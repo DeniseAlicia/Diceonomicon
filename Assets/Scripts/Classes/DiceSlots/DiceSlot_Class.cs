@@ -2,7 +2,7 @@ namespace Diceonomicon
 
 using UnityEngine;
 
-public abstract class DiceSlot : MonoBehaviour
+public abstract class DiceSlot: MonoBehaviour
 {
     public bool Filled;
     public bool Protection;
