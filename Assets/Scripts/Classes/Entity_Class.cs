@@ -1,6 +1,6 @@
-using UnityEngine;
+namespace Diceonomicon
 
-namespace Classes
+using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {

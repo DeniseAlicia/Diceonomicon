@@ -1,6 +1,6 @@
-using UnityEngine;
+namespace Diceonomicon
 
-namespace Classes
+using UnityEngine;
 public class Die : MonoBehaviour
 {
     public int[] Range;
