@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{a0a68cd5-2cc0-4a33-8768-9c334b2d0107}">
+		<property name="assetPath">
+			<value>dice-142528.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>1.3919999999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fd7edaef-95d4-44fa-95a9-a7ab5b9a2454}</destination>
+		</relationship>
+	</object>
+</objects>
