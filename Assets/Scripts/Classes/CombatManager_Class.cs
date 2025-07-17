@@ -1,5 +1,5 @@
 namespace Diceonomicon
-
+{
 using UnityEngine;
 
 public static class CombatManager : MonoBehaviour
@@ -11,12 +11,14 @@ public static class CombatManager : MonoBehaviour
         Debug.Log("CombatManager.HandleActiveCombat");
     }
 
-    private void HandleSlotEffects(_ActiveSlots) {
+        private static void HandleSlotEffects(DiceSlot[] _ActiveSlots)
+        {
         Debug.Log("CombatManager.HandleSlotEffects");
     }
 
-    private DiceSlot[][] SortActiveSlots(_ActiveColumn) {
+        private static DiceSlot[][] SortActiveSlots(DiceSlot[] _ActiveColumn) {
         Debug.Log("CombatManager.SortActiveSlots");
     }
 
+    }
 }

@@ -1,13 +1,13 @@
 namespace Diceonomicon
-
+{
 using UnityEngine;
 
 public class BattleScene : MonoBehaviour 
 {
     public Player Player;
      public Enemy[] Enemies;
-    public Vector3()[] PlayerPositions;
-    public Vector3()[] EnemyPositions;
+        public Vector3[] PlayerPositions;
+        public Vector3[] EnemyPositions;
     public DiceSlot[] PlayerActiveColumn;
     public DiceSlot[] EnemyActiveColumn;
     public int Level;
@@ -28,9 +28,10 @@ public class BattleScene : MonoBehaviour
     {
         Debug.Log("BattleScene.EndOfRound");
     }
-    private void ResetEntity(_Entity)
+        private void ResetEntity(Entity _Entity)
     {
         Debug.Log("BattleScene.Reset");
     }
 
+    }
 }
