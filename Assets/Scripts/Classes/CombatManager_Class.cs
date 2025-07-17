@@ -14,7 +14,7 @@ namespace Diceonomicon
             CombatManager.playerSlots = SortActiveSlots(_battleScene.playerActiveColumn);
             CombatManager.enemySlots = SortActiveSlots(_battleScene.enemyActiveColumn);
 
-            for (int i = 0; i < playerSlots.length(); i++)
+            for (int i = 0; i < playerSlots.Length; i++)
             {
                 HandleSlotEffects(playerSlots[i]);
                 HandleSlotEffects(enemySlots[i]);

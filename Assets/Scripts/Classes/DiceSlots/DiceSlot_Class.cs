@@ -10,6 +10,7 @@ namespace Diceonomicon
         public int mult;
         public int priority;
         public string tag;
+        public string owner;
         public Die slottedDie;
 
         public void DetectLinks()

@@ -7,8 +7,9 @@ namespace Diceonomicon
         public int[] range; //which values the die can have
         public int value; //which value the die rolled this round
         public string tag;
+        public string owner;
         public Vector3 lastPosition;
-
+    
         [SerializeField] Transform[] diceSides;
         [SerializeField] DiceTrayWall[] diceTrayWalls;
         [SerializeField] float forceX = 0f;

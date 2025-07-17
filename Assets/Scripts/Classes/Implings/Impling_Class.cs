@@ -2,11 +2,8 @@ namespace Diceonomicon
 {
     using UnityEngine;
 
-    public abstract class Impling : MonoBehaviour
+    public abstract class Impling : Demon
     {
-        public string name;
-        public string description;
-        public string traitDescription;
-        public BattleTablet tabletFragment;
+        public static string description;
     }
 }
