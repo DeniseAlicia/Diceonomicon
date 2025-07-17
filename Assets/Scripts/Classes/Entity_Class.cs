@@ -4,13 +4,13 @@ namespace Diceonomicon
 
     public abstract class Entity : MonoBehaviour
     {
-        public int Health;
-        public Die[] DiceDeck;
-        public Die[] DrawnDice;
-        public int DrawSize; //how many dice can be drawn at round start
-        public Die[] DiscardPile;
-        public int Damage = 0;
-        public int Block = 0;
+        public int health;
+        public Die[] diceDeck;
+        public Die[] drawnDice;
+        public int drawSize; //how many dice can be drawn at round start
+        public Die[] discardPile;
+        public int damage = 0;
+        public int block = 0;
 
         public void DrawDice() {
             Debug.Log("Entity.DrawDice");

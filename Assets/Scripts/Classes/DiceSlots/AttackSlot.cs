@@ -6,7 +6,7 @@ namespace Diceonomicon
     {
         public override void DoEffect()
         {
-            int DamageOutput = this.SlottedDie.Value * this.Mult;
+            int damageOutput = this.slottedDie.Value * this.mult;
 
         }
     }

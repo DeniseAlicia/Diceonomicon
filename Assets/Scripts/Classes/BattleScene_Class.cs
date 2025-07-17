@@ -4,13 +4,13 @@ namespace Diceonomicon
 
     public class BattleScene
     {
-        public Player Player;
-        public Enemy[] Enemies;
-        public Vector3[] PlayerPositions;
-        public Vector3[] EnemyPositions;
-        public DiceSlot[] PlayerActiveColumn;
-        public DiceSlot[] EnemyActiveColumn;
-        public int Level;
+        public Player player;
+        public Enemy[] enemies;
+        public Vector3[] playerPositions;
+        public Vector3[] enemyPositions;
+        public DiceSlot[] playerActiveColumn;
+        public DiceSlot[] enemyActiveColumn;
+        public int level;
 
         public void BuildScene()
         {
@@ -28,7 +28,7 @@ namespace Diceonomicon
         {
             Debug.Log("BattleScene.EndOfRound");
         }
-        private void ResetEntity(Entity _Entity)
+        private void ResetEntity(Entity _entity)
         {
             Debug.Log("BattleScene.Reset");
         }

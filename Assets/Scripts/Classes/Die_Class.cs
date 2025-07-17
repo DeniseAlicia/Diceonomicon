@@ -4,35 +4,35 @@ namespace Diceonomicon
 
     public class Die : MonoBehaviour
     {
-        public int[] Range; //which values the die can have
-        public int Value; //which value the die rolled this round
-        public string Tag;
-        public Vector3 LastPosition;
+        public int[] range; //which values the die can have
+        public int value; //which value the die rolled this round
+        public string tag;
+        public Vector3 lastPosition;
 
-        [SerializeField] Transform[] _diceSides;
-        [SerializeField] DiceTrayWall[] _diceTrayWalls;
-        [SerializeField] float _forceX = 0f;
-        [SerializeField] float _forceY = 0f;
-        [SerializeField] float _forceZ = 0f;
-        [SerializeField] float _torque = 5f;
-        [SerializeField] Vector3 _tempGravity = new Vector3(0, -100f, 0);
+        [SerializeField] Transform[] diceSides;
+        [SerializeField] DiceTrayWall[] diceTrayWalls;
+        [SerializeField] float forceX = 0f;
+        [SerializeField] float forceY = 0f;
+        [SerializeField] float forceZ = 0f;
+        [SerializeField] float torque = 5f;
+        [SerializeField] Vector3 tempGravity = new Vector3(0, -100f, 0);
 
-        private Rigidbody _rigidBody;
-        private BoxCollider _boxCollider;
-        private bool _isRolling = false;
-        private Vector3 DefaultGravity = Physics.gravity;
+        private Rigidbody rigidbody;
+        private BoxCollider boxCollider;
+        private bool isRolling = false;
+        private Vector3 defaultGravity = Physics.gravity;
 
         void Start()
         {
-            _rigidBody = GetComponent<Rigidbody>();
-            _rigidBody.useGravity = false;
-            _boxCollider = GetComponent<BoxCollider>();
-            _boxCollider.enabled = false;
+            rigidbody = GetComponent<Rigidbody>();
+            rigidbody.useGravity = false;
+            boxCollider = GetComponent<BoxCollider>();
+            boxCollider.enabled = false;
         }
 
         void FixedUpdate()
         {
-            if (_rigidBody.IsSleeping() & _isRolling)
+            if (rigidbody.IsSleeping() & isRolling)
             {
                 GetSideFacingUp();
             }
@@ -40,30 +40,30 @@ namespace Diceonomicon
 
         public void RollDice()
         {
-            Vector3 force = new Vector3(_forceX, _forceY, _forceZ);
-            Vector3 torque = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f) * _torque);
+            Vector3 force = new Vector3(forceX, forceY, forceZ);
+            Vector3 torque = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f) * this.torque);
 
-            _rigidBody.useGravity = true;
+            rigidbody.useGravity = true;
 
-            foreach (DiceTrayWall diceTrayWall in _diceTrayWalls) //enable collision for the walls of the dice tray
+            foreach (DiceTrayWall diceTrayWall in diceTrayWalls) //enable collision for the walls of the dice tray
             {
                 diceTrayWall.EnableCollision();
             }
 
-            Physics.gravity = DefaultGravity; // reset gravity
+            Physics.gravity = defaultGravity; // reset gravity
 
-            _rigidBody.AddForce(force, ForceMode.Impulse); // add force and torque to roll the die
-            _rigidBody.AddTorque(torque, ForceMode.Impulse);
+            rigidbody.AddForce(force, ForceMode.Impulse); // add force and torque to roll the die
+            rigidbody.AddTorque(torque, ForceMode.Impulse);
 
-            _isRolling = true;
+            isRolling = true;
         }
 
-        void GetSideFacingUp()
+        private void GetSideFacingUp()
         {
-            Physics.gravity = _tempGravity; // increase gravity to help the die "fall" into place
+            Physics.gravity = tempGravity; // increase gravity to help the die "fall" into place
 
             // disable DiceTrayWall collision to prevent crooked dice
-            foreach (DiceTrayWall diceTrayWall in _diceTrayWalls)
+            foreach (DiceTrayWall diceTrayWall in diceTrayWalls)
             {
                 diceTrayWall.DisableCollision();
             }
@@ -72,7 +72,7 @@ namespace Diceonomicon
             Transform upSide = null;
             float maxDot = -1;
 
-            foreach (Transform side in _diceSides)
+            foreach (Transform side in diceSides)
             {
                 float dot = Vector3.Dot(side.up, Vector3.up);
 
@@ -91,7 +91,7 @@ namespace Diceonomicon
             if (upSide == null) return;
             Debug.Log(upSide.name); // log the die value
 
-            _isRolling = false;
+            isRolling = false;
         }
     }
 }

@@ -4,6 +4,6 @@ namespace Diceonomicon
 
     public class BattleTablet : MonoBehaviour
     {
-        public DiceSlot[] Columns;
+        public DiceSlot[][] columns;
     }
 }

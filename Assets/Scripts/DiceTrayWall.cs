@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class DiceTrayWall : MonoBehaviour
 {
-    BoxCollider _boxCollider;
+    BoxCollider boxCollider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _boxCollider = GetComponent<BoxCollider>();
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -18,11 +18,11 @@ public class DiceTrayWall : MonoBehaviour
 
     public void DisableCollision()
     {
-        _boxCollider.enabled = false;
+        boxCollider.enabled = false;
     }
 
     public void EnableCollision()
     {
-        _boxCollider.enabled = true;
+        boxCollider.enabled = true;
     }
 }

@@ -4,17 +4,11 @@ namespace Diceonomicon
 
     public abstract class Enemy : Entity
     {
-        public string Description;
-        public BattlesTablet BattleTablet;
+        public string description;
+        public BattleTablet battleTablet;
 
-        public abstract void Trait()
-        {
-            Debug.Log("Enemy.Trait");
-        }
+        public abstract void Trait();
 
-        public abstract void DicePlacement()
-        {
-            Debug.Log("Enemy.DicePlacement");
-        }
+        public abstract void DicePlacement();
     }
 }

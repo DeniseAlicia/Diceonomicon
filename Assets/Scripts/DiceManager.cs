@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class DiceManager : MonoBehaviour
 {
-    [SerializeField] Die[] _dice;
+    [SerializeField] Die[] dice;
 
     // Update is called once per frame
     void Update()
@@ -18,7 +18,7 @@ public class DiceManager : MonoBehaviour
 
     private void RollAllDice()
     {
-        foreach (Die die in _dice)
+        foreach (Die die in dice)
         {
             die.ResetDiePosition();
             die.RollDice();
