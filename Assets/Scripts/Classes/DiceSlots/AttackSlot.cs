@@ -6,8 +6,8 @@ namespace Diceonomicon
     {
         public override void DoEffect()
         {
-            int damageOutput = this.slottedDie.value * this.mult;
-            if (this.slottedDie.owner == "Player")
+            int damageOutput = slottedDie.value * mult;
+            if (slottedDie.owner == "Player")
             {
             
             }

@@ -1,14 +1,16 @@
 namespace Diceonomicon
 {
     using UnityEngine;
+    using System.Collections.Generic;
 
     public class Die : MonoBehaviour
     {
         public int[] range; //which values the die can have
         public int value; //which value the die rolled this round
-        new public string tag;
+        public List<string> types;
         public string owner;
         public Vector3 lastPosition;
+        public bool frozen;
 
         [SerializeField] Transform[] diceSides;
         [SerializeField] DiceTrayWall[] diceTrayWalls;

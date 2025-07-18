@@ -41,22 +41,26 @@ namespace Diceonomicon
             List<DiceSlot> prio1 = new List<DiceSlot>();
             List<DiceSlot> prio2 = new List<DiceSlot>();
             List<DiceSlot> prio3 = new List<DiceSlot>();
+            List<DiceSlot> prio4 = new List<DiceSlot>();
 
             foreach (DiceSlot slot in _activeColumn)
             {
                 if (slot.filled)
                 {
                     slot.DetectLinks();
-                    switch (slot.priority)
+                    switch (slot.type)
                     {
-                        case 1:
+                        case "Buff":
                             prio1.Add(slot);
                             break;
-                        case 2:
+                        case "Spell":
                             prio2.Add(slot);
                             break;
-                        case 3:
+                        case "Block":
                             prio3.Add(slot);
+                            break;
+                        case "Damage":
+                            prio4.Add(slot);
                             break;
                     }
                 }
@@ -65,9 +69,9 @@ namespace Diceonomicon
             sortedSlots.Add(prio1);
             sortedSlots.Add(prio2);
             sortedSlots.Add(prio3);
+            sortedSlots.Add(prio4);
             return sortedSlots;
 
         }
-
     }
 }

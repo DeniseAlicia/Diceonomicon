@@ -2,7 +2,9 @@ namespace Diceonomicon
 {
     using UnityEngine;
     using System.Collections.Generic;
-    public class BattleScene
+    using System;
+
+    public class BattleScene : MonoBehaviour
     {
         public Player player;
         public Opponent opponent;
@@ -11,10 +13,17 @@ namespace Diceonomicon
         public List<DiceSlot> playerActiveColumn;
         public List<DiceSlot> enemyActiveColumn;
         public int level;
+        public event Action RoundStart;
 
-        private void Start()
+        private void Awake()
         {
             Debug.Log("Hello there");
+            player.Test();
+        }
+
+        private void Update()
+        {
+            RoundStart?.Invoke();
         }
         public void BuildScene()
         {
