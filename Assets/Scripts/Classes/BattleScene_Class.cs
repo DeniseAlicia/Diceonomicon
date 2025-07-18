@@ -1,17 +1,21 @@
 namespace Diceonomicon
 {
     using UnityEngine;
-
+    using System.Collections.Generic;
     public class BattleScene
     {
         public Player player;
-        public Enemy[] enemies;
+        public Opponent opponent;
         public Vector3[] playerPositions;
         public Vector3[] enemyPositions;
-        public DiceSlot[] playerActiveColumn;
-        public DiceSlot[] enemyActiveColumn;
+        public List<DiceSlot> playerActiveColumn;
+        public List<DiceSlot> enemyActiveColumn;
         public int level;
 
+        private void Start()
+        {
+
+        }
         public void BuildScene()
         {
             Debug.Log("BattleScene.BuildScene");
