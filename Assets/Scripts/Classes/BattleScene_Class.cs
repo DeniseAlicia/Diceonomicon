@@ -1,6 +1,7 @@
 namespace Diceonomicon
 {
     using UnityEngine;
+    using System.Collections.Generic;
 
     public class BattleScene
     {
@@ -8,8 +9,8 @@ namespace Diceonomicon
         public Enemy[] enemies;
         public Vector3[] playerPositions;
         public Vector3[] enemyPositions;
-        public DiceSlot[] playerActiveColumn;
-        public DiceSlot[] enemyActiveColumn;
+        public List<DiceSlot> playerActiveColumn;
+        public List<DiceSlot> enemyActiveColumn;
         public int level;
 
         public void BuildScene()

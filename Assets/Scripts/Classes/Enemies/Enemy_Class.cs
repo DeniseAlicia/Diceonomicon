@@ -2,7 +2,7 @@ namespace Diceonomicon
 {
     using UnityEngine;
 
-    public abstract class Enemy : Monobehaviour
+    public abstract class Enemy : MonoBehaviour
     {
 
     }

@@ -2,7 +2,7 @@ namespace Diceonomicon
 {
     using UnityEngine;
 
-    public abstract class Impling : Demon
+    public abstract class Impling : MonoBehaviour
     {
         public static string description;
     }
