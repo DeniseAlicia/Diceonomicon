@@ -6,7 +6,7 @@ namespace Diceonomicon
     {
         public int[] range; //which values the die can have
         public int value; //which value the die rolled this round
-        public string tag;
+        new public string tag;
         public string owner;
         public Vector3 lastPosition;
     
@@ -18,7 +18,7 @@ namespace Diceonomicon
         [SerializeField] float torque = 5f;
         [SerializeField] Vector3 tempGravity = new Vector3(0, -100f, 0);
 
-        private Rigidbody rigidbody;
+        new private Rigidbody rigidbody;
         private BoxCollider boxCollider;
         private bool isRolling = false;
         private Vector3 defaultGravity = Physics.gravity;

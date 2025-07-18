@@ -1,6 +1,9 @@
-using UnityEngine;
-
-public abstract class RoundStartImpling : Impling
+namespace Diceonomicon
 {
-    public void RoundStart() {}
+    using UnityEngine;
+
+    public abstract class RoundStartImpling : Impling
+    {
+        public void RoundStart() { }
+    }
 }
