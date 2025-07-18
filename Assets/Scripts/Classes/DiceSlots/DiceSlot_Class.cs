@@ -9,7 +9,7 @@ namespace Diceonomicon
         public bool protection;
         public int mult;
         public int priority;
-        public string tag;
+        new string tag;
         public string owner;
         public Die slottedDie;
 

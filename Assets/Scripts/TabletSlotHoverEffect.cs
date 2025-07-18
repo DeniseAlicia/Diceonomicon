@@ -1,34 +1,37 @@
-using UnityEngine;
-
-public class HoverGlowController : MonoBehaviour
+namespace Diceonomicon
 {
-    private Renderer rend;
-    private MaterialPropertyBlock mpb;
-    private bool isHovered = false;
+    using UnityEngine;
 
-    void Awake()
+    public class HoverGlowController : MonoBehaviour
     {
-        rend = GetComponent<Renderer>();
-        mpb = new MaterialPropertyBlock();
-    }
+        private Renderer rend;
+        private MaterialPropertyBlock mpb;
+        private bool isHovered = false;
 
-    void OnMouseEnter()
-    {
-        SetHover(true);
-    }
+        void Awake()
+        {
+            rend = GetComponent<Renderer>();
+            mpb = new MaterialPropertyBlock();
+        }
 
-    void OnMouseExit()
-    {
-        SetHover(false);
-    }
+        void OnMouseEnter()
+        {
+            SetHover(true);
+        }
 
-    private void SetHover(bool hover)
-    {
-        if (isHovered == hover) return;
-        isHovered = hover;
+        void OnMouseExit()
+        {
+            SetHover(false);
+        }
 
-        rend.GetPropertyBlock(mpb);
-        mpb.SetFloat("_HoverTrigger", isHovered ? 1f : 0f);
-        rend.SetPropertyBlock(mpb);
+        private void SetHover(bool hover)
+        {
+            if (isHovered == hover) return;
+            isHovered = hover;
+
+            rend.GetPropertyBlock(mpb);
+            mpb.SetFloat("_HoverTrigger", isHovered ? 1f : 0f);
+            rend.SetPropertyBlock(mpb);
+        }
     }
 }

@@ -1,28 +1,31 @@
-using UnityEngine;
-
-public class DiceTrayWall : MonoBehaviour
+namespace Diceonomicon
 {
-    BoxCollider boxCollider;
+    using UnityEngine;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class DiceTrayWall : MonoBehaviour
     {
-        boxCollider = GetComponent<BoxCollider>();
-    }
+        BoxCollider boxCollider;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        void Start()
+        {
+            boxCollider = GetComponent<BoxCollider>();
+        }
 
-    public void DisableCollision()
-    {
-        boxCollider.enabled = false;
-    }
+        // Update is called once per frame
+        void Update()
+        {
 
-    public void EnableCollision()
-    {
-        boxCollider.enabled = true;
+        }
+
+        public void DisableCollision()
+        {
+            boxCollider.enabled = false;
+        }
+
+        public void EnableCollision()
+        {
+            boxCollider.enabled = true;
+        }
     }
 }

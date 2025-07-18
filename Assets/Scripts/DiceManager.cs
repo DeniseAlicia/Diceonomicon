@@ -1,27 +1,30 @@
-using System;
-using UnityEngine;
-using UnityEngine.InputSystem;
-
-public class DiceManager : MonoBehaviour
+namespace Diceonomicon
 {
-    [SerializeField] Die[] dice;
+    using System;
+    using UnityEngine;
+    using UnityEngine.InputSystem;
 
-    // Update is called once per frame
-    void Update()
+    public class DiceManager : MonoBehaviour
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        [SerializeField] Die[] dice;
+
+        // Update is called once per frame
+        void Update()
         {
-            RollAllDice();
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                RollAllDice();
+            }
+
         }
 
-    }
-
-    private void RollAllDice()
-    {
-        foreach (Die die in dice)
+        private void RollAllDice()
         {
-            die.ResetDiePosition();
-            die.RollDice();
+            foreach (Die die in dice)
+            {
+                //die.ResetDiePosition();
+                die.RollDice();
+            }
         }
     }
 }

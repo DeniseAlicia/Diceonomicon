@@ -6,10 +6,10 @@ namespace Diceonomicon
     {
         public int[] range; //which values the die can have
         public int value; //which value the die rolled this round
-        public string tag;
+        new public string tag;
         public string owner;
         public Vector3 lastPosition;
-    
+
         [SerializeField] Transform[] diceSides;
         [SerializeField] DiceTrayWall[] diceTrayWalls;
         [SerializeField] float forceX = 0f;
@@ -18,7 +18,7 @@ namespace Diceonomicon
         [SerializeField] float torque = 5f;
         [SerializeField] Vector3 tempGravity = new Vector3(0, -100f, 0);
 
-        private Rigidbody rigidbody;
+        new private Rigidbody rigidbody;
         private BoxCollider boxCollider;
         private bool isRolling = false;
         private Vector3 defaultGravity = Physics.gravity;
@@ -94,5 +94,20 @@ namespace Diceonomicon
 
             isRolling = false;
         }
+
+        // public void ResetDiePosition()
+        // {
+        //     _rigidBody.mass = _dieMass; // reset die mass
+        //     Physics.gravity = DefaultGravity; // reset gravity
+
+        //     // enable DiceTrayWall collision
+        //     foreach (DiceTrayWall diceTrayWall in _diceTrayWalls)
+        //     {
+        //         diceTrayWall.EnableCollision();
+        //     }
+
+        //     // reset the die to its starting position
+        //     gameObject.transform.position = DieStartPosition;
+        // }
     }
 }

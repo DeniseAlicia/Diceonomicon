@@ -4,6 +4,6 @@ namespace Diceonomicon
 
     public abstract class Impling : Demon
     {
-        public static string description;
+        public static string collectionText;
     }
 }
