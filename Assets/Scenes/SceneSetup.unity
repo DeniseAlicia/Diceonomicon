@@ -368,10 +368,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 49393115}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bf6702d201eee94bb3b7a47d625950e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0376ddf48c0966d4b93fff16949b44fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dice:
+  dice:
   - {fileID: 2133740676}
   - {fileID: 1120546799}
   - {fileID: 1992152958}
@@ -634,7 +634,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 124406074}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 480e78bca36e198409163dfc18dd6c0f, type: 3}
+  m_Script: {fileID: 11500000, guid: d217a9d06814b6a4a91f6fd7c1a40bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &124406079
@@ -760,7 +760,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 150643339}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 480e78bca36e198409163dfc18dd6c0f, type: 3}
+  m_Script: {fileID: 11500000, guid: d217a9d06814b6a4a91f6fd7c1a40bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &150643344
@@ -1040,7 +1040,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 328401356}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f37422d8e372f542ad1f3f0725d37bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _diceSides:
@@ -1057,10 +1057,10 @@ MonoBehaviour:
   - {fileID: 1727252978}
   _forceX: 0
   _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
+  _forceZ: 0
+  _torque: 5
+  _dieMass: 1
+  _dieTempMass: 10
   _tempGravity: {x: 0, y: -100, z: 0}
   _targetPosition: {x: 0, y: 0, z: 0}
   _movementSpeed: 1
@@ -1237,7 +1237,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 407251139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f37422d8e372f542ad1f3f0725d37bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _diceSides:
@@ -1254,10 +1254,10 @@ MonoBehaviour:
   - {fileID: 1727252978}
   _forceX: 0
   _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
+  _forceZ: 0
+  _torque: 5
+  _dieMass: 1
+  _dieTempMass: 10
   _tempGravity: {x: 0, y: -100, z: 0}
   _targetPosition: {x: 0, y: 0, z: 0}
   _movementSpeed: 1
@@ -2709,7 +2709,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 889179867}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 480e78bca36e198409163dfc18dd6c0f, type: 3}
+  m_Script: {fileID: 11500000, guid: d217a9d06814b6a4a91f6fd7c1a40bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &889179872
@@ -3400,7 +3400,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1120546798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f37422d8e372f542ad1f3f0725d37bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _diceSides:
@@ -3417,10 +3417,10 @@ MonoBehaviour:
   - {fileID: 1727252978}
   _forceX: 0
   _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
+  _forceZ: 0
+  _torque: 5
+  _dieMass: 1
+  _dieTempMass: 10
   _tempGravity: {x: 0, y: -100, z: 0}
   _targetPosition: {x: 0, y: 0, z: 0}
   _movementSpeed: 1
@@ -4229,7 +4229,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1469575261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f37422d8e372f542ad1f3f0725d37bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _diceSides:
@@ -4246,10 +4246,10 @@ MonoBehaviour:
   - {fileID: 1727252978}
   _forceX: 0
   _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
+  _forceZ: 0
+  _torque: 5
+  _dieMass: 1
+  _dieTempMass: 10
   _tempGravity: {x: 0, y: -100, z: 0}
   _targetPosition: {x: 0, y: 0, z: 0}
   _movementSpeed: 1
@@ -4696,7 +4696,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1639450228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f37422d8e372f542ad1f3f0725d37bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _diceSides:
@@ -4713,10 +4713,10 @@ MonoBehaviour:
   - {fileID: 1727252978}
   _forceX: 0
   _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
+  _forceZ: 0
+  _torque: 5
+  _dieMass: 1
+  _dieTempMass: 10
   _tempGravity: {x: 0, y: -100, z: 0}
   _targetPosition: {x: 0, y: 0, z: 0}
   _movementSpeed: 1
@@ -4954,7 +4954,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1727252974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 480e78bca36e198409163dfc18dd6c0f, type: 3}
+  m_Script: {fileID: 11500000, guid: d217a9d06814b6a4a91f6fd7c1a40bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1727252979
@@ -5935,7 +5935,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1973955937}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f37422d8e372f542ad1f3f0725d37bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _diceSides:
@@ -5952,10 +5952,10 @@ MonoBehaviour:
   - {fileID: 1727252978}
   _forceX: 0
   _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
+  _forceZ: 0
+  _torque: 5
+  _dieMass: 1
+  _dieTempMass: 10
   _tempGravity: {x: 0, y: -100, z: 0}
   _targetPosition: {x: 0, y: 0, z: 0}
   _movementSpeed: 1
@@ -6036,7 +6036,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1992152957}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f37422d8e372f542ad1f3f0725d37bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _diceSides:
@@ -6053,10 +6053,10 @@ MonoBehaviour:
   - {fileID: 1727252978}
   _forceX: 0
   _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
+  _forceZ: 0
+  _torque: 5
+  _dieMass: 1
+  _dieTempMass: 10
   _tempGravity: {x: 0, y: -100, z: 0}
   _targetPosition: {x: 0, y: 0, z: 0}
   _movementSpeed: 1
@@ -6330,7 +6330,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2126434169}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f37422d8e372f542ad1f3f0725d37bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _diceSides:
@@ -6347,10 +6347,10 @@ MonoBehaviour:
   - {fileID: 1727252978}
   _forceX: 0
   _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
+  _forceZ: 0
+  _torque: 5
+  _dieMass: 1
+  _dieTempMass: 10
   _tempGravity: {x: 0, y: -100, z: 0}
   _targetPosition: {x: 0, y: 0, z: 0}
   _movementSpeed: 1
@@ -6431,7 +6431,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2133740672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f37422d8e372f542ad1f3f0725d37bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _diceSides:
@@ -6448,10 +6448,10 @@ MonoBehaviour:
   - {fileID: 1727252978}
   _forceX: 0
   _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
+  _forceZ: 0
+  _torque: 5
+  _dieMass: 1
+  _dieTempMass: 10
   _tempGravity: {x: 0, y: -100, z: 0}
   _targetPosition: {x: 0, y: 0, z: 0}
   _movementSpeed: 1
