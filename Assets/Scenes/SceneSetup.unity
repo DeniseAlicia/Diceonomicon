@@ -396,6 +396,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &87059749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6207420833265247728, guid: 89f84c7e5a6f91b42bbb7ed7f0c39872, type: 3}
+  m_PrefabInstance: {fileID: 6334810237567028412}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &87059755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87059749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -312422788
+      Data2: 1097391562
+      Data3: -767221833
+      Data4: 6605655
+    Path: event:/Sounds/Battle/SFX_TabletButton
+  Event: 
+  EventPlayTrigger: 15
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &100647549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,6 +1839,73 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2267514689801277027, guid: 5db0b940a508efc4795299c77058b820, type: 3}
   m_PrefabInstance: {fileID: 1636439949925026193}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &664546814 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1241702776412729853, guid: 89f84c7e5a6f91b42bbb7ed7f0c39872, type: 3}
+  m_PrefabInstance: {fileID: 6334810237567028412}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &664546820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664546814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1117826110
+      Data2: 1093070647
+      Data3: 742598326
+      Data4: 2069096788
+    Path: event:/Sounds/Battle/SFX_TabletSlotHover
+  Event: 
+  EventPlayTrigger: 13
+  EventStopTrigger: 14
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &664546821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664546814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1401388340
+      Data2: 1120791079
+      Data3: -800398179
+      Data4: -280513603
+    Path: event:/Sounds/Battle/SFX_TabletSlotPlacement
+  Event: 
+  EventPlayTrigger: 15
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &671237624
 GameObject:
   m_ObjectHideFlags: 0
@@ -2858,8 +2961,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 40}
-  m_LocalScale: {x: 15, y: 10, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 25, y: 16.666666, z: 1.6666666}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4224,6 +4327,7 @@ GameObject:
   - component: {fileID: 1549034808}
   - component: {fileID: 1549034807}
   - component: {fileID: 1549034806}
+  - component: {fileID: 1549034809}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -4292,6 +4396,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1549034809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549034805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1190501309
+      Data2: 1336387411
+      Data3: 152800390
+      Data4: 1845747967
+    Path: event:/Music/BGM_Battle01
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &1569947464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6352,6 +6487,42 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &2138781933 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4464846203397100625, guid: 89f84c7e5a6f91b42bbb7ed7f0c39872, type: 3}
+  m_PrefabInstance: {fileID: 6334810237567028412}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2138781939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138781933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -312422788
+      Data2: 1097391562
+      Data3: -767221833
+      Data4: 6605655
+    Path: event:/Sounds/Battle/SFX_TabletButton
+  Event: 
+  EventPlayTrigger: 15
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &2145428415
 GameObject:
   m_ObjectHideFlags: 0
@@ -6592,12 +6763,24 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1241702776412729853, guid: 89f84c7e5a6f91b42bbb7ed7f0c39872, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 664546820}
+    - targetCorrespondingSourceObject: {fileID: 1241702776412729853, guid: 89f84c7e5a6f91b42bbb7ed7f0c39872, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 664546821}
     - targetCorrespondingSourceObject: {fileID: 2949747162428384550, guid: 89f84c7e5a6f91b42bbb7ed7f0c39872, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 7873195427761696993, guid: 89f84c7e5a6f91b42bbb7ed7f0c39872, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 6207420833265247728, guid: 89f84c7e5a6f91b42bbb7ed7f0c39872, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 87059755}
+    - targetCorrespondingSourceObject: {fileID: 4464846203397100625, guid: 89f84c7e5a6f91b42bbb7ed7f0c39872, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2138781939}
   m_SourcePrefab: {fileID: 100100000, guid: 89f84c7e5a6f91b42bbb7ed7f0c39872, type: 3}
 --- !u!1001 &8305499595290275093
 PrefabInstance:
