@@ -14,7 +14,7 @@ namespace Diceonomicon
 
         private void Start()
         {
-
+            Debug.Log("Hello there");
         }
         public void BuildScene()
         {
