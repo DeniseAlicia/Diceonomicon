@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9bc5cf31ebde85944add3e4f042dded9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - tabletPrefab: {fileID: 8448579534215354899, guid: ace316ba9a583b141b31007ca0879c52, type: 3}
+  - impling1: {fileID: 11400000, guid: 690975b419f67df4a9b0bea378b1577e, type: 2}
+  - impling2: {fileID: 11400000, guid: 2301723de546ce24db6319045fd5219a, type: 2}
+  - impling3: {fileID: 11400000, guid: 2ee8e1e33b8dea046865309d8967e2ee, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
