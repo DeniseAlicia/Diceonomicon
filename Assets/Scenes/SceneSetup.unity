@@ -371,16 +371,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf6702d201eee94bb3b7a47d625950e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dice:
-  - {fileID: 2133740676}
-  - {fileID: 1120546799}
-  - {fileID: 1992152958}
-  - {fileID: 1469575262}
-  - {fileID: 2126434170}
-  - {fileID: 1973955938}
-  - {fileID: 1639450229}
-  - {fileID: 407251140}
-  - {fileID: 328401357}
 --- !u!4 &49393117
 Transform:
   m_ObjectHideFlags: 0
@@ -1043,27 +1033,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _diceSides:
-  - {fileID: 2044003210}
-  - {fileID: 1254348654}
-  - {fileID: 1150577547}
-  - {fileID: 1981997714}
-  - {fileID: 694376645}
-  - {fileID: 120667401}
-  _diceTrayWalls:
-  - {fileID: 124406078}
-  - {fileID: 150643343}
-  - {fileID: 889179871}
-  - {fileID: 1727252978}
-  _forceX: 0
-  _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
-  _tempGravity: {x: 0, y: -100, z: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
-  _movementSpeed: 1
 --- !u!4 &328401358 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6138043921473953259, guid: 0d2b9188252a78b4298fb8e34d9229ee, type: 3}
@@ -1240,27 +1209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _diceSides:
-  - {fileID: 1112338280}
-  - {fileID: 1647033461}
-  - {fileID: 1888710760}
-  - {fileID: 2056908669}
-  - {fileID: 721516767}
-  - {fileID: 2133696746}
-  _diceTrayWalls:
-  - {fileID: 124406078}
-  - {fileID: 150643343}
-  - {fileID: 889179871}
-  - {fileID: 1727252978}
-  _forceX: 0
-  _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
-  _tempGravity: {x: 0, y: -100, z: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
-  _movementSpeed: 1
 --- !u!4 &407251141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6138043921473953259, guid: 0d2b9188252a78b4298fb8e34d9229ee, type: 3}
@@ -1466,7 +1414,7 @@ GameObject:
   - component: {fileID: 456203159}
   - component: {fileID: 456203158}
   - component: {fileID: 456203157}
-  - component: {fileID: 456203156}
+  - component: {fileID: 456203160}
   m_Layer: 5
   m_Name: TooltipCanvas
   m_TagString: Untagged
@@ -1474,23 +1422,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &456203156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 456203155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &456203157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1557,6 +1488,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &456203160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456203155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c9dfe7595139e47bbd0b07581fb2e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltip: {fileID: 894392424}
 --- !u!1 &468276397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,10 +1533,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 894392418}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 49.365, y: -16.76}
+  m_SizeDelta: {x: 98.73, y: 33.52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &468276399
 MonoBehaviour:
@@ -2300,10 +2244,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 894392418}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 91.28, y: -47.485}
+  m_SizeDelta: {x: 182.56, y: 27.93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &708897672
 MonoBehaviour:
@@ -2560,6 +2504,25 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2126434172}
   m_SourcePrefab: {fileID: 100100000, guid: 0d2b9188252a78b4298fb8e34d9229ee, type: 3}
+--- !u!1 &746154748 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7468627922653870628, guid: c2c3ab872f7760e44820a92fe3be3458, type: 3}
+  m_PrefabInstance: {fileID: 8305499595290275093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &746154753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746154748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085fdf2801e4ed44a9eaf1e68ac3739e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Mimicry
+  content: ....
 --- !u!1 &747742153
 GameObject:
   m_ObjectHideFlags: 0
@@ -3115,13 +3078,14 @@ GameObject:
   - component: {fileID: 894392421}
   - component: {fileID: 894392420}
   - component: {fileID: 894392419}
+  - component: {fileID: 894392424}
   m_Layer: 5
   m_Name: Tooltip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &894392418
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3141,7 +3105,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 500, y: 61.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &894392419
 MonoBehaviour:
@@ -3238,6 +3202,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894392417}
   m_CullTransparentMesh: 0
+--- !u!114 &894392424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894392417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c00a13091631e44b96e02461fec071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headerField: {fileID: 468276399}
+  contentField: {fileID: 708897672}
+  layoutElement: {fileID: 894392419}
+  characterWrapLimit: 80
+  rectTransform: {fileID: 0}
 --- !u!1 &904776872
 GameObject:
   m_ObjectHideFlags: 0
@@ -3914,27 +3895,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _diceSides:
-  - {fileID: 1373154178}
-  - {fileID: 1100415510}
-  - {fileID: 510834057}
-  - {fileID: 2022134240}
-  - {fileID: 1504259785}
-  - {fileID: 470316622}
-  _diceTrayWalls:
-  - {fileID: 124406078}
-  - {fileID: 150643343}
-  - {fileID: 889179871}
-  - {fileID: 1727252978}
-  _forceX: 0
-  _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
-  _tempGravity: {x: 0, y: -100, z: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
-  _movementSpeed: 1
 --- !u!4 &1120546800 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6138043921473953259, guid: 0d2b9188252a78b4298fb8e34d9229ee, type: 3}
@@ -4072,6 +4032,7 @@ GameObject:
   - component: {fileID: 1161938747}
   - component: {fileID: 1161938746}
   - component: {fileID: 1161938745}
+  - component: {fileID: 1161938749}
   m_Layer: 6
   m_Name: GroundPlane
   m_TagString: Untagged
@@ -4169,6 +4130,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1161938749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161938744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085fdf2801e4ed44a9eaf1e68ac3739e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Ground
+  content: 
 --- !u!1001 &1162045135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4434,6 +4409,7 @@ GameObject:
   - component: {fileID: 1331253038}
   - component: {fileID: 1331253040}
   - component: {fileID: 1331253041}
+  - component: {fileID: 1331253042}
   m_Layer: 0
   m_Name: Gameplay
   m_TagString: MainCamera
@@ -4565,6 +4541,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nonRigidbodyVelocity: 0
   attenuationObject: {fileID: 0}
+--- !u!114 &1331253042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331253036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &1373154177
 GameObject:
   m_ObjectHideFlags: 0
@@ -4743,27 +4735,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _diceSides:
-  - {fileID: 157092343}
-  - {fileID: 543248069}
-  - {fileID: 1804354506}
-  - {fileID: 1462529563}
-  - {fileID: 430315113}
-  - {fileID: 1746167371}
-  _diceTrayWalls:
-  - {fileID: 124406078}
-  - {fileID: 150643343}
-  - {fileID: 889179871}
-  - {fileID: 1727252978}
-  _forceX: 0
-  _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
-  _tempGravity: {x: 0, y: -100, z: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
-  _movementSpeed: 1
 --- !u!4 &1469575263 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6138043921473953259, guid: 0d2b9188252a78b4298fb8e34d9229ee, type: 3}
@@ -5210,27 +5181,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _diceSides:
-  - {fileID: 673900553}
-  - {fileID: 930713906}
-  - {fileID: 694375625}
-  - {fileID: 101023672}
-  - {fileID: 588749670}
-  - {fileID: 476077186}
-  _diceTrayWalls:
-  - {fileID: 124406078}
-  - {fileID: 150643343}
-  - {fileID: 889179871}
-  - {fileID: 1727252978}
-  _forceX: 0
-  _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
-  _tempGravity: {x: 0, y: -100, z: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
-  _movementSpeed: 1
 --- !u!4 &1639450230 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6138043921473953259, guid: 0d2b9188252a78b4298fb8e34d9229ee, type: 3}
@@ -6269,6 +6219,8 @@ GameObject:
   - component: {fileID: 1913023522}
   - component: {fileID: 1913023521}
   - component: {fileID: 1913023520}
+  - component: {fileID: 1913023524}
+  - component: {fileID: 1913023525}
   m_Layer: 0
   m_Name: BattleTablets
   m_TagString: MainCamera
@@ -6401,6 +6353,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 390965571}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1913023524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913023519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
+--- !u!114 &1913023525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913023519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &1963926625
 GameObject:
   m_ObjectHideFlags: 0
@@ -6449,27 +6433,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _diceSides:
-  - {fileID: 1834003426}
-  - {fileID: 930061376}
-  - {fileID: 1233188835}
-  - {fileID: 840382456}
-  - {fileID: 1300425960}
-  - {fileID: 914948895}
-  _diceTrayWalls:
-  - {fileID: 124406078}
-  - {fileID: 150643343}
-  - {fileID: 889179871}
-  - {fileID: 1727252978}
-  _forceX: 0
-  _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
-  _tempGravity: {x: 0, y: -100, z: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
-  _movementSpeed: 1
 --- !u!4 &1973955939 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6138043921473953259, guid: 0d2b9188252a78b4298fb8e34d9229ee, type: 3}
@@ -6550,27 +6513,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _diceSides:
-  - {fileID: 747742154}
-  - {fileID: 710797116}
-  - {fileID: 1830086681}
-  - {fileID: 2145428416}
-  - {fileID: 504568627}
-  - {fileID: 875459614}
-  _diceTrayWalls:
-  - {fileID: 124406078}
-  - {fileID: 150643343}
-  - {fileID: 889179871}
-  - {fileID: 1727252978}
-  _forceX: 0
-  _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
-  _tempGravity: {x: 0, y: -100, z: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
-  _movementSpeed: 1
 --- !u!4 &1992152959 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6138043921473953259, guid: 0d2b9188252a78b4298fb8e34d9229ee, type: 3}
@@ -6844,27 +6786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _diceSides:
-  - {fileID: 360413178}
-  - {fileID: 1270304415}
-  - {fileID: 1906374872}
-  - {fileID: 195037850}
-  - {fileID: 1674029732}
-  - {fileID: 671237625}
-  _diceTrayWalls:
-  - {fileID: 124406078}
-  - {fileID: 150643343}
-  - {fileID: 889179871}
-  - {fileID: 1727252978}
-  _forceX: 0
-  _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
-  _tempGravity: {x: 0, y: -100, z: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
-  _movementSpeed: 1
 --- !u!4 &2126434171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6138043921473953259, guid: 0d2b9188252a78b4298fb8e34d9229ee, type: 3}
@@ -6945,27 +6866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _diceSides:
-  - {fileID: 186107270}
-  - {fileID: 1963926626}
-  - {fileID: 1799121549}
-  - {fileID: 812611750}
-  - {fileID: 1034451421}
-  - {fileID: 1759432293}
-  _diceTrayWalls:
-  - {fileID: 124406078}
-  - {fileID: 150643343}
-  - {fileID: 889179871}
-  - {fileID: 1727252978}
-  _forceX: 0
-  _forceY: 0
-  _forceZ: 3.7
-  _torque: 9
-  _dieMass: 0.9
-  _dieTempMass: 1
-  _tempGravity: {x: 0, y: -100, z: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
-  _movementSpeed: 1
 --- !u!4 &2133740677 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6138043921473953259, guid: 0d2b9188252a78b4298fb8e34d9229ee, type: 3}
@@ -7349,6 +7249,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7468627922653870628, guid: c2c3ab872f7760e44820a92fe3be3458, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 746154753}
     - targetCorrespondingSourceObject: {fileID: 1424122371058149952, guid: c2c3ab872f7760e44820a92fe3be3458, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
