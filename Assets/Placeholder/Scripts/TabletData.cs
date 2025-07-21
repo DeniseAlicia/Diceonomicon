@@ -10,7 +10,7 @@ public class TabletData : ScriptableObject
     public string desc;
     public Texture artwork;
 
-    public TabletSlotData[] slots;
+    public DiceSlotData[] slots;
     public GameObject slotPrefab;
     private Vector3 startSlotPosition = new Vector3(-3, 0, -3);
 
@@ -23,12 +23,12 @@ public class TabletData : ScriptableObject
             string slotName = $"Slot{i + 1}";
             Transform targetSlot = tabletMain.Find(slotName);
 
-            GameObject tabletSlotInstance = Instantiate(slotPrefab, targetSlot);
-            tabletSlotInstance.transform.localPosition = Vector3.zero;
+            GameObject diceSlotInstance = Instantiate(slotPrefab, targetSlot);
+            diceSlotInstance.transform.localPosition = Vector3.zero;
 
-            tabletSlotInstance.name = $"SlotInstance{i + 1}";
+            diceSlotInstance.name = $"SlotInstance{i + 1}";
 
-            TabletSlotController controller = tabletSlotInstance.GetComponent<TabletSlotController>();
+            DiceSlotController controller = diceSlotInstance.GetComponent<DiceSlotController>();
             controller.SetData(slots[i]);
         }
     }

@@ -1,69 +1,68 @@
-namespace Diceonomicon
+
+using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.UI;
+
+public static class CombatManager
 {
-    using UnityEngine;
-    using System.Collections.Generic;
+    private static List<List<DiceSlotData>> playerSlots;
+    private static List<List<DiceSlotData>> enemySlots;
 
-    public static class CombatManager
+    public static void HandleActiveCombat(BattleScene _battleScene)
     {
-        private static List<List<DiceSlot>> playerSlots;
-        private static List<List<DiceSlot>> enemySlots;
+        Debug.Log("CombatManager.HandleActiveCombat");
 
-        public static void HandleActiveCombat(BattleScene _battleScene)
+        playerSlots = SortActiveSlots(_battleScene.playerActiveColumn);
+        enemySlots = SortActiveSlots(_battleScene.enemyActiveColumn);
+
+        for (int i = 0; i < playerSlots.Count; i++)
         {
-            Debug.Log("CombatManager.HandleActiveCombat");
+            HandleSlotEffects(playerSlots[i]);
+            HandleSlotEffects(enemySlots[i]);
 
-            playerSlots = SortActiveSlots(_battleScene.playerActiveColumn);
-            enemySlots = SortActiveSlots(_battleScene.enemyActiveColumn);
-
-            for (int i = 0; i < playerSlots.Count; i++)
-            {
-                HandleSlotEffects(playerSlots[i]);
-                HandleSlotEffects(enemySlots[i]);
-
-            }
         }
+    }
 
-        private static void HandleSlotEffects(List<DiceSlot> _activeSlots)
+    private static void HandleSlotEffects(List<DiceSlotData> _activeSlots)
+    {
+        Debug.Log("CombatManager.HandleSlotEffects");
+
+        foreach (DiceSlotData slot in _activeSlots)
         {
-            Debug.Log("CombatManager.HandleSlotEffects");
-
-            foreach (DiceSlot slot in _activeSlots)
-            {
-                slot.DoEffect();
-            }
+            slot.DoEffect();
         }
+    }
 
-        private static List<List<DiceSlot>> SortActiveSlots(List<DiceSlot> _activeColumn)
+    private static List<List<DiceSlotData>> SortActiveSlots(List<DiceSlotData> _activeColumn)
+    {
+        Debug.Log("CombatManager.SortActiveSlots");
+        List<DiceSlotData> priority1 = new List<DiceSlotData>();
+        List<DiceSlotData> priority2 = new List<DiceSlotData>();
+        List<DiceSlotData> priority3 = new List<DiceSlotData>();
+        foreach (DiceSlotData slot in _activeColumn)
         {
-            Debug.Log("CombatManager.SortActiveSlots");
-            List<DiceSlot> priority1 = new List<DiceSlot>();
-            List<DiceSlot> priority2 = new List<DiceSlot>();
-            List<DiceSlot> priority3 = new List<DiceSlot>();
-            foreach (DiceSlot slot in _activeColumn)
+            if (slot.filled)
             {
-                if (slot.filled)
+                switch (slot.priority)
                 {
-                    switch (slot.priority)
-                    {
-                        case 1:
-                            priority1.Add(slot);
-                            break;
-                        case 2:
-                            priority2.Add(slot);
-                            break;
-                        case 3:
-                            priority3.Add(slot);
-                            break;
-                    }
+                    case 1:
+                        priority1.Add(slot);
+                        break;
+                    case 2:
+                        priority2.Add(slot);
+                        break;
+                    case 3:
+                        priority3.Add(slot);
+                        break;
                 }
             }
-
-            List<List<DiceSlot>> sortedSlots = new List<List<DiceSlot>>();
-            sortedSlots.Add(priority1);
-            sortedSlots.Add(priority2);
-            sortedSlots.Add(priority3);
-            return sortedSlots;
-
         }
+
+        List<List<DiceSlotData>> sortedSlots = new List<List<DiceSlotData>>();
+        sortedSlots.Add(priority1);
+        sortedSlots.Add(priority2);
+        sortedSlots.Add(priority3);
+        return sortedSlots;
+
     }
 }

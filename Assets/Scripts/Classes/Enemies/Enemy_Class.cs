@@ -1,9 +1,7 @@
-namespace Diceonomicon
+
+using UnityEngine;
+
+public abstract class Enemy : MonoBehaviour
 {
-    using UnityEngine;
 
-    public abstract class Enemy : MonoBehaviour
-    {
-
-    }
 }

@@ -20,7 +20,7 @@ public class DiceManager : MonoBehaviour
     {
         foreach (Die die in dice)
         {
-            die.ResetDiePosition();
+            //die.ResetDiePosition();
             die.RollDice();
         }
     }
