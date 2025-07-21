@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ColorBGRed_M
-  m_Shader: {fileID: 4800000, guid: 19b4bc26b328f7440acaf72e020ce457, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0cce66b83d8b1c245a362689a57de02a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -38,6 +38,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 5, y: 5}
@@ -67,8 +71,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: c0cbbd830f89fb34eab7b2e246d461ed, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 5, y: 5}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -104,6 +108,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
+    - _BandEdgeSharpness: 4
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -120,16 +125,20 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _HoverTrigger: 0
     - _Metallic: 0.5
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _OutlineStrength: 1.5
     - _OutlineWidth: 0.174
     - _Parallax: 0.02
+    - _PulseSpeed: 2
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RimPower: 2.2
     - _RimStep: 0.773
     - _RimStepSmooth: 0.019
+    - _ScrollSpeed1: 1
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -142,6 +151,8 @@ Material:
     - _Step4: 0.025
     - _Surface: 0
     - _Tiling: 10
+    - _TracerAlpha: 0.2
+    - _TracerOffset: 0.1
     - _UVSec: 0
     - _WaveAmplitude: 1
     - _WaveFrequency: 1
