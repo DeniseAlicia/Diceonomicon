@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7461de8d2d83b9145a5eb8eee13cf27c, type: 3}
+  m_Name: CubieData
+  m_EditorClassIdentifier: 
+  enemy: 0
+  name: Cubie
+  desc: I'm cool as ice.
+  artwork: {fileID: 2800000, guid: 264371d41bdc6e04eaedbc36a37ffa11, type: 3}
+  slots:
+  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
+  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
+  - {fileID: 11400000, guid: be207a1b444383f47aca6d701cdb9e58, type: 2}
+  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
+  - {fileID: 11400000, guid: 01c7691a14fabf442b61121e067eaf0d, type: 2}
+  - {fileID: 11400000, guid: e593cea36d0575e458da830cb4f0f55a, type: 2}
+  - {fileID: 11400000, guid: be207a1b444383f47aca6d701cdb9e58, type: 2}
+  - {fileID: 11400000, guid: e593cea36d0575e458da830cb4f0f55a, type: 2}
+  - {fileID: 11400000, guid: e593cea36d0575e458da830cb4f0f55a, type: 2}
+  slotPrefab: {fileID: 1881896027706196343, guid: 7b4fc5a074e11734695476f0948d04d2, type: 3}

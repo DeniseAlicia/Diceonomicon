@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6457e858ea5b84195f7ae233a6c8d4, type: 3}
+  m_Name: FreezeData
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 80cfd7d71a17bf84189587f9b86bba19, type: 2}
+  outlineMaterial: {fileID: 2100000, guid: a398c352f29c5fa4fa01d7d78f2d2bf4, type: 2}
+  symbolMaterial: {fileID: 2100000, guid: 68b9981944895124094b39c0d04be994, type: 2}
+  tag: Buff
