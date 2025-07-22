@@ -21,6 +21,7 @@ public class Die : MonoBehaviour
     private BoxCollider boxCollider;
     private bool isRolling = false;
     private Vector3 defaultGravity = Physics.gravity;
+    private bool temp;
 
     void Start()
     {

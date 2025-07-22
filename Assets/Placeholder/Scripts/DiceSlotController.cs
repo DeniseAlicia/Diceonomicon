@@ -16,11 +16,11 @@ public class DiceSlotController : MonoBehaviour
     public int priority;
     public int mult;
     public Die slottedDie;
-    private GameObject activeScene;
+    private BattleSceneManager activeSceneManager;
 
     private void Start()
     {
-        activeScene = GameObject.Find("BattleScene");
+        activeSceneManager = FindFirstObjectByType<BattleSceneManager>();
     }
 
     public void SetData(DiceSlotData data)
@@ -47,7 +47,7 @@ public class DiceSlotController : MonoBehaviour
 
     public void DoEffect()
     {
-        slotData.Effect(slottedDie.value, mult);
+        slotData.Effect(slottedDie.value, mult, activeSceneManager);
     }
 
     public void DetectLinks()

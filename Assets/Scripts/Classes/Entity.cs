@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using System.Collections.Generic;
 
 public abstract class Entity : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public abstract class Entity : MonoBehaviour
     public Die[] discardPile;
     public int damage = 0;
     public int block = 0;
+    public List<DiceSlotController> activeColumn;
 
     public void DrawDice()
     {

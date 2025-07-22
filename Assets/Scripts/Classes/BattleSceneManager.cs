@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public class BattleScene : MonoBehaviour
+public class BattleSceneManager : MonoBehaviour
 {
     public Player player;
     public Opponent opponent;
@@ -15,23 +15,23 @@ public class BattleScene : MonoBehaviour
 
     public void BuildScene()
     {
-        Debug.Log("BattleScene.BuildScene");
+        Debug.Log("BattleSceneManager.BuildScene");
     }
     public void PlacementPhase()
     {
-        Debug.Log("BattleScene.PlacementPhase");
+        Debug.Log("BattleSceneManager.PlacementPhase");
     }
     public void CalculateDamage()
     {
-        Debug.Log("BattleScene.CalculateDamage");
+        Debug.Log("BattleSceneManager.CalculateDamage");
     }
     public void EndOfRound()
     {
-        Debug.Log("BattleScene.EndOfRound");
+        Debug.Log("BattleSceneManager.EndOfRound");
     }
     private void ResetEntity(Entity _entity)
     {
-        Debug.Log("BattleScene.Reset");
+        Debug.Log("BattleSceneManager.Reset");
     }
 
 }

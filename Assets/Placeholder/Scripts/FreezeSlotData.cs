@@ -1,9 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "FreezeSlotData", menuName = "Data/FreezeSlotData")]
+[CreateAssetMenu(fileName = "FreezeSlotData", menuName = "DiceSlots/FreezeSlotData")]
 public class FreezeSlotData : DiceSlotData
 {
-    public override void Effect(int dieValue, int mult)
+    public override void Effect(int dieValue, int mult, BattleSceneManager sceneManager)
     {
         Debug.Log("Dice have been frozen");
     }

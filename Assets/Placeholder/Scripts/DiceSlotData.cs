@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "DiceSlotData", menuName = "Data/DiceSlotData")]
+[CreateAssetMenu(fileName = "DiceSlotData", menuName = "DiceSlots/DiceSlotData")]
 public class DiceSlotData : ScriptableObject
 {
     // public new string name;
@@ -50,9 +50,9 @@ public class DiceSlotData : ScriptableObject
     public void detachDie()
     { }
 
-    public virtual void Effect(int dieValue, int mult)
+    public virtual void Effect(int dieValue, int mult, BattleSceneManager sceneManager)
     {
-        Debug.Log("DoEffect not found (DiceSlot)");
+        Debug.Log("DoEffect not found");
     }
 
 }

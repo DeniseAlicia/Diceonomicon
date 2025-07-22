@@ -8,12 +8,12 @@ public static class CombatManager
     private static List<List<DiceSlotController>> playerSlots;
     private static List<List<DiceSlotController>> enemySlots;
 
-    public static void HandleActiveCombat(BattleScene _battleScene)
+    public static void HandleActiveCombat(BattleSceneManager sceneManager)
     {
         Debug.Log("CombatManager.HandleActiveCombat");
 
-        playerSlots = SortActiveSlots(_battleScene.playerActiveColumn);
-        enemySlots = SortActiveSlots(_battleScene.enemyActiveColumn);
+        playerSlots = SortActiveSlots(sceneManager.playerActiveColumn);
+        enemySlots = SortActiveSlots(sceneManager.enemyActiveColumn);
 
         for (int i = 0; i < playerSlots.Count; i++)
         {
@@ -23,23 +23,23 @@ public static class CombatManager
         }
     }
 
-    private static void HandleSlotEffects(List<DiceSlotController> _activeSlots)
+    private static void HandleSlotEffects(List<DiceSlotController> activeSlots)
     {
         Debug.Log("CombatManager.HandleSlotEffects");
 
-        foreach (DiceSlotController slot in _activeSlots)
+        foreach (DiceSlotController slot in activeSlots)
         {
             slot.DoEffect();
         }
     }
 
-    private static List<List<DiceSlotController>> SortActiveSlots(List<DiceSlotController> _activeColumn)
+    private static List<List<DiceSlotController>> SortActiveSlots(List<DiceSlotController> activeColumn)
     {
         Debug.Log("CombatManager.SortActiveSlots");
         List<DiceSlotController> priority1 = new List<DiceSlotController>();
         List<DiceSlotController> priority2 = new List<DiceSlotController>();
         List<DiceSlotController> priority3 = new List<DiceSlotController>();
-        foreach (DiceSlotController slot in _activeColumn)
+        foreach (DiceSlotController slot in activeColumn)
         {
             
             if (slot.filled)
