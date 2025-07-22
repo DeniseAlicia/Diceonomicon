@@ -6,18 +6,21 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 {
     public string header;
 
-    [Multiline()]
-    public string content;
+    [Multiline()] public string content;
 
     private Coroutine tooltipCoroutine;
+    private bool isPointerOver = false;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        isPointerOver = true;
         tooltipCoroutine = StartCoroutine(ShowTooltipWithDelay());
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        isPointerOver = false;
+
         if (tooltipCoroutine != null)
         {
             StopCoroutine(tooltipCoroutine);
@@ -29,8 +32,20 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     private IEnumerator ShowTooltipWithDelay()
     {
-        yield return new WaitForSeconds(0.5f);
-        TooltipSystem.ShowTooltip(content, header);
+        float delay = 0.5f;
+        float elapsed = 0f;
+
+        while (elapsed < delay)
+        {
+            if (!isPointerOver) yield break;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        if (isPointerOver)
+        {
+            TooltipSystem.ShowTooltip(content, header);
+        }
     }
 }
 
