@@ -1,0 +1,23 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Style/MenuStyle.uss?fileID=7433441132597879392&amp;guid=7c201a04ee54d1e45b3934145f12738c&amp;type=3#MenuStyle" />
+    <ui:VisualElement name="LevelMap" class="main-menu">
+        <ui:VisualElement name="Buttons" class="sidebar">
+            <ui:Button text="Home" name="button_to_Main" class="buttons button" />
+            <ui:Button text="Settings" name="button_to_Settings" class="buttons button" />
+            <ui:Button text="Map" name="button_to_Map" class="buttons button" />
+            <ui:Button text="Dice Collection" name="button_to_Dice" class="buttons button" />
+            <ui:Button text="Impling Compendium" name="button_to_Implings" class="buttons button" />
+            <ui:Button name="CloseMenu" icon-image="project://database/Assets/Freeui/ZOSMA/Set/Close.png?fileID=2800000&amp;guid=3f302b37d4c72954a87f7d7a773b0fb9&amp;type=3#Close" class="buttons button" style="-unity-background-image-tint-color: rgb(213, 162, 162);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Text" class="content-area">
+            <ui:Label text="Level&#10;Map" name="Header" class="header" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Map" class="visuals-container" style="right: 374px; width: 524px;">
+            <ui:VisualElement name="Achievement00" class="item" style="height: 465px; width: 460px;">
+                <ui:VisualElement name="MapImage" class="image" style="background-image: url(&quot;project://database/Assets/UI/Images%20&amp;%20Icons/demo-map0.png?fileID=2800000&amp;guid=849b7384a28659645a76a63df7d511c6&amp;type=3#demo-map0&quot;); height: 424px; width: 557px;" />
+                <ui:Label text="Choose your Level to continue." name="MapDescription" class="text" style="-unity-font-definition: url(&quot;project://database/Assets/DefaceGames/fonts/Crimson-Bold.otf?fileID=12800000&amp;guid=feb885b141d08e34b950775a3338bf34&amp;type=3#Crimson-Bold&quot;);" />
+                <ui:Button name="Button_to_LevelOne" icon-image="project://database/Assets/Dark_Brown_GUI_kit/icon/simple/sword.png?fileID=2800000&amp;guid=1225aae5cdb5cfb4196e11d97df783b3&amp;type=3#sword" style="width: 44px; height: 48px; top: -300px; background-image: url(&quot;project://database/Assets/UI/Images%20&amp;%20Icons/base%20paper%20bg.png?fileID=2800000&amp;guid=c6cf47318c113624b924685751cd11fd&amp;type=3#base paper bg&quot;);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

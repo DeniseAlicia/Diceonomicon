@@ -1,0 +1,9 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Style/StartScreenStyle.uss?fileID=7433441132597879392&amp;guid=1e537e936db319d4fac90829e18d0e04&amp;type=3#StartScreenStyle" />
+    <ui:VisualElement name="StartScreen" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Images/StartScreen.jpg?fileID=2800000&amp;guid=0c79a618714db1540ab3f265013b48e9&amp;type=3#StartScreen&quot;); -unity-background-scale-mode: stretch-to-fill;">
+        <ui:Label text="Diceonomicon&#10;Welcome to Hell" name="Header" style="color: rgb(250, 134, 18); font-size: 60px; -unity-text-align: middle-center; -unity-font-style: bold; -unity-font-definition: url(&quot;project://database/Assets/DefaceGames/fonts/Crimson-Bold.otf?fileID=12800000&amp;guid=feb885b141d08e34b950775a3338bf34&amp;type=3#Crimson-Bold&quot;); width: 600px; height: 200px; top: 15%; left: 37%;" />
+        <ui:Button text="Start Game" name="StartGame" class="button" />
+        <ui:Button text="Settings" name="Settings" class="button" />
+        <ui:Button text="Quit" name="QuitGame" class="button" />
+    </ui:VisualElement>
+</ui:UXML>
