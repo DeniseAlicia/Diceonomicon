@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "DiceSlotData", menuName = "Data/DiceSlotData")]
-public abstract class DiceSlotData : ScriptableObject
+public class DiceSlotData : ScriptableObject
 {
     // public new string name;
     // public string desc;
@@ -14,7 +14,6 @@ public abstract class DiceSlotData : ScriptableObject
     public string tag;
     public Entity owner;
     public Die slottedDie;
-    public int mult;
     public int priority;
     
     
@@ -52,7 +51,7 @@ public abstract class DiceSlotData : ScriptableObject
     public void detachDie()
     { }
 
-    public virtual void Effect()
+    public virtual void Effect(int dieValue, int mult)
     {
         Debug.Log("DoEffect not found (DiceSlot)");
     }

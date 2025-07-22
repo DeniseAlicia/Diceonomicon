@@ -17,13 +17,13 @@ MonoBehaviour:
   desc: My webs are sweet.
   artwork: {fileID: 2800000, guid: 21061f680cb5d784791b9d493f4db17e, type: 3}
   slots:
-  - {fileID: 11400000, guid: 01c7691a14fabf442b61121e067eaf0d, type: 2}
-  - {fileID: 11400000, guid: 01c7691a14fabf442b61121e067eaf0d, type: 2}
-  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
-  - {fileID: 11400000, guid: 173206cdf6abc854d8bf339db1122e3c, type: 2}
-  - {fileID: 11400000, guid: e593cea36d0575e458da830cb4f0f55a, type: 2}
-  - {fileID: 11400000, guid: e593cea36d0575e458da830cb4f0f55a, type: 2}
-  - {fileID: 11400000, guid: 01c7691a14fabf442b61121e067eaf0d, type: 2}
-  - {fileID: 11400000, guid: e593cea36d0575e458da830cb4f0f55a, type: 2}
-  - {fileID: 11400000, guid: be207a1b444383f47aca6d701cdb9e58, type: 2}
+  - {fileID: 11400000, guid: 9227a96bcdfcf5c40a3c715767612e41, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   slotPrefab: {fileID: 1881896027706196343, guid: 7b4fc5a074e11734695476f0948d04d2, type: 3}

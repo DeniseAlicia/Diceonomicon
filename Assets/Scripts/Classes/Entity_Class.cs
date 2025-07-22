@@ -3,7 +3,8 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
-    public int health;
+    public int currentHealth;
+    public int maxHealth;
     public Die[] diceDeck;
     public Die[] drawnDice;
     public int drawSize; //how many dice can be drawn at round start

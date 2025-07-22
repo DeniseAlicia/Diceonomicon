@@ -14,28 +14,39 @@ public class DiceSlotController : MonoBehaviour
     public bool filled;
     private DiceSlotData slotData;
     public int priority;
+    public int mult;
+    public Die slottedDie;
 
     public void SetData(DiceSlotData data)
     {
         // nameText.text = data.name;
         // descText.text = data.desc;
-        slotMaterial.material = data.material;
-        tag = data.tag;
-        owner = data.owner;
-        data.AssignColorMaterial(tag);
-        outlineMaterial.material = data.outlineMaterial;
-        symbolMaterial.material = data.symbolMaterial;
-        priority = data.priority;
+
         slotData = data;
+        ReadData();
 
 
     }
+    private void ReadData()
+    {
+        slotMaterial.material = slotData.material;
+        tag = slotData.tag;
+        owner = slotData.owner;
+        slotData.AssignColorMaterial(tag);
+        outlineMaterial.material = slotData.outlineMaterial;
+        symbolMaterial.material = slotData.symbolMaterial;
+        priority = slotData.priority;
+    }
+
 
     public void DoEffect()
     {
-        slotData.Effect();
+        slotData.Effect(slottedDie.value, mult);
     }
 
+    public void DetectLinks()
+    {
 
+    }
 
 }

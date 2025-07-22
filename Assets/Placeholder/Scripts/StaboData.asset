@@ -17,13 +17,13 @@ MonoBehaviour:
   desc: Stabby McStab Stab
   artwork: {fileID: 2800000, guid: 5ca3224be253c144cac39ba22138d4c7, type: 3}
   slots:
-  - {fileID: 11400000, guid: 9398a067228c3654d820bd38ecfa4016, type: 2}
-  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
-  - {fileID: 11400000, guid: e593cea36d0575e458da830cb4f0f55a, type: 2}
-  - {fileID: 11400000, guid: e593cea36d0575e458da830cb4f0f55a, type: 2}
-  - {fileID: 11400000, guid: 9398a067228c3654d820bd38ecfa4016, type: 2}
   - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
   - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
-  - {fileID: 11400000, guid: e593cea36d0575e458da830cb4f0f55a, type: 2}
-  - {fileID: 11400000, guid: 9398a067228c3654d820bd38ecfa4016, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   slotPrefab: {fileID: 1881896027706196343, guid: 7b4fc5a074e11734695476f0948d04d2, type: 3}
