@@ -9,31 +9,32 @@ namespace Diceonomicon
         new public string tag;
         public string owner;
         public Vector3 lastPosition;
-    
+        public bool isDraggable = false;
+        public bool isPlaced = false;
+
         [SerializeField] Transform[] diceSides;
         [SerializeField] DiceTrayWall[] diceTrayWalls;
         [SerializeField] float forceX = 0f;
         [SerializeField] float forceY = 0f;
         [SerializeField] float forceZ = 0f;
         [SerializeField] float torque = 5f;
+        [SerializeField] int liftOffValue = 3; // how much the die is lift off the ground when dragging
         [SerializeField] Vector3 tempGravity = new Vector3(0, -100f, 0);
 
-        new private Rigidbody rigidbody;
-        private BoxCollider boxCollider;
+        private Rigidbody rigidBody;
         private bool isRolling = false;
+        Vector3 mouseOffset;
         private Vector3 defaultGravity = Physics.gravity;
 
         void Start()
         {
-            rigidbody = GetComponent<Rigidbody>();
-            rigidbody.useGravity = false;
-            boxCollider = GetComponent<BoxCollider>();
-            boxCollider.enabled = false;
+            rigidBody = GetComponent<Rigidbody>();
+            rigidBody.useGravity = false;
         }
 
         void FixedUpdate()
         {
-            if (rigidbody.IsSleeping() & isRolling)
+            if (rigidBody.IsSleeping() & isRolling)
             {
                 GetSideFacingUp();
             }
@@ -44,7 +45,7 @@ namespace Diceonomicon
             Vector3 force = new Vector3(forceX, forceY, forceZ);
             Vector3 torque = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f) * this.torque);
 
-            rigidbody.useGravity = true;
+            rigidBody.useGravity = true;
 
             foreach (DiceTrayWall diceTrayWall in diceTrayWalls) //enable collision for the walls of the dice tray
             {
@@ -53,8 +54,8 @@ namespace Diceonomicon
 
             Physics.gravity = defaultGravity; // reset gravity
 
-            rigidbody.AddForce(force, ForceMode.Impulse); // add force and torque to roll the die
-            rigidbody.AddTorque(torque, ForceMode.Impulse);
+            rigidBody.AddForce(force, ForceMode.Impulse); // add force and torque to roll the die
+            rigidBody.AddTorque(torque, ForceMode.Impulse);
 
             isRolling = true;
         }
@@ -93,6 +94,62 @@ namespace Diceonomicon
             Debug.Log(upSide.name); // log the die value
 
             isRolling = false;
+        }
+
+        private Vector3 GetDiePosition() // convert the die position to screen coordinates
+        {
+            Vector3 diePos = Camera.main.WorldToScreenPoint(transform.position);
+            return diePos;
+        }
+
+        private void OnMouseDown()
+        {
+            if (isDraggable)
+            {
+                lastPosition = transform.position;
+                rigidBody.isKinematic = true;
+                mouseOffset = Input.mousePosition - GetDiePosition();
+            }
+        }
+
+        private void OnMouseDrag()
+        {
+            if (isDraggable)
+            {
+                transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition - mouseOffset - new Vector3(0f, 0f, liftOffValue));
+            }
+        }
+
+        private void OnMouseUp()
+        {
+            if (isDraggable)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit = new RaycastHit();
+
+                if (Physics.Raycast(ray, out hit, 100))
+                {
+                    // if (hitSlot.transform.gameObject is a Slot)
+                    // {
+                    //     transform.position = hitSlot.transform.position;
+                    //     also compare color of slot and die
+                    //     isPlaced = true; 
+                    // }
+                }
+                else
+                {
+                    transform.position = lastPosition;
+                }
+
+                transform.position = lastPosition;
+                // rigidBody.isKinematic = false; // it wont need physics now or will it?
+            }
+        }
+
+        private void MoveToLayer(string _layerName)
+        {
+            int layer = LayerMask.NameToLayer(_layerName);
+            gameObject.layer = layer;
         }
     }
 }
