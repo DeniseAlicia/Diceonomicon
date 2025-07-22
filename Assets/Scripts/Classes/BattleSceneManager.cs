@@ -7,8 +7,6 @@ public class BattleSceneManager : MonoBehaviour
 {
     public Player player;
     public Opponent opponent;
-    public Vector3[] playerPositions;
-    public Vector3[] enemyPositions;
     public List<DiceSlotController> playerActiveColumn;
     public List<DiceSlotController> enemyActiveColumn;
     public int level;
@@ -23,15 +21,24 @@ public class BattleSceneManager : MonoBehaviour
     }
     public void CalculateDamage()
     {
-        Debug.Log("BattleSceneManager.CalculateDamage");
+        player.currentHealth -= Math.Max(opponent.damage - player.block, 0);
+        opponent.currentHealth -= Math.Max(player.damage - opponent.block, 0);
     }
     public void EndOfRound()
     {
-        Debug.Log("BattleSceneManager.EndOfRound");
+        ResetEntity(player);
+        ResetEntity(opponent);
     }
-    private void ResetEntity(Entity _entity)
+    private void ResetEntity(Entity entity)
     {
-        Debug.Log("BattleSceneManager.Reset");
+        foreach (Die die in entity.drawnDice)
+        {
+            entity.drawnDice.Remove(die);
+            entity.discardPile.Add(die);
+        }
+
+        entity.damage = 0;
+        entity.block = 0;
     }
 
 }

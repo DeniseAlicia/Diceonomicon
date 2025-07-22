@@ -6,10 +6,10 @@ public abstract class Entity : MonoBehaviour
 {
     public int currentHealth;
     public int maxHealth;
-    public Die[] diceDeck;
-    public Die[] drawnDice;
+    public List<Die> diceDeck;
+    public List<Die> drawnDice;
     public int drawSize; //how many dice can be drawn at round start
-    public Die[] discardPile;
+    public List<Die> discardPile;
     public int damage = 0;
     public int block = 0;
     public List<DiceSlotController> activeColumn;
