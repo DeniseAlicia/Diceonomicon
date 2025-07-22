@@ -17,6 +17,7 @@ public abstract class DiceSlotData : ScriptableObject
     public int mult;
     public int priority;
     
+    
 
     public void AssignColorMaterial(string tag)
     {
@@ -51,7 +52,7 @@ public abstract class DiceSlotData : ScriptableObject
     public void detachDie()
     { }
 
-    public virtual void DoEffect()
+    public virtual void Effect()
     {
         Debug.Log("DoEffect not found (DiceSlot)");
     }

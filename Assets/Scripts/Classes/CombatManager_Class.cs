@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public static class CombatManager
 {
-    private static List<List<DiceSlotData>> playerSlots;
-    private static List<List<DiceSlotData>> enemySlots;
+    private static List<List<DiceSlotController>> playerSlots;
+    private static List<List<DiceSlotController>> enemySlots;
 
     public static void HandleActiveCombat(BattleScene _battleScene)
     {
@@ -23,24 +23,25 @@ public static class CombatManager
         }
     }
 
-    private static void HandleSlotEffects(List<DiceSlotData> _activeSlots)
+    private static void HandleSlotEffects(List<DiceSlotController> _activeSlots)
     {
         Debug.Log("CombatManager.HandleSlotEffects");
 
-        foreach (DiceSlotData slot in _activeSlots)
+        foreach (DiceSlotController slot in _activeSlots)
         {
             slot.DoEffect();
         }
     }
 
-    private static List<List<DiceSlotData>> SortActiveSlots(List<DiceSlotData> _activeColumn)
+    private static List<List<DiceSlotController>> SortActiveSlots(List<DiceSlotController> _activeColumn)
     {
         Debug.Log("CombatManager.SortActiveSlots");
-        List<DiceSlotData> priority1 = new List<DiceSlotData>();
-        List<DiceSlotData> priority2 = new List<DiceSlotData>();
-        List<DiceSlotData> priority3 = new List<DiceSlotData>();
-        foreach (DiceSlotData slot in _activeColumn)
+        List<DiceSlotController> priority1 = new List<DiceSlotController>();
+        List<DiceSlotController> priority2 = new List<DiceSlotController>();
+        List<DiceSlotController> priority3 = new List<DiceSlotController>();
+        foreach (DiceSlotController slot in _activeColumn)
         {
+            
             if (slot.filled)
             {
                 switch (slot.priority)
@@ -58,7 +59,7 @@ public static class CombatManager
             }
         }
 
-        List<List<DiceSlotData>> sortedSlots = new List<List<DiceSlotData>>();
+        List<List<DiceSlotController>> sortedSlots = new List<List<DiceSlotController>>();
         sortedSlots.Add(priority1);
         sortedSlots.Add(priority2);
         sortedSlots.Add(priority3);

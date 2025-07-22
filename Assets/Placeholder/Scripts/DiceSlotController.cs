@@ -9,9 +9,11 @@ public class DiceSlotController : MonoBehaviour
     public Renderer outlineMaterial;
     public Renderer symbolMaterial;
 
-    public new string tag;
+
     public Entity owner;
     public bool filled;
+    private DiceSlotData slotData;
+    public int priority;
 
     public void SetData(DiceSlotData data)
     {
@@ -23,8 +25,15 @@ public class DiceSlotController : MonoBehaviour
         data.AssignColorMaterial(tag);
         outlineMaterial.material = data.outlineMaterial;
         symbolMaterial.material = data.symbolMaterial;
+        priority = data.priority;
+        slotData = data;
 
 
+    }
+
+    public void DoEffect()
+    {
+        slotData.Effect();
     }
 
 

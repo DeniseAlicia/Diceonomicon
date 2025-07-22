@@ -9,8 +9,8 @@ public class BattleScene : MonoBehaviour
     public Opponent opponent;
     public Vector3[] playerPositions;
     public Vector3[] enemyPositions;
-    public List<DiceSlotData> playerActiveColumn;
-    public List<DiceSlotData> enemyActiveColumn;
+    public List<DiceSlotController> playerActiveColumn;
+    public List<DiceSlotController> enemyActiveColumn;
     public int level;
 
     public void BuildScene()
