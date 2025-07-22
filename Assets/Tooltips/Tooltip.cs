@@ -15,7 +15,7 @@ public class Tooltip : MonoBehaviour
 
     public RectTransform rectTransform;
 
-    private void Awake()
+    private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
     }
@@ -43,11 +43,14 @@ public class Tooltip : MonoBehaviour
     private void Update()
     {
         Vector2 position = Input.mousePosition;
+        float xOffset = 50f;
+        float yOffset = 50f;
 
         float pivotX = position.x / Screen.width;
         float pivotY = position.y / Screen.height;
 
         rectTransform.pivot = new Vector2(pivotX, pivotY);
-        transform.position = position;
+        transform.position = new Vector2(position.x + xOffset, position.y + yOffset);
+       ;
     }
 }
