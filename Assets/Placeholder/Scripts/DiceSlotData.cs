@@ -16,7 +16,6 @@ public class DiceSlotData : ScriptableObject
     public Die slottedDie;
     public int priority;
     
-    
 
     public void AssignColorMaterial(string tag)
     {

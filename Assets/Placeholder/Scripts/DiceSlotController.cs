@@ -16,6 +16,12 @@ public class DiceSlotController : MonoBehaviour
     public int priority;
     public int mult;
     public Die slottedDie;
+    private GameObject activeScene;
+
+    private void Start()
+    {
+        activeScene = GameObject.Find("BattleScene");
+    }
 
     public void SetData(DiceSlotData data)
     {
