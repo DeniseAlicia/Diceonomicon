@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74fdfedfcfe85584299d23f938c1384a, type: 3}
   m_Name: AttackData
   m_EditorClassIdentifier: 
+  name: Attack
+  desc: "Deals damage to the opponent \u201CGood old-fashioned violence\u201D "
   material: {fileID: 0}
   outlineMaterial: {fileID: 0}
   symbolMaterial: {fileID: 0}
   tag: 
   owner: {fileID: 0}
   slottedDie: {fileID: 0}
-  mult: 0
   priority: 0

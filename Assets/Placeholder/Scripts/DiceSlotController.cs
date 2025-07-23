@@ -3,8 +3,6 @@ using TMPro;
 
 public class DiceSlotController : MonoBehaviour
 {
-    // public TMP_Text nameText;
-    // public TMP_Text descText;
     public Renderer slotMaterial;
     public Renderer outlineMaterial;
     public Renderer symbolMaterial;
@@ -25,16 +23,14 @@ public class DiceSlotController : MonoBehaviour
 
     public void SetData(DiceSlotData data)
     {
-        // nameText.text = data.name;
-        // descText.text = data.desc;
-
         slotData = data;
         ReadData();
-
-
     }
+
     private void ReadData()
     {
+        if (slotData == null) return;
+
         slotMaterial.material = slotData.material;
         tag = slotData.tag;
         owner = slotData.owner;
@@ -54,5 +50,22 @@ public class DiceSlotController : MonoBehaviour
     {
 
     }
+
+
+    public bool HasSlotData()
+    {
+        return slotData != null;
+    }
+
+    public string GetTooltipHeader()
+    {
+        return slotData != null ? slotData.name : "???";
+    }
+
+    public string GetTooltipDescription()
+    {
+        return slotData != null ? slotData.desc : "";
+    }
+
 
 }

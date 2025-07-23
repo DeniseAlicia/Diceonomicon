@@ -4,8 +4,8 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "DiceSlotData", menuName = "DiceSlots/DiceSlotData")]
 public class DiceSlotData : ScriptableObject
 {
-    // public new string name;
-    // public string desc;
+    public new string name;
+    public string desc;
 
     public Material material;
     [HideInInspector] public Material outlineMaterial;
@@ -15,7 +15,7 @@ public class DiceSlotData : ScriptableObject
     public Entity owner;
     public Die slottedDie;
     public int priority;
-    
+
 
     public void AssignColorMaterial(string tag)
     {

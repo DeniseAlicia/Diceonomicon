@@ -1243,6 +1243,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1718849844}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &367605925 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7732063880749734990, guid: c2c3ab872f7760e44820a92fe3be3458, type: 3}
+  m_PrefabInstance: {fileID: 8305499595290275093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &367605930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367605925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085fdf2801e4ed44a9eaf1e68ac3739e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Attack
+  content: 
+  slotData: {fileID: 0}
 --- !u!1 &373581486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1796,7 +1816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1880,7 +1900,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 468276397}
-  m_CullTransparentMesh: 1
+  m_CullTransparentMesh: 0
 --- !u!1 &470316621
 GameObject:
   m_ObjectHideFlags: 0
@@ -2650,7 +2670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2734,7 +2754,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708897670}
-  m_CullTransparentMesh: 1
+  m_CullTransparentMesh: 0
 --- !u!1 &710797115
 GameObject:
   m_ObjectHideFlags: 0
@@ -2910,6 +2930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   header: Mimicry
   content: ....
+  slotData: {fileID: 0}
 --- !u!1 &747742153
 GameObject:
   m_ObjectHideFlags: 0
@@ -3646,7 +3667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4621,7 +4642,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   header: Ground
-  content: "Decreases the value of random dice from your opponent\u2019 column\r\r"
+  content: "\r\r"
+  slotData: {fileID: 0}
 --- !u!4 &1299899622 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3657070027929452930, guid: c9d52f8cfc5191944af0a91817188790, type: 3}
@@ -6545,7 +6567,6 @@ GameObject:
   - component: {fileID: 1913023521}
   - component: {fileID: 1913023520}
   - component: {fileID: 1913023524}
-  - component: {fileID: 1913023525}
   m_Layer: 0
   m_Name: BattleTablets
   m_TagString: MainCamera
@@ -6688,22 +6709,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EventMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_MaxRayIntersections: 0
---- !u!114 &1913023525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913023519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_EventMask:
@@ -7534,6 +7539,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1877837336}
     m_Modifications:
+    - target: {fileID: 2573110542101750925, guid: c2c3ab872f7760e44820a92fe3be3458, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573110542101750925, guid: c2c3ab872f7760e44820a92fe3be3458, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3367360826588891367, guid: c2c3ab872f7760e44820a92fe3be3458, type: 3}
       propertyPath: m_Name
       value: PlayerTablet (1)
@@ -7578,6 +7591,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8752614833038052119, guid: c2c3ab872f7760e44820a92fe3be3458, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8752614833038052119, guid: c2c3ab872f7760e44820a92fe3be3458, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7585,6 +7606,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7468627922653870628, guid: c2c3ab872f7760e44820a92fe3be3458, type: 3}
       insertIndex: -1
       addedObject: {fileID: 746154753}
+    - targetCorrespondingSourceObject: {fileID: 7732063880749734990, guid: c2c3ab872f7760e44820a92fe3be3458, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 367605930}
     - targetCorrespondingSourceObject: {fileID: 1424122371058149952, guid: c2c3ab872f7760e44820a92fe3be3458, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
