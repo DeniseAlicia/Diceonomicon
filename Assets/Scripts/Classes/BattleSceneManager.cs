@@ -11,7 +11,7 @@ public class BattleSceneManager : MonoBehaviour
     public List<DiceSlotController> enemyActiveColumn;
     public int level;
 
-    public void BuildScene()
+    public void Start()
     {
         Debug.Log("BattleSceneManager.BuildScene");
     }

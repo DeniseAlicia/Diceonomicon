@@ -9,10 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e6457e858ea5b84195f7ae233a6c8d4, type: 3}
-  m_Name: BurnData
+  m_Script: {fileID: 11500000, guid: b2cda6339a3e46248b8b45153763c6cd, type: 3}
+  m_Name: ShieldSlot
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 7f9426fecb1b5e548a58c656a14540a5, type: 2}
+  material: {fileID: 0}
   outlineMaterial: {fileID: 0}
   symbolMaterial: {fileID: 0}
-  tag: Spell
+  tag: 
+  owner: {fileID: 0}
+  slottedDie: {fileID: 0}
+  priority: 0
