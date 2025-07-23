@@ -446,7 +446,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3931064614536902754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aedeca597ea3da4b9f67caa1e8e6cbb, type: 3}
+  m_Script: {fileID: 11500000, guid: a04a2f2562eebc94bb37e0dd9546413f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 2344501088090392704}
@@ -1091,7 +1091,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6727977462724708803}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aedeca597ea3da4b9f67caa1e8e6cbb, type: 3}
+  m_Script: {fileID: 11500000, guid: a04a2f2562eebc94bb37e0dd9546413f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 2344501088090392704}
@@ -1229,6 +1229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3620997622594802804}
+  - component: {fileID: 6255826648385007587}
   m_Layer: 8
   m_Name: PlayerTablet
   m_TagString: Untagged
@@ -1254,6 +1255,21 @@ Transform:
   - {fileID: 6421517556568769540}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6255826648385007587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8448579534215354899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315b7acc13de39640968931f880ce24e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: {fileID: 13096339759207314}
+  descText: {fileID: 2352121234363414725}
+  artworkRenderer: {fileID: 4123861950717567092}
 --- !u!1 &8457177599187312549
 GameObject:
   m_ObjectHideFlags: 0

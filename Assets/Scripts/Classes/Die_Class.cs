@@ -12,10 +12,10 @@ namespace Diceonomicon
     
         [SerializeField] Transform[] diceSides;
         [SerializeField] DiceTrayWall[] diceTrayWalls;
-        [SerializeField] float forceX = 0f;
-        [SerializeField] float forceY = 0f;
-        [SerializeField] float forceZ = 0f;
-        [SerializeField] float torque = 5f;
+        [SerializeField] float forceX = 1f;
+        [SerializeField] float forceY = 1f;
+        [SerializeField] float forceZ = 1f;
+        [SerializeField] float torque = 7f;
         [SerializeField] Vector3 tempGravity = new Vector3(0, -100f, 0);
 
         new private Rigidbody rigidbody;
