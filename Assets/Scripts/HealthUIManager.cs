@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class HealthAlphaController : MonoBehaviour
+public class HealthUIManager : MonoBehaviour
 {
     public Material playerHealth;
     public Material enemyHealth;
@@ -10,9 +10,20 @@ public class HealthAlphaController : MonoBehaviour
     public TMP_Text enemyHealthText;
 
     public float alpha;
+    private readonly float maxHealth = 100;
+    public float currentHealth;
 
     public void Update()
     {
+        // Add depleting health bar effect
+        currentHealth = Mathf.Clamp(currentHealth, 0, 100);
+
+        float yOffset = 0.5f - currentHealth*0.2f / maxHealth;
+        Vector4 playerOffset = playerHealth.GetVector("_TopMap_ST");
+        playerOffset.w = yOffset;
+        playerHealth.SetVector("_TopMap_ST", playerOffset);
+
+        // Adjusting Alpha of Health UI elements
         alpha = Mathf.Clamp(alpha, 0f, 0.5f);
 
         Color playerColor = playerHealth.GetColor("_BaseColor");
