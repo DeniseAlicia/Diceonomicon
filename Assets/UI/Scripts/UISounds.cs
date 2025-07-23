@@ -11,20 +11,17 @@ public class UISounds : MonoBehaviour
 
     private VisualElement root;
 
-    public void HookAllButtons()
+    public void HookAllButtons(VisualElement rootElement)
     {
-        // get UIDocument 
-        var uiDocument = GetComponent<UIDocument>();
-        if (uiDocument == null)
+        if (rootElement == null)
         {
-            Debug.LogError("UIDocument Component not found!");
+            Debug.LogError("rootElement is null!");
             return;
         }
 
-        root = uiDocument.rootVisualElement;
-
         // find all buttons 
-        var buttons = root.Query<Button>().ToList();
+        var buttons = rootElement.Query<Button>().ToList();
+        Debug.Log($"Buttons found: {buttons.Count}");
 
         foreach (var btn in buttons)
         {
@@ -33,6 +30,7 @@ public class UISounds : MonoBehaviour
 
             btn.clicked += () =>
             {
+                Debug.Log("Button clicked");
                 if (!fmodEvent.IsNull)
                 {
                     FMODUnity.RuntimeManager.PlayOneShot(fmodEvent.Path, transform.position);

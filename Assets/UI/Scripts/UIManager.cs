@@ -94,7 +94,7 @@ public class UIManager : MonoBehaviour
             levelManager.SetupLevelButtons(activeMenuInstance);
         }
 
-        buttonsSoundManager.HookAllButtons();
+        buttonsSoundManager.HookAllButtons(activeMenuInstance);
     }
 
     private void SetupMenuButtons(VisualElement menu)

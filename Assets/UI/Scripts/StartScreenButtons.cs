@@ -8,10 +8,17 @@ public class StartScreenButtons : MonoBehaviour
 {
     public UIDocument startScreenDocument;
     public StartGame startGame;
+    public UISounds uiSounds;
 
     private void OnEnable()
     {
         var root = startScreenDocument.rootVisualElement;
+
+        // Hook all buttons for sounds
+        if (uiSounds != null)
+        {
+            uiSounds.HookAllButtons(root);
+        }
 
         var startGameButton = root.Q<Button>("StartGame");
         if (startGameButton != null)
