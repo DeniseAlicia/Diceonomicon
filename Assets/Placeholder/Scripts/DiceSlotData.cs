@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "TabletSlotData", menuName = "Data/TabletSlotData")]
-public class TabletSlotData : ScriptableObject
+[CreateAssetMenu(fileName = "DiceSlotData", menuName = "DiceSlots/DiceSlotData")]
+public class DiceSlotData : ScriptableObject
 {
     // public new string name;
     // public string desc;
@@ -12,6 +12,10 @@ public class TabletSlotData : ScriptableObject
     [HideInInspector] public Material symbolMaterial;
 
     public string tag;
+    public Entity owner;
+    public Die slottedDie;
+    public int priority;
+    
 
     public void AssignColorMaterial(string tag)
     {
@@ -39,4 +43,10 @@ public class TabletSlotData : ScriptableObject
                 return;
         }
     }
+
+    public virtual void Effect(int dieValue, int mult, BattleSceneManager sceneManager)
+    {
+        Debug.Log("DoEffect not found");
+    }
+
 }

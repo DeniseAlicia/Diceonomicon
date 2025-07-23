@@ -1,0 +1,32 @@
+
+using UnityEngine;
+using System.Collections.Generic;
+
+public abstract class Entity : MonoBehaviour
+{
+    public int currentHealth;
+    public int maxHealth;
+    public List<Die> diceDeck;
+    public List<Die> drawnDice;
+    public int drawSize; //how many dice can be drawn at round start
+    public List<Die> discardPile;
+    public int damage = 0;
+    public int block = 0;
+    public List<DiceSlotController> activeColumn;
+
+    public void DrawDice()
+    {
+        Debug.Log("Entity.DrawDice");
+    }
+    public void RollDice()
+    {
+        Debug.Log("Entity.RollDice");
+    }
+
+    public void CalculateColumns()
+    {
+        Debug.Log("Entity.CalculateColumns");
+    }
+
+
+}
