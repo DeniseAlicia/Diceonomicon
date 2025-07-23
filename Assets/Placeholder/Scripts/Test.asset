@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74fdfedfcfe85584299d23f938c1384a, type: 3}
-  m_Name: AttackData
+  m_Script: {fileID: 11500000, guid: cc7016772e502654a8b80dfc960121be, type: 3}
+  m_Name: Test
   m_EditorClassIdentifier: 
-  name: Attack
-  desc: "Deals damage to the opponent \u201CGood old-fashioned violence\u201D "
+  name: Testy McTest
+  desc: I am the TEST!
   material: {fileID: 0}
   outlineMaterial: {fileID: 0}
   symbolMaterial: {fileID: 0}
