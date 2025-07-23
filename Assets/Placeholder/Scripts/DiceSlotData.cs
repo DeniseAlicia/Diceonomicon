@@ -44,12 +44,6 @@ public class DiceSlotData : ScriptableObject
         }
     }
 
-    public void attachDie(Die die)
-    { }
-
-    public void detachDie()
-    { }
-
     public virtual void Effect(int dieValue, int mult, BattleSceneManager sceneManager)
     {
         Debug.Log("DoEffect not found");
