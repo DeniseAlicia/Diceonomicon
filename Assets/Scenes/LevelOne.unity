@@ -3587,7 +3587,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 200
+  m_PreferredWidth: 350
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -3682,7 +3682,7 @@ MonoBehaviour:
   headerField: {fileID: 468276399}
   contentField: {fileID: 708897672}
   layoutElement: {fileID: 894392419}
-  characterWrapLimit: 80
+  characterWrapLimit: 60
   rectTransform: {fileID: 0}
 --- !u!1 &904776872
 GameObject:
@@ -4621,7 +4621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   header: Ground
-  content: "Decreases the value of random dice\nfrom your opponent\u2019 column\r\r"
+  content: "Decreases the value of random dice from your opponent\u2019 column\r\r"
 --- !u!4 &1299899622 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3657070027929452930, guid: c9d52f8cfc5191944af0a91817188790, type: 3}
@@ -4644,7 +4644,8 @@ MonoBehaviour:
   healthOverlay: {fileID: 2100000, guid: e4dd66862320dfa45b01fc10ac70800c, type: 2}
   playerHealthText: {fileID: 1824492336}
   enemyHealthText: {fileID: 390334496}
-  alpha: 0
+  alpha: 0.5
+  currentHealth: 119.8
 --- !u!1 &1300425959
 GameObject:
   m_ObjectHideFlags: 0
