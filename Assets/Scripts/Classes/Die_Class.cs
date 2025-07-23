@@ -25,15 +25,21 @@ namespace Diceonomicon
 
         private Camera camera;
         private Rigidbody rigidBody;
+        private BoxCollider boxCollider;
         private bool isRolling = false;
         Vector3 mouseOffset;
         private Vector3 defaultGravity = Physics.gravity;
+        private Vector3 DieStartPos; // Test; remove later
+
 
         void Start()
         {
             camera = GameObject.Find("Gameplay").GetComponent<Camera>();
             rigidBody = GetComponent<Rigidbody>();
             rigidBody.useGravity = false;
+            boxCollider = GetComponent<BoxCollider>();
+
+            DieStartPos = transform.position; // Test; remove later
         }
 
         void FixedUpdate()
@@ -92,14 +98,62 @@ namespace Diceonomicon
             }
 
             if (upSide == null) return;
-            Debug.Log(upSide.name); // log the die value
+            // Debug.Log(upSide.name); // log the die value
 
-            // rotate die to a "straight" position
+            boxCollider.enabled = false;
+            value = int.Parse(upSide.name);
             float rotationX = transform.eulerAngles.x;
             float rotationZ = transform.eulerAngles.z;
-            transform.eulerAngles = new Vector3(rotationX, 0f, rotationZ);
+            Debug.Log("Value: " + value);
+            switch (value)
+            {
+                case 1:
+                    transform.eulerAngles = new Vector3(-90f, 0f, 90f);
+                    break;
+                case 2:
+                    transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                    break;
+                case 3:
+                    transform.eulerAngles = new Vector3(0f, 180f, -90f);
+                    break;
+                case 4:
+                    transform.eulerAngles = new Vector3(0f, 0f, 90f);
+                    break;
+                case 5:
+                    transform.eulerAngles = new Vector3(180f, 90f, 0f);
+                    break;
+                case 6:
+                    transform.eulerAngles = new Vector3(90f, 0f, 90f);
+                    break;
+            }
+            boxCollider.enabled = true;
+            // rotate die to a "straight" position
+            // float rotationX = transform.eulerAngles.x;
+            // float rotationZ = transform.eulerAngles.z;
+            // transform.eulerAngles = new Vector3(rotationX, 0f, rotationZ);
 
             isRolling = false;
+        }
+
+        // public void FixPosition()
+        // {
+            
+        // }
+
+        public void ResetDiePosition() // Test; remove later
+        {
+            Physics.gravity = defaultGravity; // reset gravity
+            rigidBody.isKinematic = false;
+            boxCollider.enabled = true;
+
+            // enable DiceTrayWall collision
+            foreach (DiceTrayWall diceTrayWall in diceTrayWalls)
+            {
+                diceTrayWall.EnableCollision();
+            }
+
+            // reset the die to its starting position
+            transform.position = DieStartPos;
         }
 
         private Vector3 GetDiePosition() // convert the die position to screen coordinates
@@ -113,7 +167,7 @@ namespace Diceonomicon
             if (isDraggable)
             {
                 lastPosition = transform.position;
-                // rigidBody.isKinematic = true;
+                // rigidBody.isKinematic = true; // Test, remove here and uncomment in FixedUpdate
                 mouseOffset = Input.mousePosition - GetDiePosition();
             }
         }

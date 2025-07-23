@@ -15,6 +15,7 @@ namespace Diceonomicon
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
                 RollAllDice();
+                
             }
 
             bool allDiceSleeping = false;
@@ -24,7 +25,7 @@ namespace Diceonomicon
                 if (die.stoop == true)
                 {
                     i++;
-                    Debug.Log(i);
+                    // Debug.Log(i);
                 }
 
             }
@@ -44,7 +45,7 @@ namespace Diceonomicon
         {
             foreach (Die die in dice)
             {
-                // die.ResetDiePosition();
+                die.ResetDiePosition();
                 die.RollDice();
             }
         }
