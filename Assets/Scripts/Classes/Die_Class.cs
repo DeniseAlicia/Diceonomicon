@@ -15,7 +15,7 @@ namespace Diceonomicon
         [SerializeField] float forceX = 0f;
         [SerializeField] float forceY = 0f;
         [SerializeField] float forceZ = 0f;
-        [SerializeField] float torque = 0f;
+        [SerializeField] float torque = 5f;
         [SerializeField] Vector3 tempGravity = new Vector3(0, -100f, 0);
 
         new private Rigidbody rigidbody;
