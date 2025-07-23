@@ -18,4 +18,4 @@ MonoBehaviour:
   tag: 
   owner: {fileID: 0}
   slottedDie: {fileID: 0}
-  priority: 0
+  priority: 3

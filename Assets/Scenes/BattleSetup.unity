@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 0
+  maxHealth: 100
   diceDeck: []
   drawnDice: []
   drawSize: 0
@@ -512,8 +512,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3975af494267e41a0f73c365acf0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  opponent: {fileID: 0}
+  player: {fileID: 1213689259}
+  opponent: {fileID: 1334747538}
   playerActiveColumn: []
   enemyActiveColumn: []
   level: 0
@@ -562,7 +562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 0
+  maxHealth: 100
   diceDeck: []
   drawnDice: []
   drawSize: 0
