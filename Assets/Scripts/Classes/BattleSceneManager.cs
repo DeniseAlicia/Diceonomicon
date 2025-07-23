@@ -14,6 +14,8 @@ public class BattleSceneManager : MonoBehaviour
     public void Start()
     {
         Debug.Log("BattleSceneManager.BuildScene");
+        opponent.currentHealth = opponent.maxHealth;
+        player.currentHealth = player.maxHealth;
     }
     public void PlacementPhase()
     {

@@ -21,7 +21,7 @@ public class PoisonSlotData : DiceSlotData
         {
             int randomIndex = Random.Range(0, target.Count);
             DiceSlotController targetSlot = target[i];
-            if (targetSlot.filled)
+            if (targetSlot.isFilled)
             {
                 targetSlot.slottedDie.value -= 1;
             }

@@ -11,7 +11,8 @@ public class DiceSlotController : MonoBehaviour
 
 
     public Entity owner;
-    public bool filled;
+    public bool isFilled;
+    public bool isHandled;
     private DiceSlotData slotData;
     public int priority;
     public int mult;

@@ -42,7 +42,7 @@ public static class CombatManager
         foreach (DiceSlotController slot in activeColumn)
         {
             
-            if (slot.filled)
+            if (slot.isFilled & !slot.isHandled)
             {
                 switch (slot.priority)
                 {
