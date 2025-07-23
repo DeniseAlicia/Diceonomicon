@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc7016772e502654a8b80dfc960121be, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
+  name: Testy McTest
+  desc: I am the TEST!
   material: {fileID: 0}
   outlineMaterial: {fileID: 0}
   symbolMaterial: {fileID: 0}
   tag: 
+  owner: {fileID: 0}
+  slottedDie: {fileID: 0}
+  priority: 0
