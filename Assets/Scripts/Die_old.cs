@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Die : MonoBehaviour
+public class DieOld : MonoBehaviour
 {
     [SerializeField] Transform[] _diceSides;
     [SerializeField] DiceTrayWall[] _diceTrayWalls;
