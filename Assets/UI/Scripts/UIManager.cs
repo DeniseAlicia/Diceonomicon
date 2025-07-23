@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public LevelManager levelManager;
     public static MenuType menuToOpenOnLoad = MenuType.Main;
+    public UISounds buttonsSoundManager;
 
 
     //Uxml Files (visivle in the Unity Inspector)
@@ -93,6 +94,7 @@ public class UIManager : MonoBehaviour
             levelManager.SetupLevelButtons(activeMenuInstance);
         }
 
+        buttonsSoundManager.HookAllButtons(activeMenuInstance);
     }
 
     private void SetupMenuButtons(VisualElement menu)

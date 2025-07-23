@@ -291,6 +291,60 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &706851986
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 706851988}
+  - component: {fileID: 706851987}
+  m_Layer: 0
+  m_Name: UISounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &706851987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706851986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 760d613f30834b448bf043ad52fd0eae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fmodEvent:
+    Guid:
+      Data1: -1100606484
+      Data2: 1270412216
+      Data3: 1855138981
+      Data4: 1501073609
+    Path: event:/Sounds/UI/UI_Confirm
+  excludedButtonNames:
+  - CloseMenu
+  - Button_to_LevelOne
+--- !u!4 &706851988
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706851986}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.07122996, y: 2.264596, z: 2.6467957}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &961739749
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startScreenDocument: {fileID: 359850119}
   startGame: {fileID: 2011406038}
+  uiSounds: {fileID: 706851987}
 --- !u!4 &1567016648
 Transform:
   m_ObjectHideFlags: 0
@@ -527,3 +582,4 @@ SceneRoots:
   - {fileID: 2011406039}
   - {fileID: 359850120}
   - {fileID: 1567016648}
+  - {fileID: 706851988}
