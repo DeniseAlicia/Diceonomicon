@@ -14,7 +14,19 @@ public class EndBattle : MonoBehaviour
     // Add Event Listener: When player currentHealth =< 0 do:
 
     // gameOverScreen.FMOD.playEvent();
-    public void Start()
+    public void Win()
+    {
+        victoryScreen.SetActive(true);
+
+        buttonContainer.SetActive(true);
+        Button restart = restartButton.GetComponent<Button>();
+        restart.onClick.AddListener(RestartOnClick);
+
+        Button quit = quitButton.GetComponent<Button>();
+        quit.onClick.AddListener(QuitOnClick);
+    }
+
+        public void Lose()
     {
         gameOverScreen.SetActive(true);
         // victoryScreen.SetActive(true);

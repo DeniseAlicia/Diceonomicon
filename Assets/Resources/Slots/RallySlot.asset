@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533e241cdaea14e438b977480d4e8367, type: 3}
   m_Name: RallySlot
   m_EditorClassIdentifier: 
-  material: {fileID: 0}
-  outlineMaterial: {fileID: 0}
-  symbolMaterial: {fileID: 0}
-  tag: 
+  name: Rally
+  desc: +3
+  material: {fileID: 2100000, guid: a27332257639ba343972776bac910f74, type: 2}
+  outlineMaterial: {fileID: 2100000, guid: 67ae5c98e7a615a44a7bfccf2774c993, type: 2}
+  symbolMaterial: {fileID: 2100000, guid: 67ae5c98e7a615a44a7bfccf2774c993, type: 2}
+  tag: Buff
   owner: {fileID: 0}
   slottedDie: {fileID: 0}
   priority: 1

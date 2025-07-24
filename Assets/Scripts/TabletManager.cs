@@ -7,16 +7,14 @@ public class TabletManager : MonoBehaviour
 {
     public static TabletManager Instance { get; private set; }
 
+    public bool enemy;
+
+    private Vector3 startPosition;
+
     public GameObject tabletPrefab;
     public List<TabletData> tablets;
 
-    // Assign Implings for testing:
-    public TabletData impling1;
-    public TabletData impling2;
-    public TabletData impling3;
-
-    private Vector3 startPosition = new Vector3(-6.9f, -2.5f, 0f);
-    private readonly float spacing = 2.5f;
+    private readonly float spacing = 0;
 
     void Awake()
     {
@@ -25,8 +23,17 @@ public class TabletManager : MonoBehaviour
 
     void Start()
     {
+        if (enemy == true)
+        {
+            startPosition = new Vector3(4.9f, -2.5f, 0f);
+        }
+        else
+        {
+            startPosition = new Vector3(-6.9f, -2.5f, 0f);
+        }
 
-        tablets = new List<TabletData> { impling1, impling2, impling3 };
+
+        // tablets = new List<TabletData> { impling1, impling2, impling3 };
         Vector3 currentPosition = startPosition;
 
         foreach (TabletData tablet in tablets)

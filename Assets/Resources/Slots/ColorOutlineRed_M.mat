@@ -20,7 +20,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
-  m_LockedProperties: _AlphaTex _HoverTrigger
+  m_LockedProperties: _AlphaTex
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:

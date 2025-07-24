@@ -9,12 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1745874381358369781}
-  - component: {fileID: 8497864465644178606}
+  - component: {fileID: 5136107455812490691}
   - component: {fileID: 2250418610123422332}
   - component: {fileID: 2085206390153914367}
   - component: {fileID: 4556871253204048259}
   - component: {fileID: 8297382084870351055}
-  - component: {fileID: 4056855507724833766}
   m_Layer: 6
   m_Name: DiePrefab
   m_TagString: Untagged
@@ -38,7 +37,7 @@ Transform:
   - {fileID: 6569032461544823490}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8497864465644178606
+--- !u!114 &5136107455812490691
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,20 +46,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 118036309713981090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f37422d8e372f542ad1f3f0725d37bd, type: 3}
+  m_Script: {fileID: 11500000, guid: f5ed19d80a275e749b1d2f77358227cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _diceSides: []
-  _diceTrayWalls: []
-  _forceX: 0.01
-  _forceY: 0.01
-  _forceZ: 0.01
-  _torque: 5
-  _dieMass: 1
-  _dieTempMass: 10
-  _tempGravity: {x: 0, y: -10, z: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
-  _movementSpeed: 1
+  diceSides:
+  - {fileID: 8909117072273750778}
+  - {fileID: 2549768774864408269}
+  - {fileID: 76401704017937275}
+  - {fileID: 8280932067507662954}
+  - {fileID: 1054348185358733704}
+  - {fileID: 863316512329479149}
+  diceTrayWalls: []
+  range: 
+  value: 0
+  tag: 
+  owner: 
+  lastPosition: {x: 0, y: 0, z: 0}
+  isDraggable: 1
+  isPlaced: 0
+  isResting: 0
+  forceX: 5
+  forceY: 5
+  forceZ: 5
+  torque: 5
+  tempGravity: {x: 0, y: -100, z: 0}
+  nameText: 
+  descText: 
+  dieTag: 
+  textureRenderer: {fileID: 2085206390153914367}
 --- !u!33 &2250418610123422332
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -143,7 +156,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118036309713981090}
   serializedVersion: 4
-  m_Mass: 0.001
+  m_Mass: 0.1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -157,26 +170,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4056855507724833766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118036309713981090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4757259c198f4347a249c2efb2fc705, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: 
-  descText: 
-  textureRenderer: {fileID: 2085206390153914367}
 --- !u!1 &2324567265026590925
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Attack
   desc: "Deals damage to the opponent \u201CGood old-fashioned violence\u201D "
-  material: {fileID: 0}
-  outlineMaterial: {fileID: 0}
-  symbolMaterial: {fileID: 0}
-  tag: 
+  material: {fileID: 2100000, guid: 7f9426fecb1b5e548a58c656a14540a5, type: 2}
+  outlineMaterial: {fileID: 2100000, guid: 67ae5c98e7a615a44a7bfccf2774c993, type: 2}
+  symbolMaterial: {fileID: 2100000, guid: 67ae5c98e7a615a44a7bfccf2774c993, type: 2}
+  tag: Damage
   owner: {fileID: 0}
   slottedDie: {fileID: 0}
   priority: 0

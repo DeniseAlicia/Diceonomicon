@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfaa29146338f04d82a242bb0727395, type: 3}
   m_Name: PoisonSlot
   m_EditorClassIdentifier: 
-  material: {fileID: 0}
-  outlineMaterial: {fileID: 0}
-  symbolMaterial: {fileID: 0}
-  tag: 
+  name: Poison
+  desc: poison
+  material: {fileID: 2100000, guid: 5da699747074baf428d31a51a1d0c4d3, type: 2}
+  outlineMaterial: {fileID: 2100000, guid: 67ae5c98e7a615a44a7bfccf2774c993, type: 2}
+  symbolMaterial: {fileID: 2100000, guid: 67ae5c98e7a615a44a7bfccf2774c993, type: 2}
+  tag: Spell
   owner: {fileID: 0}
   slottedDie: {fileID: 0}
   priority: 2
