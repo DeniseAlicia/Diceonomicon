@@ -3,95 +3,265 @@ using UnityEngine;
 
 public class Die : MonoBehaviour
 {
-    public int[] range; //which values the die can have
-    public int value; //which value the die rolled this round
-    new public string tag;
-    public Entity owner;
-    public Vector3 lastPosition;
+        [SerializeField] Transform[] diceSides;
+        [SerializeField] DiceTrayWall[] diceTrayWalls;
 
-    [SerializeField] Transform[] diceSides;
-    [SerializeField] DiceTrayWall[] diceTrayWalls;
+        public int[] range; //which values the die can have
+        public int value; //which value the die rolled this round
+        new public string tag;
+        public string owner;
+        public Vector3 lastPosition;
+        public bool isDraggable = false;
+        public bool isPlaced = false;
+        public bool isResting = false;
+
     [SerializeField] float forceX = 0f;
     [SerializeField] float forceY = 0f;
     [SerializeField] float forceZ = 0f;
     [SerializeField] float torque = 5f;
     [SerializeField] Vector3 tempGravity = new Vector3(0, -100f, 0);
 
-    new private Rigidbody rigidbody;
-    private BoxCollider boxCollider;
-    private bool isRolling = false;
-    private Vector3 defaultGravity = Physics.gravity;
-    private bool temp;
+            private Camera camGameplay;
+        private Camera camBattleTablets;
+        private Rigidbody rigidBody;
+        private BoxCollider boxCollider;
+        private bool isRolling = false;
+        Vector3 lastRotation;
+        Vector3 mouseOffset;
+        private Vector3 defaultGravity = Physics.gravity;
+        private Vector3 DieStartPos; // Test; remove later
 
-    void Start()
-    {
-        rigidbody = GetComponent<Rigidbody>();
-        rigidbody.useGravity = false;
-        boxCollider = GetComponent<BoxCollider>();
-        boxCollider.enabled = false;
-    }
 
-    void FixedUpdate()
-    {
-        if (rigidbody.IsSleeping() & isRolling)
+        void Start()
         {
-            GetSideFacingUp();
-        }
-    }
+            camGameplay = GameObject.Find("Gameplay").GetComponent<Camera>();
+            camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
+            rigidBody = GetComponent<Rigidbody>();
+            rigidBody.useGravity = false;
+            boxCollider = GetComponent<BoxCollider>();
 
-    public void Roll()
-    {
-        Vector3 force = new Vector3(forceX, forceY, forceZ);
-        Vector3 torque = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f) * this.torque);
-
-        rigidbody.useGravity = true;
-
-        foreach (DiceTrayWall diceTrayWall in diceTrayWalls) //enable collision for the walls of the dice tray
-        {
-            diceTrayWall.EnableCollision();
+            DieStartPos = transform.position; // Test; remove later
         }
 
-        Physics.gravity = defaultGravity; // reset gravity
-
-        rigidbody.AddForce(force, ForceMode.Impulse); // add force and torque to roll the die
-        rigidbody.AddTorque(torque, ForceMode.Impulse);
-
-        isRolling = true;
-    }
-
-    private void GetSideFacingUp()
-    {
-        Physics.gravity = tempGravity; // increase gravity to help the die "fall" into place
-
-        // disable DiceTrayWall collision to prevent crooked dice
-        foreach (DiceTrayWall diceTrayWall in diceTrayWalls)
+        void FixedUpdate()
         {
-            diceTrayWall.DisableCollision();
-        }
-
-        // find out die value by calculating the most upward facing face with the dot product
-        Transform upSide = null;
-        float maxDot = -1;
-
-        foreach (Transform side in diceSides)
-        {
-            float dot = Vector3.Dot(side.up, Vector3.up);
-
-            if (dot > maxDot)
+            if (rigidBody.IsSleeping() & isRolling)
             {
-                maxDot = dot;
-                upSide = side;
+                GetSideFacingUp();
+                rigidBody.isKinematic = true;
+                rigidBody.useGravity = false;
+                isResting = true;
             }
         }
 
-        // rotate die to a "straight" position
-        float rotationX = transform.eulerAngles.x;
-        float rotationZ = transform.eulerAngles.z;
-        transform.eulerAngles = new Vector3(rotationX, 0f, rotationZ);
+        public void Roll()
+        {
+            Vector3 force = new Vector3(forceX, forceY, forceZ);
+            Vector3 torque = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f) * this.torque);
 
-        if (upSide == null) return;
-        Debug.Log(upSide.name); // log the die value
+            foreach (DiceTrayWall diceTrayWall in diceTrayWalls) //enable collision for the walls of the dice tray
+            {
+                diceTrayWall.EnableCollision();
+            }
 
-        isRolling = false;
+            rigidBody.useGravity = true;
+            Physics.gravity = defaultGravity; // reset gravity
+
+            rigidBody.AddForce(force, ForceMode.Impulse); // add force and torque to roll the die
+            rigidBody.AddTorque(torque, ForceMode.Impulse);
+
+            isRolling = true;
+        }
+
+        private void GetSideFacingUp()
+        {
+            Physics.gravity = tempGravity; // increase gravity to help the die "fall" into place
+
+            // disable DiceTrayWall collision to prevent crooked dice
+            foreach (DiceTrayWall diceTrayWall in diceTrayWalls)
+            {
+                diceTrayWall.DisableCollision();
+            }
+
+            // find out die value by calculating the most upward facing face with the dot product
+            Transform upSide = null;
+            float maxDot = -1;
+
+            foreach (Transform side in diceSides)
+            {
+                float dot = Vector3.Dot(side.up, Vector3.up);
+
+                if (dot > maxDot)
+                {
+                    maxDot = dot;
+                    upSide = side;
+                }
+            }
+
+            if (upSide == null) return;
+            Debug.Log(upSide.name); // log the die value
+
+            boxCollider.enabled = false;
+            value = int.Parse(upSide.name);
+            Debug.Log("Value: " + value);
+
+            switch (value)
+            {
+                case 1:
+                    transform.eulerAngles = new Vector3(-90f, 0f, 90f);
+                    break;
+                case 2:
+                    transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                    break;
+                case 3:
+                    transform.eulerAngles = new Vector3(0f, 180f, -90f);
+                    break;
+                case 4:
+                    transform.eulerAngles = new Vector3(0f, 0f, 90f);
+                    break;
+                case 5:
+                    transform.eulerAngles = new Vector3(180f, 90f, 0f);
+                    break;
+                case 6:
+                    transform.eulerAngles = new Vector3(90f, 0f, 90f);
+                    break;
+            }
+
+            boxCollider.enabled = true;
+            isRolling = false;
+        }
+
+        public void ResetDiePosition() // Test; remove later
+        {
+            Physics.gravity = defaultGravity; // reset gravity
+            rigidBody.isKinematic = false;
+            boxCollider.enabled = true;
+
+            // enable DiceTrayWall collision
+            foreach (DiceTrayWall diceTrayWall in diceTrayWalls)
+            {
+                diceTrayWall.EnableCollision();
+            }
+
+            // reset the die to its starting position
+            transform.position = DieStartPos;
+        }
+
+        private Vector3 GetDiePosition() // convert the die position to screen coordinates
+        {
+            Vector3 diePos = camGameplay.WorldToScreenPoint(transform.position);
+            return diePos;
+        }
+
+        private void OnMouseDown()
+        {
+            if (isDraggable)
+            {
+                lastPosition = transform.position;
+                mouseOffset = Input.mousePosition - GetDiePosition();
+
+                transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
+                switch (value)
+                {
+                    case 1:
+                        lastRotation = transform.eulerAngles;
+                        transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                        break;
+                    case 2:
+                        lastRotation = transform.eulerAngles;
+                        transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                        break;
+                    case 3:
+                        lastRotation = transform.eulerAngles;
+                        transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                        break;
+                    case 4:
+                        lastRotation = transform.eulerAngles;
+                        transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                        break;
+                    case 5:
+                        lastRotation = transform.eulerAngles;
+                        transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                        break;
+                    case 6:
+                        lastRotation = transform.eulerAngles;
+                        transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                        break;
+                }
+
+                MoveToLayer("BattleTablets");
+            }
+        }
+
+        private void OnMouseDrag()
+        {
+            if (isDraggable)
+            {
+                transform.position = camBattleTablets.ScreenToWorldPoint(Input.mousePosition - mouseOffset);
+            }
+        }
+
+        private void OnMouseUp()
+        {
+            if (isDraggable)
+            {
+                switch (value)
+                {
+                    case 1:
+                        transform.eulerAngles = lastRotation;
+                        break;
+                    case 2:
+                        transform.eulerAngles = lastRotation;
+                        break;
+                    case 3:
+                        transform.eulerAngles = lastRotation;
+                        break;
+                    case 4:
+                        transform.eulerAngles = lastRotation;
+                        break;
+                    case 5:
+                        transform.eulerAngles = lastRotation;
+                        break;
+                    case 6:
+                        transform.eulerAngles = lastRotation;
+                        break;
+                }
+
+
+                RaycastHit hit = new RaycastHit();
+
+                if (Physics.Raycast(transform.position, Vector3.forward, out hit, 100))
+                {
+                    // if (hitSlot.transform.gameObject is a Slot)
+                    // {
+                    GameObject hitSlot = hit.transform.gameObject;
+                    transform.SetParent(hitSlot.transform);
+                    transform.localPosition = new Vector3(0, 0, 0);
+                    transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                    transform.localScale = new Vector3(4.5f, 4.5f, 4.5f);
+
+
+                    //     also compare color of slot and die
+                    //     isPlaced = true; 
+                    // }
+
+                    Debug.Log(hit.collider.transform.gameObject.name);
+                    Debug.Log(hitSlot);
+
+                }
+                else
+                {
+                    MoveToLayer("Gameplay");
+                    transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                    transform.position = lastPosition;
+                }
+            }
+        }
+
+        public void MoveToLayer(string _layerName)
+        {
+            int layer = LayerMask.NameToLayer(_layerName);
+            gameObject.layer = layer;
+        }
     }
-}
