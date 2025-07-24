@@ -41,7 +41,7 @@ public class DiceManager : MonoBehaviour
 
         foreach (Die die in dice)
         {
-            die.RollDice();
+            die.Roll();
         }
     }
 }
