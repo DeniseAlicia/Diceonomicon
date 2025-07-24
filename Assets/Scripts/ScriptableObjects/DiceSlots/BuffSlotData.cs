@@ -5,6 +5,6 @@ public class BuffSlotData : DiceSlotData
 {
     public void TranslateDieValue(Die die)
     {
-        string x = "0";
+        // string x = "0";
     }
 }

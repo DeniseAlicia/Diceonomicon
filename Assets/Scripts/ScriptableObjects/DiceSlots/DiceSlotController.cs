@@ -11,11 +11,12 @@ public class DiceSlotController : MonoBehaviour
     public Entity owner;
     public bool isFilled;
     public bool isHandled;
-    private DiceSlotData slotData;
+    public DiceSlotData slotData { get; private set; }
     public int priority;
     public int mult;
     public Die slottedDie;
     private BattleSceneManager activeSceneManager;
+    public new string tag;
 
     private void Start()
     {
