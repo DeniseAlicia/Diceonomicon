@@ -6,7 +6,7 @@ public class Die : MonoBehaviour
     public int[] range; //which values the die can have
     public int value; //which value the die rolled this round
     new public string tag;
-    public string owner;
+    public Entity owner;
     public Vector3 lastPosition;
 
     [SerializeField] Transform[] diceSides;
@@ -39,7 +39,7 @@ public class Die : MonoBehaviour
         }
     }
 
-    public void RollDice()
+    public void Roll()
     {
         Vector3 force = new Vector3(forceX, forceY, forceZ);
         Vector3 torque = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f) * this.torque);

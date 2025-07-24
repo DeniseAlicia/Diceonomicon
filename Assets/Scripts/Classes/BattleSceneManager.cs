@@ -10,24 +10,45 @@ public class BattleSceneManager : MonoBehaviour
     public List<DiceSlotController> playerActiveColumn;
     public List<DiceSlotController> enemyActiveColumn;
     public int level;
+    private int arbLimit = 10;
 
-    public void BuildScene()
+    private void Start()
     {
         Debug.Log("BattleSceneManager.BuildScene");
+        opponent.currentHealth = opponent.maxHealth;
+        player.currentHealth = player.maxHealth;
+        NewRound();
     }
-    public void PlacementPhase()
+
+    private void NewRound()
     {
-        Debug.Log("BattleSceneManager.PlacementPhase");
+        if (arbLimit > 0)
+        {
+            opponent.DrawDice();
+            opponent.RollDice();
+            //opponent.ai.PlaceDice(opponent.drawnDice);
+            PlacementPhase();
+            CombatManager.HandleActiveCombat(this);
+            CalculateDamage();
+            EndOfRound();
+        }
     }
-    public void CalculateDamage()
+    private void PlacementPhase()
+    {
+        player.DrawDice();
+        player.RollDice();
+    }
+    private void CalculateDamage()
     {
         player.currentHealth -= Math.Max(opponent.damage - player.block, 0);
         opponent.currentHealth -= Math.Max(player.damage - opponent.block, 0);
     }
-    public void EndOfRound()
+    private void EndOfRound()
     {
         ResetEntity(player);
         ResetEntity(opponent);
+        arbLimit -= 1;
+        NewRound();
     }
     private void ResetEntity(Entity entity)
     {

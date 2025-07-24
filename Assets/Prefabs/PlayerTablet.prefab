@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 3487107170043475305}
   - component: {fileID: 1040689279419497764}
   - component: {fileID: 5774049789339762464}
+  - component: {fileID: 9153994630743947926}
   m_Layer: 8
   m_Name: TabletMain
   m_TagString: Untagged
@@ -294,6 +295,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &9153994630743947926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3310092662065365521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315b7acc13de39640968931f880ce24e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: {fileID: 13096339759207314}
+  descText: {fileID: 2352121234363414725}
+  artworkRenderer: {fileID: 4123861950717567092}
 --- !u!1 &3777836170970485122
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a04a2f2562eebc94bb37e0dd9546413f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 2344501088090392704}
+  targetObject: {fileID: 0}
   angle: 90
 --- !u!1 &4020980023072091625
 GameObject:
@@ -1094,8 +1110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a04a2f2562eebc94bb37e0dd9546413f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 2344501088090392704}
-  angle: -90
+  targetObject: {fileID: 0}
+  angle: 90
 --- !u!1 &7226560280281865721
 GameObject:
   m_ObjectHideFlags: 0

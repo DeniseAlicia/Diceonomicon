@@ -16,11 +16,32 @@ public abstract class Entity : MonoBehaviour
 
     public void DrawDice()
     {
-        Debug.Log("Entity.DrawDice");
+        for (int i = 0; i < drawSize; i++)
+        {
+            if (diceDeck == null)
+            {
+                if (discardPile == null)
+                {
+                    return;
+                }
+                foreach (Die die in discardPile)
+                    {
+                        discardPile.Remove(die);
+                        diceDeck.Add(die);
+                    }
+            }
+            int randomIndex = Random.Range(0, diceDeck.Count);
+            Die drawnDie = diceDeck[randomIndex];
+            diceDeck.Remove(drawnDie);
+            drawnDice.Add(drawnDie);
+        }
     }
     public void RollDice()
     {
-        Debug.Log("Entity.RollDice");
+        foreach (Die die in drawnDice)
+        {
+            die.Roll();
+        }
     }
 
     public void CalculateColumns()
