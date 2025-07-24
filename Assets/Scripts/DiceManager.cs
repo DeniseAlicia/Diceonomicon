@@ -8,6 +8,14 @@ namespace Diceonomicon
     public class DiceManager : MonoBehaviour
     {
         [SerializeField] Die[] dice;
+        private Camera camGameplay;
+        private Camera camBattleTablets;
+
+        void Start()
+        {
+            camGameplay = GameObject.Find("Gameplay").GetComponent<Camera>();
+            camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
+        }
 
         // Update is called once per frame
         void Update()
@@ -22,7 +30,7 @@ namespace Diceonomicon
             int i = 0;
             foreach (Die die in dice)
             {
-                if (die.stoop == true)
+                if (die.isResting == true)
                 {
                     i++;
                     // Debug.Log(i);
@@ -69,12 +77,7 @@ namespace Diceonomicon
                 diePos.z += overflow * distance;
                 dice[i].transform.position = diePos;
 
-                // rotate die to a "straight" position
-                // float rotationX = dice[i].transform.eulerAngles.x;
-                // float rotationZ = dice[i].transform.eulerAngles.z;
-                // dice[i].transform.eulerAngles = new Vector3(rotationX, 0f, rotationZ);
-
-                dice[i].stoop = false;
+                dice[i].isResting = false;
             }
         }
     }

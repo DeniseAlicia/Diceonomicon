@@ -14,19 +14,20 @@ namespace Diceonomicon
         public Vector3 lastPosition;
         public bool isDraggable = false;
         public bool isPlaced = false;
-        public bool stoop = false;
+        public bool isResting = false;
 
         [SerializeField] float forceX = 0f;
         [SerializeField] float forceY = 0f;
         [SerializeField] float forceZ = 0f;
         [SerializeField] float torque = 5f;
-        [SerializeField] float liftOffValue = 3; // how much the die is lift off the ground when dragging
         [SerializeField] Vector3 tempGravity = new Vector3(0, -100f, 0);
 
-        private Camera camera;
+        private Camera camGameplay;
+        private Camera camBattleTablets;
         private Rigidbody rigidBody;
         private BoxCollider boxCollider;
         private bool isRolling = false;
+        Vector3 lastRotation;
         Vector3 mouseOffset;
         private Vector3 defaultGravity = Physics.gravity;
         private Vector3 DieStartPos; // Test; remove later
@@ -34,7 +35,8 @@ namespace Diceonomicon
 
         void Start()
         {
-            camera = GameObject.Find("Gameplay").GetComponent<Camera>();
+            camGameplay = GameObject.Find("Gameplay").GetComponent<Camera>();
+            camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
             rigidBody = GetComponent<Rigidbody>();
             rigidBody.useGravity = false;
             boxCollider = GetComponent<BoxCollider>();
@@ -49,7 +51,7 @@ namespace Diceonomicon
                 GetSideFacingUp();
                 rigidBody.isKinematic = true;
                 rigidBody.useGravity = false;
-                stoop = true;
+                isResting = true;
             }
         }
 
@@ -98,13 +100,12 @@ namespace Diceonomicon
             }
 
             if (upSide == null) return;
-            // Debug.Log(upSide.name); // log the die value
+            Debug.Log(upSide.name); // log the die value
 
             boxCollider.enabled = false;
             value = int.Parse(upSide.name);
-            float rotationX = transform.eulerAngles.x;
-            float rotationZ = transform.eulerAngles.z;
             Debug.Log("Value: " + value);
+
             switch (value)
             {
                 case 1:
@@ -126,19 +127,10 @@ namespace Diceonomicon
                     transform.eulerAngles = new Vector3(90f, 0f, 90f);
                     break;
             }
-            boxCollider.enabled = true;
-            // rotate die to a "straight" position
-            // float rotationX = transform.eulerAngles.x;
-            // float rotationZ = transform.eulerAngles.z;
-            // transform.eulerAngles = new Vector3(rotationX, 0f, rotationZ);
 
+            boxCollider.enabled = true;
             isRolling = false;
         }
-
-        // public void FixPosition()
-        // {
-            
-        // }
 
         public void ResetDiePosition() // Test; remove later
         {
@@ -158,7 +150,7 @@ namespace Diceonomicon
 
         private Vector3 GetDiePosition() // convert the die position to screen coordinates
         {
-            Vector3 diePos = camera.WorldToScreenPoint(transform.position);
+            Vector3 diePos = camGameplay.WorldToScreenPoint(transform.position);
             return diePos;
         }
 
@@ -167,8 +159,39 @@ namespace Diceonomicon
             if (isDraggable)
             {
                 lastPosition = transform.position;
-                // rigidBody.isKinematic = true; // Test, remove here and uncomment in FixedUpdate
                 mouseOffset = Input.mousePosition - GetDiePosition();
+
+                transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
+                switch (value)
+                {
+                    case 1:
+                        lastRotation = transform.eulerAngles;
+                        transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                        break;
+                    case 2:
+                        lastRotation = transform.eulerAngles;
+                        transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                        break;
+                    case 3:
+                        lastRotation = transform.eulerAngles;
+                        transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                        break;
+                    case 4:
+                        lastRotation = transform.eulerAngles;
+                        transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                        break;
+                    case 5:
+                        lastRotation = transform.eulerAngles;
+                        transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                        break;
+                    case 6:
+                        lastRotation = transform.eulerAngles;
+                        transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                        break;
+                }
+
+                MoveToLayer("BattleTablets");
             }
         }
 
@@ -176,7 +199,7 @@ namespace Diceonomicon
         {
             if (isDraggable)
             {
-                transform.position = camera.ScreenToWorldPoint(Input.mousePosition - mouseOffset - new Vector3(0f, 0f, liftOffValue));
+                transform.position = camBattleTablets.ScreenToWorldPoint(Input.mousePosition - mouseOffset);
             }
         }
 
@@ -184,29 +207,60 @@ namespace Diceonomicon
         {
             if (isDraggable)
             {
-                Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+                switch (value)
+                {
+                    case 1:
+                        transform.eulerAngles = lastRotation;
+                        break;
+                    case 2:
+                        transform.eulerAngles = lastRotation;
+                        break;
+                    case 3:
+                        transform.eulerAngles = lastRotation;
+                        break;
+                    case 4:
+                        transform.eulerAngles = lastRotation;
+                        break;
+                    case 5:
+                        transform.eulerAngles = lastRotation;
+                        break;
+                    case 6:
+                        transform.eulerAngles = lastRotation;
+                        break;
+                }
+
+
                 RaycastHit hit = new RaycastHit();
 
-                if (Physics.Raycast(ray, out hit, 100))
+                if (Physics.Raycast(transform.position, Vector3.forward, out hit, 100))
                 {
                     // if (hitSlot.transform.gameObject is a Slot)
                     // {
-                    //     transform.position = hitSlot.transform.position;
+                    GameObject hitSlot = hit.transform.gameObject;
+                    transform.SetParent(hitSlot.transform);
+                    transform.localPosition = new Vector3(0, 0, 0);
+                    transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                    transform.localScale = new Vector3(4.5f, 4.5f, 4.5f);
+
+
                     //     also compare color of slot and die
                     //     isPlaced = true; 
                     // }
+
+                    Debug.Log(hit.collider.transform.gameObject.name);
+                    Debug.Log(hitSlot);
+
                 }
                 else
                 {
+                    MoveToLayer("Gameplay");
+                    transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                     transform.position = lastPosition;
                 }
-
-                transform.position = lastPosition;
-                // rigidBody.isKinematic = false; // it wont need physics now or will it?
             }
         }
 
-        private void MoveToLayer(string _layerName)
+        public void MoveToLayer(string _layerName)
         {
             int layer = LayerMask.NameToLayer(_layerName);
             gameObject.layer = layer;
