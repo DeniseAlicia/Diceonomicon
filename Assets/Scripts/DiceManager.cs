@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
 
 public class DiceManager : MonoBehaviour
 {
-    [SerializeField] List<Die> dice;
+    [SerializeField] Die[] dice;
 
     // Update is called once per frame
     void Update()
