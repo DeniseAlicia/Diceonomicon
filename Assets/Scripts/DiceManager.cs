@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class DiceManager : MonoBehaviour
 {
     public List<DiceData> diceDrawn;
+    public Die[] dice;
 
     private Vector3 startPosition = new Vector3(0f, 0f, 0f);
     public GameObject diePrefab;
