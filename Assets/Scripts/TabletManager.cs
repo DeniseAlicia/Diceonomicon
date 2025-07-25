@@ -9,6 +9,8 @@ public class TabletManager : MonoBehaviour
 
     public bool enemy;
 
+    public Player owner;
+
     private Vector3 startPosition;
 
     public GameObject tabletPrefab;
@@ -23,6 +25,9 @@ public class TabletManager : MonoBehaviour
 
     void Start()
     {
+
+        TabletData[] activeRoster = owner.ActiveImplings;
+
         if (enemy == true)
         {
             startPosition = new Vector3(4.9f, -2.5f, 0f);
@@ -32,8 +37,6 @@ public class TabletManager : MonoBehaviour
             startPosition = new Vector3(-6.9f, -2.5f, 0f);
         }
 
-
-        // tablets = new List<TabletData> { impling1, impling2, impling3 };
         Vector3 currentPosition = startPosition;
 
         foreach (TabletData tablet in tablets)
@@ -48,7 +51,10 @@ public class TabletManager : MonoBehaviour
 
             currentPosition.y -= height + spacing;
 
-            Debug.Log("Test");
+            // foreach (DiceData die in startingDice)
+            // {
+            //     owner.diceDeck.Add(die);
+            // }
         }
     }
 }

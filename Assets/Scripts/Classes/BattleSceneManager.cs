@@ -88,7 +88,7 @@ public class BattleSceneManager : MonoBehaviour
     }
     private void ResetEntity(Entity entity)
     {
-        foreach (Die die in entity.drawnDice)
+        foreach (DiceData die in entity.drawnDice)
         {
             entity.drawnDice.Remove(die);
             entity.discardPile.Add(die);
