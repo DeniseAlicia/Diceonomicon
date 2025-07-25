@@ -14,12 +14,15 @@ public class BattleSceneManager : MonoBehaviour
     public List<DiceSlotController> enemyActiveColumn;
     public int level;
     private int arbLimit = 10;
+    private readonly float[] columnStartPositions = new float[] { -7.65f, -6.9f, -6.1f, 6.6f, 7.4f, 8.2f }; // 1,2,3 = Player; 4,5,6 = Opponent;
+
     public EndBattle endScene;
+    public GameObject columnMaster;
 
     private void Start()
     {
         Debug.Log("BattleSceneManager.BuildScene");
-        // opponent.currentHealth = opponent.maxHealth;
+        opponent.currentHealth = opponent.maxHealth;
         // player.currentHealth = player.maxHealth;
 
         player.alpha = 0.1f; // 0.1f for rolling, 0.9f for post-placement
@@ -41,6 +44,7 @@ public class BattleSceneManager : MonoBehaviour
     {
         if (arbLimit > 0)
         {
+            GetActiveColumn(1);
             opponent.DrawDice();
             opponent.RollDice();
             //opponent.ai.PlaceDice(opponent.drawnDice);
@@ -50,11 +54,13 @@ public class BattleSceneManager : MonoBehaviour
             EndOfRound();
         }
     }
+
     private void PlacementPhase()
     {
         player.DrawDice();
         player.RollDice();
     }
+
     private void CalculateDamage()
     {
         player.currentHealth -= Math.Max(opponent.damage - player.block, 0);
@@ -104,7 +110,7 @@ public class BattleSceneManager : MonoBehaviour
         player.currentHealth -= 1;
         player.healthText.text = player.currentHealth.ToString();
 
-                if (player.currentHealth <= 0)
+        if (player.currentHealth <= 0)
         {
             endScene.Lose();
         }
@@ -113,6 +119,35 @@ public class BattleSceneManager : MonoBehaviour
         {
             endScene.Win();
         }
+    }
+
+    public void GetActiveColumn(int column)
+    {
+        float columnPosX = columnStartPositions[column-1];
+        
+        for (int i = 0; i < 9; i++)
+        {
+            float yJump = i * -0.8f;
+
+            Vector3 rayPosition = new Vector3(columnPosX, columnMaster.transform.position.y + yJump, columnMaster.transform.position.z);
+
+            Ray ray = new Ray(rayPosition, Vector3.forward);
+            if (Physics.Raycast(ray, out RaycastHit hit, 9999))
+            {
+                Debug.Log($"Ray hit: {hit.collider.name} at {hit.point}");
+
+                DiceSlotController slotController = hit.collider.GetComponent<DiceSlotController>();
+                if (slotController != null)
+                {
+                    playerActiveColumn.Add(slotController);
+                }
+                else
+                {
+                    Debug.Log("Hit object does not have a Slot component.");
+                }
+            }
+        }
+        Debug.Log("Slots: " + string.Join(", ", playerActiveColumn));
     }
 
 }

@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 9008426212122655417}
   - component: {fileID: 5982104575663082444}
   - component: {fileID: 2172946150142528717}
+  - component: {fileID: 961559740975167074}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -171,6 +172,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!111 &961559740975167074
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088674112585130498}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: fe80767541400374a98372d1836bd969, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 9a31b8f641b443946bdf670be4169628, type: 2}
+  - {fileID: 7400000, guid: fe80767541400374a98372d1836bd969, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &3171188554470384769
 GameObject:
   m_ObjectHideFlags: 0

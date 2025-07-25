@@ -66,12 +66,12 @@ public class DiceManager : MonoBehaviour
 
     void Update()
     {
-        if (Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            Debug.Log("Test");
-            ResetAllDice();
-            RollAllDice();
-        }
+        // if (Mouse.current.rightButton.wasPressedThisFrame)
+        // {
+        //     Debug.Log("Test");
+        //     ResetAllDice();
+        //     RollAllDice();
+        // }
 
         bool allDiceSleeping = false;
         int i = 0;
