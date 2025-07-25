@@ -13,10 +13,11 @@ public abstract class Entity : MonoBehaviour
     public Material overlayMaterial;
     public TMP_Text healthText;
 
-    public List<Die> diceDeck;
-    public List<Die> drawnDice;
+    public List<DiceData> diceDeck;
+    public List<DiceData> drawnDice;
+    public List<Die> dice;
     public int drawSize; //how many dice can be drawn at round start
-    public List<Die> discardPile;
+    public List<DiceData> discardPile;
     public int damage = 0;
     public int block = 0;
     public List<DiceSlotController> activeColumn;
@@ -31,7 +32,7 @@ public abstract class Entity : MonoBehaviour
         // Add depleting health bar effect
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        float yOffset = 0.5f - currentHealth*0.2f / maxHealth;
+        float yOffset = 0.5f - currentHealth * 0.2f / maxHealth;
         Vector4 healthOffset = healthMaterial.GetVector("_TopMap_ST");
         healthOffset.w = yOffset;
         healthMaterial.SetVector("_TopMap_ST", healthOffset);
@@ -62,30 +63,29 @@ public abstract class Entity : MonoBehaviour
                 {
                     return;
                 }
-                foreach (Die die in discardPile)
+                foreach (DiceData die in discardPile)
                 {
                     discardPile.Remove(die);
                     diceDeck.Add(die);
                 }
             }
             int randomIndex = Random.Range(0, diceDeck.Count);
-            Die drawnDie = diceDeck[randomIndex];
+            DiceData drawnDie = diceDeck[randomIndex];
             diceDeck.Remove(drawnDie);
             drawnDice.Add(drawnDie);
         }
     }
+
     public void RollDice()
     {
-        foreach (Die die in drawnDice)
-        {
-            die.Roll();
-        }
+        // foreach (DiceData die in drawnDice)
+        // {
+        //     die.Roll();
+        // }
     }
 
     public void CalculateColumns()
     {
         Debug.Log("Entity.CalculateColumns");
     }
-
-
 }

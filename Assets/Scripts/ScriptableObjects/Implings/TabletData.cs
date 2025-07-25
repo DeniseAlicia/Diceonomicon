@@ -11,6 +11,7 @@ public class TabletData : ScriptableObject
     public Texture artwork;
 
     public DiceSlotData[] slots;
+    public DiceData[] startingDice;
     public GameObject slotPrefab;
     private Vector3 startSlotPosition = new Vector3(-3, 0, -3);
 
