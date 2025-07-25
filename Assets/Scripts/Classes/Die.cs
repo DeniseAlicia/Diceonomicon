@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class Die : MonoBehaviour
@@ -265,7 +264,7 @@ public class Die : MonoBehaviour
                         Debug.Log("Slotted!");
 
                         transform.SetParent(hitSlot.transform);
-                        transform.localPosition = new Vector3(0, 0, 0);
+                        transform.localPosition = new Vector3(0, 3, 0);
                         transform.Rotate(new Vector3(-90, 0, 0), Space.World);
                         transform.localScale = new Vector3(6f, 6f, 6f);
 
