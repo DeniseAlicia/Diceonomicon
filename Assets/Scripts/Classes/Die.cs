@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Die : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class Die : MonoBehaviour
     private BoxCollider boxCollider;
     private bool isRolling = false;
     Vector3 lastRotation;
+    public int dieRotation;
     Vector3 mouseOffset;
     private Vector3 defaultGravity = Physics.gravity;
     private Vector3 DieStartPos; // Test; remove later
@@ -48,6 +50,7 @@ public class Die : MonoBehaviour
     {
         camGameplay = GameObject.Find("Gameplay").GetComponent<Camera>();
         camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
+        dieRotation = 0;
 
         rigidBody = GetComponent<Rigidbody>();
         rigidBody.useGravity = false;
@@ -216,6 +219,12 @@ public class Die : MonoBehaviour
         if (isDraggable)
         {
             transform.position = camBattleTablets.ScreenToWorldPoint(Input.mousePosition - mouseOffset);
+
+            if (Mouse.current.rightButton.wasPressedThisFrame && this.dieTag == "Buff")
+            {
+                transform.Rotate(new Vector3(0, 0, 90), Space.World);
+                dieRotation += 90;
+            }
         }
     }
 
@@ -266,6 +275,7 @@ public class Die : MonoBehaviour
                         transform.SetParent(hitSlot.transform);
                         transform.localPosition = new Vector3(0, 3, 0);
                         transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                        transform.Rotate(new Vector3(0, 0, dieRotation), Space.World);
                         transform.localScale = new Vector3(6f, 6f, 6f);
 
                         // isPlaced = true;

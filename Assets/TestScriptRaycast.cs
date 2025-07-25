@@ -7,36 +7,27 @@ public class TestScriptRaycast : MonoBehaviour
 {
     public Transform originTransform;
 
-    [System.Serializable]
-    public struct Arrows
-    {
-        public int value;
-        public int[] degrees;
-    }
-
-    public List<Arrows> arrows;
+    public List<int> arrows;
 
     public Button raycastButton;
+
+    public Die testDie;
 
     public void Start()
     {
         Button raycast = raycastButton.GetComponent<Button>();
         raycast.onClick.AddListener(RaycastOnClick);
+        arrows = new List<int> { 0, 90 };
     }
 
     public void RaycastOnClick()
     {
 
-        int maxDistance = 4;
+        int maxDistance = 1;
 
-        for (int i = 0; i < arrows.Count; i++)
+      foreach (int angle in arrows)
         {
-            Arrows arrow = arrows[i];
-
-            for (int j = 0; j < arrow.degrees.Length; j++)
-            {
-                float angle = arrow.degrees[j];
-                Vector3 direction = Quaternion.Euler(0, 0, angle) * Vector3.left;
+                Vector3 direction = Quaternion.Euler(20, testDie.dieRotation + angle, -20) * Vector3.back;
 
                 Ray ray = new Ray(originTransform.position, originTransform.TransformDirection(direction));
                 if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
@@ -56,6 +47,5 @@ public class TestScriptRaycast : MonoBehaviour
                 }
             }
         }
-        return;
     }
-}
+
