@@ -6,14 +6,14 @@ public class DiceSlotController : MonoBehaviour
     public Renderer slotMaterial;
     public Renderer outlineMaterial;
     public Renderer symbolMaterial;
-
+    public HoverGlowController hoverTarget;
 
     public Entity owner;
     public bool isFilled;
     public bool isHandled;
     public DiceSlotData slotData { get; private set; }
     public int priority;
-    public int mult;
+    public int mult = 1;
     public Die slottedDie;
     private BattleSceneManager activeSceneManager;
     public new string tag;
@@ -21,6 +21,8 @@ public class DiceSlotController : MonoBehaviour
     private void Start()
     {
         activeSceneManager = FindFirstObjectByType<BattleSceneManager>();
+        mult = 1;
+
     }
 
     public void SetData(DiceSlotData data)
@@ -35,7 +37,6 @@ public class DiceSlotController : MonoBehaviour
 
         slotMaterial.material = slotData.material;
         tag = slotData.tag;
-        owner = slotData.owner;
         slotData.AssignColorMaterial(tag);
         outlineMaterial.material = slotData.outlineMaterial;
         symbolMaterial.material = slotData.symbolMaterial;
@@ -45,7 +46,7 @@ public class DiceSlotController : MonoBehaviour
 
     public void DoEffect()
     {
-        slotData.Effect(slottedDie.value, mult, activeSceneManager);
+        slotData.Effect(slottedDie.value, mult, activeSceneManager, owner);
     }
 
     public void DetectLinks()
@@ -69,5 +70,16 @@ public class DiceSlotController : MonoBehaviour
         return slotData != null ? slotData.desc : "";
     }
 
+    void OnMouseEnter()
+    {
+        if (hoverTarget != null)
+            hoverTarget.SetHover(true);
+    }
+
+    void OnMouseExit()
+    {
+        if (hoverTarget != null)
+            hoverTarget.SetHover(false);
+    }
 
 }

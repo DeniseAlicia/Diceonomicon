@@ -23,7 +23,7 @@ public class Die : MonoBehaviour
 
     private Camera camGameplay;
     private Camera camBattleTablets;
-    private Rigidbody rigidBody;
+    public Rigidbody rigidBody;
     private BoxCollider boxCollider;
     private bool isRolling = false;
     Vector3 lastRotation;
@@ -51,11 +51,15 @@ public class Die : MonoBehaviour
         camGameplay = GameObject.Find("Gameplay").GetComponent<Camera>();
         camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
         dieRotation = 0;
-
-        rigidBody = GetComponent<Rigidbody>();
-        rigidBody.useGravity = false;
+        torque = 5f;
+        Vector3 tempGravity = new Vector3(0, -10f, 0);
+        rigidBody = this.gameObject.GetComponent<Rigidbody>();
+        rigidBody.useGravity = true;
         boxCollider = GetComponent<BoxCollider>();
-
+        isRolling = false;
+        isDraggable = false;
+        isPlaced = false;
+        isResting = false;
         DieStartPos = transform.position; // Test; remove later
     }
 
@@ -72,6 +76,11 @@ public class Die : MonoBehaviour
 
     public void Roll()
     {
+        rigidBody.useGravity = true;
+        rigidBody.isKinematic = false;
+
+        Debug.Log("Rolling...");
+
         forceX = UnityEngine.Random.Range(-0.02f, 0.02f);
         forceY = UnityEngine.Random.Range(0.2f, 0.3f);
         forceZ = UnityEngine.Random.Range(0.25f, 0.3f);
@@ -84,8 +93,7 @@ public class Die : MonoBehaviour
             diceTrayWall.EnableCollision();
         }
 
-        rigidBody.useGravity = true;
-        Physics.gravity = defaultGravity; // reset gravity
+        Physics.gravity = new Vector3(0, -10f, 0);
 
         rigidBody.AddForce(force, ForceMode.Impulse); // add force and torque to roll the die
         rigidBody.AddTorque(torque, ForceMode.Impulse);
@@ -93,7 +101,7 @@ public class Die : MonoBehaviour
         isRolling = true;
     }
 
-    private void GetSideFacingUp()
+    public void GetSideFacingUp()
     {
         Physics.gravity = tempGravity; // increase gravity to help the die "fall" into place
 
@@ -278,7 +286,9 @@ public class Die : MonoBehaviour
                         transform.Rotate(new Vector3(0, 0, dieRotation), Space.World);
                         transform.localScale = new Vector3(6f, 6f, 6f);
 
-                        // isPlaced = true;
+                        slotController.isFilled = true;
+                        slotController.slottedDie = this;
+                        isPlaced = true;
                     }
                     else
                     {

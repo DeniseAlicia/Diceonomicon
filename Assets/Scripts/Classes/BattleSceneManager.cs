@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine.UI;
@@ -13,15 +14,24 @@ public class BattleSceneManager : MonoBehaviour
     public List<DiceSlotController> playerActiveColumn;
     public List<DiceSlotController> enemyActiveColumn;
     public int level;
-    private int arbLimit = 10;
-    private readonly float[] columnStartPositions = new float[] { -7.65f, -6.9f, -6.1f, 6.6f, 7.4f, 8.2f }; // 1,2,3 = Player; 4,5,6 = Opponent;
+    public float[] columnStartPositions = new float[] { -7.65f, -6.9f, -6.1f }; // 1,2,3 = Player
 
     public EndBattle endScene;
     public GameObject columnMaster;
+    public Button confirmButton;
+
+    private void Awake()
+    {
+        Camera camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
+        camBattleTablets.gameObject.SetActive(false);
+        camBattleTablets.gameObject.SetActive(true);
+        player.SetImplingRoster();
+        opponent.SetEnemyRoster();
+    }
 
     private void Start()
     {
-        Debug.Log("BattleSceneManager.BuildScene");
+        // Debug.Log("BattleSceneManager.BuildScene");
         opponent.currentHealth = opponent.maxHealth;
         // player.currentHealth = player.maxHealth;
 
@@ -37,37 +47,56 @@ public class BattleSceneManager : MonoBehaviour
         Button downButton = player.healthDown.GetComponent<Button>();
         downButton.onClick.AddListener(LoseHealth);
 
+        Button confirm = confirmButton.GetComponent<Button>();
+        confirm.onClick.AddListener(() => CombatManager.HandleActiveCombat(this));
+
         NewRound();
     }
 
     private void NewRound()
     {
-        if (arbLimit > 0)
-        {
-            GetActiveColumn(1);
             opponent.DrawDice();
             opponent.RollDice();
             //opponent.ai.PlaceDice(opponent.drawnDice);
             PlacementPhase();
-            CombatManager.HandleActiveCombat(this);
-            // CalculateDamage();
-            EndOfRound();
-        }
     }
 
     private void PlacementPhase()
     {
         player.DrawDice();
         player.RollDice();
+
+        StartCoroutine(SortAfterDelay());
     }
 
-    private void CalculateDamage()
+    private IEnumerator SortAfterDelay()
+    {
+        float delay = 4f;
+        yield return new WaitForSeconds(delay);
+        foreach (Die die in player.dice)
+        {
+            die.GetSideFacingUp();
+            die.isResting = true;
+            die.isDraggable = true;
+            die.rigidBody.isKinematic = true;
+            die.rigidBody.useGravity = false;
+
+        }
+        DiceManager.SortAllDice(player.dice);
+    }
+
+    public void CalculateDamage()
     {
         player.currentHealth -= Math.Max(opponent.damage - player.block, 0);
         player.healthText.text = player.currentHealth.ToString();
 
         opponent.currentHealth -= Math.Max(player.damage - opponent.block, 0);
-        opponent.healthText.text = player.currentHealth.ToString();
+        opponent.healthText.text = opponent.currentHealth.ToString();
+
+        opponent.damage = 0;
+        opponent.block = 0;
+        player.damage = 0;
+        player.block = 0;
 
         if (player.currentHealth <= 0)
         {
@@ -78,20 +107,34 @@ public class BattleSceneManager : MonoBehaviour
         {
             endScene.Win();
         }
+
+        if (CombatManager.currentColumn == 3)
+        {
+            EndOfRound();
+        }
     }
     private void EndOfRound()
     {
         ResetEntity(player);
         ResetEntity(opponent);
-        arbLimit -= 1;
         NewRound();
     }
     private void ResetEntity(Entity entity)
     {
-        foreach (DiceData die in entity.drawnDice)
+        List<DiceData> dicardedDice = new List<DiceData>(entity.drawnDice);
+
+        foreach (DiceData die in dicardedDice)
         {
-            entity.drawnDice.Remove(die);
             entity.discardPile.Add(die);
+            entity.drawnDice.Remove(die);
+        }
+
+        Die[] dice = FindObjectsByType<Die>(FindObjectsSortMode.None);
+
+        foreach (Die dieInstance in dice)
+        {
+            GameObject dieObject = dieInstance.transform.gameObject;
+            Destroy(dieObject);
         }
 
         entity.damage = 0;
@@ -123,18 +166,34 @@ public class BattleSceneManager : MonoBehaviour
 
     public void GetActiveColumn(int column)
     {
-        float columnPosX = columnStartPositions[column-1];
-        
+        playerActiveColumn.Clear();
+        enemyActiveColumn.Clear();
+        float columnPosX = columnStartPositions[column - 1];
+
         for (int i = 0; i < 9; i++)
         {
             float yJump = i * -0.8f;
 
             Vector3 rayPosition = new Vector3(columnPosX, columnMaster.transform.position.y + yJump, columnMaster.transform.position.z);
-
             Ray ray = new Ray(rayPosition, Vector3.forward);
-            if (Physics.Raycast(ray, out RaycastHit hit, 9999))
+            if (Physics.Raycast(ray, out RaycastHit hit, 666))
             {
-                Debug.Log($"Ray hit: {hit.collider.name} at {hit.point}");
+                Vector3 ray2Position = new Vector3(columnPosX + 14.3f, columnMaster.transform.position.y + yJump, columnMaster.transform.position.z);
+                Ray ray2 = new Ray(ray2Position, Vector3.forward);
+                Debug.DrawRay(ray2Position, Vector3.forward * 10, Color.green, 666);
+                if (Physics.Raycast(ray2, out RaycastHit hit2, 666))
+                {
+                    DiceSlotController slotController2 = hit2.collider.GetComponent<DiceSlotController>();
+                    if (slotController2 != null)
+                    {
+                        enemyActiveColumn.Add(slotController2);
+                    }
+                    else
+                    {
+                        Debug.Log("Hit object does not have a Slot component.");
+                    }
+
+                }
 
                 DiceSlotController slotController = hit.collider.GetComponent<DiceSlotController>();
                 if (slotController != null)
@@ -148,6 +207,7 @@ public class BattleSceneManager : MonoBehaviour
             }
         }
         Debug.Log("Slots: " + string.Join(", ", playerActiveColumn));
+        Debug.Log("Slots: " + string.Join(", ", enemyActiveColumn));
     }
 
 }

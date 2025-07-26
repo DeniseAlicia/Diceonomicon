@@ -44,7 +44,7 @@ public class DiceSlotData : ScriptableObject
         }
     }
 
-    public virtual void Effect(int dieValue, int mult, BattleSceneManager sceneManager)
+    public virtual void Effect(int dieValue, int mult, BattleSceneManager sceneManager, Entity owner)
     {
         Debug.Log("DoEffect not found");
     }

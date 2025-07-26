@@ -4,25 +4,15 @@ public class HoverGlowController : MonoBehaviour
 {
     private Renderer rend;
     private MaterialPropertyBlock mpb;
-    private bool isHovered = false;
+    public bool isHovered = false;
 
-    void Awake()
+    void Start()
     {
         rend = GetComponent<Renderer>();
         mpb = new MaterialPropertyBlock();
     }
 
-    void OnMouseEnter()
-    {
-        SetHover(true);
-    }
-
-    void OnMouseExit()
-    {
-        SetHover(false);
-    }
-
-    private void SetHover(bool hover)
+    public void SetHover(bool hover)
     {
         if (isHovered == hover) return;
         isHovered = hover;

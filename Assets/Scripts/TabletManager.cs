@@ -7,9 +7,8 @@ public class TabletManager : MonoBehaviour
 {
     public static TabletManager Instance { get; private set; }
 
+    public Entity owner;
     public bool enemy;
-
-    public Player owner;
 
     private Vector3 startPosition;
 
@@ -25,8 +24,14 @@ public class TabletManager : MonoBehaviour
 
     void Start()
     {
-
-        TabletData[] activeRoster = owner.ActiveImplings;
+        if (enemy == false)
+        {
+            owner = FindFirstObjectByType<Player>();
+        }
+        else
+        { owner = FindFirstObjectByType<Opponent>(); }
+        
+        //TabletData[] activeRoster = owner.ActiveImplings;
 
         if (enemy == true)
         {
@@ -45,6 +50,7 @@ public class TabletManager : MonoBehaviour
 
             TabletController controller = tabletInstance.GetComponent<TabletController>();
             controller.SetData(tablet);
+            controller.owner = owner;
 
             Renderer renderer = tabletInstance.GetComponentInChildren<Renderer>();
             float height = renderer.bounds.size.y;

@@ -5,22 +5,22 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class DiceManager : MonoBehaviour
+public static class DiceManager
 {
-    public List<DiceData> diceDrawn;
-    public List<Die> dice;
+    public static List<DiceData> diceDrawn;
+    public static List<Die> dice;
 
-    private Vector3 startPosition = new Vector3(0f, 5f, -5f);
-    public GameObject diePrefab;
-    private Camera camGameplay;
-    private Camera camBattleTablets;
+    private static Vector3 startPosition = new Vector3(0f, 5f, -5f);
+    public static GameObject diePrefab;
+    private static Camera camGameplay;
+    private static Camera camBattleTablets;
 
-    public Button drawButton;
-    public Button rollButton;
-    public Button confirmButton;
-    public Button restartButton;
+    public static Button drawButton;
+    public static Button rollButton;
+    public static Button confirmButton;
+    public static Button restartButton;
 
-    void Start()
+    public static void Start()
     {
         camGameplay = GameObject.Find("Gameplay").GetComponent<Camera>();
         camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
@@ -31,48 +31,12 @@ public class DiceManager : MonoBehaviour
         Button roll = rollButton.GetComponent<Button>();
         roll.onClick.AddListener(RollAllDice);
 
-        Button confirm = confirmButton.GetComponent<Button>();
-        //confirm.onClick.AddListener(ConfirmOnClick);
-
         Button restart = restartButton.GetComponent<Button>();
         restart.onClick.AddListener(RestartOnClick);
-
-        Vector3 basePosition = startPosition;
-        float distance = 0.5f;
-
-
-        for (int i = 0; i < diceDrawn.Count; i++)
-        {
-            DiceData die = diceDrawn[i];
-
-            float overflow = Mathf.Floor(i / 3f);
-            float spacing = (i - overflow * 3) * distance;
-
-            Vector3 diePos = basePosition;
-            diePos.x += spacing;
-            diePos.z += overflow * distance;
-
-            // Instantiate prefab at the calculated position
-            GameObject dieInstance = Instantiate(diePrefab, diePos, Quaternion.identity);
-
-            // Set data on the die script
-            Die controller = dieInstance.GetComponent<Die>();
-            controller.SetData(die);
-
-            // Add to list
-            dice.Add(controller);
-        }
     }
 
-    void Update()
+    static void Update()
     {
-        // if (Mouse.current.rightButton.wasPressedThisFrame)
-        // {
-        //     Debug.Log("Test");
-        //     ResetAllDice();
-        //     RollAllDice();
-        // }
-
         bool allDiceSleeping = false;
         int i = 0;
         foreach (Die die in dice)
@@ -90,11 +54,11 @@ public class DiceManager : MonoBehaviour
 
         if (allDiceSleeping == true)
         {
-            SortAllDice();
+            SortAllDice(dice);
         }
     }
 
-    private void RollAllDice()
+    private static void RollAllDice()
     {
         foreach (Die die in dice)
         {
@@ -102,7 +66,7 @@ public class DiceManager : MonoBehaviour
         }
     }
 
-    private void ResetAllDice()
+    private static void ResetAllDice()
     {
         foreach (Die die in dice)
         {
@@ -110,7 +74,7 @@ public class DiceManager : MonoBehaviour
         }
     }
 
-    private void SortAllDice()
+    public static void SortAllDice(List<Die> dice)
     {
         float overflow = 0;
         float spacing;
@@ -133,7 +97,7 @@ public class DiceManager : MonoBehaviour
         }
     }
 
-    void RestartOnClick()
+    static void RestartOnClick()
     {
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

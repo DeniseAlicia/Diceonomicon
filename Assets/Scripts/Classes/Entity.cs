@@ -15,10 +15,9 @@ public abstract class Entity : MonoBehaviour
 
     public List<DiceData> diceDeck;
     public List<DiceData> drawnDice;
-    public List<Die> dice;
     public int drawSize; //how many dice can be drawn at round start
     public List<DiceData> discardPile;
-    public int damage = 0;
+    public int damage = 10;
     public int block = 0;
     public List<DiceSlotController> activeColumn;
 
@@ -26,6 +25,7 @@ public abstract class Entity : MonoBehaviour
     public Button healthUp;
     public Button healthDown;
     public float alpha;
+    public GameObject diePrefab;
 
     public void Update()
     {
@@ -57,35 +57,21 @@ public abstract class Entity : MonoBehaviour
     {
         for (int i = 0; i < drawSize; i++)
         {
-            if (diceDeck == null)
+            if (diceDeck == null | diceDeck.Count == 0)
             {
-                if (discardPile == null)
+                if (discardPile == null || discardPile.Count == 0)
                 {
                     return;
                 }
-                foreach (DiceData die in discardPile)
-                {
-                    discardPile.Remove(die);
-                    diceDeck.Add(die);
-                }
+                diceDeck.AddRange(discardPile);
+                discardPile.Clear();
             }
             int randomIndex = Random.Range(0, diceDeck.Count);
             DiceData drawnDie = diceDeck[randomIndex];
-            diceDeck.Remove(drawnDie);
+            diceDeck.RemoveAt(randomIndex);
             drawnDice.Add(drawnDie);
         }
     }
-
-    public void RollDice()
-    {
-        // foreach (DiceData die in drawnDice)
-        // {
-        //     die.Roll();
-        // }
-    }
-
-    public void CalculateColumns()
-    {
-        Debug.Log("Entity.CalculateColumns");
-    }
+    
+    public abstract void RollDice();
 }
