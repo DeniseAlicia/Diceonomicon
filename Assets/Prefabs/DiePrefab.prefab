@@ -70,6 +70,8 @@ MonoBehaviour:
   forceZ: 5
   torque: 5
   tempGravity: {x: 0, y: -100, z: 0}
+  rigidBody: {fileID: 8297382084870351055}
+  dieRotation: 0
   nameText: 
   descText: 
   dieTag: 

@@ -310,6 +310,7 @@ MonoBehaviour:
   nameText: {fileID: 13096339759207314}
   descText: {fileID: 2352121234363414725}
   artworkRenderer: {fileID: 4123861950717567092}
+  owner: {fileID: 0}
 --- !u!1 &3777836170970485122
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,7 +448,7 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 1
@@ -1110,7 +1111,7 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 1
@@ -1304,6 +1305,7 @@ MonoBehaviour:
   nameText: {fileID: 13096339759207314}
   descText: {fileID: 2352121234363414725}
   artworkRenderer: {fileID: 4123861950717567092}
+  owner: {fileID: 0}
 --- !u!1 &8457177599187312549
 GameObject:
   m_ObjectHideFlags: 0

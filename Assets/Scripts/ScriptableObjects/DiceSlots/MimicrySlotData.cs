@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "MimicrySlotData", menuName = "DiceSlots/MimicrySlotData")]
 public class MimicrySlotData : DiceSlotData
 {
-    public override void Effect(int dieValue, int mult, BattleSceneManager sceneManager)
+    public override void Effect(int dieValue, int mult, BattleSceneManager sceneManager, Entity owner)
     {
         List<DiceSlotController> target = owner.activeColumn;
         int repeats = dieValue * mult;

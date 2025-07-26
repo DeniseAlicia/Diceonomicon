@@ -9,7 +9,7 @@ public class TabletData : ScriptableObject
     public new string name;
     public string desc;
     public Texture artwork;
-
+    public Entity owner;
     public DiceSlotData[] slots;
     public DiceData[] startingDice;
     public GameObject slotPrefab;
@@ -21,6 +21,15 @@ public class TabletData : ScriptableObject
 
         for (int i = 0; i < slots.Length; i++)
         {
+            if (enemy == false)
+            {
+                owner = FindFirstObjectByType<Player>();
+            }
+            else
+            {
+                owner = FindFirstObjectByType<Opponent>();
+            }
+
             string slotName = $"Slot{i + 1}";
             Transform targetSlot = tabletMain.Find(slotName);
 
@@ -30,6 +39,7 @@ public class TabletData : ScriptableObject
             diceSlotInstance.name = $"SlotInstance{i + 1}";
 
             DiceSlotController controller = diceSlotInstance.GetComponent<DiceSlotController>();
+            controller.owner = owner;
             controller.SetData(slots[i]);
         }
     }

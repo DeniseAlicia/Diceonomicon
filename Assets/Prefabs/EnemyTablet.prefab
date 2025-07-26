@@ -570,6 +570,7 @@ MonoBehaviour:
   nameText: {fileID: 7627021162437748329}
   descText: {fileID: 4794263122041795133}
   artworkRenderer: {fileID: 5982104575663082444}
+  owner: {fileID: 0}
 --- !u!1 &5173259861328246865
 GameObject:
   m_ObjectHideFlags: 0
