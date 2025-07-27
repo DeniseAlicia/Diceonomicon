@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: ShieldSlot
   m_EditorClassIdentifier: 
   name: Shield
-  desc: Shield
+  desc: Blocks incoming damage.
   material: {fileID: 2100000, guid: 9db39f4817f53d94f9dfe609bc99b291, type: 2}
-  outlineMaterial: {fileID: 2100000, guid: 67ae5c98e7a615a44a7bfccf2774c993, type: 2}
-  symbolMaterial: {fileID: 2100000, guid: 67ae5c98e7a615a44a7bfccf2774c993, type: 2}
+  outlineMaterial: {fileID: 2100000, guid: 35342d2b9112a8540a020cb1803d0545, type: 2}
+  symbolMaterial: {fileID: 2100000, guid: 22dfbae4def467847978f112f589f47a, type: 2}
   tag: Block
   owner: {fileID: 0}
   slottedDie: {fileID: 0}

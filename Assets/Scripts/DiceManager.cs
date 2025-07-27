@@ -15,24 +15,10 @@ public static class DiceManager
     private static Camera camGameplay;
     private static Camera camBattleTablets;
 
-    public static Button drawButton;
-    public static Button rollButton;
-    public static Button confirmButton;
-    public static Button restartButton;
-
     public static void Start()
     {
         camGameplay = GameObject.Find("Gameplay").GetComponent<Camera>();
         camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
-
-        Button draw = drawButton.GetComponent<Button>();
-        draw.onClick.AddListener(ResetAllDice);
-
-        Button roll = rollButton.GetComponent<Button>();
-        roll.onClick.AddListener(RollAllDice);
-
-        Button restart = restartButton.GetComponent<Button>();
-        restart.onClick.AddListener(RestartOnClick);
     }
 
     static void Update()

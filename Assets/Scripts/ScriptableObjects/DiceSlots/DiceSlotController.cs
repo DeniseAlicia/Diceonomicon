@@ -79,7 +79,7 @@ public class DiceSlotController : MonoBehaviour
 
         if (slotData != null)
         {
-            TooltipSystem.ShowTooltip(slotData.desc, slotData.name);
+            // TooltipSystem.ShowTooltip(slotData.desc, slotData.name);
         }
     }
 
