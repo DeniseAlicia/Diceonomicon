@@ -2,21 +2,21 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class TooltipTrigger : MonoBehaviour, IPointerExitHandler
 {
     private DiceSlotController controller;
     private Coroutine tooltipCoroutine;
     private bool isPointerOver = false;
 
 
-    private void Awake()
+    private void Start()
     {
         controller = GetComponent<DiceSlotController>();
     }
 
 
     // mouse enters element
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnMouseEnter()
     {
         Debug.Log("Tooltip");
         isPointerOver = true;
@@ -39,16 +39,8 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     private IEnumerator ShowTooltipWithDelay()
     {
-        float delay = 0.5f;
-        float elapsed = 0f;
-
-        while (elapsed < delay)
-        {
-            if (!isPointerOver) yield break;
-
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
+        float delay = 1f;
+        yield return new WaitForSeconds(delay);
 
         if (isPointerOver && controller != null && controller.HasSlotData())
         {

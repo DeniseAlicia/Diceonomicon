@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AttackData
   m_EditorClassIdentifier: 
   name: Attack
-  desc: "Deals damage to the opponent \u201CGood old-fashioned violence\u201D "
+  desc: Deals damage to the opponent.
   material: {fileID: 2100000, guid: 7f9426fecb1b5e548a58c656a14540a5, type: 2}
   outlineMaterial: {fileID: 2100000, guid: 049389e94b49af5438f5e533ce623c7a, type: 2}
   symbolMaterial: {fileID: 2100000, guid: 796de48ca903b5c43aba14176425bffd, type: 2}

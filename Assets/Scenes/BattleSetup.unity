@@ -932,7 +932,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &942055716
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1058,7 +1058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &986525128
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1627,7 +1627,6 @@ MonoBehaviour:
   healthText: {fileID: 1675249727}
   diceDeck: []
   drawnDice: []
-  dice: []
   drawSize: 9
   discardPile: []
   damage: 0
@@ -1643,6 +1642,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2301723de546ce24db6319045fd5219a, type: 2}
   - {fileID: 11400000, guid: 690975b419f67df4a9b0bea378b1577e, type: 2}
   MaxImplings: 3
+  dice: []
 --- !u!4 &1213689260
 Transform:
   m_ObjectHideFlags: 0
@@ -1765,7 +1765,6 @@ MonoBehaviour:
   healthText: {fileID: 1710912338}
   diceDeck: []
   drawnDice: []
-  dice: []
   drawSize: 8
   discardPile: []
   damage: 0
@@ -1779,6 +1778,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 942f12c5474d2d94f84f75e1e174626e, type: 2}
   - {fileID: 11400000, guid: 942f12c5474d2d94f84f75e1e174626e, type: 2}
   ai: {fileID: 0}
+  dice: []
 --- !u!4 &1334747539
 Transform:
   m_ObjectHideFlags: 0
@@ -1813,7 +1813,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1448212537
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2152,6 +2152,42 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 890627919042295371, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 890627919042295371, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 890627919042295371, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 890627919042295371, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 03de3d47061d1ee49831f226985666bf, type: 3}
+    - target: {fileID: 890627919042295371, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_Maskable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 890627919042295371, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 890627919042295371, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_UVRect.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 890627919042295371, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_UVRect.width
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 890627919042295371, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_UVRect.height
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1202142039816880407, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_RaycastTarget
       value: 0
@@ -2183,6 +2219,22 @@ PrefabInstance:
     - target: {fileID: 2420413036925393262, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_RaycastTarget
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905240895119845552, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_Padding.m_Top
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905240895119845552, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_Padding.m_Left
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905240895119845552, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_Padding.m_Right
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905240895119845552, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_Padding.m_Bottom
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3549785067415308344, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_Name

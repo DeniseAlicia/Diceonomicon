@@ -17,6 +17,7 @@ public class Tooltip : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("I'm not being used.");
         rectTransform = GetComponent<RectTransform>();
     }
 
@@ -44,16 +45,16 @@ public class Tooltip : MonoBehaviour
     {
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
-            contentField.gameObject.SetActive(false);
-            headerField.gameObject.SetActive(false);
+            // contentField.gameObject.SetActive(false);
+            // headerField.gameObject.SetActive(false);
             return;
         }
         else
         {
-            contentField.gameObject.SetActive(true);
-            headerField.gameObject.SetActive(true);
+            // contentField.gameObject.SetActive(true);
+            // headerField.gameObject.SetActive(true);
             Vector2 position = Input.mousePosition;
-            float xOffset = 50f;
+            float xOffset = 20f;
             float yOffset = 50f;
 
             float pivotX = position.x / Screen.width;
