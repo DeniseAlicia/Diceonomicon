@@ -18,6 +18,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     // mouse enters element
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log("Tooltip");
         isPointerOver = true;
         tooltipCoroutine = StartCoroutine(ShowTooltipWithDelay());
     }

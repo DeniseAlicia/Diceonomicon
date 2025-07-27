@@ -41,6 +41,12 @@ public class TabletData : ScriptableObject
             DiceSlotController controller = diceSlotInstance.GetComponent<DiceSlotController>();
             controller.owner = owner;
             controller.SetData(slots[i]);
+
+            TooltipTrigger tooltipTrigger = diceSlotInstance.GetComponent<TooltipTrigger>();
+            if (tooltipTrigger == null)
+            {
+                tooltipTrigger = diceSlotInstance.AddComponent<TooltipTrigger>();
+            }
         }
     }
 }

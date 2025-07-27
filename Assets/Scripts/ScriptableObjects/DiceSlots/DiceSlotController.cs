@@ -15,8 +15,10 @@ public class DiceSlotController : MonoBehaviour
     public int priority;
     public int mult = 1;
     public Die slottedDie;
-    private BattleSceneManager activeSceneManager;
     public new string tag;
+
+    private BattleSceneManager activeSceneManager;
+
 
     private void Start()
     {
@@ -74,12 +76,19 @@ public class DiceSlotController : MonoBehaviour
     {
         if (hoverTarget != null)
             hoverTarget.SetHover(true);
+
+        if (slotData != null)
+        {
+            TooltipSystem.ShowTooltip(slotData.desc, slotData.name);
+        }
     }
 
     void OnMouseExit()
     {
         if (hoverTarget != null)
             hoverTarget.SetHover(false);
+
+        TooltipSystem.HideTooltip();
     }
 
 }
