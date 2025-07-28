@@ -4,8 +4,8 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "AttackSlotData", menuName = "DiceSlots/AttackSlotData")]
 public class AttackSlotData : DiceSlotData
 {
-    public override void Effect(int dieValue, int mult, BattleSceneManager sceneManager, Entity owner)
+    public override void Effect(Die slottedDie, int mult, BattleSceneManager sceneManager, Entity owner, DiceSlotController slot)
     {
-        owner.damage += dieValue * mult;
+        owner.damage += slottedDie.value * mult;
     }
 }

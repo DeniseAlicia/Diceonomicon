@@ -17,7 +17,6 @@ public class Tooltip : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("I'm not being used.");
         rectTransform = GetComponent<RectTransform>();
     }
 

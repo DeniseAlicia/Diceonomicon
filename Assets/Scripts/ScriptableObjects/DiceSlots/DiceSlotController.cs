@@ -48,7 +48,11 @@ public class DiceSlotController : MonoBehaviour
 
     public void DoEffect()
     {
-        slotData.Effect(slottedDie.value, mult, activeSceneManager, owner);
+        if (slottedDie.value > 0 && slottedDie.value < 7)
+        {
+            slottedDie.value = slottedDie.range[slottedDie.value - 1];
+        }
+        slotData.Effect(slottedDie, mult, activeSceneManager, owner, this);
     }
 
     public void DetectLinks()

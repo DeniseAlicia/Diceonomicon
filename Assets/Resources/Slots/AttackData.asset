@@ -20,4 +20,4 @@ MonoBehaviour:
   tag: Damage
   owner: {fileID: 0}
   slottedDie: {fileID: 0}
-  priority: 1
+  priority: 3

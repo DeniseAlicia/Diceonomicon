@@ -21,3 +21,5 @@ MonoBehaviour:
   owner: {fileID: 0}
   slottedDie: {fileID: 0}
   priority: 1
+  directions: 
+  bonus: 3

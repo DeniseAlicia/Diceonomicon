@@ -79,8 +79,6 @@ public class Die : MonoBehaviour
         rigidBody.useGravity = true;
         rigidBody.isKinematic = false;
 
-        Debug.Log("Rolling...");
-
         forceX = UnityEngine.Random.Range(-0.02f, 0.02f);
         forceY = UnityEngine.Random.Range(0.2f, 0.3f);
         forceZ = UnityEngine.Random.Range(0.25f, 0.3f);
@@ -127,11 +125,11 @@ public class Die : MonoBehaviour
         }
 
         if (upSide == null) return;
-        Debug.Log(upSide.name); // log the die value
+        // Debug.Log(upSide.name); // log the die value
 
         boxCollider.enabled = false;
         value = int.Parse(upSide.name);
-        Debug.Log("Value: " + value);
+        //Debug.Log("Value: " + value);
 
         switch (value)
         {
@@ -268,17 +266,17 @@ public class Die : MonoBehaviour
             if (Physics.Raycast(transform.position, Vector3.forward, out hit, 100))
             {
                 GameObject hitSlot = hit.transform.gameObject;
-                Debug.Log(hitSlot);
+                // Debug.Log(hitSlot);
 
                 DiceSlotController slotController = hitSlot.GetComponent<DiceSlotController>();
                 if (slotController != null)
                 {
                     DiceSlotData slotData = slotController.slotData;
-                    Debug.Log(slotData);
+                    // Debug.Log(slotData);
 
                     if (slotData.tag == this.dieTag)
                     {
-                        Debug.Log("Slotted!");
+                        //Debug.Log("Slotted!");
 
                         transform.SetParent(hitSlot.transform);
                         transform.localPosition = new Vector3(0, 3, 0);
@@ -292,7 +290,7 @@ public class Die : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log(slotData.slottedDie);
+                        //Debug.Log(slotData.slottedDie);
                         MoveToLayer("Gameplay");
                         transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                         transform.position = lastPosition;

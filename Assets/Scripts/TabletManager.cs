@@ -20,18 +20,13 @@ public class TabletManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-    }
 
-    void Start()
-    {
         if (enemy == false)
         {
             owner = FindFirstObjectByType<Player>();
         }
         else
         { owner = FindFirstObjectByType<Opponent>(); }
-        
-        //TabletData[] activeRoster = owner.ActiveImplings;
 
         if (enemy == true)
         {
@@ -56,11 +51,6 @@ public class TabletManager : MonoBehaviour
             float height = renderer.bounds.size.y;
 
             currentPosition.y -= height + spacing;
-
-            // foreach (DiceData die in startingDice)
-            // {
-            //     owner.diceDeck.Add(die);
-            // }
         }
     }
 }
