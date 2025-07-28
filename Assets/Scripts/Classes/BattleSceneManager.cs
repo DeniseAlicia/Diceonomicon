@@ -23,8 +23,8 @@ public class BattleSceneManager : MonoBehaviour
     private void Awake()
     {
         Camera camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
-        camBattleTablets.gameObject.SetActive(false);
-        camBattleTablets.gameObject.SetActive(true);
+        camBattleTablets.gameObject.SetActive(false);   // have you tried turning it off and on again?
+        camBattleTablets.gameObject.SetActive(true);    // what is the purpose?
         player.SetImplingRoster();
         opponent.SetEnemyRoster();
     }
@@ -75,11 +75,11 @@ public class BattleSceneManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         foreach (Die die in player.dice)
         {
-            die.GetSideFacingUp();
-            die.isResting = true;
-            die.isDraggable = true;
-            die.rigidBody.isKinematic = true;
-            die.rigidBody.useGravity = false;
+            die.GetSideFacingUp();              // already called in the Die class, why again?
+            die.isResting = true;               // these* sre already set in the Die class, why are they set again? should they be removed from Die?
+            die.isDraggable = true;             // *
+            die.rigidBody.isKinematic = true;   // *
+            die.rigidBody.useGravity = false;   // *
 
         }
         DiceManager.SortAllDice(player.dice);

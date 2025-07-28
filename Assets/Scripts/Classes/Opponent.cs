@@ -22,7 +22,7 @@ public class Opponent : Entity
     public override void RollDice()
     {
         List<Die> dice = new List<Die>();
-        Vector3 startPosition = new Vector3(0f, 15f, -15f);
+        Vector3 startPosition = new Vector3(0f, 5f, -10f);
         float distance = 0.5f;
 
         for (int i = 0; i < drawnDice.Count; i++)

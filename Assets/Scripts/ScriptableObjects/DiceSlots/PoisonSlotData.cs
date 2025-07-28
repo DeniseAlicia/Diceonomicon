@@ -8,19 +8,19 @@ public class PoisonSlotData : DiceSlotData
     {
         List<DiceSlotController> target;
         int repeats = dieValue * mult;
-        if (owner is Player)
+        if (owner is Player)    // does this work??
         {
-            target = sceneManager.opponent.activeColumn;
+            target = sceneManager.opponent.activeColumn;    // target.AddRannge(sceneManager.opponent.activeColumn)?
         }
         else
         {
-            target = sceneManager.player.activeColumn;
+            target = sceneManager.player.activeColumn;  // target.AddRannge(sceneManager.opponent.activeColumn)?
         }
 
         for (int i = 0; i < repeats; i++)
         {
             int randomIndex = Random.Range(0, target.Count);
-            DiceSlotController targetSlot = target[i];
+            DiceSlotController targetSlot = target[i];  // = target[randomIndex]
             if (targetSlot.isFilled)
             {
                 targetSlot.slottedDie.value -= 1;

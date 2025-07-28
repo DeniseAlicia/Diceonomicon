@@ -15,11 +15,11 @@ public class Die : MonoBehaviour
     public bool isPlaced = false;
     public bool isResting = false;
 
-    [SerializeField] float forceX;
-    [SerializeField] float forceY;
-    [SerializeField] float forceZ;
-    [SerializeField] float torque = 5f;
-    [SerializeField] Vector3 tempGravity = new Vector3(0, -10f, 0);
+    [SerializeField] float forceX;  // the forces are randomized in Roll() so these* should be private
+    [SerializeField] float forceY;  // *
+    [SerializeField] float forceZ;  // *
+    [SerializeField] float torque = 5f;    // * same here
+    [SerializeField] Vector3 tempGravity = new Vector3(0, -10f, 0);     // this is set in Start() aswell
 
     private Camera camGameplay;
     private Camera camBattleTablets;
@@ -48,7 +48,7 @@ public class Die : MonoBehaviour
 
     void Start()
     {
-        camGameplay = GameObject.Find("Gameplay").GetComponent<Camera>();
+        camGameplay = GameObject.Find("Gameplay").GetComponent<Camera>();       // isnt there a better way than Find() ?
         camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
         dieRotation = 0;
         torque = 5f;
@@ -60,7 +60,7 @@ public class Die : MonoBehaviour
         isDraggable = false;
         isPlaced = false;
         isResting = false;
-        DieStartPos = transform.position; // Test; remove later
+        DieStartPos = transform.position; // used for ResetDiePosition(); remove later
     }
 
     void FixedUpdate()
@@ -93,7 +93,7 @@ public class Die : MonoBehaviour
             diceTrayWall.EnableCollision();
         }
 
-        Physics.gravity = new Vector3(0, -10f, 0);
+        Physics.gravity = new Vector3(0, -10f, 0);  // why not use tempGravity?
 
         rigidBody.AddForce(force, ForceMode.Impulse); // add force and torque to roll the die
         rigidBody.AddTorque(torque, ForceMode.Impulse);
@@ -190,7 +190,7 @@ public class Die : MonoBehaviour
 
             transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
 
-            switch (value)
+            switch (value)      // all cases are identical, we only need the lastRotation for each case 
             {
                 case 1:
                     lastRotation = transform.eulerAngles;
@@ -240,7 +240,7 @@ public class Die : MonoBehaviour
     {
         if (isDraggable)
         {
-            switch (value)
+            switch (value)      // this is useless? we already checked the value in OnMouseDown()
             {
                 case 1:
                     transform.eulerAngles = lastRotation;

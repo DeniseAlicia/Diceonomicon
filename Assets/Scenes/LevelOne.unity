@@ -298,62 +298,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 407251142}
   m_SourcePrefab: {fileID: 100100000, guid: 0d2b9188252a78b4298fb8e34d9229ee, type: 3}
---- !u!1 &49393115
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 49393117}
-  - component: {fileID: 49393116}
-  m_Layer: 0
-  m_Name: DiceManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &49393116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 49393115}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0376ddf48c0966d4b93fff16949b44fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  diceDrawn: []
-  dice:
-  - {fileID: 1120546805}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 1992152964}
-  - {fileID: 2126434176}
-  - {fileID: 1973955944}
-  - {fileID: 0}
-  diePrefab: {fileID: 0}
---- !u!4 &49393117
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 49393115}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -500.70102, y: -282.0311, z: -5.285116}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 373581487}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &100647549
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,6 +775,12 @@ MonoBehaviour:
   forceZ: 5
   torque: 5
   tempGravity: {x: 0, y: -100, z: 0}
+  rigidBody: {fileID: 0}
+  dieRotation: 0
+  nameText: 
+  descText: 
+  dieTag: 
+  textureRenderer: {fileID: 0}
 --- !u!1 &360413177
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,7 +841,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 49393117}
   - {fileID: 1549034808}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -980,6 +929,12 @@ MonoBehaviour:
   forceZ: 5
   torque: 5
   tempGravity: {x: 0, y: -100, z: 0}
+  rigidBody: {fileID: 0}
+  dieRotation: 0
+  nameText: 
+  descText: 
+  dieTag: 
+  textureRenderer: {fileID: 0}
 --- !u!1 &411189320
 GameObject:
   m_ObjectHideFlags: 0
@@ -2303,12 +2258,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc5cf31ebde85944add3e4f042dded9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   enemy: 0
   tabletPrefab: {fileID: 8448579534215354899, guid: ace316ba9a583b141b31007ca0879c52, type: 3}
   tablets: []
-  impling1: {fileID: 11400000, guid: 690975b419f67df4a9b0bea378b1577e, type: 2}
-  impling2: {fileID: 11400000, guid: 2301723de546ce24db6319045fd5219a, type: 2}
-  impling3: {fileID: 11400000, guid: 2ee8e1e33b8dea046865309d8967e2ee, type: 2}
 --- !u!4 &1004706264
 Transform:
   m_ObjectHideFlags: 0
@@ -2534,6 +2487,12 @@ MonoBehaviour:
   forceZ: 5
   torque: 5
   tempGravity: {x: 0, y: -100, z: 0}
+  rigidBody: {fileID: 0}
+  dieRotation: 0
+  nameText: 
+  descText: 
+  dieTag: 
+  textureRenderer: {fileID: 0}
 --- !u!1 &1150577546
 GameObject:
   m_ObjectHideFlags: 0
@@ -2940,6 +2899,12 @@ MonoBehaviour:
   forceZ: 5
   torque: 5
   tempGravity: {x: 0, y: -100, z: 0}
+  rigidBody: {fileID: 0}
+  dieRotation: 0
+  nameText: 
+  descText: 
+  dieTag: 
+  textureRenderer: {fileID: 0}
 --- !u!1 &1504259784
 GameObject:
   m_ObjectHideFlags: 0
@@ -3238,6 +3203,12 @@ MonoBehaviour:
   forceZ: 5
   torque: 5
   tempGravity: {x: 0, y: -100, z: 0}
+  rigidBody: {fileID: 0}
+  dieRotation: 0
+  nameText: 
+  descText: 
+  dieTag: 
+  textureRenderer: {fileID: 0}
 --- !u!1 &1647033460
 GameObject:
   m_ObjectHideFlags: 0
@@ -3984,6 +3955,12 @@ MonoBehaviour:
   forceZ: 5
   torque: 5
   tempGravity: {x: 0, y: -100, z: 0}
+  rigidBody: {fileID: 0}
+  dieRotation: 0
+  nameText: 
+  descText: 
+  dieTag: 
+  textureRenderer: {fileID: 0}
 --- !u!1 &1981997713
 GameObject:
   m_ObjectHideFlags: 0
@@ -4089,6 +4066,12 @@ MonoBehaviour:
   forceZ: 5
   torque: 5
   tempGravity: {x: 0, y: -100, z: 0}
+  rigidBody: {fileID: 0}
+  dieRotation: 0
+  nameText: 
+  descText: 
+  dieTag: 
+  textureRenderer: {fileID: 0}
 --- !u!1 &2006649437
 GameObject:
   m_ObjectHideFlags: 0
@@ -4387,6 +4370,12 @@ MonoBehaviour:
   forceZ: 5
   torque: 5
   tempGravity: {x: 0, y: -100, z: 0}
+  rigidBody: {fileID: 0}
+  dieRotation: 0
+  nameText: 
+  descText: 
+  dieTag: 
+  textureRenderer: {fileID: 0}
 --- !u!1 &2133696745
 GameObject:
   m_ObjectHideFlags: 0
