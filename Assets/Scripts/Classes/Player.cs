@@ -48,7 +48,7 @@ public class Player : Entity
 
         }
 
-        Debug.Log("Slots: " + string.Join(", ", dice));
+        // Debug.Log("Slots: " + string.Join(", ", dice));
 
         foreach (Die dieInstance in dice)
         {

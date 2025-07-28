@@ -14,7 +14,7 @@ public static class CombatManager
     {
         for (int column = 1; column <= 3; column++)
         {
-            Debug.Log("Column: " + column);
+            // Debug.Log("Column: " + column);
             sceneManager.GetActiveColumn(column);
 
             playerSlots = SortActiveSlots(sceneManager.playerActiveColumn);

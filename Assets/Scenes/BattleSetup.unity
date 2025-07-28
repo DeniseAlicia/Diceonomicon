@@ -136,7 +136,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 167997467}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca123bee44e0ee442895f4eb2bb200f9, type: 3}
   m_Name: 
@@ -1909,8 +1909,7 @@ MonoBehaviour:
   army:
   - {fileID: 11400000, guid: 942f12c5474d2d94f84f75e1e174626e, type: 2}
   - {fileID: 11400000, guid: 942f12c5474d2d94f84f75e1e174626e, type: 2}
-  ai: {fileID: 0}
-  dice: []
+  ai: {fileID: 1627389017}
 --- !u!4 &1334747539
 Transform:
   m_ObjectHideFlags: 0
@@ -1925,6 +1924,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1848212705}
+  - {fileID: 1627389018}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1411813275
@@ -2174,6 +2174,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca123bee44e0ee442895f4eb2bb200f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1627389016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1627389018}
+  - component: {fileID: 1627389017}
+  m_Layer: 0
+  m_Name: EnemyAI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1627389017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627389016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1daed157d96a7742a55519625e3e2b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emptySlots: []
+  dice: []
+  opponent: {fileID: 1334747538}
+  columnMaster: {fileID: 341680232}
+  diePrefab: {fileID: 118036309713981090, guid: b478b503530ed88419f4ee2c9f690297, type: 3}
+--- !u!4 &1627389018
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627389016}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.47757, y: 16.089802, z: -21.38193}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1334747539}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1675249727 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8895127501670275088, guid: b67fba4bea6f75747bdcb8e15cf4700e, type: 3}
@@ -2461,7 +2510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2399183705739809002, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2420413036925393262, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_Sprite
@@ -2509,7 +2558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3697484508525932857, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4106683305005011485, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_CullTransparentMesh
@@ -2525,7 +2574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5907483897637747453, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7862362756489477098, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_IsActive
@@ -2597,7 +2646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8496606679298450991, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8805293676216415657, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_Enabled

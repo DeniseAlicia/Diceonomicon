@@ -55,10 +55,10 @@ public class BattleSceneManager : MonoBehaviour
 
     private void NewRound()
     {
-            opponent.DrawDice();
-            opponent.RollDice();
-            //opponent.ai.PlaceDice(opponent.drawnDice);
-            PlacementPhase();
+        opponent.DrawDice();
+        opponent.ai.RollDice();
+        //opponent.ai.PlaceDice(opponent.drawnDice);
+        PlacementPhase();
     }
 
     private void PlacementPhase()
@@ -137,8 +137,10 @@ public class BattleSceneManager : MonoBehaviour
             Destroy(dieObject);
         }
 
-        entity.damage = 0;
-        entity.block = 0;
+        opponent.damage = 0;
+        opponent.block = 0;
+        player.damage = 0;
+        player.block = 0;
     }
 
     public void GainHealth()
@@ -166,6 +168,18 @@ public class BattleSceneManager : MonoBehaviour
 
     public void GetActiveColumn(int column)
     {
+        foreach (DiceSlotController slot in enemyActiveColumn)
+        {
+            slot.isFilled = false;
+            slot.slottedDie = null;
+        }
+
+          foreach (DiceSlotController slot in playerActiveColumn)
+        {
+            slot.isFilled = false;
+            slot.slottedDie = null;
+        }
+
         playerActiveColumn.Clear();
         enemyActiveColumn.Clear();
         float columnPosX = columnStartPositions[column - 1];
@@ -190,7 +204,7 @@ public class BattleSceneManager : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Hit object does not have a Slot component.");
+                        // Debug.Log("Hit object does not have a Slot component.");
                     }
 
                 }
@@ -206,8 +220,7 @@ public class BattleSceneManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Slots: " + string.Join(", ", playerActiveColumn));
-        Debug.Log("Slots: " + string.Join(", ", enemyActiveColumn));
+        // Debug.Log("Slots: " + string.Join(", ", playerActiveColumn));
+        // Debug.Log("Slots: " + string.Join(", ", enemyActiveColumn));
     }
-
 }

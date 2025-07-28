@@ -4,10 +4,10 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "PoisonSlotData", menuName = "DiceSlots/PoisonSlotData")]
 public class PoisonSlotData : DiceSlotData
 {
-    public override void Effect(int dieValue, int mult, BattleSceneManager sceneManager, Entity owner)
+    public override void Effect(Die slottedDie, int mult, BattleSceneManager sceneManager, Entity owner, DiceSlotController slot)
     {
         List<DiceSlotController> target;
-        int repeats = dieValue * mult;
+        int repeats = slottedDie.value * mult;
         if (owner is Player)
         {
             target = sceneManager.opponent.activeColumn;

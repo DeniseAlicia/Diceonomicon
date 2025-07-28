@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System;
 
 [CreateAssetMenu(fileName = "BuffSlotData", menuName = "DiceSlots/BuffSlotData")]
 public class BuffSlotData : DiceSlotData
@@ -10,19 +11,28 @@ public class BuffSlotData : DiceSlotData
 
     public void TranslateDieValue(Die die)
     {
-        // string x = "0";
-        directions = new List<int> { 0, 90 };
+        directions.Clear();
+
+        string valueString = die.value.ToString();
+        foreach (char x in valueString)
+        {
+            int newValue = Int32.Parse(x.ToString());
+            int angle = newValue * 45 - 45 - die.dieRotation;
+            directions.Add(angle);
+            Debug.Log(angle);
+        }
     }
 
-    private Die FindTargetDie(Die die, DiceSlotController slot)
+    public List<Die> FindTargetDie(Die die, DiceSlotController slot)
     {
         TranslateDieValue(die);
         List<int> dirAngles = directions;
+        List<Die> targets = new List<Die>();
         int maxDistance = 1;
 
         foreach (int angle in dirAngles)
         {
-            Vector3 direction = Quaternion.Euler(20, die.dieRotation + angle, -20) * Vector3.back;
+            Vector3 direction = Quaternion.Euler(20, angle, -20) * Vector3.back;
             Transform originTransform = slot.transform;
 
             Ray ray = new Ray(originTransform.position, originTransform.TransformDirection(direction));
@@ -33,16 +43,15 @@ public class BuffSlotData : DiceSlotData
                 Die dieComponent = hit.collider.GetComponent<Die>();
                 if (dieComponent != null)
                 {
-                    return dieComponent;
+                    targets.Add(dieComponent);
                 }
                 else
                 {
-                    Debug.Log("Hit object does not have a Die component.");
                     return null;
                 }
             }
-            return null;
+            // return targets;
         }
-        return null;
+        return targets;
     }
 }

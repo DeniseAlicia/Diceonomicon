@@ -4,10 +4,10 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "MimicrySlotData", menuName = "DiceSlots/MimicrySlotData")]
 public class MimicrySlotData : DiceSlotData
 {
-    public override void Effect(int dieValue, int mult, BattleSceneManager sceneManager, Entity owner)
+    public override void Effect(Die slottedDie, int mult, BattleSceneManager sceneManager, Entity owner, DiceSlotController slot)
     {
         List<DiceSlotController> target = owner.activeColumn;
-        int repeats = dieValue * mult;
+        int repeats = slottedDie.value * mult;
         for (int i = 0; i < repeats; i++)
         {
             int randomIndex = Random.Range(0, target.Count);
