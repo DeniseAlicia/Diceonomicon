@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ff4cc70c65c2c4386cd41c2ceb0f88, type: 3}
   m_Name: EmptySlot
   m_EditorClassIdentifier: 
-  name: Empty
-  desc: Empty
+  name: 
+  desc: 
   material: {fileID: 2100000, guid: 08972bc1b780f0949917fecbbd629a4a, type: 2}
   outlineMaterial: {fileID: 2100000, guid: 67ae5c98e7a615a44a7bfccf2774c993, type: 2}
   symbolMaterial: {fileID: 2100000, guid: 67ae5c98e7a615a44a7bfccf2774c993, type: 2}
