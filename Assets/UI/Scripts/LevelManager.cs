@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
         {
             levelOneButton.clicked += () =>
             {
-                SceneManager.LoadScene("LevelOne");
+                SceneManager.LoadScene("BattleSetup");
             };
         }
         else
