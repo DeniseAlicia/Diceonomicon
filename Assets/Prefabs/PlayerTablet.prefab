@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.5, y: 0}
+  m_AnchoredPosition: {x: -5.59, y: 0.05}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &4835910162278063374
@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 3487107170043475305}
   - component: {fileID: 1040689279419497764}
   - component: {fileID: 5774049789339762464}
+  - component: {fileID: 9153994630743947926}
   m_Layer: 8
   m_Name: TabletMain
   m_TagString: Untagged
@@ -294,6 +295,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &9153994630743947926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3310092662065365521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315b7acc13de39640968931f880ce24e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: {fileID: 13096339759207314}
+  descText: {fileID: 2352121234363414725}
+  artworkRenderer: {fileID: 4123861950717567092}
+  owner: {fileID: 0}
 --- !u!1 &3777836170970485122
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,11 +447,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &5898489219191213226
@@ -446,7 +463,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3931064614536902754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aedeca597ea3da4b9f67caa1e8e6cbb, type: 3}
+  m_Script: {fileID: 11500000, guid: a04a2f2562eebc94bb37e0dd9546413f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 2344501088090392704}
@@ -690,7 +707,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.5, y: 0}
+  m_AnchoredPosition: {x: -5.5, y: 0.05}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &7231593360560382719
@@ -875,6 +892,7 @@ GameObject:
   - component: {fileID: 8475979474310799297}
   - component: {fileID: 4123861950717567092}
   - component: {fileID: 2541863809531617812}
+  - component: {fileID: 6787641656822290558}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -891,7 +909,7 @@ Transform:
   m_GameObject: {fileID: 6128394071063509810}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: -1}
-  m_LocalPosition: {x: -0.11005595, y: -0.1, z: 0.10432041}
+  m_LocalPosition: {x: -0.11005595, y: -0.05, z: 0.10432041}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -972,6 +990,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!111 &6787641656822290558
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128394071063509810}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: 9a31b8f641b443946bdf670be4169628, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 9a31b8f641b443946bdf670be4169628, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &6727977462724708803
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,11 +1110,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &6090923583413976491
@@ -1091,7 +1126,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6727977462724708803}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aedeca597ea3da4b9f67caa1e8e6cbb, type: 3}
+  m_Script: {fileID: 11500000, guid: a04a2f2562eebc94bb37e0dd9546413f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 2344501088090392704}
@@ -1229,6 +1264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3620997622594802804}
+  - component: {fileID: 6255826648385007587}
   m_Layer: 8
   m_Name: PlayerTablet
   m_TagString: Untagged
@@ -1245,7 +1281,7 @@ Transform:
   m_GameObject: {fileID: 8448579534215354899}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.9, y: -2, z: 1.32}
+  m_LocalPosition: {x: -6.9, y: -2, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1254,6 +1290,22 @@ Transform:
   - {fileID: 6421517556568769540}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6255826648385007587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8448579534215354899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315b7acc13de39640968931f880ce24e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: {fileID: 13096339759207314}
+  descText: {fileID: 2352121234363414725}
+  artworkRenderer: {fileID: 4123861950717567092}
+  owner: {fileID: 0}
 --- !u!1 &8457177599187312549
 GameObject:
   m_ObjectHideFlags: 0

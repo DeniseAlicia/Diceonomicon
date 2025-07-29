@@ -1,0 +1,16 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Style/MenuStyle.uss?fileID=7433441132597879392&amp;guid=7c201a04ee54d1e45b3934145f12738c&amp;type=3#MenuStyle" />
+    <ui:VisualElement name="DiceCollection" class="main-menu">
+        <ui:VisualElement name="Buttons" class="sidebar">
+            <ui:Button text="Home" name="button_to_Main" class="buttons button" />
+            <ui:Button text="Settings" name="button_to_Settings" class="buttons button" />
+            <ui:Button text="Map" name="button_to_Map" class="buttons button" />
+            <ui:Button text="Dice Collection" name="button_to_Dice" class="buttons button" />
+            <ui:Button text="Impling Compendium" name="button_to_Implings" class="buttons button" />
+            <ui:Button name="CloseMenu" icon-image="project://database/Assets/Freeui/ZOSMA/Set/Close.png?fileID=2800000&amp;guid=3f302b37d4c72954a87f7d7a773b0fb9&amp;type=3#Close" class="buttons button" style="-unity-background-image-tint-color: rgb(213, 162, 162);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Text" class="content-area">
+            <ui:Label text="Dice&#10;Collection" name="Header" class="header" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

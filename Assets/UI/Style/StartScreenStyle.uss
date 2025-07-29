@@ -1,0 +1,22 @@
+.button {
+    top: 25%;
+    left: 42%;
+    width: 20%;
+    height: 10%;
+    -unity-font-definition: url("../../DefaceGames/fonts/Crimson-Bold.otf");
+    color: rgb(255, 184, 6);
+    -unity-text-align: middle-center;
+    font-size: 40px;
+    background-image: url("../../Dark_Brown_GUI_kit/frame/other/button_frame.png");
+    background-color: rgb(161, 11, 49);
+    -unity-background-image-tint-color: rgba(61, 10, 27, 0.45);
+    bottom: auto;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
