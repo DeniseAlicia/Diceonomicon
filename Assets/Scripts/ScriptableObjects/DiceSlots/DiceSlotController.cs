@@ -18,11 +18,12 @@ public class DiceSlotController : MonoBehaviour
     public new string tag;
 
     private BattleSceneManager activeSceneManager;
-
+    public bool wasFrozen = false;
 
     private void Start()
     {
         activeSceneManager = FindFirstObjectByType<BattleSceneManager>();
+        GameObject columnMaster = activeSceneManager.columnMaster;
         mult = 1;
 
     }
@@ -48,6 +49,14 @@ public class DiceSlotController : MonoBehaviour
 
     public void DoEffect()
     {
+        if (slottedDie.isFrozen)
+        {
+            wasFrozen = true;
+        }
+
+        mult = 1;
+        DetectLinksDown(this.transform.position);
+        DetectLinksUp(this.transform.position);
         if (slottedDie.value > 0 && slottedDie.value < 7)
         {
             slottedDie.value = slottedDie.range[slottedDie.value - 1];
@@ -55,11 +64,41 @@ public class DiceSlotController : MonoBehaviour
         slotData.Effect(slottedDie, mult, activeSceneManager, owner, this);
     }
 
-    public void DetectLinks()
+    public void DetectLinksDown(Vector3 pos)
     {
+        Vector3 rayPosition = new Vector3(pos.x, pos.y - 0.8f, pos.z - 10);
+        Ray raydown = new Ray(rayPosition, Vector3.forward);
 
+        if (Physics.Raycast(raydown, out RaycastHit hit, 666))
+        {
+            Debug.Log($"Ray hit: {hit.collider.name} at {hit.point}");
+
+            Die die = hit.collider.GetComponent<Die>();
+            if (die != null && die.dieTag == slottedDie.dieTag)
+            {
+                mult += 1;
+                DetectLinksDown(rayPosition);
+            }
+        }
     }
 
+    public void DetectLinksUp(Vector3 pos)
+    {
+        Vector3 rayPosition = new Vector3(pos.x, pos.y + 0.8f, pos.z - 10);
+        Ray raydown = new Ray(rayPosition, Vector3.forward);
+
+        if (Physics.Raycast(raydown, out RaycastHit hit, 666))
+        {
+            Debug.Log($"Ray hit: {hit.collider.name} at {hit.point}");
+
+            Die die = hit.collider.GetComponent<Die>();
+            if (die != null && die.dieTag == slottedDie.dieTag)
+            {
+                mult += 1;
+                DetectLinksUp(rayPosition);
+            }
+        }
+    }
 
     public bool HasSlotData()
     {

@@ -1759,6 +1759,7 @@ MonoBehaviour:
   healthText: {fileID: 1675249727}
   diceDeck: []
   drawnDice: []
+  maxDrawSize: 9
   drawSize: 9
   discardPile: []
   damage: 0
@@ -1897,6 +1898,7 @@ MonoBehaviour:
   healthText: {fileID: 1710912338}
   diceDeck: []
   drawnDice: []
+  maxDrawSize: 8
   drawSize: 8
   discardPile: []
   damage: 0

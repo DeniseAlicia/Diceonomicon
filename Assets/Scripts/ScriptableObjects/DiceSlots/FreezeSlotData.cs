@@ -1,10 +1,17 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "FreezeSlotData", menuName = "DiceSlots/FreezeSlotData")]
-public class FreezeSlotData : DiceSlotData
+public class FreezeSlotData : BuffSlotData
 {
     public override void Effect(Die slottedDie, int mult, BattleSceneManager sceneManager, Entity owner, DiceSlotController slot)
     {
-        Debug.Log("Dice have been frozen");
+        List<Die> targetDice = FindTargetDie(slottedDie, slot);
+
+        foreach (Die targetDie in targetDice)
+        {
+            targetDie.isFrozen = true;
+            owner.drawSize -= 1;
+        }
     }
 }

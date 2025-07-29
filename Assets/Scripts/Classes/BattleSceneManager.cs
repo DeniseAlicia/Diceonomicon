@@ -57,7 +57,6 @@ public class BattleSceneManager : MonoBehaviour
     {
         opponent.DrawDice();
         opponent.ai.RollDice();
-        //opponent.ai.PlaceDice(opponent.drawnDice);
         PlacementPhase();
     }
 
@@ -66,12 +65,15 @@ public class BattleSceneManager : MonoBehaviour
         player.DrawDice();
         player.RollDice();
 
+        player.drawSize = player.maxDrawSize;
+        opponent.drawSize = opponent.maxDrawSize;
+
         StartCoroutine(SortAfterDelay());
     }
 
     private IEnumerator SortAfterDelay()
     {
-        float delay = 4f;
+        float delay = 3f;
         yield return new WaitForSeconds(delay);
         foreach (Die die in player.dice)
         {
@@ -117,24 +119,34 @@ public class BattleSceneManager : MonoBehaviour
     {
         ResetEntity(player);
         ResetEntity(opponent);
+
+        Die[] dice = FindObjectsByType<Die>(FindObjectsSortMode.None);
+        foreach (Die die in dice)
+        {
+            die.isFrozen = false;
+        }
+
         NewRound();
     }
     private void ResetEntity(Entity entity)
     {
         List<DiceData> dicardedDice = new List<DiceData>(entity.drawnDice);
 
-        foreach (DiceData die in dicardedDice)
+        foreach (DiceData dieData in dicardedDice)
         {
-            entity.discardPile.Add(die);
-            entity.drawnDice.Remove(die);
+            entity.discardPile.Add(dieData);
+            entity.drawnDice.Remove(dieData);
         }
 
         Die[] dice = FindObjectsByType<Die>(FindObjectsSortMode.None);
 
-        foreach (Die dieInstance in dice)
+        foreach (Die die in dice)
         {
-            GameObject dieObject = dieInstance.transform.gameObject;
-            Destroy(dieObject);
+            if (die.isFrozen == false)
+            {
+                GameObject dieObject = die.transform.gameObject;
+                Destroy(dieObject);
+            }
         }
 
         opponent.damage = 0;
@@ -170,14 +182,19 @@ public class BattleSceneManager : MonoBehaviour
     {
         foreach (DiceSlotController slot in enemyActiveColumn)
         {
-            slot.isFilled = false;
-            slot.slottedDie = null;
+            if (slot.wasFrozen == false)
+            {
+                slot.isFilled = false;
+                slot.slottedDie = null;
+            }
         }
-
-          foreach (DiceSlotController slot in playerActiveColumn)
+        foreach (DiceSlotController slot in playerActiveColumn)
         {
-            slot.isFilled = false;
-            slot.slottedDie = null;
+            if (slot.wasFrozen == false)
+            {
+                slot.isFilled = false;
+                slot.slottedDie = null;
+            }
         }
 
         playerActiveColumn.Clear();
@@ -204,7 +221,7 @@ public class BattleSceneManager : MonoBehaviour
                     }
                     else
                     {
-                        // Debug.Log("Hit object does not have a Slot component.");
+                        return;
                     }
 
                 }
@@ -216,11 +233,10 @@ public class BattleSceneManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Hit object does not have a Slot component.");
+                    // Debug.Log("Hit object does not have a Slot component.");
                 }
             }
         }
-        // Debug.Log("Slots: " + string.Join(", ", playerActiveColumn));
-        // Debug.Log("Slots: " + string.Join(", ", enemyActiveColumn));
+        Debug.Log("Slots: " + string.Join(", ", playerActiveColumn));
     }
 }
