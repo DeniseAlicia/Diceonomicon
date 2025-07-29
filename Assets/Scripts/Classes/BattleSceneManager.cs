@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +5,7 @@ using System;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Threading.Tasks;
 
 public class BattleSceneManager : MonoBehaviour
 {
@@ -40,17 +40,49 @@ public class BattleSceneManager : MonoBehaviour
         player.healthText.text = player.currentHealth.ToString();
         opponent.healthText.text = opponent.currentHealth.ToString();
 
-        // Add Test Buttons
-        Button upButton = player.healthUp.GetComponent<Button>();
-        upButton.onClick.AddListener(GainHealth);
-
-        Button downButton = player.healthDown.GetComponent<Button>();
-        downButton.onClick.AddListener(LoseHealth);
-
         Button confirm = confirmButton.GetComponent<Button>();
         confirm.onClick.AddListener(() => CombatManager.HandleActiveCombat(this));
 
         NewRound();
+    }
+
+    void Update()
+    {
+        if (player.block != 0)
+        {
+            player.blockText.text = player.block.ToString();
+        }
+        else
+        {
+            player.blockText.text = null;
+        }
+
+        if (opponent.block != 0)
+        {
+            opponent.blockText.text = opponent.block.ToString();
+        }
+        else
+        {
+            opponent.blockText.text = null;
+        }
+
+        if (player.damage != 0)
+        {
+            player.damageText.text = player.damage.ToString();
+        }
+        else
+        {
+            player.damageText.text = null;
+        }
+
+        if (opponent.damage != 0)
+        {
+            opponent.damageText.text = opponent.damage.ToString();
+        }
+        else
+        {
+            opponent.damageText.text = null;
+        }
     }
 
     private void NewRound()
@@ -87,7 +119,7 @@ public class BattleSceneManager : MonoBehaviour
         DiceManager.SortAllDice(player.dice);
     }
 
-    public void CalculateDamage()
+    public async void CalculateDamage()
     {
         player.currentHealth -= Math.Max(opponent.damage - player.block, 0);
         player.healthText.text = player.currentHealth.ToString();
@@ -112,6 +144,9 @@ public class BattleSceneManager : MonoBehaviour
 
         if (CombatManager.currentColumn == 3)
         {
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            player.alpha = 0.1f; // 0.1f for rolling, 0.9f for post-placement
+            opponent.alpha = 0.1f; // 0.1f for rolling, 0.9f for post-placement
             EndOfRound();
         }
     }
@@ -128,6 +163,7 @@ public class BattleSceneManager : MonoBehaviour
 
         NewRound();
     }
+
     private void ResetEntity(Entity entity)
     {
         List<DiceData> dicardedDice = new List<DiceData>(entity.drawnDice);
@@ -180,25 +216,6 @@ public class BattleSceneManager : MonoBehaviour
 
     public void GetActiveColumn(int column)
     {
-        foreach (DiceSlotController slot in enemyActiveColumn)
-        {
-            if (slot.wasFrozen == false)
-            {
-                slot.isFilled = false;
-                slot.slottedDie = null;
-            }
-        }
-        foreach (DiceSlotController slot in playerActiveColumn)
-        {
-            if (slot.wasFrozen == false)
-            {
-                slot.isFilled = false;
-                slot.slottedDie = null;
-            }
-        }
-
-        playerActiveColumn.Clear();
-        enemyActiveColumn.Clear();
         float columnPosX = columnStartPositions[column - 1];
 
         for (int i = 0; i < 9; i++)
@@ -239,4 +256,28 @@ public class BattleSceneManager : MonoBehaviour
         }
         Debug.Log("Slots: " + string.Join(", ", playerActiveColumn));
     }
+
+    public void ClearActiveColumn()
+    {
+        foreach (DiceSlotController slot in enemyActiveColumn)
+        {
+            if (slot.wasFrozen == false)
+            {
+                slot.isFilled = false;
+                slot.slottedDie = null;
+            }
+        }
+        foreach (DiceSlotController slot in playerActiveColumn)
+        {
+            if (slot.wasFrozen == false)
+            {
+                slot.isFilled = false;
+                slot.slottedDie = null;
+            }
+        }
+
+        playerActiveColumn.Clear();
+        enemyActiveColumn.Clear();
+    }
 }
+

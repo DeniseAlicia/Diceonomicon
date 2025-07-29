@@ -12,6 +12,8 @@ public abstract class Entity : MonoBehaviour
     public Material healthMaterial;
     public Material overlayMaterial;
     public TMP_Text healthText;
+    public TMP_Text damageText;
+     public TMP_Text blockText;
 
     public List<DiceData> diceDeck;
     public List<DiceData> drawnDice;

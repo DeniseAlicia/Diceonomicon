@@ -10,6 +10,7 @@ public class DiceSlotData : ScriptableObject
     public Material material;
     [HideInInspector] public Material outlineMaterial;
     [HideInInspector] public Material symbolMaterial;
+    public GameObject vfxPrefab;
 
     public string tag;
     public Entity owner;
