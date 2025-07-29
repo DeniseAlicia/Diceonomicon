@@ -10,9 +10,9 @@
             <ui:Button name="CloseMenu" icon-image="project://database/Assets/Freeui/ZOSMA/Set/Close.png?fileID=2800000&amp;guid=3f302b37d4c72954a87f7d7a773b0fb9&amp;type=3#Close" class="buttons button" style="-unity-background-image-tint-color: rgb(213, 162, 162);" />
         </ui:VisualElement>
         <ui:VisualElement name="Text" class="content-area" style="-unity-background-scale-mode: stretch-to-fill;">
-            <ui:Label text="Diceonomicon" name="Header" class="header" />
-            <ui:Label text="Welcome to Hell!" name="SubHeader" class="header" />
-            <ui:Label text="Something about the game world and why it is so nice ..." name="FlavorText" class="flavor-text" style="-unity-font-definition: url(&quot;project://database/Assets/DefaceGames/fonts/Crimson-Bold.otf?fileID=12800000&amp;guid=feb885b141d08e34b950775a3338bf34&amp;type=3#Crimson-Bold&quot;); font-size: 25px; -unity-text-align: middle-left;" />
+            <ui:Label text="Diceonomicon" name="Header" class="header" style="font-size: 50px;" />
+            <ui:Label text="Welcome to Hell, lost soul." name="SubHeader" class="header" style="padding-bottom: 50px;" />
+            <ui:Label text=" Don’t look so surprised — you knew where that wheel of fortune would take you.&#10; I am the Diceonomicon, your guide, your weapon, and perhaps... your only way out.&#10;Things may seem chaotic, cruel, or downright confusing — but worry not. I’m here to help you.&#10; Together, we’ll make it out of this twisted, cursed place.&#10;You want freedom? Redemption? Power?&#10; Then listen closely, roll carefully, and above all… choose wisely.&#10; &#10;Let the game begin.&#10;&#10;Go to the Level Map and start your journey out of hell.&#10;" name="FlavorText" class="flavor-text" style="-unity-font-definition: url(&quot;project://database/Assets/DefaceGames/fonts/Crimson-Bold.otf?fileID=12800000&amp;guid=feb885b141d08e34b950775a3338bf34&amp;type=3#Crimson-Bold&quot;); font-size: 28px; -unity-text-align: middle-left; text-overflow: clip; -unity-paragraph-spacing: 5px;" />
         </ui:VisualElement>
         <ui:VisualElement name="Achievements" class="visuals-container">
             <ui:VisualElement name="Achievement00" class="item" style="background-image: none;">

@@ -11,6 +11,10 @@
         </ui:VisualElement>
         <ui:VisualElement name="Text" class="content-area">
             <ui:Label text="Impling&#10;Compendium" name="Header" class="header" />
+            <ui:VisualElement class="item-image" style="background-image: url(&quot;project://database/Assets/Images/Impling1.png?fileID=2800000&amp;guid=0d8a5d9d969bfe04cbce7794e696a335&amp;type=3#Impling1&quot;); height: 300px; width: 300px; padding-right: 0; margin-right: 200px;" />
+            <ui:Label text="IceScream" class="text" style="font-size: 25px; margin-right: 200px;" />
+            <ui:VisualElement class="item-image" style="background-image: url(&quot;project://database/Assets/Images/Impling2.png?fileID=2800000&amp;guid=a0d9a31640924654cab18dc75cf5aaf9&amp;type=3#Impling2&quot;); height: 300px; width: 350px; margin-left: 100px;" />
+            <ui:Label text="Cubie" class="text" style="font-size: 25px; margin-left: 100px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

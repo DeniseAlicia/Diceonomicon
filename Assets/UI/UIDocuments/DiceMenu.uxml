@@ -10,7 +10,8 @@
             <ui:Button name="CloseMenu" icon-image="project://database/Assets/Freeui/ZOSMA/Set/Close.png?fileID=2800000&amp;guid=3f302b37d4c72954a87f7d7a773b0fb9&amp;type=3#Close" class="buttons button" style="-unity-background-image-tint-color: rgb(213, 162, 162);" />
         </ui:VisualElement>
         <ui:VisualElement name="Text" class="content-area">
-            <ui:Label text="Dice&#10;Collection" name="Header" class="header" />
+            <ui:Label text="Dice&#10;Collection" name="Header" class="header" style="margin-bottom: 50px;" />
+            <ui:VisualElement class="item-image" style="background-image: url(&quot;project://database/Assets/Images/dice1.png?fileID=2800000&amp;guid=fc2124236152560479e0349d4615fb4d&amp;type=3#dice1&quot;); height: 600px; width: 400px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
