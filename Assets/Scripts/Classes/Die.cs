@@ -37,6 +37,7 @@ public class Die : MonoBehaviour
     public string descText;
     public string dieTag;
     public Renderer textureRenderer;
+    public DiceData dieData;
 
     public void SetData(DiceData dieData)
     {

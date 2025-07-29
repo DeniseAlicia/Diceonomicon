@@ -1,4 +1,10 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 using TMPro;
 
 public class DiceSlotController : MonoBehaviour
@@ -6,6 +12,7 @@ public class DiceSlotController : MonoBehaviour
     public Renderer slotMaterial;
     public Renderer outlineMaterial;
     public Renderer symbolMaterial;
+    public ParticleSystem vfx;
     public HoverGlowController hoverTarget;
 
     public Entity owner;
@@ -46,9 +53,11 @@ public class DiceSlotController : MonoBehaviour
         priority = slotData.priority;
     }
 
-
     public void DoEffect()
     {
+
+        vfx.Play();
+        
         if (slottedDie.isFrozen)
         {
             wasFrozen = true;
@@ -62,6 +71,7 @@ public class DiceSlotController : MonoBehaviour
             slottedDie.value = slottedDie.range[slottedDie.value - 1];
         }
         slotData.Effect(slottedDie, mult, activeSceneManager, owner, this);
+        return;
     }
 
     public void DetectLinksDown(Vector3 pos)

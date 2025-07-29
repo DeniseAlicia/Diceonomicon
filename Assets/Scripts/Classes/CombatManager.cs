@@ -1,7 +1,10 @@
 
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Threading.Tasks;
+using System;
 
 public static class CombatManager
 {
@@ -9,37 +12,42 @@ public static class CombatManager
     private static List<List<DiceSlotController>> enemySlots;
     public static int currentColumn { get; private set; }
 
-
-    public static void HandleActiveCombat(BattleSceneManager sceneManager)
+    public static async void HandleActiveCombat(BattleSceneManager sceneManager)
     {
         for (int column = 1; column <= 3; column++)
         {
-            // Debug.Log("Column: " + column);
+            sceneManager.player.alpha = 0.5f;
+            sceneManager.opponent.alpha = 0.5f;
             sceneManager.GetActiveColumn(column);
 
             playerSlots = SortActiveSlots(sceneManager.playerActiveColumn);
             enemySlots = SortActiveSlots(sceneManager.enemyActiveColumn);
 
-            currentColumn = column;
-
             for (int i = 0; i < playerSlots.Count; i++)
             {
                 HandleSlotEffects(playerSlots[i]);
+            }
+
+            for (int i = 0; i < enemySlots.Count; i++)
+            {
                 HandleSlotEffects(enemySlots[i]);
             }
 
+            currentColumn = column;
+
             playerSlots.Clear();
             enemySlots.Clear();
+            await Task.Delay(TimeSpan.FromSeconds(7));
             sceneManager.CalculateDamage();
+            sceneManager.ClearActiveColumn();
         }
     }
 
-    private static void HandleSlotEffects(List<DiceSlotController> activeSlots)
+    private static async void HandleSlotEffects(List<DiceSlotController> activeSlot)
     {
-        // Debug.Log("CombatManager.HandleSlotEffects");
-
-        foreach (DiceSlotController slot in activeSlots)
+        foreach (DiceSlotController slot in activeSlot)
         {
+            await Task.Delay(TimeSpan.FromSeconds(1));
             slot.DoEffect();
         }
     }

@@ -6,6 +6,6 @@ public class AttackSlotData : DiceSlotData
 {
     public override void Effect(Die slottedDie, int mult, BattleSceneManager sceneManager, Entity owner, DiceSlotController slot)
     {
-        owner.damage += slottedDie.value * mult;
+            owner.damage += slottedDie.value * mult;
     }
 }

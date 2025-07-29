@@ -10,17 +10,21 @@ public class PoisonSlotData : DiceSlotData
         int repeats = slottedDie.value * mult;
         if (owner is Player)
         {
-            target = sceneManager.opponent.activeColumn;
+            target = sceneManager.enemyActiveColumn;
         }
         else
         {
-            target = sceneManager.player.activeColumn;
+            target = sceneManager.playerActiveColumn;
         }
 
         for (int i = 0; i < repeats; i++)
         {
             int randomIndex = Random.Range(0, target.Count);
-            DiceSlotController targetSlot = target[i];
+            DiceSlotController targetSlot = target[randomIndex];
+
+            GameObject vfx = Instantiate(vfxPrefab, targetSlot.transform.position, Quaternion.identity);
+            vfx.GetComponent<ParticleSystem>()?.Play();
+
             if (targetSlot.isFilled)
             {
                 targetSlot.slottedDie.value -= 1;
