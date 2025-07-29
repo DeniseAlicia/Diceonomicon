@@ -15,6 +15,7 @@ public abstract class Entity : MonoBehaviour
 
     public List<DiceData> diceDeck;
     public List<DiceData> drawnDice;
+    public int maxDrawSize;
     public int drawSize; //how many dice can be drawn at round start
     public List<DiceData> discardPile;
     public int damage = 10;
@@ -26,6 +27,11 @@ public abstract class Entity : MonoBehaviour
     public Button healthDown;
     public float alpha;
     public GameObject diePrefab;
+
+    public void Start()
+    {
+        drawSize = maxDrawSize;
+    }
 
     public void Update()
     {

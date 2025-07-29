@@ -14,6 +14,7 @@ public class Die : MonoBehaviour
     public bool isDraggable = false;
     public bool isPlaced = false;
     public bool isResting = false;
+    public bool isFrozen = false;
 
     [SerializeField] float forceX;
     [SerializeField] float forceY;
