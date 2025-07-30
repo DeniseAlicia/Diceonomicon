@@ -69,7 +69,7 @@ public static class DiceManager
 
         for (int i = 0; i < dice.Count; i++)
         {
-            diePos = new Vector3(-0.5f, 0.5f, -1f);
+            diePos = new Vector3(-0.5f, 0.15f, -1f);
             dice[i].transform.position = diePos;
 
             overflow = Mathf.Floor(i / 3);

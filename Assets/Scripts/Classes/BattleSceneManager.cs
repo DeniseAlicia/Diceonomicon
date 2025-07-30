@@ -176,12 +176,12 @@ public class BattleSceneManager : MonoBehaviour
             }
             else
             {
-                wait = 3f / damage;
+                wait = 1.5f / damage;
             }
 
             player.currentHealth -= 1;
             player.healthText.text = player.currentHealth.ToString();
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(wait);
         }
     }
 
@@ -196,11 +196,11 @@ public class BattleSceneManager : MonoBehaviour
             }
             else
             {
-                wait = 2f / damage;
+                wait = 1.5f / damage;
             }
             opponent.currentHealth -= 1;
             opponent.healthText.text = opponent.currentHealth.ToString();
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(wait);
         }
     }
 

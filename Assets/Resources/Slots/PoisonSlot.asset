@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PoisonSlot
   m_EditorClassIdentifier: 
   name: Poison
-  desc: "Decreases the value of random dice from your opponent\u2019 column."
+  desc: "Decreases the value of random dice from your opponent\u2019s column"
   material: {fileID: 2100000, guid: 5da699747074baf428d31a51a1d0c4d3, type: 2}
   outlineMaterial: {fileID: 2100000, guid: 2f552ffb27b8ccc4eaf824a5f001b542, type: 2}
   symbolMaterial: {fileID: 2100000, guid: 3eadc9ce3eb11084a867fbb5f19398e2, type: 2}
