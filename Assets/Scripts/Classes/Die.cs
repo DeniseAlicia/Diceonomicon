@@ -199,6 +199,8 @@ public class Die : MonoBehaviour
             else
             {
                 mouseOffset = Input.mousePosition - GetDiePosition(camBattleTablets);
+                transform.localScale = new Vector3(7f, 7f, 7f);
+
             }
 
         }
@@ -266,6 +268,7 @@ public class Die : MonoBehaviour
                             transform.localPosition = new Vector3(0, 3, 0);
                             transform.Rotate(new Vector3(-90, 0, 0), Space.World);
                             transform.Rotate(new Vector3(0, 0, dieRotation), Space.World);
+                            transform.localScale = new Vector3(6f, 6f, 6f);
                         }
 
                         //Debug.Log(slotData.slottedDie);

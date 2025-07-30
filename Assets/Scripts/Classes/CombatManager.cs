@@ -54,12 +54,14 @@ public static class CombatManager
 
             for (int i = 0; i < playerSlots.Count; i++)
             {
-                HandleSlotEffects(playerSlots[i]);
+                var task = HandleSlotEffects(playerSlots[i]);
+                await task;
             }
 
             for (int i = 0; i < enemySlots.Count; i++)
             {
-                HandleSlotEffects(enemySlots[i]);
+                var task = HandleSlotEffects(enemySlots[i]);
+                await task;
             }
 
             currentColumn = column;
@@ -74,12 +76,13 @@ public static class CombatManager
         sceneManager.combatBolt.SetActive(false);
     }
 
-    private static async void HandleSlotEffects(List<DiceSlotController> activeSlot)
+    private static async Task HandleSlotEffects(List<DiceSlotController> activeSlot)
     {
         foreach (DiceSlotController slot in activeSlot)
         {
-            await Task.Delay(TimeSpan.FromSeconds(1));
             slot.DoEffect();
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            // Thread.Sleep(500);
         }
     }
 
