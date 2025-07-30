@@ -25,10 +25,9 @@ public abstract class Entity : MonoBehaviour
     public List<DiceSlotController> activeColumn;
 
     // Health UI Testing
-    public Button healthUp;
-    public Button healthDown;
     public float alpha;
     public GameObject diePrefab;
+    public bool inColumnPhase;
 
     public void Start()
     {

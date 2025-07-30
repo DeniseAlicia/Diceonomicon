@@ -14,14 +14,29 @@ public static class CombatManager
 
     public static async void HandleActiveCombat(BattleSceneManager sceneManager)
     {
+        DiceSlotController[] slots = GameObject.FindObjectsByType<DiceSlotController>(FindObjectsSortMode.None);
+        foreach (DiceSlotController slot in slots)
+        {
+            if (slot.tag == "Buff" && slot.slottedDie != null && slot.isFilled == true)
+            {
+                slot.DoEffect();
+            }
+        }
+
+        sceneManager.combatBolt.SetActive(true);
+        sceneManager.player.inColumnPhase = true;
+
         for (int column = 1; column <= 3; column++)
         {
-            sceneManager.player.alpha = 0.5f;
-            sceneManager.opponent.alpha = 0.5f;
+
+            // sceneManager.player.alpha = Mathf.MoveTowards(0.1f, 0.9f, 0.02f * Time.deltaTime);
+            // sceneManager.opponent.alpha = Mathf.MoveTowards(0.1f, 0.9f, 0.02f * Time.deltaTime);
             sceneManager.GetActiveColumn(column);
 
             playerSlots = SortActiveSlots(sceneManager.playerActiveColumn);
             enemySlots = SortActiveSlots(sceneManager.enemyActiveColumn);
+
+            int delay = Mathf.Max(playerSlots.Count, enemySlots.Count) + 2;
 
             for (int i = 0; i < playerSlots.Count; i++)
             {
@@ -35,12 +50,14 @@ public static class CombatManager
 
             currentColumn = column;
 
+
             playerSlots.Clear();
             enemySlots.Clear();
-            await Task.Delay(TimeSpan.FromSeconds(7));
+            await Task.Delay(TimeSpan.FromSeconds(delay));
             sceneManager.CalculateDamage();
             sceneManager.ClearActiveColumn();
         }
+        sceneManager.combatBolt.SetActive(false);
     }
 
     private static async void HandleSlotEffects(List<DiceSlotController> activeSlot)
@@ -81,7 +98,7 @@ public static class CombatManager
             }
         }
 
-        sortedSlots.Add(priority1);
+        //sortedSlots.Add(priority1);
         sortedSlots.Add(priority2);
         sortedSlots.Add(priority3);
 

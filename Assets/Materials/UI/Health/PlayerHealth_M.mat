@@ -118,7 +118,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaMask2Rotation: 0
-    - _AlphaMask2Speed: 0
+    - _AlphaMask2Speed: 5
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1

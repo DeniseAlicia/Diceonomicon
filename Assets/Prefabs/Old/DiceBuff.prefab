@@ -40,7 +40,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3630656021541471579}
-  - component: {fileID: 6201925417039063015}
   - component: {fileID: 1847214382393800643}
   - component: {fileID: 4975278593769587100}
   - component: {fileID: 6156282415523662460}
@@ -68,39 +67,6 @@ Transform:
   - {fileID: 3941892341765543088}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6201925417039063015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2212712171324777025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4db0c9733d936049b5f2156ff2ba9b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _diceSides:
-  - {fileID: 996548125746534179}
-  - {fileID: 6470491189726069857}
-  - {fileID: 5510662841886294666}
-  - {fileID: 7760242244103697242}
-  - {fileID: 6565092317779431863}
-  - {fileID: 729456858612616184}
-  _diceTrayWalls:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _forceX: 3
-  _forceY: 0
-  _forceZ: 9
-  _torque: 5
-  _dieMass: 0.9
-  _dieTempMass: 100
-  _tempGravity: {x: 0, y: -100, z: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
-  _movementSpeed: 1
 --- !u!33 &1847214382393800643
 MeshFilter:
   m_ObjectHideFlags: 0
