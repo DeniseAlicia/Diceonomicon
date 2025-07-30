@@ -174,9 +174,9 @@ public class Die : MonoBehaviour
         transform.position = DieStartPos;
     }
 
-    private Vector3 GetDiePosition() // convert the die position to screen coordinates
+    private Vector3 GetDiePosition(Camera _camera) // convert the die position to screen coordinates
     {
-        Vector3 diePos = camGameplay.WorldToScreenPoint(transform.position);
+        Vector3 diePos = _camera.WorldToScreenPoint(transform.position);
         return diePos;
     }
 
@@ -184,40 +184,22 @@ public class Die : MonoBehaviour
     {
         if (isDraggable)
         {
-            lastPosition = transform.position;
-            mouseOffset = Input.mousePosition - GetDiePosition();
-
-            transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-
-            switch (value)
+            if (gameObject.layer == LayerMask.NameToLayer("Gameplay"))
             {
-                case 1:
-                    lastRotation = transform.eulerAngles;
-                    transform.Rotate(new Vector3(-90, 0, 0), Space.World);
-                    break;
-                case 2:
-                    lastRotation = transform.eulerAngles;
-                    transform.Rotate(new Vector3(-90, 0, 0), Space.World);
-                    break;
-                case 3:
-                    lastRotation = transform.eulerAngles;
-                    transform.Rotate(new Vector3(-90, 0, 0), Space.World);
-                    break;
-                case 4:
-                    lastRotation = transform.eulerAngles;
-                    transform.Rotate(new Vector3(-90, 0, 0), Space.World);
-                    break;
-                case 5:
-                    lastRotation = transform.eulerAngles;
-                    transform.Rotate(new Vector3(-90, 0, 0), Space.World);
-                    break;
-                case 6:
-                    lastRotation = transform.eulerAngles;
-                    transform.Rotate(new Vector3(-90, 0, 0), Space.World);
-                    break;
+                lastPosition = transform.position;
+                mouseOffset = Input.mousePosition - GetDiePosition(camGameplay);
+                transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
+                lastRotation = transform.eulerAngles;
+                transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+
+                MoveToLayer("BattleTablets");
+            }
+            else
+            {
+                mouseOffset = Input.mousePosition - GetDiePosition(camBattleTablets);
             }
 
-            MoveToLayer("BattleTablets");
         }
     }
 
@@ -239,28 +221,7 @@ public class Die : MonoBehaviour
     {
         if (isDraggable)
         {
-            switch (value)
-            {
-                case 1:
-                    transform.eulerAngles = lastRotation;
-                    break;
-                case 2:
-                    transform.eulerAngles = lastRotation;
-                    break;
-                case 3:
-                    transform.eulerAngles = lastRotation;
-                    break;
-                case 4:
-                    transform.eulerAngles = lastRotation;
-                    break;
-                case 5:
-                    transform.eulerAngles = lastRotation;
-                    break;
-                case 6:
-                    transform.eulerAngles = lastRotation;
-                    break;
-            }
-
+            transform.eulerAngles = lastRotation;
 
             RaycastHit hit = new RaycastHit();
 
@@ -291,10 +252,21 @@ public class Die : MonoBehaviour
                     }
                     else
                     {
+                        if (transform.parent == null)
+                        {
+                            MoveToLayer("Gameplay");
+                            transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                            transform.position = lastPosition;
+
+                        }
+                        else
+                        {
+                            transform.localPosition = new Vector3(0, 3, 0);
+                            transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                            transform.Rotate(new Vector3(0, 0, dieRotation), Space.World);
+                        }
+                        
                         //Debug.Log(slotData.slottedDie);
-                        MoveToLayer("Gameplay");
-                        transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-                        transform.position = lastPosition;
                     }
                     // Debug.Log(hit.collider.transform.gameObject.name);
                     // Debug.Log(hitSlot);
@@ -302,6 +274,7 @@ public class Die : MonoBehaviour
                 else
                 {
                     MoveToLayer("Gameplay");
+                    transform.SetParent(null);
                     transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                     transform.position = lastPosition;
                 }
@@ -310,6 +283,7 @@ public class Die : MonoBehaviour
             else
             {
                 MoveToLayer("Gameplay");
+                transform.SetParent(null);
                 transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                 transform.position = lastPosition;
             }

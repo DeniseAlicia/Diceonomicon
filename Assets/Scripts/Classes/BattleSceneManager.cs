@@ -119,6 +119,7 @@ public class BattleSceneManager : MonoBehaviour
     {
         ResetEntity(player);
         ResetEntity(opponent);
+        RotationButton.ResetRotationButton();
 
         Die[] dice = FindObjectsByType<Die>(FindObjectsSortMode.None);
         foreach (Die die in dice)
