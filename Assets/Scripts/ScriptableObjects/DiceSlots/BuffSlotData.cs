@@ -13,13 +13,18 @@ public class BuffSlotData : DiceSlotData
     {
         directions.Clear();
 
+        if (die.value > 0 && die.value < 7)
+        {
+            die.value = die.range[die.value - 1];
+        }
+
         string valueString = die.value.ToString();
         foreach (char x in valueString)
         {
             int newValue = Int32.Parse(x.ToString());
             int angle = newValue * 45 - 45 - die.dieRotation;
             directions.Add(angle);
-            //Debug.Log(angle);
+            Debug.Log(angle);
         }
     }
 
@@ -46,7 +51,7 @@ public class BuffSlotData : DiceSlotData
                     if (dieComponent.dieTag != "Buff")
                     {
                         targets.Add(dieComponent);
-                     }
+                    }
                 }
                 else
                 {

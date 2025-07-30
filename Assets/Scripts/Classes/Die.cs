@@ -235,10 +235,11 @@ public class Die : MonoBehaviour
         if (isDraggable)
         {
             transform.eulerAngles = lastRotation;
-
+            Vector3 yOffset = new Vector3(0, 0, -0.2f);
             RaycastHit hit = new RaycastHit();
 
-            if (Physics.Raycast(transform.position, Vector3.forward, out hit, 100))
+            //Debug.DrawRay(transform.position + yOffset, Vector3.forward * 10, Color.green, 100);
+            if (Physics.Raycast(transform.position + yOffset, Vector3.forward, out hit, 100))
             {
                 GameObject hitSlot = hit.transform.gameObject;
                 // Debug.Log(hitSlot);

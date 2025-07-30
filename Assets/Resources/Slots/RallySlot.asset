@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: RallySlot
   m_EditorClassIdentifier: 
   name: Rally
-  desc: Add 3 to neighbouring dice.
+  desc: Add 3 to neighbouring dice
   material: {fileID: 2100000, guid: a27332257639ba343972776bac910f74, type: 2}
   outlineMaterial: {fileID: 2100000, guid: a398c352f29c5fa4fa01d7d78f2d2bf4, type: 2}
   symbolMaterial: {fileID: 2100000, guid: 68b9981944895124094b39c0d04be994, type: 2}
+  vfxPrefab: {fileID: 0}
   tag: Buff
   owner: {fileID: 0}
   slottedDie: {fileID: 0}
   priority: 1
-  directions: 
+  directions: 000000005a000000b40000000e010000
   bonus: 3

@@ -50,7 +50,7 @@ public static class CombatManager
             playerSlots = SortActiveSlots(sceneManager.playerActiveColumn);
             enemySlots = SortActiveSlots(sceneManager.enemyActiveColumn);
 
-            int delay = Mathf.Max(playerSlots.Count, enemySlots.Count) + 2;
+            int delay = Mathf.Max(playerSlots.Count, enemySlots.Count);
 
             for (int i = 0; i < playerSlots.Count; i++)
             {
@@ -67,8 +67,9 @@ public static class CombatManager
 
             playerSlots.Clear();
             enemySlots.Clear();
-            await Task.Delay(TimeSpan.FromSeconds(delay));
+            await Task.Delay(TimeSpan.FromSeconds(delay + 2));
             sceneManager.CalculateDamage();
+            await Task.Delay(TimeSpan.FromSeconds(1));
             sceneManager.ClearActiveColumn();
         }
         sceneManager.combatBolt.SetActive(false);
