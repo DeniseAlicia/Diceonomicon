@@ -11,7 +11,7 @@ public class RotationButton : MonoBehaviour
     private Color hoverColor = new Color32(255, 255, 255, 255);
     private Color clickColor = new Color32(100, 100, 100, 255);
     private float rotationDuration = 0.5f;
-    
+
     private MeshRenderer meshRenderer;
     private Material materialInstance;
 
@@ -20,19 +20,19 @@ public class RotationButton : MonoBehaviour
     private static int currentRotations = 0;
 
     private void Start()
+    {
+        meshRenderer = GetComponent<MeshRenderer>();
+        if (meshRenderer != null)
         {
-            meshRenderer = GetComponent<MeshRenderer>();
-            if (meshRenderer != null)
-            {
-                materialInstance = meshRenderer.material;
-                materialInstance.color = baseColor;
-            }
+            materialInstance = meshRenderer.material;
+            materialInstance.color = baseColor;
         }
+    }
 
     private void OnMouseEnter()
-        {
-                materialInstance.color = hoverColor;
-        }
+    {
+        materialInstance.color = hoverColor;
+    }
 
     private void OnMouseDown()
     {
@@ -44,9 +44,9 @@ public class RotationButton : MonoBehaviour
     }
 
     private void OnMouseUp()
-        {
-                materialInstance.color = hoverColor;
-        }
+    {
+        materialInstance.color = hoverColor;
+    }
 
     private void OnMouseExit()
     {
@@ -99,5 +99,20 @@ public class RotationButton : MonoBehaviour
 
         targetObject.rotation = endRot;
         isRotating = false;
+    }
+
+    public static void ResetRotationButton()
+    {
+        currentRotations = 0;
+
+        RotationButton[] allButtons = Object.FindObjectsByType<RotationButton>(FindObjectsSortMode.None);
+
+        foreach (RotationButton button in allButtons)
+        {
+            foreach (MeshRenderer mr in button.GetComponentsInChildren<MeshRenderer>())
+            {
+                mr.enabled = true;
+            }
+        }
     }
 }
