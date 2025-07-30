@@ -17,9 +17,23 @@ public static class CombatManager
         DiceSlotController[] slots = GameObject.FindObjectsByType<DiceSlotController>(FindObjectsSortMode.None);
         foreach (DiceSlotController slot in slots)
         {
+            if (slot.slottedDie != null)
+            {
+                slot.slottedDie.isDraggable = false;
+            }
+
             if (slot.tag == "Buff" && slot.slottedDie != null && slot.isFilled == true)
             {
                 slot.DoEffect();
+            }
+        }
+
+        Die[] unusedDice = GameObject.FindObjectsByType<Die>(FindObjectsSortMode.None);
+        foreach (Die die in unusedDice)
+        {
+            if (die.isPlaced != true)
+            {
+                die.transform.position = new Vector3(10, 0, 0);
             }
         }
 

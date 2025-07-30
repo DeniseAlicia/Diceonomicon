@@ -258,6 +258,7 @@ public class Die : MonoBehaviour
                             MoveToLayer("Gameplay");
                             transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                             transform.position = lastPosition;
+                            isPlaced = false;
 
                         }
                         else
@@ -266,7 +267,7 @@ public class Die : MonoBehaviour
                             transform.Rotate(new Vector3(-90, 0, 0), Space.World);
                             transform.Rotate(new Vector3(0, 0, dieRotation), Space.World);
                         }
-                        
+
                         //Debug.Log(slotData.slottedDie);
                     }
                     // Debug.Log(hit.collider.transform.gameObject.name);
@@ -278,6 +279,7 @@ public class Die : MonoBehaviour
                     transform.SetParent(null);
                     transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                     transform.position = lastPosition;
+                    isPlaced = false;
                 }
 
             }
@@ -287,6 +289,7 @@ public class Die : MonoBehaviour
                 transform.SetParent(null);
                 transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                 transform.position = lastPosition;
+                isPlaced = false;
             }
         }
     }
