@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Die : MonoBehaviour
 {
@@ -39,6 +40,9 @@ public class Die : MonoBehaviour
     public Renderer textureRenderer;
     public DiceData dieData;
 
+    public int currentValue;
+    private Transform sideUp;
+
     public void SetData(DiceData dieData)
     {
         nameText = dieData.name;
@@ -46,6 +50,7 @@ public class Die : MonoBehaviour
         textureRenderer.material.SetTexture("_BaseMap", dieData.texture);
         range = dieData.range;
         dieTag = dieData.tag;
+        TranslateValueAtStart();
     }
 
     void Start()
@@ -129,6 +134,8 @@ public class Die : MonoBehaviour
         if (upSide == null) return;
         // Debug.Log(upSide.name); // log the die value
 
+        sideUp = upSide;
+
         boxCollider.enabled = false;
         value = int.Parse(upSide.name);
         //Debug.Log("Value: " + value);
@@ -157,6 +164,11 @@ public class Die : MonoBehaviour
 
         boxCollider.enabled = true;
         isRolling = false;
+
+        if (dieTag != "Buff")
+        {
+            value = range[value - 1];
+        }
     }
 
     public void ResetDiePosition() // Test; remove later
@@ -298,5 +310,39 @@ public class Die : MonoBehaviour
     {
         int layer = LayerMask.NameToLayer(_layerName);
         gameObject.layer = layer;
+
+        Transform[] children = gameObject.GetComponentsInChildren<Transform>(includeInactive: true);
+        foreach (Transform child in children)
+        {
+            child.gameObject.layer = layer;
+        }
+    }
+
+    public void TranslateValueAtStart()
+    {
+        if (dieTag != "Buff")
+        {
+            foreach (Transform childSide in diceSides)
+            {
+                GameObject child = childSide.gameObject;
+
+                if (!int.TryParse(child.name, out int index))
+                {
+                    Debug.LogWarning($"Invalid child name '{child.name}'");
+                    continue;
+                }
+
+                int translatedValue = range[index - 1];
+                GameObject childText = child.transform.GetChild(0).gameObject;
+                childText.GetComponent<TMP_Text>().text = translatedValue.ToString();
+            }
+        }
+    }
+
+    public void TranslateValue()
+    {
+        GameObject child = sideUp.gameObject;
+        GameObject childText = child.transform.GetChild(0).gameObject;
+        childText.GetComponent<TMP_Text>().text = value.ToString();
     }
 }

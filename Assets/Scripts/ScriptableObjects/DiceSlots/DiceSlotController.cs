@@ -66,10 +66,6 @@ public class DiceSlotController : MonoBehaviour
         mult = 1;
         DetectLinksDown(this.transform.position);
         DetectLinksUp(this.transform.position);
-        if (slottedDie.value > 0 && slottedDie.value < 7)
-        {
-            slottedDie.value = slottedDie.range[slottedDie.value - 1];
-        }
         slotData.Effect(slottedDie, mult, activeSceneManager, owner, this);
         return;
     }

@@ -43,7 +43,10 @@ public class BuffSlotData : DiceSlotData
                 Die dieComponent = hit.collider.GetComponent<Die>();
                 if (dieComponent != null)
                 {
-                    targets.Add(dieComponent);
+                    if (dieComponent.dieTag != "Buff")
+                    {
+                        targets.Add(dieComponent);
+                     }
                 }
                 else
                 {
