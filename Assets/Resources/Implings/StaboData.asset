@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: 0
   name: Stabo
-  desc: Stabby McStab Stab
-  artwork: {fileID: 2800000, guid: 5ca3224be253c144cac39ba22138d4c7, type: 3}
+  desc: You can rotate your tablets one additional time per round
+  artwork: {fileID: 2800000, guid: 487ca30a792ef1d40810d47339efb669, type: 3}
   owner: {fileID: 0}
   slots:
   - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
-  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
-  - {fileID: 11400000, guid: c11cd3df102418f43a108888c7b677bc, type: 2}
-  - {fileID: 11400000, guid: d4faee525e7b7804c99dbb9268688fbf, type: 2}
-  - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
-  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
-  - {fileID: 11400000, guid: c11cd3df102418f43a108888c7b677bc, type: 2}
   - {fileID: 11400000, guid: fc7e5ba1be96c1c4cb534392a95c6f42, type: 2}
+  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
   - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
+  - {fileID: 11400000, guid: c11cd3df102418f43a108888c7b677bc, type: 2}
+  - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
+  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
+  - {fileID: 11400000, guid: fc7e5ba1be96c1c4cb534392a95c6f42, type: 2}
+  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
   startingDice:
   - {fileID: 11400000, guid: c2dcd459aa01fbd42a9f975166570284, type: 2}
   - {fileID: 11400000, guid: 74128a7cf78e81b41ad6b85beb4c440f, type: 2}

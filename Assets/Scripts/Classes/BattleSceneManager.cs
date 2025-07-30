@@ -19,6 +19,7 @@ public class BattleSceneManager : MonoBehaviour
     public EndBattle endScene;
     public GameObject columnMaster;
     public Button confirmButton;
+    public GameObject combatBolt;
 
     private void Awake()
     {
@@ -48,6 +49,12 @@ public class BattleSceneManager : MonoBehaviour
 
     void Update()
     {
+        if (player.inColumnPhase == true)
+        {
+            player.alpha = Mathf.MoveTowards(player.alpha, 0.9f, 0.21f * Time.deltaTime);
+            opponent.alpha = Mathf.MoveTowards(player.alpha, 0.9f, 0.2f * Time.deltaTime);
+        }
+
         if (player.block != 0)
         {
             player.blockText.text = player.block.ToString();
@@ -121,11 +128,17 @@ public class BattleSceneManager : MonoBehaviour
 
     public async void CalculateDamage()
     {
-        player.currentHealth -= Math.Max(opponent.damage - player.block, 0);
-        player.healthText.text = player.currentHealth.ToString();
+        int damageTaken = opponent.damage - player.block;
+        int targetHealth = Mathf.Max(player.currentHealth - damageTaken, 0);
+        StartCoroutine(AnimatePlayerHealthDecrease(targetHealth, damageTaken));
+        //player.currentHealth -= Math.Max(opponent.damage - player.block, 0);
+        //player.healthText.text = player.currentHealth.ToString();
 
-        opponent.currentHealth -= Math.Max(player.damage - opponent.block, 0);
-        opponent.healthText.text = opponent.currentHealth.ToString();
+        int opponentDamageTaken = player.damage - opponent.block;
+        int targetOpponentHealth = Mathf.Max(opponent.currentHealth - opponentDamageTaken, 0);
+        StartCoroutine(AnimateOpponentHealthDecrease(targetOpponentHealth, opponentDamageTaken));
+        // opponent.currentHealth -= Math.Max(player.damage - opponent.block, 0);
+        // opponent.healthText.text = opponent.currentHealth.ToString();
 
         opponent.damage = 0;
         opponent.block = 0;
@@ -150,6 +163,47 @@ public class BattleSceneManager : MonoBehaviour
             EndOfRound();
         }
     }
+
+    private IEnumerator AnimatePlayerHealthDecrease(int targetHealth, int damage)
+    {
+        float wait = 0.1f;
+
+        while (player.currentHealth > targetHealth)
+        {
+            if (damage < 11)
+            {
+                wait = 0.1f;
+            }
+            else
+            {
+                wait = 3f / damage;
+            }
+
+            player.currentHealth -= 1;
+            player.healthText.text = player.currentHealth.ToString();
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    private IEnumerator AnimateOpponentHealthDecrease(int targetHealth, int damage)
+    {
+        float wait = 0.1f;
+        while (opponent.currentHealth > targetHealth)
+        {
+            if (damage < 11)
+            {
+                wait = 0.1f;
+            }
+            else
+            {
+                wait = 2f / damage;
+            }
+            opponent.currentHealth -= 1;
+            opponent.healthText.text = opponent.currentHealth.ToString();
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
     private void EndOfRound()
     {
         ResetEntity(player);

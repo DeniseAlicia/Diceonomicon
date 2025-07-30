@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Threading.Tasks;
 using TMPro;
+using System.Threading.Tasks;
 
 public class DiceSlotController : MonoBehaviour
 {

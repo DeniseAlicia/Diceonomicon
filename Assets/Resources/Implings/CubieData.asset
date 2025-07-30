@@ -14,22 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: 0
   name: Cubie
-  desc: I'm cool as ice.
-  artwork: {fileID: 2800000, guid: 264371d41bdc6e04eaedbc36a37ffa11, type: 3}
+  desc: I'm too cool to have an ability
+  artwork: {fileID: 2800000, guid: bc9ec2d9fd3ac644f9d7d0f5bbd156f2, type: 3}
   owner: {fileID: 0}
   slots:
   - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
   - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
-  - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
-  - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
+  - {fileID: 11400000, guid: c11cd3df102418f43a108888c7b677bc, type: 2}
+  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
   - {fileID: 11400000, guid: d4faee525e7b7804c99dbb9268688fbf, type: 2}
   - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
-  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
-  - {fileID: 11400000, guid: 293e1d616b58eb141a6458b6cd6306e1, type: 2}
-  - {fileID: 11400000, guid: 293e1d616b58eb141a6458b6cd6306e1, type: 2}
+  - {fileID: 11400000, guid: c11cd3df102418f43a108888c7b677bc, type: 2}
+  - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
+  - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
   startingDice:
   - {fileID: 11400000, guid: c2dcd459aa01fbd42a9f975166570284, type: 2}
   - {fileID: 11400000, guid: 74128a7cf78e81b41ad6b85beb4c440f, type: 2}
   - {fileID: 11400000, guid: 8a33abe298e513a41894f1c6b0d9a21c, type: 2}
-  - {fileID: 11400000, guid: 707b3f61c9339c84693e74aa83332f2f, type: 2}
+  - {fileID: 11400000, guid: 8a33abe298e513a41894f1c6b0d9a21c, type: 2}
   slotPrefab: {fileID: 1881896027706196343, guid: 7b4fc5a074e11734695476f0948d04d2, type: 3}
