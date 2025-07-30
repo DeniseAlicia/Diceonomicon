@@ -27,7 +27,11 @@ public class PoisonSlotData : DiceSlotData
 
             if (targetSlot.isFilled)
             {
-                targetSlot.slottedDie.value -= 1;
+                if (targetSlot.slottedDie.dieTag != "Buff")
+                {
+                    targetSlot.slottedDie.value -= 1;
+                    targetSlot.slottedDie.TranslateValue();
+                }
             }
         }
     }
