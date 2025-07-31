@@ -173,12 +173,14 @@ public class BattleSceneManager : MonoBehaviour
         {
             endScene.Lose();
             EndOfRound();
+            Time.timeScale = 0;
         }
 
         if (opponent.currentHealth <= 0 && player.currentHealth > 0)
         {
             endScene.Win();
             EndOfRound();
+            Time.timeScale = 0;
         }
 
 
