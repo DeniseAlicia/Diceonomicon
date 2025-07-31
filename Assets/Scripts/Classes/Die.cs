@@ -5,7 +5,6 @@ using TMPro;
 public class Die : MonoBehaviour
 {
     [SerializeField] Transform[] diceSides;
-    [SerializeField] DiceTrayWall[] diceTrayWalls;
 
     public int[] range; //which values the die can have
     public int value; //which value the die rolled this round
@@ -93,11 +92,6 @@ public class Die : MonoBehaviour
         Vector3 force = new Vector3(forceX, forceY, forceZ);
         Vector3 torque = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f) * this.torque);
 
-        foreach (DiceTrayWall diceTrayWall in diceTrayWalls) //enable collision for the walls of the dice tray
-        {
-            diceTrayWall.EnableCollision();
-        }
-
         Physics.gravity = new Vector3(0, -10f, 0);
 
         rigidBody.AddForce(force, ForceMode.Impulse); // add force and torque to roll the die
@@ -109,12 +103,6 @@ public class Die : MonoBehaviour
     public void GetSideFacingUp()
     {
         Physics.gravity = tempGravity; // increase gravity to help the die "fall" into place
-
-        // disable DiceTrayWall collision to prevent crooked dice
-        foreach (DiceTrayWall diceTrayWall in diceTrayWalls)
-        {
-            diceTrayWall.DisableCollision();
-        }
 
         // find out die value by calculating the most upward facing face with the dot product
         Transform upSide = null;
@@ -169,22 +157,6 @@ public class Die : MonoBehaviour
         {
             value = range[value - 1];
         }
-    }
-
-    public void ResetDiePosition() // Test; remove later
-    {
-        Physics.gravity = defaultGravity; // reset gravity
-        rigidBody.isKinematic = false;
-        boxCollider.enabled = true;
-
-        // enable DiceTrayWall collision
-        foreach (DiceTrayWall diceTrayWall in diceTrayWalls)
-        {
-            diceTrayWall.EnableCollision();
-        }
-
-        // reset the die to its starting position
-        transform.position = DieStartPos;
     }
 
     private Vector3 GetDiePosition(Camera _camera) // convert the die position to screen coordinates
