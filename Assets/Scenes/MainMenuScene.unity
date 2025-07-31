@@ -272,11 +272,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fmodEvent:
     Guid:
-      Data1: -1100606484
-      Data2: 1270412216
-      Data3: 1855138981
-      Data4: 1501073609
-    Path: event:/Sounds/UI/UI_Confirm
+      Data1: -417471337
+      Data2: 1143435504
+      Data3: -1280261713
+      Data4: -300869162
+    Path: event:/Sounds/UI/UI_SwitchMenu
+  hoverSound:
+    Guid:
+      Data1: 2125211397
+      Data2: 1276942124
+      Data3: 735438254
+      Data4: 846126225
+    Path: event:/Sounds/UI/UI_Hover
+  specialClickSound:
+    Guid:
+      Data1: -186513229
+      Data2: 1325969248
+      Data3: -1439967306
+      Data4: -1566070605
+    Path: event:/Sounds/UI/UI_MenuExit
   excludedButtonNames:
   - CloseMenu
   - Button_to_LevelOne

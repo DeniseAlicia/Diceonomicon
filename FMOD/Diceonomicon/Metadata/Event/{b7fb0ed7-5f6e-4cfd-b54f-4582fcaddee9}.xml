@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{b7fb0ed7-5f6e-4cfd-b54f-4582fcaddee9}">
 		<property name="name">
-			<value>DiceySituation</value>
+			<value>BGM_DiceySituation</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -203,7 +203,6 @@
 		<property name="length">
 			<value>15.359999999999992</value>
 		</property>
-		<property name="name" />
 		<property name="playlistMode">
 			<value>1</value>
 		</property>
@@ -674,7 +673,6 @@
 	<object class="MixerBusPanner" id="{d655fcd6-ceb6-48f3-905f-385a46b1bb72}" />
 	<object class="MixerBusFader" id="{df3c0a0d-3b3f-4360-9512-b1b8996cf6bd}" />
 	<object class="EventSound" id="{ed8067b8-13c3-4506-a49f-775aae68a231}">
-		<property name="name" />
 		<relationship name="event">
 			<destination>{f2ac6001-5de2-4a8b-9c19-b0d6192154d2}</destination>
 		</relationship>
