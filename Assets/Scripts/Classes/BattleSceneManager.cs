@@ -15,6 +15,8 @@ public class BattleSceneManager : MonoBehaviour
     public List<DiceSlotController> enemyActiveColumn;
     public int level;
     public float[] columnStartPositions = new float[] { -7.65f, -6.9f, -6.1f }; // 1,2,3 = Player
+    public GameObject[] playerColumnBanner;
+    public GameObject[] opponentColumnBanner;
 
     public EndBattle endScene;
     public GameObject columnMaster;
