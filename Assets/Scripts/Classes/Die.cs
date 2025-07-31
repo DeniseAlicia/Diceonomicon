@@ -216,7 +216,7 @@ public class Die : MonoBehaviour
             if (Physics.Raycast(transform.position + yOffset, Vector3.forward, out hit, 100))
             {
                 GameObject hitSlot = hit.transform.gameObject;
-                // Debug.Log(hitSlot);
+                // Debug.Log("RaycastHit:" + hitSlot);
 
                 DiceSlotController slotController = hitSlot.GetComponent<DiceSlotController>();
                 if (slotController != null)
@@ -224,9 +224,18 @@ public class Die : MonoBehaviour
                     DiceSlotData slotData = slotController.slotData;
                     // Debug.Log(slotData);
 
-                    if (slotData.tag == this.dieTag)
+                    if (slotData.tag == this.dieTag && slotController.isFilled == false && slotController.owner.GetType() == typeof(Player))
                     {
                         //Debug.Log("Slotted!");
+
+                        if (transform.parent != null)
+                        {
+                            Transform parent = transform.parent;
+                            DiceSlotController slot = parent.gameObject.GetComponent<DiceSlotController>();
+                            slot.isFilled = false;
+                            slot.slottedDie = null;
+                            transform.SetParent(null);
+                        }
 
                         transform.SetParent(hitSlot.transform);
                         transform.localPosition = new Vector3(0, 3, 0);
@@ -246,7 +255,6 @@ public class Die : MonoBehaviour
                             transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                             transform.position = lastPosition;
                             isPlaced = false;
-
                         }
                         else
                         {
@@ -255,7 +263,6 @@ public class Die : MonoBehaviour
                             transform.Rotate(new Vector3(0, 0, dieRotation), Space.World);
                             transform.localScale = new Vector3(6f, 6f, 6f);
                         }
-
                         //Debug.Log(slotData.slottedDie);
                     }
                     // Debug.Log(hit.collider.transform.gameObject.name);
@@ -263,8 +270,16 @@ public class Die : MonoBehaviour
                 }
                 else
                 {
+                    if (transform.parent != null)
+                    {
+                        Transform parent = transform.parent;
+                        DiceSlotController slot = parent.gameObject.GetComponent<DiceSlotController>();
+                        slot.isFilled = false;
+                        slot.slottedDie = null;
+                        transform.SetParent(null);
+                    }
+
                     MoveToLayer("Gameplay");
-                    transform.SetParent(null);
                     transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                     transform.position = lastPosition;
                     isPlaced = false;
@@ -273,8 +288,16 @@ public class Die : MonoBehaviour
             }
             else
             {
+                if (transform.parent != null)
+                {
+                    Transform parent = transform.parent;
+                    DiceSlotController slot = parent.gameObject.GetComponent<DiceSlotController>();
+                    slot.isFilled = false;
+                    slot.slottedDie = null;
+                    transform.SetParent(null);
+                }
+
                 MoveToLayer("Gameplay");
-                transform.SetParent(null);
                 transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                 transform.position = lastPosition;
                 isPlaced = false;
@@ -304,7 +327,7 @@ public class Die : MonoBehaviour
 
                 if (!int.TryParse(child.name, out int index))
                 {
-                    Debug.LogWarning($"Invalid child name '{child.name}'");
+                    // Debug.LogWarning($"Invalid child name '{child.name}'");
                     continue;
                 }
 

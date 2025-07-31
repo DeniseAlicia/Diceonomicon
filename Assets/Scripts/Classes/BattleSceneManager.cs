@@ -150,11 +150,13 @@ public class BattleSceneManager : MonoBehaviour
         if (player.currentHealth <= 0)
         {
             endScene.Lose();
+            Time.timeScale = 0;
         }
 
         if (opponent.currentHealth <= 0 && player.currentHealth > 0)
         {
             endScene.Win();
+            Time.timeScale = 0;
         }
 
         if (CombatManager.currentColumn == 3)
