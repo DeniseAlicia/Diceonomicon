@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{9f208750-3e89-46f1-bdff-122f04170028}">
+		<property name="name">
+			<value>SlotEventByTag</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b52f7b21-c1e5-44b4-84fe-78a05d2157fb}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{bb1b1e88-9d25-4666-aae3-0c32290cb8ca}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{bb1b1e88-9d25-4666-aae3-0c32290cb8ca}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>4</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Damage</value>
+			<value>Block</value>
+			<value>Spell</value>
+			<value>Buff</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

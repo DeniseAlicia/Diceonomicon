@@ -139,6 +139,13 @@ MonoBehaviour:
   slottedDie: {fileID: 0}
   tag: 
   wasFrozen: 0
+  DoEffectEvent:
+    Guid:
+      Data1: -289097852
+      Data2: 1333133324
+      Data3: -534244716
+      Data4: 770790776
+    Path: event:/Sounds/Battle/SFX_DoEffect
 --- !u!111 &5883367616978814828
 Animation:
   m_ObjectHideFlags: 0

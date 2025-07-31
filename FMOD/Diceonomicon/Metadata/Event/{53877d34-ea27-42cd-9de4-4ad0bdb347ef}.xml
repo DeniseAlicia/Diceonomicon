@@ -140,7 +140,10 @@
 	</object>
 	<object class="SingleSound" id="{d73c3452-a8c7-4332-bb96-8e91cee4412d}">
 		<property name="length">
-			<value>0.47020408163265304</value>
+			<value>0.39000000000000001</value>
+		</property>
+		<property name="pitch">
+			<value>-12</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{4836bfdb-334c-4566-a462-c631abdb8bfc}</destination>
@@ -196,7 +199,7 @@
 			<value>1</value>
 		</property>
 		<property name="curveShape">
-			<value>0.25471893</value>
+			<value>-0.459498137</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{51f109ab-175a-4a31-81a2-e6ac004615bf}">

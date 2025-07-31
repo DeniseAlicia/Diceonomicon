@@ -43,6 +43,8 @@ public class Die : MonoBehaviour
     public int currentValue;
     private Transform sideUp;
 
+    public FMODUnity.EventReference DiePlacementEvent;
+
     public void SetData(DiceData dieData)
     {
         nameText = dieData.name;
@@ -265,6 +267,9 @@ public class Die : MonoBehaviour
                         slotController.isFilled = true;
                         slotController.slottedDie = this;
                         isPlaced = true;
+
+                        FMOD.Studio.EventInstance placeDieAudio = FMODUnity.RuntimeManager.CreateInstance(DiePlacementEvent);
+                        placeDieAudio.start();
                     }
                     else
                     {
