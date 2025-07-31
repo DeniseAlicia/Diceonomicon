@@ -188,7 +188,6 @@
 		<property name="length">
 			<value>15.359999999999989</value>
 		</property>
-		<property name="name" />
 		<relationship name="event">
 			<destination>{d5a3683d-7e5b-456f-96e0-b86ef5d7524f}</destination>
 		</relationship>
@@ -256,9 +255,6 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{2036e2d1-644d-41c3-955a-d23258276681}">
-		<property name="volume">
-			<value>-6</value>
-		</property>
 		<property name="name">
 			<value>Marimba</value>
 		</property>
