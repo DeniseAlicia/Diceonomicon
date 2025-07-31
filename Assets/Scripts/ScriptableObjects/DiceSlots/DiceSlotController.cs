@@ -84,6 +84,11 @@ public class DiceSlotController : MonoBehaviour
 
         vfx.Play();
 
+       if (wasFrozen)
+        {
+            wasFrozen = false;
+        }
+
         if (slottedDie.isFrozen)
         {
             wasFrozen = true;

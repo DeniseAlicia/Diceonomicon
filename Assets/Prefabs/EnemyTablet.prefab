@@ -347,7 +347,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.5, y: 0.01}
+  m_AnchoredPosition: {x: 5.43, y: 0.01}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &3464631325610522254
@@ -373,7 +373,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7133233092595201142, guid: 410a30cf2fe3ee44b914c9916016dd8c, type: 2}
+  - {fileID: -4960864564835095298, guid: cb44e13185fa08a48839111498875ed3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -417,8 +417,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Diedra
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 410a30cf2fe3ee44b914c9916016dd8c, type: 2}
-  m_sharedMaterial: {fileID: 7133233092595201142, guid: 410a30cf2fe3ee44b914c9916016dd8c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cb44e13185fa08a48839111498875ed3, type: 2}
+  m_sharedMaterial: {fileID: -4960864564835095298, guid: cb44e13185fa08a48839111498875ed3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -442,8 +442,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

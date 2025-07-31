@@ -83,7 +83,7 @@ QualitySettings:
     useLegacyDetailDistribution: 1
     adaptiveVsync: 0
     vSyncCount: 0
-    realtimeGICPUUsage: 100
+    realtimeGICPUUsage: 50
     adaptiveVsyncExtraA: 0
     adaptiveVsyncExtraB: 0
     lodBias: 2
@@ -95,7 +95,7 @@ QualitySettings:
     streamingMipmapsRenderersPerFrame: 512
     streamingMipmapsMaxLevelReduction: 2
     streamingMipmapsMaxFileIORequests: 1024
-    particleRaycastBudget: 256
+    particleRaycastBudget: 64
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
