@@ -51,6 +51,7 @@ public class BattleSceneManager : MonoBehaviour
         Button confirm = confirmButton.GetComponent<Button>();
         confirm.onClick.AddListener(() => CombatManager.HandleActiveCombat(this));
 
+        Time.timeScale = 1;
         NewRound();
     }
 
@@ -172,15 +173,17 @@ public class BattleSceneManager : MonoBehaviour
         if (player.currentHealth <= 0)
         {
             endScene.Lose();
-            EndOfRound();
             Time.timeScale = 0;
+            EndOfRound();
+
         }
 
         if (opponent.currentHealth <= 0 && player.currentHealth > 0)
         {
             endScene.Win();
-            EndOfRound();
             Time.timeScale = 0;
+            EndOfRound();
+
         }
 
 

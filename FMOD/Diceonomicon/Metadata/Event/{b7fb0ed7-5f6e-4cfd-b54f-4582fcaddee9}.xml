@@ -684,7 +684,7 @@
 	</object>
 	<object class="PlayPercentage" id="{aaf548e0-6d25-41b9-9341-b8dfa5cf85db}">
 		<property name="percentage">
-			<value>0</value>
+			<value>90</value>
 		</property>
 		<relationship name="sound">
 			<destination>{ed8067b8-13c3-4506-a49f-775aae68a231}</destination>
@@ -692,7 +692,7 @@
 	</object>
 	<object class="PlayPercentage" id="{3c731a04-65cf-4a97-b519-a9f577be828e}">
 		<property name="percentage">
-			<value>100</value>
+			<value>10</value>
 		</property>
 		<relationship name="sound">
 			<destination>{a0f54aea-ea7e-479a-a527-abce5f177130}</destination>
