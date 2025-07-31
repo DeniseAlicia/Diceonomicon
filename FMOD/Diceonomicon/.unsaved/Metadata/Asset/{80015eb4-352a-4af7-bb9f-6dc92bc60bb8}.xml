@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="EncodableAsset" id="{80015eb4-352a-4af7-bb9f-6dc92bc60bb8}">
+		<property name="assetPath">
+			<value>DiceSFX/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fd7edaef-95d4-44fa-95a9-a7ab5b9a2454}</destination>
+		</relationship>
+	</object>
+</objects>
