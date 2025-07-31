@@ -89,7 +89,7 @@ public class UIManager : MonoBehaviour
         //connect buttons in the activeMenuInstance automaically
         SetupMenuButtons(activeMenuInstance);
 
-        if (menuType == MenuType.Map && levelManager != null)
+        if ((menuType == MenuType.Map || menuType == MenuType.Main) && levelManager != null)
         {
             levelManager.SetupLevelButtons(activeMenuInstance);
         }
