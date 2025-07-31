@@ -103,7 +103,7 @@ public class DiceSlotController : MonoBehaviour
 
         if (Physics.Raycast(raydown, out RaycastHit hit, 666))
         {
-            Debug.Log($"Ray hit: {hit.collider.name} at {hit.point}");
+            // Debug.Log($"Ray hit: {hit.collider.name} at {hit.point}");
 
             Die die = hit.collider.GetComponent<Die>();
             if (die != null && die.dieTag == slottedDie.dieTag)
@@ -121,7 +121,7 @@ public class DiceSlotController : MonoBehaviour
 
         if (Physics.Raycast(raydown, out RaycastHit hit, 666))
         {
-            Debug.Log($"Ray hit: {hit.collider.name} at {hit.point}");
+            // Debug.Log($"Ray hit: {hit.collider.name} at {hit.point}");
 
             Die die = hit.collider.GetComponent<Die>();
             if (die != null && die.dieTag == slottedDie.dieTag)

@@ -26,7 +26,7 @@ public class EndBattle : MonoBehaviour
         quit.onClick.AddListener(QuitOnClick);
     }
 
-        public void Lose()
+    public void Lose()
     {
         gameOverScreen.SetActive(true);
         // victoryScreen.SetActive(true);

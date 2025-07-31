@@ -10,6 +10,7 @@ public static class DiceManager
     public static List<DiceData> diceDrawn;
     public static List<Die> dice;
 
+    private static DiceTrayWall[] diceTrayWalls;
     private static Vector3 startPosition = new Vector3(0f, 5f, -5f);
     public static GameObject diePrefab;
     private static Camera camGameplay;
@@ -19,6 +20,8 @@ public static class DiceManager
     {
         camGameplay = GameObject.Find("Gameplay").GetComponent<Camera>();
         camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
+
+        diceTrayWalls = GameObject.FindObjectsByType<DiceTrayWall>(FindObjectsSortMode.None);
     }
 
     static void Update()
@@ -49,14 +52,6 @@ public static class DiceManager
         foreach (Die die in dice)
         {
             die.Roll();
-        }
-    }
-
-    private static void ResetAllDice()
-    {
-        foreach (Die die in dice)
-        {
-            die.ResetDiePosition();
         }
     }
 
