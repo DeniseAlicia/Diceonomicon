@@ -2,19 +2,29 @@
     <Style src="project://database/Assets/UI/Style/MenuStyle.uss?fileID=7433441132597879392&amp;guid=7c201a04ee54d1e45b3934145f12738c&amp;type=3#MenuStyle" />
     <ui:VisualElement name="ImplingCompendium" class="main-menu">
         <ui:VisualElement name="Buttons" class="sidebar">
-            <ui:Button text="Home" name="button_to_Main" class="buttons button" />
-            <ui:Button text="Settings" name="button_to_Settings" class="buttons button" />
-            <ui:Button text="Map" name="button_to_Map" class="buttons button" />
-            <ui:Button text="Dice Collection" name="button_to_Dice" class="buttons button" />
-            <ui:Button text="Impling Compendium" name="button_to_Implings" class="buttons button" />
+            <ui:Button name="button_to_Main" icon-image="project://database/Assets/UI/Images%20&amp;%20Icons/Icons/home.png?fileID=2800000&amp;guid=9557dd7dcbac2754eb01a0f6545dafb8&amp;type=3#home" class="buttons button" />
+            <ui:Button name="button_to_Settings" icon-image="project://database/Assets/UI/Images%20&amp;%20Icons/Icons/settings_two.png?fileID=2800000&amp;guid=934f85099c50d6e4c93d5d7040ea9dc3&amp;type=3#settings_two" class="buttons button" />
+            <ui:Button name="button_to_Map" icon-image="project://database/Assets/DefaceGames/img/demo-map0.png?fileID=2800000&amp;guid=f2c887e04b04ea34895c358411ef7c19&amp;type=3#demo-map0" class="buttons button" />
+            <ui:Button name="button_to_Dice" icon-image="project://database/Assets/Images/dice-tabletop-game-six-sided-d-roleplay-entertainment-hobby-isolated-drawing-white-background-310261244.png?fileID=2800000&amp;guid=1a053c265fc0d6f4287ee7eec05efa92&amp;type=3#dice-tabletop-game-six-sided-d-roleplay-entertainment-hobby-isolated-drawing-white-background-310261244" class="buttons button" />
+            <ui:Button name="button_to_Implings" icon-image="project://database/Assets/Images/Impling%20Sprites/Imp2.png?fileID=2800000&amp;guid=704d7977a67184549be833b93e0c8333&amp;type=3#Imp2" class="buttons button" />
             <ui:Button name="CloseMenu" icon-image="project://database/Assets/UI/Images%20&amp;%20Icons/Close.png?fileID=2800000&amp;guid=fe7e0d7b19cd69f4294c58d7229016e1&amp;type=3#Close" class="buttons button" style="-unity-background-image-tint-color: rgb(213, 162, 162);" />
         </ui:VisualElement>
         <ui:VisualElement name="Text" class="content-area">
             <ui:Label text="Impling&#10;Compendium" name="Header" class="header" />
-            <ui:VisualElement class="item-image" style="background-image: url(&quot;project://database/Assets/Images/Impling1.png?fileID=2800000&amp;guid=0d8a5d9d969bfe04cbce7794e696a335&amp;type=3#Impling1&quot;); height: 300px; width: 300px; padding-right: 0; margin-right: 200px;" />
-            <ui:Label text="IceScream" class="text" style="font-size: 25px; margin-right: 200px;" />
-            <ui:VisualElement class="item-image" style="background-image: url(&quot;project://database/Assets/Images/Impling2.png?fileID=2800000&amp;guid=a0d9a31640924654cab18dc75cf5aaf9&amp;type=3#Impling2&quot;); height: 300px; width: 350px; margin-left: 100px;" />
-            <ui:Label text="Cubie" class="text" style="font-size: 25px; margin-left: 100px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Implings" class="visuals-container" style="padding-top: 0; top: 85px; right: 429px;">
+            <ui:VisualElement name="Impling00" class="item" style="background-image: none;">
+                <ui:VisualElement class="item-image" style="background-image: url(&quot;project://database/Assets/Images/Impling%20Sprites/Imp2.png?fileID=2800000&amp;guid=704d7977a67184549be833b93e0c8333&amp;type=3#Imp2&quot;); height: 190px;" />
+                <ui:Label text="Spooding" class="text" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Impling01" class="item" style="background-image: none;">
+                <ui:VisualElement class="item-image" style="background-image: url(&quot;project://database/Assets/Images/Impling%20Sprites/Imp8.png?fileID=2800000&amp;guid=bc9ec2d9fd3ac644f9d7d0f5bbd156f2&amp;type=3#Imp8&quot;); height: 220px;" />
+                <ui:Label text="Cubie" class="text" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Impling02" class="item" style="background-image: none;">
+                <ui:VisualElement class="item-image" style="background-image: url(&quot;project://database/Assets/Images/Impling%20Sprites/Imp10.png?fileID=2800000&amp;guid=487ca30a792ef1d40810d47339efb669&amp;type=3#Imp10&quot;); height: 190px;" />
+                <ui:Label text="Impling" class="text" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

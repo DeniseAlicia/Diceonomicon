@@ -2,22 +2,22 @@
     <Style src="project://database/Assets/UI/Style/MenuStyle.uss?fileID=7433441132597879392&amp;guid=7c201a04ee54d1e45b3934145f12738c&amp;type=3#MenuStyle" />
     <ui:VisualElement name="LevelMap" class="main-menu">
         <ui:VisualElement name="Buttons" class="sidebar">
-            <ui:Button text="Home" name="button_to_Main" class="buttons button" />
-            <ui:Button text="Settings" name="button_to_Settings" class="buttons button" />
-            <ui:Button text="Map" name="button_to_Map" class="buttons button" />
-            <ui:Button text="Dice Collection" name="button_to_Dice" class="buttons button" />
-            <ui:Button text="Impling Compendium" name="button_to_Implings" class="buttons button" />
+            <ui:Button name="button_to_Main" icon-image="project://database/Assets/UI/Images%20&amp;%20Icons/Icons/home.png?fileID=2800000&amp;guid=9557dd7dcbac2754eb01a0f6545dafb8&amp;type=3#home" class="buttons button" />
+            <ui:Button name="button_to_Settings" icon-image="project://database/Assets/UI/Images%20&amp;%20Icons/Icons/settings_two.png?fileID=2800000&amp;guid=934f85099c50d6e4c93d5d7040ea9dc3&amp;type=3#settings_two" class="buttons button" />
+            <ui:Button name="button_to_Map" icon-image="project://database/Assets/DefaceGames/img/demo-map0.png?fileID=2800000&amp;guid=f2c887e04b04ea34895c358411ef7c19&amp;type=3#demo-map0" class="buttons button" />
+            <ui:Button name="button_to_Dice" icon-image="project://database/Assets/Images/dice-tabletop-game-six-sided-d-roleplay-entertainment-hobby-isolated-drawing-white-background-310261244.png?fileID=2800000&amp;guid=1a053c265fc0d6f4287ee7eec05efa92&amp;type=3#dice-tabletop-game-six-sided-d-roleplay-entertainment-hobby-isolated-drawing-white-background-310261244" class="buttons button" />
+            <ui:Button name="button_to_Implings" icon-image="project://database/Assets/Images/Impling%20Sprites/Imp2.png?fileID=2800000&amp;guid=704d7977a67184549be833b93e0c8333&amp;type=3#Imp2" class="buttons button" />
             <ui:Button name="CloseMenu" icon-image="project://database/Assets/Freeui/ZOSMA/Set/Close.png?fileID=2800000&amp;guid=3f302b37d4c72954a87f7d7a773b0fb9&amp;type=3#Close" class="buttons button" style="-unity-background-image-tint-color: rgb(213, 162, 162);" />
         </ui:VisualElement>
         <ui:VisualElement name="Text" class="content-area">
             <ui:Label text="Level&#10;Map" name="Header" class="header" />
             <ui:Label text="Click the Button on the Map to choose your Level and start the fight." name="FlavorText" class="flavor-text" style="-unity-font-definition: url(&quot;project://database/Assets/DefaceGames/fonts/Crimson-Bold.otf?fileID=12800000&amp;guid=feb885b141d08e34b950775a3338bf34&amp;type=3#Crimson-Bold&quot;); font-size: 28px; -unity-text-align: middle-left; text-overflow: clip; -unity-paragraph-spacing: 5px; margin-top: 50px;" />
         </ui:VisualElement>
-        <ui:VisualElement name="Map" class="visuals-container" style="right: 374px; width: 524px;">
+        <ui:VisualElement name="Map" class="visuals-container" style="right: 374px; width: 524px; margin-top: 100px;">
             <ui:VisualElement name="Achievement00" class="item" style="height: 800px; width: 500px;">
-                <ui:VisualElement name="MapImage" class="image" style="background-image: url(&quot;project://database/Assets/Images/example_map.png?fileID=2800000&amp;guid=cce4a6dfda36fa84ab09a671491f2773&amp;type=3#example_map&quot;); height: 450px; width: 600px; padding-left: 0; margin-left: 50px;" />
+                <ui:VisualElement name="MapImage" class="image" style="background-image: url(&quot;project://database/Assets/Images/example_map.png?fileID=2800000&amp;guid=cce4a6dfda36fa84ab09a671491f2773&amp;type=3#example_map&quot;); height: 450px; width: 600px; padding-left: 0; margin-left: 50px; margin-bottom: 20px;" />
                 <ui:Label text="Choose your Level to continue." name="MapDescription" class="text" style="-unity-font-definition: url(&quot;project://database/Assets/DefaceGames/fonts/Crimson-Bold.otf?fileID=12800000&amp;guid=feb885b141d08e34b950775a3338bf34&amp;type=3#Crimson-Bold&quot;); font-size: 30px; padding-top: 4px; padding-bottom: 0; margin-bottom: 0; height: 36px;" />
-                <ui:Button name="Button_to_LevelOne" icon-image="project://database/Assets/Images/creeperEyeBlue.png?fileID=2800000&amp;guid=dcb569a70dced284aa342256be35186e&amp;type=3#creeperEyeBlue" style="width: 60px; height: 60px; top: -300px; background-image: url(&quot;project://database/Assets/UI/Images%20&amp;%20Icons/base%20paper%20bg.png?fileID=2800000&amp;guid=c6cf47318c113624b924685751cd11fd&amp;type=3#base paper bg&quot;);" />
+                <ui:Button name="Button_to_LevelOne" icon-image="project://database/Assets/Dark_Brown_GUI_kit/icon/simple/sword.png?fileID=2800000&amp;guid=1225aae5cdb5cfb4196e11d97df783b3&amp;type=3#sword" style="width: 80px; height: 80px; top: -320px; background-image: url(&quot;project://database/Assets/UI/Images%20&amp;%20Icons/base%20paper%20bg.png?fileID=2800000&amp;guid=c6cf47318c113624b924685751cd11fd&amp;type=3#base paper bg&quot;);" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
