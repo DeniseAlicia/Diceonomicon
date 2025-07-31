@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{9c3ef4d2-3552-44e7-8877-e1c35beb9f88}">
+		<property name="assetPath">
+			<value>BattleTheme/PianoMelody.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>17.428594104308392</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fd7edaef-95d4-44fa-95a9-a7ab5b9a2454}</destination>
+		</relationship>
+	</object>
+</objects>
