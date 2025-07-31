@@ -42,10 +42,27 @@ public static class CombatManager
 
         for (int column = 1; column <= 3; column++)
         {
-
-            // sceneManager.player.alpha = Mathf.MoveTowards(0.1f, 0.9f, 0.02f * Time.deltaTime);
-            // sceneManager.opponent.alpha = Mathf.MoveTowards(0.1f, 0.9f, 0.02f * Time.deltaTime);
             sceneManager.GetActiveColumn(column);
+
+
+            foreach (GameObject banner in sceneManager.playerColumnBanner)
+            {
+                Image sprite = banner.GetComponent<Image>();
+                sprite.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+            }
+
+            foreach (GameObject opponentBanner in sceneManager.opponentColumnBanner)
+            {
+                Image sprite = opponentBanner.GetComponent<Image>();
+                sprite.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+            }
+
+            Image bannerSprite = sceneManager.playerColumnBanner[column - 1].GetComponent<Image>();
+            bannerSprite.color = new Color(1f, 1f, 1f, 1f);
+            Image opponentBannerSprite = sceneManager.opponentColumnBanner[column - 1].GetComponent<Image>();
+            opponentBannerSprite.color = new Color(1f, 1f, 1f, 1f);
+
+
 
             playerSlots = SortActiveSlots(sceneManager.playerActiveColumn);
             enemySlots = SortActiveSlots(sceneManager.enemyActiveColumn);
@@ -73,6 +90,19 @@ public static class CombatManager
             sceneManager.ClearActiveColumn();
         }
         sceneManager.combatBolt.SetActive(false);
+
+        foreach (GameObject banner in sceneManager.playerColumnBanner)
+        {
+            Image sprite = banner.GetComponent<Image>();
+            sprite.color = new Color(1f, 1f, 1f, 1f);
+        }
+
+        foreach (GameObject opponentBanner in sceneManager.opponentColumnBanner)
+        {
+            Image sprite = opponentBanner.GetComponent<Image>();
+            sprite.color = new Color(1f, 1f, 1f, 1f);
+        }
+
     }
 
     private static async void HandleSlotEffects(List<DiceSlotController> activeSlot)
