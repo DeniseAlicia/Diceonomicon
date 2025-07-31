@@ -380,6 +380,26 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8009256811413000390, guid: 6aca8cc78f219f141b53309d53d7359e, type: 3}
+      propertyPath: EventReference.Path
+      value: event:/Music/BGM_DiceySituation
+      objectReference: {fileID: 0}
+    - target: {fileID: 8009256811413000390, guid: 6aca8cc78f219f141b53309d53d7359e, type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: -1208283433
+      objectReference: {fileID: 0}
+    - target: {fileID: 8009256811413000390, guid: 6aca8cc78f219f141b53309d53d7359e, type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1291673454
+      objectReference: {fileID: 0}
+    - target: {fileID: 8009256811413000390, guid: 6aca8cc78f219f141b53309d53d7359e, type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: -2109386827
+      objectReference: {fileID: 0}
+    - target: {fileID: 8009256811413000390, guid: 6aca8cc78f219f141b53309d53d7359e, type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: -371282436
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1824,6 +1844,27 @@ MonoBehaviour:
       Data3: -2071647590
       Data4: 2110821985
     Path: event:/Sounds/Battle/SFX_DiceRoll
+  DiceDrawEvent:
+    Guid:
+      Data1: 639099754
+      Data2: 1154305886
+      Data3: -404260957
+      Data4: 733942643
+    Path: event:/Sounds/Battle/SFX_DiceDraw
+  RoundStartEvent:
+    Guid:
+      Data1: -1646942398
+      Data2: 1114189882
+      Data3: 548352181
+      Data4: -1244291674
+    Path: event:/Sounds/Battle/SFX_RoundStart
+  DamageEvent:
+    Guid:
+      Data1: 812645063
+      Data2: 1245119979
+      Data3: 837858976
+      Data4: 1215427578
+    Path: event:/Sounds/Battle/SFX_LifeCounter
 --- !u!4 &1301764764
 Transform:
   m_ObjectHideFlags: 0

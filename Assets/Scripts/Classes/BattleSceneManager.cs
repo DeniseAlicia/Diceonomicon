@@ -24,6 +24,9 @@ public class BattleSceneManager : MonoBehaviour
     public GameObject combatBolt;
 
     public FMODUnity.EventReference DiceRollEvent;
+    public FMODUnity.EventReference DiceDrawEvent;
+    public FMODUnity.EventReference RoundStartEvent;
+    public FMODUnity.EventReference DamageEvent;
 
     private void Awake()
     {
@@ -98,6 +101,9 @@ public class BattleSceneManager : MonoBehaviour
 
     private void NewRound()
     {
+        FMOD.Studio.EventInstance roundStartAudio = FMODUnity.RuntimeManager.CreateInstance(RoundStartEvent);
+        roundStartAudio.start();
+
         opponent.DrawDice();
         opponent.ai.RollDice();
         PlacementPhase();
@@ -105,8 +111,10 @@ public class BattleSceneManager : MonoBehaviour
 
     private void PlacementPhase()
     {
+        FMOD.Studio.EventInstance drawDiceAudio = FMODUnity.RuntimeManager.CreateInstance(DiceDrawEvent);
+        drawDiceAudio.start();
         player.DrawDice();
-        
+
         FMOD.Studio.EventInstance rollDiceAudio = FMODUnity.RuntimeManager.CreateInstance(DiceRollEvent);
         rollDiceAudio.start();
         player.RollDice();
@@ -138,29 +146,17 @@ public class BattleSceneManager : MonoBehaviour
         int damageTaken = opponent.damage - player.block;
         int targetHealth = Mathf.Max(player.currentHealth - damageTaken, 0);
         StartCoroutine(AnimatePlayerHealthDecrease(targetHealth, damageTaken));
-        //player.currentHealth -= Math.Max(opponent.damage - player.block, 0);
-        //player.healthText.text = player.currentHealth.ToString();
 
         int opponentDamageTaken = player.damage - opponent.block;
         int targetOpponentHealth = Mathf.Max(opponent.currentHealth - opponentDamageTaken, 0);
         StartCoroutine(AnimateOpponentHealthDecrease(targetOpponentHealth, opponentDamageTaken));
-        // opponent.currentHealth -= Math.Max(player.damage - opponent.block, 0);
-        // opponent.healthText.text = opponent.currentHealth.ToString();
 
         opponent.damage = 0;
         opponent.block = 0;
         player.damage = 0;
         player.block = 0;
 
-        if (player.currentHealth <= 0)
-        {
-            endScene.Lose();
-        }
-
-        if (opponent.currentHealth <= 0 && player.currentHealth > 0)
-        {
-            endScene.Win();
-        }
+        CheckWinLossState();
 
         if (CombatManager.currentColumn == 3)
         {
@@ -169,6 +165,23 @@ public class BattleSceneManager : MonoBehaviour
             opponent.alpha = 0.1f; // 0.1f for rolling, 0.9f for post-placement
             EndOfRound();
         }
+    }
+
+    public void CheckWinLossState()
+    {
+        if (player.currentHealth <= 0)
+        {
+            endScene.Lose();
+            EndOfRound();
+        }
+
+        if (opponent.currentHealth <= 0 && player.currentHealth > 0)
+        {
+            endScene.Win();
+            EndOfRound();
+        }
+
+
     }
 
     private IEnumerator AnimatePlayerHealthDecrease(int targetHealth, int damage)
@@ -186,9 +199,14 @@ public class BattleSceneManager : MonoBehaviour
                 wait = 1.5f / damage;
             }
 
+            FMOD.Studio.EventInstance damageAudio = FMODUnity.RuntimeManager.CreateInstance(DamageEvent);
+            damageAudio.start();
+
             player.currentHealth -= 1;
             player.healthText.text = player.currentHealth.ToString();
             yield return new WaitForSeconds(wait);
+            damageAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            CheckWinLossState();
         }
     }
 
@@ -205,9 +223,15 @@ public class BattleSceneManager : MonoBehaviour
             {
                 wait = 1.5f / damage;
             }
+
+            FMOD.Studio.EventInstance damageAudio = FMODUnity.RuntimeManager.CreateInstance(DamageEvent);
+            damageAudio.start();
+
             opponent.currentHealth -= 1;
             opponent.healthText.text = opponent.currentHealth.ToString();
             yield return new WaitForSeconds(wait);
+            damageAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            CheckWinLossState();
         }
     }
 

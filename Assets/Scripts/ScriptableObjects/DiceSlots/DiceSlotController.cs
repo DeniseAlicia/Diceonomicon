@@ -27,6 +27,8 @@ public class DiceSlotController : MonoBehaviour
     private BattleSceneManager activeSceneManager;
     public bool wasFrozen = false;
 
+    public FMODUnity.EventReference DoEffectEvent;
+
     private void Start()
     {
         activeSceneManager = FindFirstObjectByType<BattleSceneManager>();
@@ -55,9 +57,33 @@ public class DiceSlotController : MonoBehaviour
 
     public void DoEffect()
     {
+        int fmodParameter = 0;
+
+        switch (tag)
+        {
+            case "Buff":
+                fmodParameter = 3;
+                break;
+            case "Spell":
+                fmodParameter = 2;
+                break;
+            case "Damage":
+                fmodParameter = 0;
+                break;
+            case "Block":
+                fmodParameter = 1;
+                break;
+            default:
+                fmodParameter = 0;
+                break;
+        }
+
+        FMOD.Studio.EventInstance effectAudio = FMODUnity.RuntimeManager.CreateInstance(DoEffectEvent);
+        effectAudio.setParameterByName("SlotEventByTag", fmodParameter);
+        effectAudio.start();
 
         vfx.Play();
-        
+
         if (slottedDie.isFrozen)
         {
             wasFrozen = true;

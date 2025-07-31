@@ -78,6 +78,14 @@ MonoBehaviour:
   dieTag: 
   textureRenderer: {fileID: 2085206390153914367}
   dieData: {fileID: 0}
+  currentValue: 0
+  DiePlacementEvent:
+    Guid:
+      Data1: 1401388340
+      Data2: 1120791079
+      Data3: -800398179
+      Data4: -280513603
+    Path: event:/Sounds/Battle/SFX_TabletSlotPlacement
 --- !u!33 &2250418610123422332
 MeshFilter:
   m_ObjectHideFlags: 0

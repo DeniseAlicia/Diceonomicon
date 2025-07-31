@@ -14,6 +14,8 @@ public static class CombatManager
 
     public static async void HandleActiveCombat(BattleSceneManager sceneManager)
     {
+        sceneManager.combatBolt.SetActive(true);
+
         DiceSlotController[] slots = GameObject.FindObjectsByType<DiceSlotController>(FindObjectsSortMode.None);
         foreach (DiceSlotController slot in slots)
         {
@@ -38,7 +40,6 @@ public static class CombatManager
             }
         }
 
-        sceneManager.combatBolt.SetActive(true);
         sceneManager.player.inColumnPhase = true;
 
         for (int column = 1; column <= 3; column++)
@@ -95,9 +96,9 @@ public static class CombatManager
 
             playerSlots.Clear();
             enemySlots.Clear();
-            await Task.Delay(TimeSpan.FromSeconds(delay + 2));
+            await Task.Delay(TimeSpan.FromSeconds(delay + 0.5f));
             sceneManager.CalculateDamage();
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            await Task.Delay(TimeSpan.FromSeconds(1f));
             sceneManager.ClearActiveColumn();
         }
         sceneManager.combatBolt.SetActive(false);
