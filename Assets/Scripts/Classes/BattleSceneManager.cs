@@ -23,6 +23,8 @@ public class BattleSceneManager : MonoBehaviour
     public Button confirmButton;
     public GameObject combatBolt;
 
+    public FMODUnity.EventReference DiceRollEvent;
+
     private void Awake()
     {
         Camera camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
@@ -104,6 +106,9 @@ public class BattleSceneManager : MonoBehaviour
     private void PlacementPhase()
     {
         player.DrawDice();
+        
+        FMOD.Studio.EventInstance rollDiceAudio = FMODUnity.RuntimeManager.CreateInstance(DiceRollEvent);
+        rollDiceAudio.start();
         player.RollDice();
 
         player.drawSize = player.maxDrawSize;
