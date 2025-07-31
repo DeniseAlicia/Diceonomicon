@@ -25,6 +25,7 @@ public static class CombatManager
             if (slot.tag == "Buff" && slot.slottedDie != null && slot.isFilled == true)
             {
                 slot.DoEffect();
+                await Task.Delay(TimeSpan.FromSeconds(1));
             }
         }
 
@@ -50,18 +51,26 @@ public static class CombatManager
             playerSlots = SortActiveSlots(sceneManager.playerActiveColumn);
             enemySlots = SortActiveSlots(sceneManager.enemyActiveColumn);
 
-            int delay = Mathf.Max(playerSlots.Count, enemySlots.Count) + 2;
+            int delay = Mathf.Max(playerSlots.Count, enemySlots.Count);
 
-            for (int i = 0; i < playerSlots.Count; i++)
-            {
-                var task = HandleSlotEffects(playerSlots[i]);
-                await task;
-            }
+            // for (int i = 0; i < playerSlots.Count; i++)
+            // {
+            //     var task = HandleSlotEffects(playerSlots[i]);
+            //     await task;
+            // }
 
-            for (int i = 0; i < enemySlots.Count; i++)
+            // for (int i = 0; i < enemySlots.Count; i++)
+            // {
+            //     var task = HandleSlotEffects(enemySlots[i]);
+            //     await task;
+            // }
+
+            for (int i = 0; i < 2; i++)
             {
-                var task = HandleSlotEffects(enemySlots[i]);
-                await task;
+                var task1 = HandleSlotEffects(playerSlots[i]);
+                await task1;
+                var task2 = HandleSlotEffects(enemySlots[i]);
+                await task2;                
             }
 
             currentColumn = column;
@@ -82,7 +91,6 @@ public static class CombatManager
         {
             slot.DoEffect();
             await Task.Delay(TimeSpan.FromSeconds(1));
-            // Thread.Sleep(500);
         }
     }
 
