@@ -336,11 +336,11 @@ MonoBehaviour:
     Path: event:/Sounds/UI/UI_Hover
   specialClickSound:
     Guid:
-      Data1: -186513229
-      Data2: 1325969248
-      Data3: -1439967306
-      Data4: -1566070605
-    Path: event:/Sounds/UI/UI_MenuExit
+      Data1: 1628684145
+      Data2: 1102166664
+      Data3: 1940620215
+      Data4: -1535359347
+    Path: event:/Sounds/UI/UI_ButtonClick
   excludedButtonNames:
   - CloseMenu
   - Button_to_LevelOne
