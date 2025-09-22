@@ -24,29 +24,6 @@ public static class DiceManager
         diceTrayWalls = GameObject.FindObjectsByType<DiceTrayWall>(FindObjectsSortMode.None);
     }
 
-    static void Update()
-    {
-        bool allDiceSleeping = false;
-        int i = 0;
-        foreach (Die die in dice)
-        {
-            if (die.isResting == true)
-            {
-                i++;
-            }
-        }
-
-        if (i == dice.Count)
-        {
-            allDiceSleeping = true;
-        }
-
-        if (allDiceSleeping == true)
-        {
-            SortAllDice(dice);
-        }
-    }
-
     private static void RollAllDice()
     {
         foreach (Die die in dice)
@@ -55,8 +32,17 @@ public static class DiceManager
         }
     }
 
-    public static void SortAllDice(List<Die> dice)
+    public static void SortAllDice(List<Die> dice, BattleSceneManager sceneManager)
     {
+        foreach (Die die in sceneManager.player.dice)
+        {
+            die.GetSideFacingUp();
+            die.isResting = true;
+            die.isDraggable = true;
+            die.rigidBody.isKinematic = true;
+            die.rigidBody.useGravity = false;
+        }
+
         float overflow = 0;
         float spacing;
         float distance = 0.5f;
