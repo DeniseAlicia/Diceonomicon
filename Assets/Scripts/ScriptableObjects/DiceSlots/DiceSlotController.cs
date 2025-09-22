@@ -32,9 +32,7 @@ public class DiceSlotController : MonoBehaviour
     private void Start()
     {
         activeSceneManager = FindFirstObjectByType<BattleSceneManager>();
-        GameObject columnMaster = activeSceneManager.columnMaster;
         mult = 1;
-
     }
 
     public void SetData(DiceSlotData data)
