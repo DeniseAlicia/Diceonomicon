@@ -21,24 +21,27 @@ public class TabletManager : MonoBehaviour
     {
         Instance = this;
 
-        if (enemy == false)
+        if (enemy)
         {
-            owner = FindFirstObjectByType<Player>();
-        }
-        else
-        { owner = FindFirstObjectByType<Opponent>(); }
-
-        if (enemy == true)
-        {
+            Opponent opponent = Object.FindFirstObjectByType<Opponent>();
+            tablets = Encounters.SetEnemyRoster(1, "Green");
+            owner = FindFirstObjectByType<Opponent>();
+            opponent.SetEnemyRoster(tablets);
             startPosition = new Vector3(4.9f, -2.5f, 0f);
         }
         else
         {
+            Player player = Object.FindFirstObjectByType<Player>();
+            tablets = player.SetImplingRoster();
+            owner = FindFirstObjectByType<Player>();
             startPosition = new Vector3(-6.9f, -2.5f, 0f);
         }
-
         Vector3 currentPosition = startPosition;
+        SpawnTablets(currentPosition);
+    }
 
+    public void SpawnTablets(Vector3 currentPosition)
+    {
         foreach (TabletData tablet in tablets)
         {
             GameObject tabletInstance = Instantiate(tabletPrefab, currentPosition, Quaternion.identity);

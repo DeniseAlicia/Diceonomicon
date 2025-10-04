@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7461de8d2d83b9145a5eb8eee13cf27c, type: 3}
-  m_Name: Imp1
+  m_Name: Squaredra
   m_EditorClassIdentifier: 
   enemy: 0
-  name: Hie
-  desc: Don't look!
-  artwork: {fileID: 2800000, guid: f9e9e4e23aa3f994ca887a9b837665eb, type: 3}
+  name: Squaredra
+  desc: I'm hungry!
+  artwork: {fileID: 2800000, guid: ec37a96182667b049993ce805fe3e878, type: 3}
   owner: {fileID: 0}
   slots:
   - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}

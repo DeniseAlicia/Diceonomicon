@@ -74,7 +74,7 @@ public class EnemyAI : MonoBehaviour
         GetEnemySlots();
 
         List<Die> dice = new List<Die>();
-        Vector3 startPosition = new Vector3(5f, 5f, -5f);
+        Vector3 startPosition = new Vector3(2f, 5f, -5f);
         float distance = 0.5f;
 
         for (int i = 0; i < opponent.drawnDice.Count; i++)
@@ -101,7 +101,7 @@ public class EnemyAI : MonoBehaviour
 
         foreach (Die dieInstance in dice)
         {
-            dieInstance.Roll();
+            dieInstance.Roll(-0.2f);
             StartCoroutine(PlaceDieDelay(dieInstance));
         }
         ;

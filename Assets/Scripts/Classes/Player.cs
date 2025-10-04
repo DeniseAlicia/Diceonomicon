@@ -3,12 +3,34 @@ using System.Collections.Generic;
 
 public class Player : Entity
 {
-    public TabletData[] ImplingRoster;
-    public TabletData[] ActiveImplings;
+    public List<string> ImplingRoster;
+    public List<TabletData> ActiveImplings;
     public int MaxImplings;
     public List<Die> dice;
 
-    public void SetImplingRoster()
+    public int level;
+    public string area;
+
+    public List<TabletData> SetImplingRoster()
+    {
+        ImplingRoster.Add("Cubie");
+        ImplingRoster.Add("Stabo");
+        ImplingRoster.Add("Spooding");
+
+        foreach (var impName in ImplingRoster)
+        {
+            string dataName = impName + "Data";
+
+            TabletData data = Resources.Load<TabletData>($"Implings/{dataName}");
+            if (data != null)
+            {
+                ActiveImplings.Add(data);
+            }
+        }
+        return ActiveImplings;
+    }
+
+    public void CreateDiceDeck()
     {
         foreach (TabletData impling in ActiveImplings)
         {
@@ -52,7 +74,7 @@ public class Player : Entity
 
         foreach (Die dieInstance in dice)
         {
-            dieInstance.Roll();
+            dieInstance.Roll(0.02f);
         }
     }
 }
