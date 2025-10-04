@@ -28,7 +28,7 @@ public static class DiceManager
     {
         foreach (Die die in dice)
         {
-            die.Roll();
+            die.Roll(0.5f);
         }
     }
 

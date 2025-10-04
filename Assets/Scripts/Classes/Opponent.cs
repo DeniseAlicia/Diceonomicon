@@ -4,12 +4,13 @@ using System.Collections.Generic;
 
 public class Opponent : Entity
 {
-    public TabletData[] army;
     public EnemyAI ai;
+    public List<TabletData> ActiveImplings;
 
-
-    public void SetEnemyRoster()
+    public void SetEnemyRoster(List<TabletData> army)
     {
+        ActiveImplings = army;
+
         foreach (TabletData demon in army)
         {
             for (int i = 0; i < demon.startingDice.Length; i++)

@@ -82,12 +82,12 @@ public class Die : MonoBehaviour
         }
     }
 
-    public void Roll()
+    public void Roll(float x)
     {
         rigidBody.useGravity = true;
         rigidBody.isKinematic = false;
 
-        forceX = UnityEngine.Random.Range(-0.02f, 0.02f);
+        forceX = UnityEngine.Random.Range(x, x/2);
         forceY = UnityEngine.Random.Range(0.2f, 0.3f);
         forceZ = UnityEngine.Random.Range(0.25f, 0.3f);
 

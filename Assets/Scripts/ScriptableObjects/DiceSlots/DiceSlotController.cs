@@ -80,9 +80,12 @@ public class DiceSlotController : MonoBehaviour
         effectAudio.setParameterByName("SlotEventByTag", fmodParameter);
         effectAudio.start();
 
-        vfx.Play();
+        if (vfx)
+        {
+            vfx.Play();
+        }
 
-       if (wasFrozen)
+        if (wasFrozen)
         {
             wasFrozen = false;
         }
