@@ -352,7 +352,12 @@ public class BattleSceneManager : MonoBehaviour
 
     private IEnumerator AnimatePlayerHealthDecrease(int targetHealth, int damage)
     {
+        RectTransform candle = player.candle.GetComponent<RectTransform>();
+
         float wait = 0.1f;
+        float startY = 16.2f;   // full health
+        float endY = -36.8f;  // zero health
+        float rangeY = startY - endY;
 
         while (player.currentHealth > Mathf.Max(targetHealth, 0))
         {
@@ -370,6 +375,14 @@ public class BattleSceneManager : MonoBehaviour
 
             player.currentHealth -= 1;
             player.healthText.text = player.currentHealth.ToString();
+
+            float healthPercent = (float)player.currentHealth / player.maxHealth;
+            float newY = Mathf.Lerp(endY, startY, healthPercent);
+
+            Vector3 pos = candle.anchoredPosition;
+            pos.y = newY;
+            candle.anchoredPosition = pos;
+
             yield return new WaitForSeconds(wait);
             damageAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
@@ -379,7 +392,13 @@ public class BattleSceneManager : MonoBehaviour
 
     private IEnumerator AnimateOpponentHealthDecrease(int targetHealth, int damage)
     {
+        RectTransform candle = opponent.candle.GetComponent<RectTransform>();
+
         float wait = 0.1f;
+        float startY = 16.2f;   // full health
+        float endY = -36.8f;  // zero health
+        float rangeY = startY - endY;
+
         while (opponent.currentHealth > Mathf.Max(targetHealth, 0))
         {
             if (damage < 11)
@@ -396,6 +415,13 @@ public class BattleSceneManager : MonoBehaviour
 
             opponent.currentHealth -= 1;
             opponent.healthText.text = opponent.currentHealth.ToString();
+
+            float healthPercent = (float)opponent.currentHealth / opponent.maxHealth;
+            float newY = Mathf.Lerp(endY, startY, healthPercent);
+
+            Vector3 pos = candle.anchoredPosition;
+            pos.y = newY;
+            candle.anchoredPosition = pos;
 
             if (opponent.currentHealth <= 0)
             {
@@ -619,6 +645,11 @@ public class BattleSceneManager : MonoBehaviour
     {
         opponent.currentHealth = opponent.maxHealth;
         opponent.healthText.text = opponent.currentHealth.ToString();
+        RectTransform candle = opponent.candle.GetComponent<RectTransform>();
+        Vector3 pos = candle.anchoredPosition;
+        pos.y = 16.2f;
+        candle.anchoredPosition = pos;
+
         List<TabletData> newTablets = Encounters.SetEnemyRoster(level, area);
         opponent.SetEnemyRoster(newTablets);
 
