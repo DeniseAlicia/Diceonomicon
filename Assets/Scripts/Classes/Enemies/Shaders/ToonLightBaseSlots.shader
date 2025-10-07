@@ -40,11 +40,11 @@ Shader "Lpk/LightModel/ToonLightBaseSlots"
 
             #pragma vertex vert
             #pragma fragment frag
-            #pragma multi_compile _ _SHADOWS_SOFT
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
-            #pragma multi_compile_fog
-            #pragma multi_compile_instancing
+            #pragma shader_feature_local _ _SHADOWS_SOFT
+            #pragma shader_feature_local _ _MAIN_LIGHT_SHADOWS
+            #pragma shader_feature_local _ _MAIN_LIGHT_SHADOWS_CASCADE
+            #pragma shader_feature_local_fog
+            #pragma shader_feature_local_instancing
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"

@@ -153,7 +153,7 @@ public class BattleSceneManager : MonoBehaviour
 
         foreach (DiceSlotController slot in slots)
         {
-            if (slot.slottedDie != null)
+            if (slot.slottedDie)
             {
                 slot.slottedDie.isDraggable = false;
             }
