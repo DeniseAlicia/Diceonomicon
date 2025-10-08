@@ -31,8 +31,8 @@ Shader "Lpk/LightModel/ToonLightBaseSlots"
 
         Pass
         {
-            Name "UniversalForward"
-            Tags { "LightMode" = "UniversalForward" }
+           // Name "ShadowCaster"
+            //Tags { "LightMode" = "ShadowCaster" }
 
             HLSLPROGRAM
             #pragma prefer_hlslcc gles
@@ -40,15 +40,19 @@ Shader "Lpk/LightModel/ToonLightBaseSlots"
 
             #pragma vertex vert
             #pragma fragment frag
-            #pragma shader_feature_local _ _SHADOWS_SOFT
-            #pragma shader_feature_local _ _MAIN_LIGHT_SHADOWS
-            #pragma shader_feature_local _ _MAIN_LIGHT_SHADOWS_CASCADE
-            #pragma shader_feature_local_fog
-            #pragma shader_feature_local_instancing
+
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            #pragma multi_compile_fragment _ _MAIN_LIGHT_SHADOWS
+            #pragma multi_compile_fragment _ _MAIN_LIGHT_SHADOWS_CASCADE
+            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+            #pragma multi_compile_instancing
+            #pragma multi_compile_fog
+
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"
+            //#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/SurfaceInput.hlsl"
 
             TEXTURE2D(_BaseMap); SAMPLER(sampler_BaseMap);
             TEXTURE2D(_NormalMap); SAMPLER(sampler_NormalMap);
@@ -145,7 +149,8 @@ Shader "Lpk/LightModel/ToonLightBaseSlots"
         normalize(input.normalWS.xyz)
     )));
     float3 V = normalize(input.viewDirWS.xyz);
-    float3 L = normalize(_MainLightPosition.xyz);
+    Light mainLight = GetMainLight(TransformWorldToShadowCoord(input.positionWS));
+    float3 L = normalize(mainLight.direction);
     float3 H = normalize(V + L);
 
     float NV = dot(N, V);
@@ -161,10 +166,10 @@ Shader "Lpk/LightModel/ToonLightBaseSlots"
     float shadowNL = smoothstep(_ShadowStep - _ShadowStepSmooth, _ShadowStep + _ShadowStepSmooth, NL);
 
     input.shadowCoord = TransformWorldToShadowCoord(input.positionWS);
-    float shadow = MainLightRealtimeShadow(input.shadowCoord);
+    float shadow = mainLight.shadowAttenuation;
     float rim = smoothstep((1 - _RimStep) - _RimStepSmooth * 0.5, (1 - _RimStep) + _RimStepSmooth * 0.5, 0.5 - NV);
 
-    float3 diffuse = _MainLightColor.rgb * baseMap.rgb * _BaseColor.rgb * shadowNL * shadow;
+    float3 diffuse = mainLight.color * baseMap.rgb * _BaseColor.rgb * shadowNL * shadow;
     float3 specular = _SpecularColor.rgb * shadow * shadowNL * specularNH;
     float3 ambient = rim * _RimColor.rgb + SampleSH(N) * _BaseColor.rgb * baseMap.rgb;
 
@@ -176,7 +181,5 @@ Shader "Lpk/LightModel/ToonLightBaseSlots"
 }
             ENDHLSL
         }
-
-        UsePass "Universal Render Pipeline/Lit/ShadowCaster"
     }
 }

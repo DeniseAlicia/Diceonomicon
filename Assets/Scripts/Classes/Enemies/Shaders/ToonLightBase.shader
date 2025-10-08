@@ -40,11 +40,11 @@ Shader "Lpk/LightModel/ToonLightBase"
 
             #pragma vertex vert
             #pragma fragment frag
-            #pragma shader_feature_local _SHADOWS_SOFT
-            #pragma shader_feature_local _MAIN_LIGHT_SHADOWS
-            #pragma shader_feature_local _MAIN_LIGHT_SHADOWS_CASCADE
-            #pragma shader_feature_local_fog
-            #pragma shader_feature_local_instancing
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            #pragma multi_compile_fragment _ _MAIN_LIGHT_SHADOWS
+            #pragma multi_compile_fragment _ _MAIN_LIGHT_SHADOWS_CASCADE
+            #pragma multi_compile_instancing
+            #pragma multi_compile_fog
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
@@ -177,6 +177,6 @@ Shader "Lpk/LightModel/ToonLightBase"
             ENDHLSL
         }
 
-        UsePass "Universal Render Pipeline/Lit/ShadowCaster"
+        //UsePass "Universal Render Pipeline/Lit/ShadowCaster"
     }
 }

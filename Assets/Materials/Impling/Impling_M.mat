@@ -109,6 +109,7 @@ Material:
     - _Step3: 0.97
     - _Step4: 0.025
     - _Surface: 0
+    - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
