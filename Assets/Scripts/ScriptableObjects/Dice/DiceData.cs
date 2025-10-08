@@ -10,7 +10,7 @@ public abstract class DiceData : ScriptableObject
     public Texture texture;
 
     public int[] range; 
-    public string tag;
+    public string[] tags;
 
     public abstract void DoEffect();
 }

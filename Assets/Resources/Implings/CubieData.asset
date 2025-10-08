@@ -28,8 +28,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
   - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
   startingDice:
-  - {fileID: 11400000, guid: c2dcd459aa01fbd42a9f975166570284, type: 2}
-  - {fileID: 11400000, guid: 74128a7cf78e81b41ad6b85beb4c440f, type: 2}
-  - {fileID: 11400000, guid: 8a33abe298e513a41894f1c6b0d9a21c, type: 2}
-  - {fileID: 11400000, guid: 8a33abe298e513a41894f1c6b0d9a21c, type: 2}
+  - {fileID: 11400000, guid: c17fb7bd564336e479cf487f1cc3dc89, type: 2}
+  - {fileID: 11400000, guid: 368842c8b3521d04781f86dfb94fe717, type: 2}
+  - {fileID: 11400000, guid: e336b3f2525047d4b8fcd618f4522e09, type: 2}
+  - {fileID: 11400000, guid: ff7ba309e481fbb4c988911d22b3b2e0, type: 2}
   slotPrefab: {fileID: 1881896027706196343, guid: 7b4fc5a074e11734695476f0948d04d2, type: 3}

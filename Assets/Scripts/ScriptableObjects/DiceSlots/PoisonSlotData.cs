@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "PoisonSlotData", menuName = "DiceSlots/PoisonSlotData")]
 public class PoisonSlotData : DiceSlotData
@@ -27,7 +28,7 @@ public class PoisonSlotData : DiceSlotData
 
             if (targetSlot.isFilled)
             {
-                if (targetSlot.slottedDie.dieTag != "Buff")
+                if (!targetSlot.slottedDie.dieTags.Contains("Buff"))
                 {
                     targetSlot.slottedDie.value -= 1;
                     targetSlot.slottedDie.TranslateValue();
