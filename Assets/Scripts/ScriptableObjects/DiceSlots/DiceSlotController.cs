@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Threading.Tasks;
+using System.Linq;
 
 public class DiceSlotController : MonoBehaviour
 {
@@ -112,7 +113,7 @@ public class DiceSlotController : MonoBehaviour
             // Debug.Log($"Ray hit: {hit.collider.name} at {hit.point}");
 
             Die die = hit.collider.GetComponent<Die>();
-            if (die != null && die.dieTag == slottedDie.dieTag)
+            if (die != null && die.dieTags.Intersect(slottedDie.dieTags).Any())
             {
                 mult += 1;
                 DetectLinksDown(rayPosition);
@@ -130,7 +131,7 @@ public class DiceSlotController : MonoBehaviour
             // Debug.Log($"Ray hit: {hit.collider.name} at {hit.point}");
 
             Die die = hit.collider.GetComponent<Die>();
-            if (die != null && die.dieTag == slottedDie.dieTag)
+            if (die != null && die.dieTags.Intersect(slottedDie.dieTags).Any())
             {
                 mult += 1;
                 DetectLinksUp(rayPosition);

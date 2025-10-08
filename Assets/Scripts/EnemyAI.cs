@@ -47,9 +47,9 @@ public class EnemyAI : MonoBehaviour
     public void PlaceDie(Die die)
     {
         List<DiceSlotController> color = (
-            from slot in emptySlots
-            where slot.tag == die.dieTag && slot.isFilled == false
-            select slot
+             from slot in emptySlots
+             where die.dieTags.Contains(slot.tag) && slot.isFilled == false
+             select slot
         ).ToList();
 
         int rdm = UnityEngine.Random.Range(0, color.Count);

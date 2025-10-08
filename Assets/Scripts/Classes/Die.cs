@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using System.Linq;
 
 public class Die : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class Die : MonoBehaviour
 
     public string nameText;
     public string descText;
-    public string dieTag;
+    public string[] dieTags;
     public Renderer textureRenderer;
     public DiceData dieData;
 
@@ -50,7 +51,7 @@ public class Die : MonoBehaviour
         descText = dieData.desc;
         textureRenderer.material.SetTexture("_BaseMap", dieData.texture);
         range = dieData.range;
-        dieTag = dieData.tag;
+        dieTags = dieData.tags;
         TranslateValueAtStart();
     }
 
@@ -155,7 +156,7 @@ public class Die : MonoBehaviour
         boxCollider.enabled = true;
         isRolling = false;
 
-        if (dieTag != "Buff")
+        if (!dieTags.Contains("Buff"))
         {
             value = range[value - 1];
         }
@@ -198,7 +199,7 @@ public class Die : MonoBehaviour
         {
             transform.position = camBattleTablets.ScreenToWorldPoint(Input.mousePosition - mouseOffset);
 
-            if (Mouse.current.rightButton.wasPressedThisFrame && this.dieTag == "Buff")
+            if (Mouse.current.rightButton.wasPressedThisFrame && this.dieTags.Contains("Buff"))
             {
                 transform.Rotate(new Vector3(0, 0, 90), Space.World);
                 dieRotation += 90;
@@ -226,7 +227,7 @@ public class Die : MonoBehaviour
                     DiceSlotData slotData = slotController.slotData;
                     // Debug.Log(slotData);
 
-                    if (slotData.tag == this.dieTag && slotController.isFilled == false && slotController.owner.GetType() == typeof(Player))
+                    if (this.dieTags.Contains(slotData.tag) && slotController.isFilled == false && slotController.owner.GetType() == typeof(Player))
                     {
                         //Debug.Log("Slotted!");
 
@@ -324,7 +325,7 @@ public class Die : MonoBehaviour
 
     public void TranslateValueAtStart()
     {
-        if (dieTag != "Buff")
+        if (!dieTags.Contains("Buff"))
         {
             foreach (Transform childSide in diceSides)
             {

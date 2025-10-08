@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "BuffSlotData", menuName = "DiceSlots/BuffSlotData")]
 public class BuffSlotData : DiceSlotData
@@ -48,7 +49,7 @@ public class BuffSlotData : DiceSlotData
                 Die dieComponent = hit.collider.GetComponent<Die>();
                 if (dieComponent != null)
                 {
-                    if (dieComponent.dieTag != "Buff")
+                    if (!dieComponent.dieTags.Contains("Buff"))
                     {
                         targets.Add(dieComponent);
                     }
