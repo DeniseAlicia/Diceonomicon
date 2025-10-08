@@ -17,13 +17,16 @@ public class BattleSceneManager : MonoBehaviour
     private static List<List<DiceSlotController>> playerSlots;
     private static List<List<DiceSlotController>> enemySlots;
 
+
     public int level;
     public int round;
     public float[] columnStartPositions = new float[] { -7.65f, -6.9f, -6.1f };
     public static int CurrentColumn { get; private set; }
+    public static bool intermission { get; private set; }
 
     public EndBattle endScene;
-    public Button confirmButton;
+    public Button placementButton;
+    public Button intermissionButton;
     public Button rollDiceButton;
     public GameObject combatBolt;
 
@@ -63,11 +66,14 @@ public class BattleSceneManager : MonoBehaviour
         player.healthText.text = player.currentHealth.ToString();
         opponent.healthText.text = opponent.currentHealth.ToString();
 
-        confirmButton.onClick.AddListener(() => HandleActiveCombat());
-        confirmButton.gameObject.SetActive(false);
+        placementButton.onClick.AddListener(() => StartActiveCombat());
+        placementButton.gameObject.SetActive(false);
 
         rollDiceButton.onClick.AddListener(() => StartPlacementPhase());
         rollDiceButton.gameObject.SetActive(false);
+
+        intermissionButton.onClick.AddListener(() => ContinueColumnPhase());
+        intermissionButton.gameObject.SetActive(false);
 
         Time.timeScale = 1;
         StartNewRound();
@@ -129,28 +135,55 @@ public class BattleSceneManager : MonoBehaviour
 
         StartDelay(3f, () => DiceManager.SortAllDice(player.dice, this));
 
-        confirmButton.gameObject.SetActive(true);
+        placementButton.gameObject.SetActive(true);
     }
 
 
 
-    public void HandleActiveCombat()
+
+    private void StartIntermissionPhase()
     {
-        confirmButton.gameObject.SetActive(false);
-        StartCoroutine(HandleActiveCombatRoutine());
+        intermissionButton.gameObject.SetActive(true);
+    }
+
+    private void ContinueColumnPhase()
+    {
+        intermission = false;
+        StartCoroutine(HandleActiveColumnRoutine(CurrentColumn));
+    }
+
+
+    public void StartActiveCombat()
+    {
+        // Remove Confirm Button
+        placementButton.gameObject.SetActive(false);
+
+        // combatBolt.SetActive(true);
+        // player.alpha = 0.9f;
+        // opponent.alpha = 0.9f;
+
+        // Remove Dice that haven't been placed
+        Die[] unusedDice = GameObject.FindObjectsByType<Die>(FindObjectsSortMode.None);
+        foreach (Die die in unusedDice)
+        {
+            if (!die.isPlaced)
+            {
+                die.transform.position = new Vector3(10, 0, 0);
+            }
+        }
+
+        // Proceed to Next Phase
+        StartCoroutine(StartActiveCombatRoutine());
     }
 
 
 
-    private IEnumerator HandleActiveCombatRoutine()
+    private IEnumerator StartActiveCombatRoutine()
     {
-        combatBolt.SetActive(true);
-        player.alpha = 0.9f;
-        opponent.alpha = 0.9f;
+        player.inColumnPhase = true;
 
         DiceSlotController[] slots = GameObject.FindObjectsByType<DiceSlotController>(FindObjectsSortMode.None);
         List<DiceSlotController> buffSlots = new List<DiceSlotController>();
-
         foreach (DiceSlotController slot in slots)
         {
             if (slot.slottedDie)
@@ -166,88 +199,95 @@ public class BattleSceneManager : MonoBehaviour
 
         yield return DoSlotEffect(buffSlots, 1f, 1);
 
-        Die[] unusedDice = GameObject.FindObjectsByType<Die>(FindObjectsSortMode.None);
-        foreach (Die die in unusedDice)
+        StartCoroutine(HandleActiveColumnRoutine(0));
+    }
+
+
+
+
+    private IEnumerator HandleActiveColumnRoutine(int column)
+    {
+        intermissionButton.gameObject.SetActive(false);
+
+        column++;
+
+        if (opponent.currentHealth <= 0 || player.currentHealth <= 0)
+            yield break;
+
+        GetActiveColumn(column);
+
+        foreach (GameObject banner in playerColumnBanner)
         {
-            if (!die.isPlaced)
-            {
-                die.transform.position = new Vector3(10, 0, 0);
-            }
+            Image sprite = banner.GetComponent<Image>();
+            sprite.color = new Color(0.5f, 0.5f, 0.5f, 1f);
         }
 
-        player.inColumnPhase = true;
-
-        for (int column = 1; column < 5; column++)
+        foreach (GameObject opponentBanner in opponentColumnBanner)
         {
-            if (opponent.currentHealth <= 0 || player.currentHealth <= 0)
-                yield break;
+            Image sprite = opponentBanner.GetComponent<Image>();
+            sprite.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+        }
 
-            GetActiveColumn(column);
+        Image playerBannerSprite = playerColumnBanner[column - 1].GetComponent<Image>();
+        playerBannerSprite.color = new Color(1f, 1f, 1f, 1f);
 
-            foreach (GameObject banner in playerColumnBanner)
-            {
-                Image sprite = banner.GetComponent<Image>();
-                sprite.color = new Color(0.5f, 0.5f, 0.5f, 1f);
-            }
+        Image opponentBannerSprite = opponentColumnBanner[column - 1].GetComponent<Image>();
+        opponentBannerSprite.color = new Color(1f, 1f, 1f, 1f);
 
-            foreach (GameObject opponentBanner in opponentColumnBanner)
-            {
-                Image sprite = opponentBanner.GetComponent<Image>();
-                sprite.color = new Color(0.5f, 0.5f, 0.5f, 1f);
-            }
+        playerSlots = SortActiveSlots(playerActiveColumn);
+        enemySlots = SortActiveSlots(enemyActiveColumn);
 
-            Image playerBannerSprite = playerColumnBanner[column - 1].GetComponent<Image>();
-            playerBannerSprite.color = new Color(1f, 1f, 1f, 1f);
+        float delay = Mathf.Max(playerSlots.Count, enemySlots.Count) + 0.5f;
 
-            Image opponentBannerSprite = opponentColumnBanner[column - 1].GetComponent<Image>();
-            opponentBannerSprite.color = new Color(1f, 1f, 1f, 1f);
+        foreach (List<DiceSlotController> activeSlots in playerSlots)
+        {
+            yield return DoSlotEffect(activeSlots, 1f, 2);
+        }
 
-            playerSlots = SortActiveSlots(playerActiveColumn);
-            enemySlots = SortActiveSlots(enemyActiveColumn);
+        foreach (List<DiceSlotController> activeSlots in enemySlots)
+        {
+            yield return DoSlotEffect(activeSlots, 1f, 2);
+        }
 
-            float delay = Mathf.Max(playerSlots.Count, enemySlots.Count) + 0.5f;
+        foreach (List<DiceSlotController> activeSlots in playerSlots)
+        {
+            yield return DoSlotEffect(activeSlots, 1f, 3);
+        }
 
-            foreach (List<DiceSlotController> activeSlots in playerSlots)
-            {
-                yield return DoSlotEffect(activeSlots, 1f, 2);
-            }
+        foreach (List<DiceSlotController> activeSlots in enemySlots)
+        {
+            yield return DoSlotEffect(activeSlots, 1f, 3);
+        }
 
-            foreach (List<DiceSlotController> activeSlots in enemySlots)
-            {
-                yield return DoSlotEffect(activeSlots, 1f, 2);
-            }
+        CalculateDamage();
 
-            foreach (List<DiceSlotController> activeSlots in playerSlots)
-            {
-                yield return DoSlotEffect(activeSlots, 1f, 3);
-            }
+        if (player.currentHealth <= 0 | opponent.currentHealth <= 0)
+        {
+            yield break;
+        }
 
-            foreach (List<DiceSlotController> activeSlots in enemySlots)
-            {
-                yield return DoSlotEffect(activeSlots, 1f, 3);
-            }
+        yield return new WaitForSeconds(1f);
 
-            CalculateDamage();
+        ClearActiveColumn();
 
-            if (player.currentHealth <= 0 | opponent.currentHealth <= 0)
-            {
-                yield break;
-            }
+        CurrentColumn = column;
 
-            yield return new WaitForSeconds(1f);
+        playerSlots.Clear();
+        enemySlots.Clear();
 
-            ClearActiveColumn();
-
-            CurrentColumn = column;
-
-            playerSlots.Clear();
-            enemySlots.Clear();
-
-            if (column == 3)
-            {
-                EndOfRound();
-                yield break;
-            }
+        if (column == 3)
+        {
+            EndOfRound();
+            yield break;
+        }
+        else if (intermission == true)
+        {
+            StartIntermissionPhase();
+            yield break;
+        }
+        else
+        {
+            StartCoroutine(HandleActiveColumnRoutine(column));
         }
     }
 
