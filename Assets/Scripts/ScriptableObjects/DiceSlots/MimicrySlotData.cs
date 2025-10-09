@@ -1,18 +1,46 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "MimicrySlotData", menuName = "DiceSlots/MimicrySlotData")]
 public class MimicrySlotData : DiceSlotData
 {
     public override void Effect(Die slottedDie, int mult, BattleSceneManager sceneManager, Entity owner, DiceSlotController slot)
     {
-        List<DiceSlotController> target = owner.activeColumn;
-        int repeats = slottedDie.value * mult;
-        for (int i = 0; i < repeats; i++)
+        List<DiceSlotController> target;
+        int triggers = slottedDie.value * mult;
+        if (owner is Player)
+        {
+            target = sceneManager.enemyActiveColumn;
+        }
+        else
+        {
+            target = sceneManager.playerActiveColumn;
+        }
+
+        for (int i = 0; i < triggers; i++)
         {
             int randomIndex = Random.Range(0, target.Count);
             DiceSlotController targetSlot = target[randomIndex];
+
+            GameObject vfx = Instantiate(vfxPrefab, targetSlot.transform.position, Quaternion.identity);
+            vfx.GetComponent<ParticleSystem>()?.Play();
+
+            if (targetSlot.isFilled)
+            {
+                owner.extraDice.Add(targetSlot.slottedDie);
+                Debug.Log("Dice have been mimicked");
+            }
+            else
+            {
+                Debug.Log("Nothing to mimic");
+            }
         }
-        Debug.Log("Dice have been mimicked");
+
+        if (owner.extraDice.Count > 0)
+        {
+            sceneManager.intermission = true;
+        }
+
     }
 }

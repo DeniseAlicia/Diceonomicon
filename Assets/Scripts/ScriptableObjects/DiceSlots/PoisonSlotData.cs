@@ -8,7 +8,7 @@ public class PoisonSlotData : DiceSlotData
     public override void Effect(Die slottedDie, int mult, BattleSceneManager sceneManager, Entity owner, DiceSlotController slot)
     {
         List<DiceSlotController> target;
-        int repeats = slottedDie.value * mult;
+        int triggers = slottedDie.value * mult;
         if (owner is Player)
         {
             target = sceneManager.enemyActiveColumn;
@@ -18,7 +18,7 @@ public class PoisonSlotData : DiceSlotData
             target = sceneManager.playerActiveColumn;
         }
 
-        for (int i = 0; i < repeats; i++)
+        for (int i = 0; i < triggers; i++)
         {
             int randomIndex = Random.Range(0, target.Count);
             DiceSlotController targetSlot = target[randomIndex];

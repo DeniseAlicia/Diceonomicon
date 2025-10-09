@@ -22,7 +22,7 @@ public class BattleSceneManager : MonoBehaviour
     public int round;
     public float[] columnStartPositions = new float[] { -7.65f, -6.9f, -6.1f };
     public static int CurrentColumn { get; private set; }
-    public static bool intermission { get; private set; }
+    public bool intermission;
 
     public EndBattle endScene;
     public Button placementButton;
@@ -144,11 +144,26 @@ public class BattleSceneManager : MonoBehaviour
     private void StartIntermissionPhase()
     {
         intermissionButton.gameObject.SetActive(true);
+
+        if (player.extraDice.Count > 0)
+        {
+            CopyDice();
+            player.extraDice.Clear();
+        }
     }
 
     private void ContinueColumnPhase()
     {
         intermission = false;
+
+        foreach (Die die in player.tempDice)
+        {
+            if (!die.isPlaced)
+            {
+                Destroy(die.gameObject);
+            }
+        }
+
         StartCoroutine(HandleActiveColumnRoutine(CurrentColumn));
     }
 
@@ -696,5 +711,37 @@ public class BattleSceneManager : MonoBehaviour
         TabletManager.Instance.tablets = newTablets;
         Vector3 startPosition = new Vector3(4.9f, -2.5f, 0f);
         TabletManager.Instance.SpawnTablets(startPosition);
+    }
+
+    public void CopyDice()
+    {
+        List<Die> intermissionDice = new List<Die>();
+
+        foreach (Die die in player.extraDice)
+        {
+            if (die == null) continue;
+
+            Die dieCopy = Instantiate(die, die.transform.position, Quaternion.identity);
+            dieCopy.InitializeAsCopy();
+
+            intermissionDice.Add(dieCopy);
+        }
+
+        float distance = 0.5f;
+        Vector3 basePos = new Vector3(-0.5f, 0.15f, -1f);
+
+        for (int i = 0; i < intermissionDice.Count; i++)
+        {
+            float overflow = Mathf.Floor(i / 3);
+            float spacing = (i - overflow * 3) * distance;
+
+            Vector3 diePos = basePos;
+            diePos.x += spacing;
+            diePos.z += overflow * distance;
+
+            intermissionDice[i].transform.position = diePos;
+        }
+
+        player.tempDice = intermissionDice;
     }
 }
