@@ -12,10 +12,11 @@ public class Die : MonoBehaviour
     new public string tag;
     public string owner;
     public Vector3 lastPosition;
-    public bool isDraggable = false;
+    public bool isDraggable;
     public bool isPlaced = false;
     public bool isResting = false;
     public bool isFrozen = false;
+    public bool isCopy;
 
     [SerializeField] float forceX;
     [SerializeField] float forceY;
@@ -32,7 +33,6 @@ public class Die : MonoBehaviour
     public int dieRotation;
     Vector3 mouseOffset;
     private Vector3 defaultGravity = Physics.gravity;
-    private Vector3 DieStartPos; // Test; remove later
 
     public string nameText;
     public string descText;
@@ -41,7 +41,7 @@ public class Die : MonoBehaviour
     public DiceData dieData;
 
     public int currentValue;
-    private Transform sideUp;
+    public Transform sideUp;
 
     public FMODUnity.EventReference DiePlacementEvent;
 
@@ -66,10 +66,14 @@ public class Die : MonoBehaviour
         rigidBody.useGravity = true;
         boxCollider = GetComponent<BoxCollider>();
         isRolling = false;
-        isDraggable = false;
         isPlaced = false;
-        isResting = false;
-        DieStartPos = transform.position; // Test; remove later
+
+        if (!isCopy)
+        {
+            isDraggable = false;
+            isResting = false;
+        }
+
     }
 
     void FixedUpdate()
@@ -88,7 +92,7 @@ public class Die : MonoBehaviour
         rigidBody.useGravity = true;
         rigidBody.isKinematic = false;
 
-        forceX = UnityEngine.Random.Range(x, x/2);
+        forceX = UnityEngine.Random.Range(x, x / 2);
         forceY = UnityEngine.Random.Range(0.2f, 0.3f);
         forceZ = UnityEngine.Random.Range(0.25f, 0.3f);
 
@@ -127,7 +131,7 @@ public class Die : MonoBehaviour
 
         sideUp = upSide;
 
-        boxCollider.enabled = false;
+        //boxCollider.enabled = false;
         value = int.Parse(upSide.name);
         //Debug.Log("Value: " + value);
 
@@ -153,7 +157,7 @@ public class Die : MonoBehaviour
                 break;
         }
 
-        boxCollider.enabled = true;
+        //boxCollider.enabled = true;
         isRolling = false;
 
         if (!dieTags.Contains("Buff"))
@@ -349,5 +353,27 @@ public class Die : MonoBehaviour
         GameObject child = sideUp.gameObject;
         GameObject childText = child.transform.GetChild(0).gameObject;
         childText.GetComponent<TMP_Text>().text = value.ToString();
+    }
+
+    public void InitializeAsCopy()
+    {
+        MoveToLayer("Gameplay");
+        transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+
+        if (!dieTags.Contains("Buff"))
+        {
+            foreach (TMP_Text t in GetComponentsInChildren<TMP_Text>(true))
+            {
+                t.text = value.ToString();
+                t.ForceMeshUpdate();
+            }
+        }
+
+        isCopy = true;
+        isPlaced = false;
+        isResting = true;
+        isDraggable = true;
+        rigidBody.isKinematic = true;
+        rigidBody.useGravity = false;
     }
 }

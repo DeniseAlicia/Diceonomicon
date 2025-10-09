@@ -12,13 +12,15 @@ public abstract class Entity : MonoBehaviour
     public GameObject candle;
     public TMP_Text healthText;
     public TMP_Text damageText;
-     public TMP_Text blockText;
+    public TMP_Text blockText;
 
     public List<DiceData> diceDeck;
     public List<DiceData> drawnDice;
     public int maxDrawSize;
     public int drawSize; //how many dice can be drawn at round start
     public List<DiceData> discardPile;
+    public List<Die> extraDice;
+    public List<Die> tempDice;
     public int damage = 10;
     public int block = 0;
     public List<DiceSlotController> activeColumn;
@@ -35,7 +37,7 @@ public abstract class Entity : MonoBehaviour
 
     public void Update()
     {
-        
+
     }
 
     public void DrawDice()
@@ -57,6 +59,6 @@ public abstract class Entity : MonoBehaviour
             drawnDice.Add(drawnDie);
         }
     }
-    
+
     public abstract void RollDice();
 }
