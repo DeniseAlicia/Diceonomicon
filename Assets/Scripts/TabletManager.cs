@@ -12,7 +12,7 @@ public class TabletManager : MonoBehaviour
 
     private Vector3 startPosition;
 
-    public GameObject tabletPrefab;
+
     public List<TabletData> tablets;
 
     private readonly float spacing = 0;
@@ -44,7 +44,7 @@ public class TabletManager : MonoBehaviour
     {
         foreach (TabletData tablet in tablets)
         {
-            GameObject tabletInstance = Instantiate(tabletPrefab, currentPosition, Quaternion.identity);
+            GameObject tabletInstance = Instantiate(tablet.tabletPrefab, currentPosition, Quaternion.identity);
 
             TabletController controller = tabletInstance.GetComponent<TabletController>();
             controller.SetData(tablet);
@@ -52,6 +52,15 @@ public class TabletManager : MonoBehaviour
 
             Renderer renderer = tabletInstance.GetComponentInChildren<Renderer>();
             float height = renderer.bounds.size.y;
+
+            if (tablet.tabletPrefab.name.Contains("Small"))
+            {
+                height *= 0.33f;
+            }
+            else if (tablet.tabletPrefab.name.Contains("Medium"))
+            {
+                height *= 0.7f;
+            }
 
             currentPosition.y -= height + spacing;
         }
