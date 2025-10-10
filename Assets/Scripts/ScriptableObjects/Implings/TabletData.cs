@@ -12,6 +12,7 @@ public class TabletData : ScriptableObject
     public Entity owner;
     public DiceSlotData[] slots;
     public DiceData[] startingDice;
+    public GameObject tabletPrefab;
     public GameObject slotPrefab;
     private Vector3 startSlotPosition = new Vector3(-3, 0, -3);
 
