@@ -29,7 +29,6 @@ public class EndBattle : MonoBehaviour
     public void Lose()
     {
         gameOverScreen.SetActive(true);
-        // victoryScreen.SetActive(true);
 
         buttonContainer.SetActive(true);
         Button restart = restartButton.GetComponent<Button>();
