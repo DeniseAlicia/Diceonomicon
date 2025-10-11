@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -17,19 +18,25 @@ public class BattleSceneManager : MonoBehaviour
     private static List<List<DiceSlotController>> playerSlots;
     private static List<List<DiceSlotController>> enemySlots;
 
-
+    // Combat Stats
     public int level;
     public int round;
+    public int Score { get; private set; }
+    public List<int> ScoreList { get; private set; } = new List<int>();
     public float[] columnStartPositions = new float[] { -7.65f, -6.9f, -6.1f };
     public static int CurrentColumn { get; private set; }
     public bool intermission;
 
+    // UI Elements & Buttons
     public EndBattle endScene;
     public Button placementButton;
     public Button intermissionButton;
     public Button rollDiceButton;
     public GameObject combatBolt;
+    public TMP_Text scoreText;
+    public TMP_Text highscoreText;
 
+    // FMOD
     public FMODUnity.EventReference DiceRollEvent;
     public FMODUnity.EventReference DiceDrawEvent;
     public FMODUnity.EventReference RoundStartEvent;
@@ -47,6 +54,7 @@ public class BattleSceneManager : MonoBehaviour
         //opponent.SetEnemyRoster();
 
         round = 0;
+        Score = 0;
         player.level = 1;
         player.area = "Green";
         opponent.damage = 0;
@@ -60,9 +68,10 @@ public class BattleSceneManager : MonoBehaviour
 
     private void Start()
     {
+        scoreText.text = Score.ToString();
         opponent.currentHealth = opponent.maxHealth;
-        player.alpha = 0.9f; // 0.1f for rolling, 0.9f for post-placement
-        opponent.alpha = 0.9f; // 0.1f for rolling, 0.9f for post-placement
+        player.alpha = 0.9f;
+        opponent.alpha = 0.9f;
         player.healthText.text = player.currentHealth.ToString();
         opponent.healthText.text = opponent.currentHealth.ToString();
 
@@ -75,7 +84,6 @@ public class BattleSceneManager : MonoBehaviour
         intermissionButton.onClick.AddListener(() => ContinueColumnPhase());
         intermissionButton.gameObject.SetActive(false);
 
-        Time.timeScale = 1;
         StartNewRound();
     }
 
@@ -147,7 +155,7 @@ public class BattleSceneManager : MonoBehaviour
 
         if (player.extraDice.Count > 0)
         {
-            CopyDice();
+            DiceManager.CopyDice(player);
             player.extraDice.Clear();
         }
     }
@@ -161,6 +169,10 @@ public class BattleSceneManager : MonoBehaviour
             if (!die.isPlaced)
             {
                 Destroy(die.gameObject);
+            }
+            else
+            {
+                die.isDraggable = false;
             }
         }
 
@@ -290,7 +302,7 @@ public class BattleSceneManager : MonoBehaviour
         playerSlots.Clear();
         enemySlots.Clear();
 
-        if (column == 3)
+        if (column == 3 && opponent.currentHealth > 0)
         {
             EndOfRound();
             yield break;
@@ -350,6 +362,7 @@ public class BattleSceneManager : MonoBehaviour
         {
             die.isFrozen = false;
         }
+
         StartDelay(1f, () => StartNewRound());
     }
 
@@ -375,32 +388,35 @@ public class BattleSceneManager : MonoBehaviour
 
 
 
-    public void CheckWinLossState()
+    public void CheckLossState()
     {
         if (player.currentHealth <= 0)
         {
             endScene.Lose();
-            Time.timeScale = 0;
-            EndOfRound();
+            ScoreList.Add(Score);
+            UpdateScoreDisplay();
+            StartIntermissionPhase();
         }
+    }
 
+    public void CheckWinState()
+    {
         if (opponent.currentHealth <= 0 && player.currentHealth > 0)
         {
             // endScene.Win();
             // Time.timeScale = 0;
             // EndOfRound();
 
-            GameObject[] oldTablets = GameObject.FindGameObjectsWithTag("EnemyTablet");
-            foreach (GameObject tablet in oldTablets)
-            {
-                Destroy(tablet);
-            }
-
             opponent.ActiveImplings.Clear();
             opponent.drawnDice.Clear();
             opponent.discardPile.Clear();
             opponent.diceDeck.Clear();
 
+            GameObject[] oldTablets = GameObject.FindGameObjectsWithTag("EnemyTablet");
+            foreach (GameObject tablet in oldTablets)
+            {
+                Destroy(tablet);
+            }
             EndOfRound();
         }
     }
@@ -440,6 +456,7 @@ public class BattleSceneManager : MonoBehaviour
 
             yield return new WaitForSeconds(wait);
             damageAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            CheckLossState();
         }
     }
 
@@ -484,13 +501,12 @@ public class BattleSceneManager : MonoBehaviour
                 opponent.healthText.text = opponent.currentHealth.ToString();
                 damageAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 damageAudio.release();
-                CheckWinLossState();
+                CheckWinState();
                 yield break;
             }
 
             yield return new WaitForSeconds(wait);
             damageAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            CheckWinLossState();
         }
     }
 
@@ -698,6 +714,8 @@ public class BattleSceneManager : MonoBehaviour
     // TEMPORARY ENDLESS MODE
     private void NewEncounter(int level, string area)
     {
+        Score += player.currentHealth + 20;
+        scoreText.text = Score.ToString();
         opponent.currentHealth = opponent.maxHealth;
         opponent.healthText.text = opponent.currentHealth.ToString();
         RectTransform candle = opponent.candle.GetComponent<RectTransform>();
@@ -713,35 +731,20 @@ public class BattleSceneManager : MonoBehaviour
         TabletManager.Instance.SpawnTablets(startPosition);
     }
 
-    public void CopyDice()
+    public void UpdateScoreDisplay()
     {
-        List<Die> intermissionDice = new List<Die>();
+        // Get top 5 scores (sorted descending)
+        var topScores = ScoreList
+            .OrderByDescending(s => s)
+            .Take(5)
+            .ToList();
 
-        foreach (Die die in player.extraDice)
+        string scoreText = "High Scores:\n";
+        for (int i = 0; i < topScores.Count; i++)
         {
-            if (die == null) continue;
-
-            Die dieCopy = Instantiate(die, die.transform.position, Quaternion.identity);
-            dieCopy.InitializeAsCopy();
-
-            intermissionDice.Add(dieCopy);
+            scoreText += $"{i + 1}. {topScores[i]}\n";
         }
 
-        float distance = 0.5f;
-        Vector3 basePos = new Vector3(-0.5f, 0.15f, -1f);
-
-        for (int i = 0; i < intermissionDice.Count; i++)
-        {
-            float overflow = Mathf.Floor(i / 3);
-            float spacing = (i - overflow * 3) * distance;
-
-            Vector3 diePos = basePos;
-            diePos.x += spacing;
-            diePos.z += overflow * distance;
-
-            intermissionDice[i].transform.position = diePos;
-        }
-
-        player.tempDice = intermissionDice;
+        highscoreText.text = scoreText;
     }
 }

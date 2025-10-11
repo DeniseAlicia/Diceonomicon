@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Linq;
+
 
 public static class DiceManager
 {
@@ -68,6 +71,38 @@ public static class DiceManager
     {
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public static void CopyDice(Entity entity)
+    {
+        List<Die> intermissionDice = new List<Die>();
+
+        foreach (Die die in entity.extraDice)
+        {
+            if (die == null) continue;
+
+            Die dieCopy = UnityEngine.Object.Instantiate(die, die.transform.position, Quaternion.identity);
+            dieCopy.InitializeAsCopy();
+
+            intermissionDice.Add(dieCopy);
+        }
+
+        float distance = 0.5f;
+        Vector3 basePos = new Vector3(-0.5f, 0.15f, -1f);
+
+        for (int i = 0; i < intermissionDice.Count; i++)
+        {
+            float overflow = Mathf.Floor(i / 3);
+            float spacing = (i - overflow * 3) * distance;
+
+            Vector3 diePos = basePos;
+            diePos.x += spacing;
+            diePos.z += overflow * distance;
+
+            intermissionDice[i].transform.position = diePos;
+        }
+
+        entity.tempDice = intermissionDice;
     }
 }
 
