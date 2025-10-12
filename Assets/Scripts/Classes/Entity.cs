@@ -35,11 +35,6 @@ public abstract class Entity : MonoBehaviour
         drawSize = maxDrawSize;
     }
 
-    public void Update()
-    {
-
-    }
-
     public void DrawDice()
     {
         for (int i = 0; i < drawSize; i++)

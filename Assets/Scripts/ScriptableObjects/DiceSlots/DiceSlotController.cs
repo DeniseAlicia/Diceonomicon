@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.Threading.Tasks;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 public class DiceSlotController : MonoBehaviour
 {
@@ -15,8 +16,10 @@ public class DiceSlotController : MonoBehaviour
     public Renderer symbolMaterial;
     public ParticleSystem vfx;
     public HoverGlowController hoverTarget;
+    public Tooltip tooltip;
 
     public Entity owner;
+    public Player player;
     public bool isFilled;
     public bool isHandled;
     public DiceSlotData slotData { get; private set; }
@@ -24,6 +27,7 @@ public class DiceSlotController : MonoBehaviour
     public int mult = 1;
     public Die slottedDie;
     public new string tag;
+    public Die die;
 
     private BattleSceneManager activeSceneManager;
     public bool wasFrozen = false;
@@ -33,6 +37,7 @@ public class DiceSlotController : MonoBehaviour
     private void Start()
     {
         activeSceneManager = FindFirstObjectByType<BattleSceneManager>();
+        player = FindFirstObjectByType<Player>();
         mult = 1;
     }
 
@@ -154,23 +159,63 @@ public class DiceSlotController : MonoBehaviour
         return slotData != null ? slotData.desc : "";
     }
 
-    void OnMouseEnter()
+    private void OnMouseEnter()
     {
-        if (hoverTarget != null)
-            hoverTarget.SetHover(true);
-
-        if (slotData != null)
+        if (hoverTarget)
         {
-            // TooltipSystem.ShowTooltip(slotData.desc, slotData.name);
+            hoverTarget.SetHover(true);
         }
     }
 
-    void OnMouseExit()
+    private void OnMouseExit()
     {
-        if (hoverTarget != null)
+        if (hoverTarget)
+        {
             hoverTarget.SetHover(false);
-
-        TooltipSystem.HideTooltip();
+        }
     }
 
+    private void OnMouseDown()
+    {
+        die = null;
+        
+        if (!isFilled)
+        {
+            foreach (Die suitableDie in player.dice.OrderBy(d => d.value))
+            {
+                if (suitableDie.dieTags.Contains(tag) && !suitableDie.isPlaced && owner is Player && suitableDie.isDraggable)
+                {
+                    die = suitableDie;
+                }
+            }
+
+            if (die)
+            {
+                if (die.transform.parent != null)
+                {
+                    Transform parent = die.transform.parent;
+                    isFilled = false;
+                    slottedDie = null;
+                    die.transform.SetParent(null);
+                }
+                die.lastPosition = die.transform.position;
+                die.lastRotation = die.transform.eulerAngles;
+                die.transform.SetParent(this.transform);
+                die.transform.localPosition = new Vector3(0, 3, 0);
+                die.transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                die.transform.Rotate(new Vector3(0, 0, die.dieRotation), Space.World);
+                die.transform.localScale = new Vector3(6f, 6f, 6f);
+
+                isFilled = true;
+                slottedDie = die;
+                die.isPlaced = true;
+                die.MoveToLayer("BattleTablets");
+            }
+        }
+    }
+
+    private void OnPointerMove()
+    {
+        tooltip.UpdatePosition();
+    }
 }

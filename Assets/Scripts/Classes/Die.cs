@@ -28,8 +28,8 @@ public class Die : MonoBehaviour
     private Camera camBattleTablets;
     public Rigidbody rigidBody;
     private BoxCollider boxCollider;
-    private bool isRolling = false;
-    Vector3 lastRotation;
+    public bool isRolling = false;
+    public Vector3 lastRotation;
     public int dieRotation;
     Vector3 mouseOffset;
     private Vector3 defaultGravity = Physics.gravity;
