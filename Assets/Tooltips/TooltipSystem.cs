@@ -21,4 +21,9 @@ public class TooltipSystem : MonoBehaviour
     {
         current.tooltip.gameObject.SetActive(false);
     }
+
+    public static void UpdateTooltip()
+    {
+        current.tooltip.UpdatePosition();
+    }
 }

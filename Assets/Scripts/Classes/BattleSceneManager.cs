@@ -17,6 +17,7 @@ public class BattleSceneManager : MonoBehaviour
     public List<DiceSlotController> enemyActiveColumn;
     private static List<List<DiceSlotController>> playerSlots;
     private static List<List<DiceSlotController>> enemySlots;
+    private static DiceSlotController[] allSlots;
 
     // Combat Stats
     public int level;
@@ -49,6 +50,7 @@ public class BattleSceneManager : MonoBehaviour
         Camera camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
         camBattleTablets.gameObject.SetActive(false);
         camBattleTablets.gameObject.SetActive(true);
+
 
         player.CreateDiceDeck();
         //opponent.SetEnemyRoster();
@@ -91,6 +93,8 @@ public class BattleSceneManager : MonoBehaviour
 
     private void StartNewRound()
     {
+        allSlots = GameObject.FindObjectsByType<DiceSlotController>(FindObjectsSortMode.None);
+        
         if (opponent.currentHealth == 0)
         {
             NewEncounter(player.level, player.area);
@@ -108,6 +112,26 @@ public class BattleSceneManager : MonoBehaviour
             sprite.color = new Color(1f, 1f, 1f, 1f);
         }
 
+        foreach (DiceSlotController slot in allSlots)
+        {
+            if (slot.tag == "Buff")
+            {
+                slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0f, 1f, 0.2f, 0.6f));
+            }
+            else if (slot.tag == "Spell")
+            {
+                slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0.6f, 0.2f, 1f, 0.6f));
+            }
+            else if (slot.tag == "Damage")
+            {
+                slot.outlineMaterial.material.SetColor("_BaseColor", new Color(1f, 0f, 0.15f, 0.6f));
+            }
+            else
+            {
+                slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0.1f, 0.45f, 1f, 0.6f));
+            }
+        }
+
         FMOD.Studio.EventInstance roundStartAudio = FMODUnity.RuntimeManager.CreateInstance(RoundStartEvent);
         roundStartAudio.start();
 
@@ -116,8 +140,6 @@ public class BattleSceneManager : MonoBehaviour
         StartDelay(1f, () => opponent.ai.RollDice());
         StartDelay(4f, () => StartPrePlacementPhase());
     }
-
-
 
     private void StartPrePlacementPhase()
     {
@@ -246,13 +268,13 @@ public class BattleSceneManager : MonoBehaviour
         foreach (GameObject banner in playerColumnBanner)
         {
             Image sprite = banner.GetComponent<Image>();
-            sprite.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+            sprite.color = new Color(0.25f, 0.25f, 0.25f, 1f);
         }
 
         foreach (GameObject opponentBanner in opponentColumnBanner)
         {
             Image sprite = opponentBanner.GetComponent<Image>();
-            sprite.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+            sprite.color = new Color(0.25f, 0.25f, 0.25f, 1f);
         }
 
         Image playerBannerSprite = playerColumnBanner[column - 1].GetComponent<Image>();
@@ -607,7 +629,9 @@ public class BattleSceneManager : MonoBehaviour
                 slot.isFilled = false;
                 slot.slottedDie = null;
             }
+            slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0.1f, 0.1f, 0.1f, 0.1f));
         }
+
         foreach (DiceSlotController slot in playerActiveColumn)
         {
             if (slot.wasFrozen == false)
@@ -615,6 +639,7 @@ public class BattleSceneManager : MonoBehaviour
                 slot.isFilled = false;
                 slot.slottedDie = null;
             }
+            slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0.1f, 0.1f, 0.1f, 0.1f));
         }
 
         playerActiveColumn.Clear();
@@ -677,37 +702,45 @@ public class BattleSceneManager : MonoBehaviour
         if (player.block != 0)
         {
             player.blockText.text = player.block.ToString();
+            player.blockText.gameObject.SetActive(true);
         }
         else
         {
             player.blockText.text = null;
+            player.blockText.gameObject.SetActive(false);
         }
 
         if (opponent.block != 0)
         {
             opponent.blockText.text = opponent.block.ToString();
+            opponent.blockText.gameObject.SetActive(true);
         }
         else
         {
             opponent.blockText.text = null;
+            opponent.blockText.gameObject.SetActive(false);
         }
 
         if (player.damage != 0)
         {
             player.damageText.text = player.damage.ToString();
+            player.damageText.gameObject.SetActive(true);
         }
         else
         {
             player.damageText.text = null;
+            player.damageText.gameObject.SetActive(false);
         }
 
         if (opponent.damage != 0)
         {
             opponent.damageText.text = opponent.damage.ToString();
+            opponent.damageText.gameObject.SetActive(true);
         }
         else
         {
             opponent.damageText.text = null;
+            opponent.damageText.gameObject.SetActive(false);
         }
     }
 

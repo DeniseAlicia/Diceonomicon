@@ -6,13 +6,9 @@ using UnityEngine.UI;
 public class Tooltip : MonoBehaviour
 {
     public TextMeshProUGUI headerField;
-
     public TextMeshProUGUI contentField;
-
     public LayoutElement layoutElement;
-
     public int characterWrapLimit;
-
     public RectTransform rectTransform;
 
     private void Start()
@@ -38,11 +34,13 @@ public class Tooltip : MonoBehaviour
         int contentLength = contentField.text.Length;
 
         layoutElement.enabled = (headerLength > characterWrapLimit || contentLength > characterWrapLimit) ? true : false;
+        UpdatePosition();
     }
 
-    private void Update()
+    public void UpdatePosition()
     {
         Vector2 position = Input.mousePosition;
+
         float xOffset = 20f;
         float yOffset = 50f;
 

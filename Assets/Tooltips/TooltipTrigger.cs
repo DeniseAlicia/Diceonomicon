@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TooltipTrigger : MonoBehaviour, IPointerExitHandler
+public class TooltipTrigger : MonoBehaviour
 {
     private DiceSlotController controller;
     private Coroutine tooltipCoroutine;
@@ -14,15 +14,6 @@ public class TooltipTrigger : MonoBehaviour, IPointerExitHandler
         controller = GetComponent<DiceSlotController>();
     }
 
-    public void Update()
-    {
-        if (controller == null || !controller.HasSlotData() || Input.GetAxis("Mouse X") > 0.5 || Input.GetAxis("Mouse Y") > 0.5)
-        {
-            TooltipSystem.HideTooltip();
-        }
-    }
-
-    // mouse enters element
     public void OnMouseEnter()
     {
         isPointerOver = true;
@@ -33,17 +24,9 @@ public class TooltipTrigger : MonoBehaviour, IPointerExitHandler
         tooltipCoroutine = StartCoroutine(ShowTooltipWithDelay());
     }
 
-    // mouse exits element
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnMouseExit()
     {
         isPointerOver = false;
-
-        if (tooltipCoroutine != null)
-        {
-            StopCoroutine(tooltipCoroutine);
-            tooltipCoroutine = null;
-        }
-
         TooltipSystem.HideTooltip();
     }
 
