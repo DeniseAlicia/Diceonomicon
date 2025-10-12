@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Linq;
+using DG.Tweening;
 
 
 public static class DiceManager
@@ -35,7 +36,7 @@ public static class DiceManager
         }
     }
 
-    public static void SortAllDice(List<Die> dice, BattleSceneManager sceneManager)
+    public static void SortAllDice(List<Die> dice, BattleSceneManager sceneManager, Button button)
     {
         foreach (Die die in sceneManager.player.dice)
         {
@@ -54,17 +55,21 @@ public static class DiceManager
         for (int i = 0; i < dice.Count; i++)
         {
             diePos = new Vector3(-0.5f, 0.15f, -1f);
-            dice[i].transform.position = diePos;
+            //dice[i].transform.position = diePos;
 
             overflow = Mathf.Floor(i / 3);
             spacing = (i - overflow * 3) * distance;
 
             diePos.x += spacing;
             diePos.z += overflow * distance;
-            dice[i].transform.position = diePos;
+            //dice[i].transform.position = diePos;
+
+            dice[i].transform.DOMove(diePos, 0.6f).SetEase(Ease.OutQuad);
 
             dice[i].isResting = false;
         }
+
+        button.gameObject.SetActive(true);
     }
 
     static void RestartOnClick()

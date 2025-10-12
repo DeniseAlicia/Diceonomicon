@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class BattleSceneManager : MonoBehaviour
@@ -29,6 +30,7 @@ public class BattleSceneManager : MonoBehaviour
     public bool intermission;
 
     // UI Elements & Buttons
+    private InputAction tooltipAction;
     public EndBattle endScene;
     public Button placementButton;
     public Button intermissionButton;
@@ -51,7 +53,7 @@ public class BattleSceneManager : MonoBehaviour
         camBattleTablets.gameObject.SetActive(false);
         camBattleTablets.gameObject.SetActive(true);
 
-
+tooltipAction = InputSystem.actions.FindAction("ShowInfo");
         player.CreateDiceDeck();
         //opponent.SetEnemyRoster();
 
@@ -70,6 +72,7 @@ public class BattleSceneManager : MonoBehaviour
 
     private void Start()
     {
+        
         scoreText.text = Score.ToString();
         opponent.currentHealth = opponent.maxHealth;
         player.alpha = 0.9f;
@@ -89,12 +92,10 @@ public class BattleSceneManager : MonoBehaviour
         StartNewRound();
     }
 
-
-
     private void StartNewRound()
     {
         allSlots = GameObject.FindObjectsByType<DiceSlotController>(FindObjectsSortMode.None);
-        
+
         if (opponent.currentHealth == 0)
         {
             NewEncounter(player.level, player.area);
@@ -163,9 +164,7 @@ public class BattleSceneManager : MonoBehaviour
         player.drawSize = player.maxDrawSize;
         opponent.drawSize = opponent.maxDrawSize;
 
-        StartDelay(3f, () => DiceManager.SortAllDice(player.dice, this));
-
-        placementButton.gameObject.SetActive(true);
+        StartDelay(3f, () => DiceManager.SortAllDice(player.dice, this, placementButton));
     }
 
 
@@ -779,5 +778,37 @@ public class BattleSceneManager : MonoBehaviour
         }
 
         highscoreText.text = scoreText;
+    }
+
+    private void OnEnable()
+    {
+        tooltipAction.performed += ctx => ShowInfo();
+        tooltipAction.canceled += ctx => HideInfo();
+        tooltipAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        tooltipAction.Disable();
+    }
+
+
+    public void ShowInfo()
+    {
+        foreach (DiceSlotController slot in allSlots)
+        {
+            if (slot.isFilled)
+            {
+                slot.slotName.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    public void HideInfo()
+    {
+        foreach (DiceSlotController slot in allSlots)
+        {
+                slot.slotName.gameObject.SetActive(false);
+        }
     }
 }

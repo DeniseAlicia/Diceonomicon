@@ -17,6 +17,7 @@ public class DiceSlotController : MonoBehaviour
     public ParticleSystem vfx;
     public HoverGlowController hoverTarget;
     public Tooltip tooltip;
+    public TMP_Text slotName;
 
     public Entity owner;
     public Player player;
@@ -39,6 +40,7 @@ public class DiceSlotController : MonoBehaviour
         activeSceneManager = FindFirstObjectByType<BattleSceneManager>();
         player = FindFirstObjectByType<Player>();
         mult = 1;
+        slotName.gameObject.SetActive(false);
     }
 
     public void SetData(DiceSlotData data)
@@ -57,6 +59,7 @@ public class DiceSlotController : MonoBehaviour
         outlineMaterial.material = slotData.outlineMaterial;
         symbolMaterial.material = slotData.symbolMaterial;
         priority = slotData.priority;
+        slotName.text = slotData.name;
     }
 
     public void DoEffect()
