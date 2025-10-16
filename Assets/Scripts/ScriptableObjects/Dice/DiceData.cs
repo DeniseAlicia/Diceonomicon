@@ -9,6 +9,7 @@ public abstract class DiceData : ScriptableObject
     public new string name;
     public string desc;
     public Texture texture;
+    public Texture usedTexture;
 
     public int[] range; 
     public string[] tags;

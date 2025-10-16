@@ -16,6 +16,7 @@ public class DiceSlotData : ScriptableObject
     public Entity owner;
     public Die slottedDie;
     public int priority;
+    public int synergy;
 
     public void AssignColorMaterial(string tag)
     {

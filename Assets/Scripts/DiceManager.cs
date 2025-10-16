@@ -86,7 +86,9 @@ public static class DiceManager
         {
             if (die == null) continue;
 
+
             Die dieCopy = UnityEngine.Object.Instantiate(die, die.transform.position, Quaternion.identity);
+            dieCopy.textureRenderer.material.SetTexture("_BaseMap", dieCopy.data.texture);
             dieCopy.InitializeAsCopy();
 
             intermissionDice.Add(dieCopy);

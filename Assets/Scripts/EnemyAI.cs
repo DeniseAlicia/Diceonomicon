@@ -5,75 +5,101 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.Events;
 
 public class EnemyAI : MonoBehaviour
 {
+    public BattleSceneManager sceneManager;
+
     public List<DiceSlotController> emptySlots;
     public List<Die> dice;
-    public Opponent opponent;
-    public GameObject columnMaster;
-    public GameObject diePrefab;
+    public List<int> directions;
 
-    public void GetEnemySlots()
+    public Opponent opponent;
+    public GameObject diePrefab;
+    private int maxDice;
+
+    private int column1Count;
+    private int column2Count;
+    private int column3Count;
+
+    [Header("AI Parameters")]
+    public int columnLimit;
+    public int buffWeight;
+    public int linkWeight;
+
+    public enum DiceSortOrder { Ascending, Descending, Random }
+    public DiceSortOrder diceSortOrder = DiceSortOrder.Descending;
+
+    public void OnEventTriggered()
     {
+        GetEmptySlots();
+    }
+
+    public void GetEmptySlots()
+    {
+        foreach (DiceSlotController slot in emptySlots)
+        {
+            slot.synergy = slot.slotData.synergy;
+        }
+
         emptySlots = new List<DiceSlotController>();
 
         float[] columnStartPositions = new float[] { -7.65f, -6.9f, -6.1f };
-
         for (int j = 0; j < columnStartPositions.Length; j++)
         {
             float columnPosX = columnStartPositions[j];
+            Vector3 raycastVector = new Vector3(columnPosX, -1.8f, -0.1f);
 
             for (int i = 0; i < 9; i++)
             {
                 float yJump = i * -0.8f;
-
-                Vector3 rayPosition = new Vector3(columnPosX + 14.3f, columnMaster.transform.position.y + yJump, columnMaster.transform.position.z);
+                Vector3 rayPosition = new Vector3(columnPosX + 14.3f, raycastVector.y + yJump, raycastVector.z);
                 Ray ray = new Ray(rayPosition, Vector3.forward);
 
+                //Debug.DrawRay(rayPosition, Vector3.forward * 10, Color.purple, 666);
                 if (Physics.Raycast(ray, out RaycastHit hit2, 666))
                 {
                     DiceSlotController slotController = hit2.collider.GetComponent<DiceSlotController>();
                     if (slotController != null)
                     {
+                        if (slotController.tag != "Empty")
+                        {
+                            slotController.synergy += 1;
+
+                            if (slotController.tag == "Buff")
+                            {
+                                DetectBuffNeighbors(slotController);
+                            }
+                        }
                         emptySlots.Add(slotController);
                     }
                 }
             }
-            // Debug.Log("Enemy DiceSlots: " + string.Join(", ", emptySlots));
         }
+
+        foreach (DiceSlotController slot in emptySlots)
+        {
+            DetectLinksDown(slot);
+            DetectLinksUp(slot);
+        }
+
+        SortSlots();
     }
 
-    public void PlaceDie(Die die)
+    private void SortSlots()
     {
-        List<DiceSlotController> color = (
-             from slot in emptySlots
-             where die.dieTags.Contains(slot.tag) && slot.isFilled == false
-             select slot
-        ).ToList();
+        System.Random rng = new System.Random();
 
-        int rdm = UnityEngine.Random.Range(0, color.Count);
-
-        DiceSlotController filledSlot = color[rdm];
-
-        die.transform.SetParent(filledSlot.transform);
-        die.transform.localPosition = new Vector3(0, 3, 0);
-        die.transform.Rotate(new Vector3(-90, 0, 0), Space.World);
-        die.transform.Rotate(new Vector3(0, 0, die.dieRotation), Space.World);
-        die.transform.localScale = new Vector3(6f, 6f, 6f);
-
-        filledSlot.isFilled = true;
-        filledSlot.slottedDie = die;
-        die.isPlaced = true;
-
-        color = new List<DiceSlotController>();
+        emptySlots = emptySlots
+    .OrderByDescending(slot => slot.synergy)
+    .ThenBy(slot => rng.Next())
+    .ToList();
     }
 
     public void RollDice()
     {
-        GetEnemySlots();
-
-        List<Die> dice = new List<Die>();
+        dice = new List<Die>();
         Vector3 startPosition = new Vector3(2f, 5f, -5f);
         float distance = 0.5f;
 
@@ -88,36 +114,331 @@ public class EnemyAI : MonoBehaviour
             diePos.x += spacing;
             diePos.z += overflow * distance;
 
-            // Instantiate prefab at the calculated position
             GameObject dieObject = Instantiate(diePrefab, diePos, Quaternion.identity);
 
-            // Set data on the die script
             Die die = dieObject.GetComponent<Die>();
             die.SetData(dieData);
 
-            // Add dice to die Class list
             dice.Add(die);
         }
 
         foreach (Die dieInstance in dice)
         {
             dieInstance.Roll(-0.2f);
-            StartCoroutine(PlaceDieDelay(dieInstance));
         }
-        ;
+
+        maxDice = dice.Count();
+
+        if (columnLimit == 0)
+        {
+            columnLimit = Mathf.CeilToInt(maxDice / 3) + 1;
+        }
+
+        StartCoroutine(PlaceDieDelay());
     }
 
-    private IEnumerator PlaceDieDelay(Die die)
+    private IEnumerator PlaceDieDelay()
     {
         float delay = 3f;
         yield return new WaitForSeconds(delay);
-        die.GetSideFacingUp();
-        die.isResting = true;
-        die.isDraggable = false;
-        die.rigidBody.isKinematic = true;
-        die.rigidBody.useGravity = false;
-        PlaceDie(die);
-        die.MoveToLayer("BattleTablets");
+
+        foreach (Die die in dice)
+        {
+            die.GetSideFacingUp();
+            die.isResting = true;
+            die.isDraggable = false;
+            die.rigidBody.isKinematic = true;
+            die.rigidBody.useGravity = false;
+
+        }
+
+        switch (diceSortOrder)
+        {
+            case DiceSortOrder.Ascending:
+                dice = dice.OrderBy(d => d.value).ToList();
+                break;
+            case DiceSortOrder.Descending:
+                dice = dice.OrderByDescending(d => d.value).ToList();
+                break;
+            case DiceSortOrder.Random:
+                dice = dice.OrderBy(d => UnityEngine.Random.value).ToList();
+                break;
+        }
+
+        PlaceBuffDice();
+        SortSlots();
+
+        column1Count = 0;
+        column2Count = 0;
+        column3Count = 0;
+
+        PlaceDice();
+
+        if (dice.Count() > 0)
+        {
+            PlaceLeftoverDice();
+        }
+    }
+
+    public void PlaceBuffDice()
+    {
+        foreach (DiceSlotController slot in emptySlots)
+        {
+            if (slot.tag == "Buff")
+            {
+                foreach (Die die in dice)
+                {
+                    if (die.dieTags.Contains(slot.tag))
+                    {
+                        die.transform.SetParent(slot.transform);
+                        die.transform.localPosition = new Vector3(0, 3, 0);
+                        die.transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                        die.transform.localScale = new Vector3(6f, 6f, 6f);
+
+                        slot.isFilled = true;
+                        slot.slottedDie = die;
+                        die.isPlaced = true;
+                        die.MoveToLayer("BattleTablets");
+
+                        FindBuffTargetSlots(die, slot);
+
+                        dice.Remove(die);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void PlaceDice()
+    {
+
+        for (int i = 0; i < emptySlots.Count; i++)
+        {
+            DiceSlotController slot = emptySlots[i];
+            int columnIndex;
+
+            if (slot.isFilled)
+            {
+                continue;
+            }
+
+            if (slot.transform.position.x < 7.3f) columnIndex = 1;
+            else if (slot.transform.position.x < 8.1f) columnIndex = 2;
+            else columnIndex = 3;
+
+            if ((columnIndex == 1 && column1Count >= columnLimit) ||
+                (columnIndex == 2 && column2Count >= columnLimit) ||
+                (columnIndex == 3 && column3Count >= columnLimit))
+            {
+                continue;
+            }
+
+            foreach (Die die in dice)
+            {
+                if (die.dieTags.Contains(slot.tag))
+                {
+                    die.transform.SetParent(slot.transform);
+                    die.transform.localPosition = new Vector3(0, 3, 0);
+                    die.transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                    die.transform.localScale = new Vector3(6f, 6f, 6f);
+
+                    slot.isFilled = true;
+                    slot.slottedDie = die;
+                    die.isPlaced = true;
+                    die.MoveToLayer("BattleTablets");
+
+                    if (columnIndex == 1) column1Count++;
+                    else if (columnIndex == 2) column2Count++;
+                    else column3Count++;
+
+                    CheckDieUpDown(die);
+
+                    dice.Remove(die);
+
+                    // Restart recursion after placing a die
+                    PlaceDice();
+                    return;
+                }
+            }
+        }
+    }
+
+    public void PlaceLeftoverDice()
+    {
+        foreach (DiceSlotController slot in emptySlots)
+        {
+            if (slot.isFilled)
+            {
+                continue;
+            }
+
+            foreach (Die die in dice)
+            {
+                if (die.dieTags.Contains(slot.tag))
+                {
+                    die.transform.SetParent(slot.transform);
+                    die.transform.localPosition = new Vector3(0, 3, 0);
+                    die.transform.Rotate(new Vector3(-90, 0, 0), Space.World);
+                    die.transform.localScale = new Vector3(6f, 6f, 6f);
+
+                    slot.isFilled = true;
+                    slot.slottedDie = die;
+                    die.isPlaced = true;
+                    die.MoveToLayer("BattleTablets");
+
+                    CheckDieUpDown(die);
+
+                    dice.Remove(die);
+                    break;
+                }
+            }
+        }
+    }
+
+
+    public void TranslateDieValue(Die die)
+    {
+        directions.Clear();
+
+        if (die.value > 0 && die.value < 7)
+        {
+            die.value = die.range[die.value - 1];
+        }
+
+        string valueString = die.value.ToString();
+        foreach (char x in valueString)
+        {
+            int newValue = Int32.Parse(x.ToString());
+            int angle = newValue * 45 - 45 - die.dieRotation;
+            directions.Add(angle);
+            Debug.Log(angle);
+        }
+    }
+
+    public List<Die> FindBuffTargetSlots(Die die, DiceSlotController slot)
+    {
+        TranslateDieValue(die);
+        List<int> dirAngles = directions;
+        List<Die> targets = new List<Die>();
+        int maxDistance = 1;
+
+        foreach (int angle in dirAngles)
+        {
+            Vector3 direction = Quaternion.Euler(-20, angle, -20) * Vector3.back;
+
+            Transform originTransform = slot.transform;
+
+            Vector3 raycastVector = new Vector3(originTransform.position.x, originTransform.position.y, originTransform.position.z - 0.3f);
+
+            Ray ray = new Ray(raycastVector, originTransform.TransformDirection(direction));
+            Debug.DrawRay(raycastVector, originTransform.TransformDirection(direction) * 666, Color.red, 222f);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
+            {
+                DiceSlotController hitSlot = hit.collider.GetComponent<DiceSlotController>();
+                if (hitSlot != null)
+                {
+                    if (hitSlot.tag != "Buff")
+                    {
+                        hitSlot.synergy += buffWeight;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+        return targets;
+    }
+
+    public void DetectLinksDown(DiceSlotController slot)
+    {
+        Vector3 rayPosition = new Vector3(slot.transform.position.x, slot.transform.position.y - 0.8f, slot.transform.position.z - 10);
+        Ray raydown = new Ray(rayPosition, Vector3.forward);
+
+        if (Physics.Raycast(raydown, out RaycastHit hit, 666))
+        {
+            DiceSlotController hitSlot = hit.collider.GetComponent<DiceSlotController>();
+            if (hitSlot != null && hitSlot.tag == slot.tag)
+            {
+                hitSlot.synergy += linkWeight;
+                DetectLinksDown(hitSlot);
+            }
+        }
+    }
+
+    public void DetectLinksUp(DiceSlotController slot)
+    {
+        Vector3 rayPosition = new Vector3(slot.transform.position.x, slot.transform.position.y + 0.8f, slot.transform.position.z - 10);
+        Ray rayup = new Ray(rayPosition, Vector3.forward);
+
+        if (Physics.Raycast(rayup, out RaycastHit hit, 666))
+        {
+            DiceSlotController hitSlot = hit.collider.GetComponent<DiceSlotController>();
+            if (hitSlot != null && hitSlot.tag == slot.tag)
+            {
+                hitSlot.synergy += linkWeight;
+                DetectLinksUp(hitSlot);
+            }
+        }
+    }
+
+    public void CheckDieUpDown(Die die)
+    {
+        Vector3 rayPosition = new Vector3(die.transform.position.x, die.transform.position.y + 0.8f, die.transform.position.z - 10);
+        Ray rayup = new Ray(rayPosition, Vector3.forward);
+
+        if (Physics.Raycast(rayup, out RaycastHit hit, 666))
+        {
+            DiceSlotController hitSlot = hit.collider.GetComponent<DiceSlotController>();
+            if (hitSlot != null && die.dieTags.Contains(hitSlot.tag))
+            {
+                hitSlot.synergy += 1;
+            }
+        }
+
+        Vector3 rayPosition2 = new Vector3(die.transform.position.x, die.transform.position.y - 0.8f, die.transform.position.z - 10);
+        Ray raydown = new Ray(rayPosition2, Vector3.forward);
+
+        if (Physics.Raycast(raydown, out RaycastHit hit2, 666))
+        {
+            DiceSlotController hitSlot = hit2.collider.GetComponent<DiceSlotController>();
+            if (hitSlot != null && die.dieTags.Contains(hitSlot.tag))
+            {
+                hitSlot.synergy += 1;
+            }
+        }
+
+        SortSlots();
+    }
+
+    public void DetectBuffNeighbors(DiceSlotController slot)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            float xJump = j * 0.8f;
+            Vector3 raycastVector = new Vector3(slot.transform.position.x - 0.8f + xJump, slot.transform.position.y + 0.8f, slot.transform.position.z - 10);
+
+            for (int i = 0; i < 3; i++)
+            {
+                float yJump = i * -0.8f;
+                Vector3 rayPosition = new Vector3(raycastVector.x, raycastVector.y + yJump, raycastVector.z);
+                Ray ray = new Ray(rayPosition, Vector3.forward);
+
+                if (Physics.Raycast(ray, out RaycastHit hit2, 666))
+                {
+                    DiceSlotController slotController = hit2.collider.GetComponent<DiceSlotController>();
+                    if (slotController != null)
+                    {
+                        if (slotController.tag != "Empty")
+                        {
+                            slot.synergy += 1;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
-
