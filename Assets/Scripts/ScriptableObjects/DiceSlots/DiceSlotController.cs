@@ -25,6 +25,7 @@ public class DiceSlotController : MonoBehaviour
     public bool isHandled;
     public DiceSlotData slotData { get; private set; }
     public int priority;
+    public int synergy;
     public int mult = 1;
     public Die slottedDie;
     public new string tag;
@@ -59,6 +60,7 @@ public class DiceSlotController : MonoBehaviour
         outlineMaterial.material = slotData.outlineMaterial;
         symbolMaterial.material = slotData.symbolMaterial;
         priority = slotData.priority;
+        synergy = slotData.synergy;
         slotName.text = slotData.name;
     }
 
@@ -181,7 +183,7 @@ public class DiceSlotController : MonoBehaviour
     private void OnMouseDown()
     {
         die = null;
-        
+
         if (!isFilled)
         {
             foreach (Die suitableDie in player.dice.OrderBy(d => d.value))
@@ -189,6 +191,17 @@ public class DiceSlotController : MonoBehaviour
                 if (suitableDie.dieTags.Contains(tag) && !suitableDie.isPlaced && owner is Player && suitableDie.isDraggable)
                 {
                     die = suitableDie;
+                }
+            }
+
+            if (!die)
+            {
+                foreach (Die suitableExtraDie in player.tempDice.OrderBy(d => d.value))
+                {
+                    if (suitableExtraDie.dieTags.Contains(tag) && !suitableExtraDie.isPlaced && owner is Player && suitableExtraDie.isDraggable)
+                    {
+                        die = suitableExtraDie;
+                    }
                 }
             }
 

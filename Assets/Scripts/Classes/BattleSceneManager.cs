@@ -1,11 +1,12 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 using TMPro;
 
 public class BattleSceneManager : MonoBehaviour
@@ -39,6 +40,12 @@ public class BattleSceneManager : MonoBehaviour
     public TMP_Text scoreText;
     public TMP_Text highscoreText;
 
+    // Events
+    public UnityEvent OnSceneStart;
+    public UnityEvent OnRoundStart;
+    public UnityEvent OnAcvitveCombatStart;
+    public UnityEvent OnAcvitveCombatEnd;
+
     // FMOD
     public FMODUnity.EventReference DiceRollEvent;
     public FMODUnity.EventReference DiceDrawEvent;
@@ -53,7 +60,7 @@ public class BattleSceneManager : MonoBehaviour
         camBattleTablets.gameObject.SetActive(false);
         camBattleTablets.gameObject.SetActive(true);
 
-tooltipAction = InputSystem.actions.FindAction("ShowInfo");
+        tooltipAction = InputSystem.actions.FindAction("ShowInfo");
         player.CreateDiceDeck();
         //opponent.SetEnemyRoster();
 
@@ -72,7 +79,7 @@ tooltipAction = InputSystem.actions.FindAction("ShowInfo");
 
     private void Start()
     {
-        
+
         scoreText.text = Score.ToString();
         opponent.currentHealth = opponent.maxHealth;
         player.alpha = 0.9f;
@@ -94,6 +101,7 @@ tooltipAction = InputSystem.actions.FindAction("ShowInfo");
 
     private void StartNewRound()
     {
+        OnRoundStart.Invoke();
         allSlots = GameObject.FindObjectsByType<DiceSlotController>(FindObjectsSortMode.None);
 
         if (opponent.currentHealth == 0)
@@ -118,18 +126,22 @@ tooltipAction = InputSystem.actions.FindAction("ShowInfo");
             if (slot.tag == "Buff")
             {
                 slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0f, 1f, 0.2f, 0.6f));
+                slot.outlineMaterial.material.SetColor("_OutlineColor", new Color(0.2f, 1f, 0.4f, 1f));
             }
             else if (slot.tag == "Spell")
             {
                 slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0.6f, 0.2f, 1f, 0.6f));
+                slot.outlineMaterial.material.SetColor("_OutlineColor", new Color(0.7f, 0.3f, 1f, 1f));
             }
             else if (slot.tag == "Damage")
             {
                 slot.outlineMaterial.material.SetColor("_BaseColor", new Color(1f, 0f, 0.15f, 0.6f));
+                slot.outlineMaterial.material.SetColor("_OutlineColor", new Color(1f, 0.2f, 0.4f, 1f));
             }
             else
             {
                 slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0.1f, 0.45f, 1f, 0.6f));
+                slot.outlineMaterial.material.SetColor("_OutlineColor", new Color(0.3f, 0.6f, 1f, 1f));
             }
         }
 
@@ -626,9 +638,18 @@ tooltipAction = InputSystem.actions.FindAction("ShowInfo");
             if (slot.wasFrozen == false)
             {
                 slot.isFilled = false;
+                if (slot.slottedDie)
+                {
+                    slot.slottedDie.textureRenderer.material.SetTexture("_BaseMap", slot.slottedDie.usedTexture);
+                }
                 slot.slottedDie = null;
             }
-            slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0.1f, 0.1f, 0.1f, 0.1f));
+
+            if (slot)
+            {
+                slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0.1f, 0.1f, 0.1f, 0.1f));
+                slot.outlineMaterial.material.SetColor("_OutlineColor", new Color(0.1f, 0.1f, 0.1f, 1f));
+            }
         }
 
         foreach (DiceSlotController slot in playerActiveColumn)
@@ -636,9 +657,19 @@ tooltipAction = InputSystem.actions.FindAction("ShowInfo");
             if (slot.wasFrozen == false)
             {
                 slot.isFilled = false;
+                if (slot.slottedDie)
+                {
+                    slot.slottedDie.textureRenderer.material.SetTexture("_BaseMap", slot.slottedDie.usedTexture);
+                }
                 slot.slottedDie = null;
             }
-            slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0.1f, 0.1f, 0.1f, 0.1f));
+
+
+            if (slot)
+            {
+                slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0.1f, 0.1f, 0.1f, 0.1f));
+                slot.outlineMaterial.material.SetColor("_OutlineColor", new Color(0.1f, 0.1f, 0.1f, 1f));
+            }
         }
 
         playerActiveColumn.Clear();
@@ -808,7 +839,7 @@ tooltipAction = InputSystem.actions.FindAction("ShowInfo");
     {
         foreach (DiceSlotController slot in allSlots)
         {
-                slot.slotName.gameObject.SetActive(false);
+            slot.slotName.gameObject.SetActive(false);
         }
     }
 }

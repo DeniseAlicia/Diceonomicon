@@ -38,7 +38,8 @@ public class Die : MonoBehaviour
     public string descText;
     public string[] dieTags;
     public Renderer textureRenderer;
-    public DiceData dieData;
+    public DiceData data;
+    public Texture usedTexture;
 
     public int currentValue;
     public Transform sideUp;
@@ -47,11 +48,13 @@ public class Die : MonoBehaviour
 
     public void SetData(DiceData dieData)
     {
+        data = dieData;
         nameText = dieData.name;
         descText = dieData.desc;
         textureRenderer.material.SetTexture("_BaseMap", dieData.texture);
         range = dieData.range;
         dieTags = dieData.tags;
+        usedTexture = dieData.usedTexture;
         TranslateValueAtStart();
     }
 

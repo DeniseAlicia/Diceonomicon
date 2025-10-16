@@ -8,6 +8,7 @@ public class TabletData : ScriptableObject
 
     public new string name;
     public string desc;
+    public string trait;
     public Texture artwork;
     public Entity owner;
     public DiceSlotData[] slots;
