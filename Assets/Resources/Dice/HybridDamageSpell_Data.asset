@@ -16,6 +16,7 @@ MonoBehaviour:
   name: Hybrid Damage Spell
   desc: '{ 1, 1, 2, 2, 2, 3}'
   texture: {fileID: 2800000, guid: 7f53099e52487164694cdae64ac22b46, type: 3}
+  usedTexture: {fileID: 2800000, guid: b14bd1ebc95ce154cafae61cd1461a70, type: 3}
   range: 010000000100000002000000020000000200000003000000
   tags:
   - Damage

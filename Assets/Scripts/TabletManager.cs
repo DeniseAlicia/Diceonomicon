@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class TabletManager : MonoBehaviour
 {
@@ -10,8 +11,7 @@ public class TabletManager : MonoBehaviour
     public Entity owner;
     public bool enemy;
 
-    private Vector3 startPosition;
-
+    private Vector3 goalPosition;
 
     public List<TabletData> tablets;
 
@@ -21,27 +21,33 @@ public class TabletManager : MonoBehaviour
     {
         Instance = this;
 
+        Vector3 startPosition = new Vector3();
+
         if (enemy)
         {
             Opponent opponent = Object.FindFirstObjectByType<Opponent>();
             tablets = Encounters.SetEnemyRoster(1, "Green");
             owner = FindFirstObjectByType<Opponent>();
             opponent.SetEnemyRoster(tablets);
-            startPosition = new Vector3(4.9f, -2.5f, 0f);
+            goalPosition = new Vector3(4.9f, -2.5f, 0f);
+            startPosition = new Vector3(goalPosition.x + 6f, goalPosition.y, goalPosition.z);
         }
         else
         {
             Player player = Object.FindFirstObjectByType<Player>();
             tablets = player.SetImplingRoster();
             owner = FindFirstObjectByType<Player>();
-            startPosition = new Vector3(-6.9f, -2.5f, 0f);
+            goalPosition = new Vector3(-6.9f, -2.5f, 0f);
+            startPosition = new Vector3(goalPosition.x - 6f, goalPosition.y, goalPosition.z); ;
         }
-        Vector3 currentPosition = startPosition;
-        SpawnTablets(currentPosition);
+
+        SpawnTablets(startPosition);
     }
 
     public void SpawnTablets(Vector3 currentPosition)
     {
+        float speed = 1f;
+
         foreach (TabletData tablet in tablets)
         {
             GameObject tabletInstance = Instantiate(tablet.tabletPrefab, currentPosition, Quaternion.identity);
@@ -62,7 +68,22 @@ public class TabletManager : MonoBehaviour
                 height *= 0.7f;
             }
 
+            goalPosition.y = currentPosition.y;
             currentPosition.y -= height + spacing;
+
+            if (controller.owner == enemy)
+            {
+                currentPosition.x += 3f;
+
+            }
+            else
+            {
+                currentPosition.x -= 3f;
+            }
+
+            controller.gameObject.transform.DOMove(goalPosition, speed).SetEase(Ease.OutQuad);
+
+            speed += 0.1f;
         }
     }
 }
