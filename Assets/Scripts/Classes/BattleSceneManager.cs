@@ -20,6 +20,7 @@ public class BattleSceneManager : MonoBehaviour
     private static List<List<DiceSlotController>> playerSlots;
     private static List<List<DiceSlotController>> enemySlots;
     private static DiceSlotController[] allSlots;
+    public List<Die> unusedDice;
 
     // Combat Stats
     public int level;
@@ -43,6 +44,7 @@ public class BattleSceneManager : MonoBehaviour
     // Events
     public UnityEvent OnSceneStart;
     public UnityEvent OnRoundStart;
+    public UnityEvent OnPlacementDone;
     public UnityEvent OnAcvitveCombatStart;
     public UnityEvent OnAcvitveCombatEnd;
 
@@ -52,7 +54,11 @@ public class BattleSceneManager : MonoBehaviour
     public FMODUnity.EventReference RoundStartEvent;
     public FMODUnity.EventReference DamageEvent;
 
-
+    //////////////////////////////////////////////////////////////////////////
+    // 
+    // SCENE START
+    // 
+    //////////////////////////////////////////////////////////////////////////
 
     private void Awake()
     {
@@ -62,7 +68,6 @@ public class BattleSceneManager : MonoBehaviour
 
         tooltipAction = InputSystem.actions.FindAction("ShowInfo");
         player.CreateDiceDeck();
-        //opponent.SetEnemyRoster();
 
         round = 0;
         Score = 0;
@@ -75,11 +80,8 @@ public class BattleSceneManager : MonoBehaviour
         UpdateDamageBlockUI();
     }
 
-
-
     private void Start()
     {
-
         scoreText.text = Score.ToString();
         opponent.currentHealth = opponent.maxHealth;
         player.alpha = 0.9f;
@@ -96,8 +98,15 @@ public class BattleSceneManager : MonoBehaviour
         intermissionButton.onClick.AddListener(() => ContinueColumnPhase());
         intermissionButton.gameObject.SetActive(false);
 
+        OnSceneStart.Invoke();
         StartNewRound();
     }
+
+    //////////////////////////////////////////////////////////////////////////
+    // 
+    // START OF ROUND
+    // 
+    //////////////////////////////////////////////////////////////////////////
 
     private void StartNewRound()
     {
@@ -138,7 +147,7 @@ public class BattleSceneManager : MonoBehaviour
                 slot.outlineMaterial.material.SetColor("_BaseColor", new Color(1f, 0f, 0.15f, 0.6f));
                 slot.outlineMaterial.material.SetColor("_OutlineColor", new Color(1f, 0.2f, 0.4f, 1f));
             }
-            else
+            else // "Block"
             {
                 slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0.1f, 0.45f, 1f, 0.6f));
                 slot.outlineMaterial.material.SetColor("_OutlineColor", new Color(0.3f, 0.6f, 1f, 1f));
@@ -159,8 +168,6 @@ public class BattleSceneManager : MonoBehaviour
         rollDiceButton.gameObject.SetActive(true);
     }
 
-
-
     private void StartPlacementPhase()
     {
         rollDiceButton.gameObject.SetActive(false);
@@ -179,64 +186,32 @@ public class BattleSceneManager : MonoBehaviour
         StartDelay(3f, () => DiceManager.SortAllDice(player.dice, this, placementButton));
     }
 
-
-
-
-    private void StartIntermissionPhase()
-    {
-        intermissionButton.gameObject.SetActive(true);
-
-        if (player.extraDice.Count > 0)
-        {
-            DiceManager.CopyDice(player);
-            player.extraDice.Clear();
-        }
-    }
-
-    private void ContinueColumnPhase()
-    {
-        intermission = false;
-
-        foreach (Die die in player.tempDice)
-        {
-            if (!die.isPlaced)
-            {
-                Destroy(die.gameObject);
-            }
-            else
-            {
-                die.isDraggable = false;
-            }
-        }
-
-        StartCoroutine(HandleActiveColumnRoutine(CurrentColumn));
-    }
-
+    //////////////////////////////////////////////////////////////////////////
+    // 
+    // START COMBAT
+    // 
+    //////////////////////////////////////////////////////////////////////////
 
     public void StartActiveCombat()
     {
-        // Remove Confirm Button
         placementButton.gameObject.SetActive(false);
 
-        // combatBolt.SetActive(true);
-        // player.alpha = 0.9f;
-        // opponent.alpha = 0.9f;
-
         // Remove Dice that haven't been placed
-        Die[] unusedDice = GameObject.FindObjectsByType<Die>(FindObjectsSortMode.None);
-        foreach (Die die in unusedDice)
+        Die[] dice = GameObject.FindObjectsByType<Die>(FindObjectsSortMode.None);
+        foreach (Die die in dice)
         {
             if (!die.isPlaced)
             {
+                die.isDraggable = false;
                 die.transform.position = new Vector3(10, 0, 0);
+                unusedDice.Add(die);
             }
         }
 
+        OnAcvitveCombatStart.Invoke();
         // Proceed to Next Phase
         StartCoroutine(StartActiveCombatRoutine());
     }
-
-
 
     private IEnumerator StartActiveCombatRoutine()
     {
@@ -261,9 +236,6 @@ public class BattleSceneManager : MonoBehaviour
 
         StartCoroutine(HandleActiveColumnRoutine(0));
     }
-
-
-
 
     private IEnumerator HandleActiveColumnRoutine(int column)
     {
@@ -321,10 +293,7 @@ public class BattleSceneManager : MonoBehaviour
 
         CalculateDamage();
 
-        if (player.currentHealth <= 0 | opponent.currentHealth <= 0)
-        {
-            yield break;
-        }
+
 
         yield return new WaitForSeconds(1f);
 
@@ -334,6 +303,12 @@ public class BattleSceneManager : MonoBehaviour
 
         playerSlots.Clear();
         enemySlots.Clear();
+
+        if (player.currentHealth > 0 && opponent.currentHealth <= 0)
+        {
+            EndOfRound();
+            yield break;
+        }
 
         if (column == 3 && opponent.currentHealth > 0)
         {
@@ -350,8 +325,6 @@ public class BattleSceneManager : MonoBehaviour
             StartCoroutine(HandleActiveColumnRoutine(column));
         }
     }
-
-
 
     public void DelaySlotEffect(List<DiceSlotController> slots, float delay, int priority)
     {
@@ -377,30 +350,6 @@ public class BattleSceneManager : MonoBehaviour
         }
     }
 
-
-
-    private void EndOfRound()
-    {
-
-        combatBolt.SetActive(false);
-        player.alpha = 0.9f;
-        opponent.alpha = 0.9f;
-
-        ResetEntity(player);
-        ResetEntity(opponent);
-        RotationButton.ResetRotationButton();
-
-        Die[] dice = FindObjectsByType<Die>(FindObjectsSortMode.None);
-        foreach (Die die in dice)
-        {
-            die.isFrozen = false;
-        }
-
-        StartDelay(1f, () => StartNewRound());
-    }
-
-
-
     public void CalculateDamage()
     {
         int damageTaken = opponent.damage - player.block;
@@ -419,42 +368,7 @@ public class BattleSceneManager : MonoBehaviour
         UpdateDamageBlockUI();
     }
 
-
-
-    public void CheckLossState()
-    {
-        if (player.currentHealth <= 0)
-        {
-            endScene.Lose();
-            ScoreList.Add(Score);
-            UpdateScoreDisplay();
-            StartIntermissionPhase();
-        }
-    }
-
-    public void CheckWinState()
-    {
-        if (opponent.currentHealth <= 0 && player.currentHealth > 0)
-        {
-            // endScene.Win();
-            // Time.timeScale = 0;
-            // EndOfRound();
-
-            opponent.ActiveImplings.Clear();
-            opponent.drawnDice.Clear();
-            opponent.discardPile.Clear();
-            opponent.diceDeck.Clear();
-
-            GameObject[] oldTablets = GameObject.FindGameObjectsWithTag("EnemyTablet");
-            foreach (GameObject tablet in oldTablets)
-            {
-                Destroy(tablet);
-            }
-            EndOfRound();
-        }
-    }
-
-    private IEnumerator AnimatePlayerHealthDecrease(int targetHealth, int damage)
+    public IEnumerator AnimatePlayerHealthDecrease(int targetHealth, int damage)
     {
         RectTransform candle = player.candle.GetComponent<RectTransform>();
 
@@ -493,9 +407,45 @@ public class BattleSceneManager : MonoBehaviour
         }
     }
 
+    public IEnumerator AnimatePlayerHealthIncrease(int targetHealth, int damage)
+    {
+        RectTransform candle = player.candle.GetComponent<RectTransform>();
 
+        float wait = 0.1f;
+        float startY = 16.2f;   // full health
+        float endY = -36.8f;  // zero health
+        float rangeY = startY - endY;
 
-    private IEnumerator AnimateOpponentHealthDecrease(int targetHealth, int damage)
+        while (player.currentHealth < Mathf.Min(targetHealth, player.maxHealth))
+        {
+            if (damage < 11)
+            {
+                wait = 0.1f;
+            }
+            else
+            {
+                wait = 1.5f / damage;
+            }
+
+            FMOD.Studio.EventInstance damageAudio = FMODUnity.RuntimeManager.CreateInstance(DamageEvent);
+            damageAudio.start();
+
+            player.currentHealth += 1;
+            player.healthText.text = player.currentHealth.ToString();
+
+            float healthPercent = (float)player.currentHealth / player.maxHealth;
+            float newY = Mathf.Lerp(endY, startY, healthPercent);
+
+            Vector3 pos = candle.anchoredPosition;
+            pos.y = newY;
+            candle.anchoredPosition = pos;
+
+            yield return new WaitForSeconds(wait);
+            damageAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+    }
+
+    public IEnumerator AnimateOpponentHealthDecrease(int targetHealth, int damage)
     {
         RectTransform candle = opponent.candle.GetComponent<RectTransform>();
 
@@ -543,7 +493,96 @@ public class BattleSceneManager : MonoBehaviour
         }
     }
 
+    public void CheckLossState()
+    {
+        if (player.currentHealth <= 0)
+        {
+            endScene.Lose();
+            ScoreList.Add(Score);
+            UpdateScoreDisplay();
+            StartIntermissionPhase();
+        }
+    }
 
+    public void CheckWinState()
+    {
+        if (opponent.currentHealth <= 0 && player.currentHealth > 0)
+        {
+            opponent.ActiveImplings.Clear();
+            opponent.drawnDice.Clear();
+            opponent.discardPile.Clear();
+            opponent.diceDeck.Clear();
+
+            GameObject[] oldTablets = GameObject.FindGameObjectsWithTag("EnemyTablet");
+            foreach (GameObject tablet in oldTablets)
+            {
+                Destroy(tablet);
+            }
+
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////////
+    // 
+    // START INTERMISSION
+    // 
+    //////////////////////////////////////////////////////////////////////////
+
+    private void StartIntermissionPhase()
+    {
+        intermissionButton.gameObject.SetActive(true);
+
+        if (player.extraDice.Count > 0)
+        {
+            DiceManager.CopyDice(player);
+            player.extraDice.Clear();
+        }
+    }
+
+    private void ContinueColumnPhase()
+    {
+        OnPlacementDone.Invoke();
+        intermission = false;
+
+        foreach (Die die in player.tempDice)
+        {
+            if (!die.isPlaced)
+            {
+                Destroy(die.gameObject);
+            }
+            else
+            {
+                die.isDraggable = false;
+            }
+        }
+
+        StartCoroutine(HandleActiveColumnRoutine(CurrentColumn));
+    }
+
+    //////////////////////////////////////////////////////////////////////////
+    // 
+    // END OF COMBAT
+    // 
+    //////////////////////////////////////////////////////////////////////////
+
+    private void EndOfRound()
+    {
+        ResetEntity(player);
+        ResetEntity(opponent);
+        ResetTabletSlots();
+        RotationButton.ResetRotationButton();
+
+        Die[] dice = FindObjectsByType<Die>(FindObjectsSortMode.None);
+        foreach (Die die in dice)
+        {
+            die.isFrozen = false;
+        }
+
+        unusedDice.Clear();
+        OnAcvitveCombatEnd.Invoke();
+
+        StartDelay(1f, () => StartNewRound());
+    }
 
     private void ResetEntity(Entity entity)
     {
@@ -573,7 +612,47 @@ public class BattleSceneManager : MonoBehaviour
         UpdateDamageBlockUI();
     }
 
+    private void NewEncounter(int level, string area)
+    {
+        Score += player.currentHealth + 20;
+        scoreText.text = Score.ToString();
+        opponent.currentHealth = opponent.maxHealth;
+        opponent.healthText.text = opponent.currentHealth.ToString();
+        RectTransform candle = opponent.candle.GetComponent<RectTransform>();
+        Vector3 pos = candle.anchoredPosition;
+        pos.y = 16.2f;
+        candle.anchoredPosition = pos;
 
+        List<TabletData> newTablets = Encounters.SetEnemyRoster(level, area);
+        opponent.SetEnemyRoster(newTablets);
+
+        TabletManager.Instance.tablets = newTablets;
+        Vector3 startPosition = new Vector3(4.9f, -2.5f, 0f);
+        TabletManager.Instance.SpawnTablets(startPosition);
+    }
+
+    public void UpdateScoreDisplay()
+    {
+        // Get top 5 scores (sorted descending)
+        var topScores = ScoreList
+            .OrderByDescending(s => s)
+            .Take(5)
+            .ToList();
+
+        string scoreText = "High Scores:\n";
+        for (int i = 0; i < topScores.Count; i++)
+        {
+            scoreText += $"{i + 1}. {topScores[i]}\n";
+        }
+
+        highscoreText.text = scoreText;
+    }
+
+    //////////////////////////////////////////////////////////////////////////
+    // 
+    // HELPFUL METHODS
+    // 
+    //////////////////////////////////////////////////////////////////////////
 
     public void GainHealth()
     {
@@ -581,15 +660,11 @@ public class BattleSceneManager : MonoBehaviour
         player.healthText.text = player.currentHealth.ToString();
     }
 
-
-
     public void LoseHealth()
     {
         player.currentHealth -= 1;
         player.healthText.text = player.currentHealth.ToString();
     }
-
-
 
     public void GetActiveColumn(int column)
     {
@@ -629,20 +704,16 @@ public class BattleSceneManager : MonoBehaviour
         }
     }
 
-
-
     public void ClearActiveColumn()
     {
         foreach (DiceSlotController slot in enemyActiveColumn)
         {
             if (slot.wasFrozen == false)
             {
-                slot.isFilled = false;
                 if (slot.slottedDie)
                 {
                     slot.slottedDie.textureRenderer.material.SetTexture("_BaseMap", slot.slottedDie.usedTexture);
                 }
-                slot.slottedDie = null;
             }
 
             if (slot)
@@ -656,12 +727,10 @@ public class BattleSceneManager : MonoBehaviour
         {
             if (slot.wasFrozen == false)
             {
-                slot.isFilled = false;
                 if (slot.slottedDie)
                 {
                     slot.slottedDie.textureRenderer.material.SetTexture("_BaseMap", slot.slottedDie.usedTexture);
                 }
-                slot.slottedDie = null;
             }
 
 
@@ -676,7 +745,20 @@ public class BattleSceneManager : MonoBehaviour
         enemyActiveColumn.Clear();
     }
 
-
+    public void ResetTabletSlots()
+    {
+        foreach (DiceSlotController slot in allSlots)
+        {
+            if (slot.wasFrozen == false)
+            {
+                slot.isFilled = false;
+                if (slot.slottedDie)
+                {
+                    slot.slottedDie = null;
+                }
+            }
+        }
+    }
 
     private static List<List<DiceSlotController>> SortActiveSlots(List<DiceSlotController> activeColumn)
     {
@@ -712,8 +794,6 @@ public class BattleSceneManager : MonoBehaviour
         return sortedSlots;
     }
 
-
-
     public void StartDelay(float delay, Action method)
     {
         StartCoroutine(SortAfterDelay(delay, method));
@@ -724,8 +804,6 @@ public class BattleSceneManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         method.Invoke();
     }
-
-
 
     public void UpdateDamageBlockUI()
     {
@@ -774,43 +852,6 @@ public class BattleSceneManager : MonoBehaviour
         }
     }
 
-    // TEMPORARY ENDLESS MODE
-    private void NewEncounter(int level, string area)
-    {
-        Score += player.currentHealth + 20;
-        scoreText.text = Score.ToString();
-        opponent.currentHealth = opponent.maxHealth;
-        opponent.healthText.text = opponent.currentHealth.ToString();
-        RectTransform candle = opponent.candle.GetComponent<RectTransform>();
-        Vector3 pos = candle.anchoredPosition;
-        pos.y = 16.2f;
-        candle.anchoredPosition = pos;
-
-        List<TabletData> newTablets = Encounters.SetEnemyRoster(level, area);
-        opponent.SetEnemyRoster(newTablets);
-
-        TabletManager.Instance.tablets = newTablets;
-        Vector3 startPosition = new Vector3(4.9f, -2.5f, 0f);
-        TabletManager.Instance.SpawnTablets(startPosition);
-    }
-
-    public void UpdateScoreDisplay()
-    {
-        // Get top 5 scores (sorted descending)
-        var topScores = ScoreList
-            .OrderByDescending(s => s)
-            .Take(5)
-            .ToList();
-
-        string scoreText = "High Scores:\n";
-        for (int i = 0; i < topScores.Count; i++)
-        {
-            scoreText += $"{i + 1}. {topScores[i]}\n";
-        }
-
-        highscoreText.text = scoreText;
-    }
-
     private void OnEnable()
     {
         tooltipAction.performed += ctx => ShowInfo();
@@ -822,7 +863,6 @@ public class BattleSceneManager : MonoBehaviour
     {
         tooltipAction.Disable();
     }
-
 
     public void ShowInfo()
     {

@@ -5,7 +5,7 @@ public class RotationButton : MonoBehaviour
 {
     public Transform targetObject;
     public float angle = 90f;
-    public static int maxRotations = 2;
+    public static int maxRotations = 1;
 
     private Color baseColor = new Color32(175, 175, 175, 255);
     private Color hoverColor = new Color32(255, 255, 255, 255);

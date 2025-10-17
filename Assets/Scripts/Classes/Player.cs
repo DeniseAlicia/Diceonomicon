@@ -13,9 +13,10 @@ public class Player : Entity
 
     public List<TabletData> SetImplingRoster()
     {
-        ImplingRoster.Add("Cubie");
-        ImplingRoster.Add("MrMimic");
-        ImplingRoster.Add("Beempling");
+        ImplingRoster.Add("Hie");
+        ImplingRoster.Add("Spooding");
+        ImplingRoster.Add("Stabo");
+
 
         foreach (var impName in ImplingRoster)
         {
