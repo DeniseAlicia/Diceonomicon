@@ -16,6 +16,7 @@ MonoBehaviour:
   name: Hybrid Block Spell
   desc: '{ 1, 1, 2, 2, 2, 3}'
   texture: {fileID: 2800000, guid: 3cd1a95a9a27a104b84b02dd1d220bd5, type: 3}
+  usedTexture: {fileID: 2800000, guid: b14bd1ebc95ce154cafae61cd1461a70, type: 3}
   range: 010000000100000002000000020000000200000003000000
   tags:
   - Block

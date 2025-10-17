@@ -15,6 +15,7 @@ MonoBehaviour:
   enemy: 0
   name: Cubie
   desc: I'm too cool to have an ability
+  trait: 
   artwork: {fileID: 2800000, guid: bc9ec2d9fd3ac644f9d7d0f5bbd156f2, type: 3}
   owner: {fileID: 0}
   slots:
@@ -28,9 +29,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
   - {fileID: 11400000, guid: c11cd3df102418f43a108888c7b677bc, type: 2}
   startingDice:
-  - {fileID: 11400000, guid: 8a33abe298e513a41894f1c6b0d9a21c, type: 2}
-  - {fileID: 11400000, guid: 8a33abe298e513a41894f1c6b0d9a21c, type: 2}
-  - {fileID: 11400000, guid: 74128a7cf78e81b41ad6b85beb4c440f, type: 2}
-  - {fileID: 11400000, guid: c2dcd459aa01fbd42a9f975166570284, type: 2}
+  - {fileID: 11400000, guid: 368842c8b3521d04781f86dfb94fe717, type: 2}
+  - {fileID: 11400000, guid: 368842c8b3521d04781f86dfb94fe717, type: 2}
+  - {fileID: 11400000, guid: c17fb7bd564336e479cf487f1cc3dc89, type: 2}
+  - {fileID: 11400000, guid: c17fb7bd564336e479cf487f1cc3dc89, type: 2}
   tabletPrefab: {fileID: 8448579534215354899, guid: ace316ba9a583b141b31007ca0879c52, type: 3}
   slotPrefab: {fileID: 1881896027706196343, guid: 7b4fc5a074e11734695476f0948d04d2, type: 3}

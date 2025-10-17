@@ -31,10 +31,10 @@ public class EnemyAI : MonoBehaviour
     public enum DiceSortOrder { Ascending, Descending, Random }
     public DiceSortOrder diceSortOrder = DiceSortOrder.Descending;
 
-    public void OnEventTriggered()
-    {
-        GetEmptySlots();
-    }
+    // public void OnEventTriggered()
+    // {
+    //     GetEmptySlots();
+    // }
 
     public void GetEmptySlots()
     {
@@ -134,6 +134,7 @@ public class EnemyAI : MonoBehaviour
             columnLimit = Mathf.CeilToInt(maxDice / 3) + 1;
         }
 
+        GetEmptySlots();
         StartCoroutine(PlaceDieDelay());
     }
 
