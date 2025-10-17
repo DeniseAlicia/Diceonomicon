@@ -8,16 +8,17 @@ public class TabletData : ScriptableObject
 
     public new string name;
     public string desc;
-    public string trait;
     public Texture artwork;
     public Entity owner;
     public DiceSlotData[] slots;
     public DiceData[] startingDice;
     public GameObject tabletPrefab;
     public GameObject slotPrefab;
+    public string trait;
+
     private Vector3 startSlotPosition = new Vector3(-3, 0, -3);
 
-    public void CreateSlots(Transform tabletMain)
+    public void CreateSlots(Transform tabletTransform, TabletController tablet)
     {
         Vector3 currentSlotPosition = startSlotPosition;
 
@@ -33,7 +34,7 @@ public class TabletData : ScriptableObject
             }
 
             string slotName = $"Slot{i + 1}";
-            Transform targetSlot = tabletMain.Find(slotName);
+            Transform targetSlot = tabletTransform.Find(slotName);
 
             GameObject diceSlotInstance = Instantiate(slotPrefab, targetSlot);
             diceSlotInstance.transform.localPosition = Vector3.zero;
@@ -43,6 +44,8 @@ public class TabletData : ScriptableObject
             DiceSlotController controller = diceSlotInstance.GetComponent<DiceSlotController>();
             controller.owner = owner;
             controller.SetData(slots[i]);
+
+            tablet.tabletSlots.Add(controller);
 
             TooltipTrigger tooltipTrigger = diceSlotInstance.GetComponent<TooltipTrigger>();
             if (tooltipTrigger == null)

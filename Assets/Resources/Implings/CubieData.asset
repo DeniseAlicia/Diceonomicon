@@ -15,7 +15,6 @@ MonoBehaviour:
   enemy: 0
   name: Cubie
   desc: I'm too cool to have an ability
-  trait: 
   artwork: {fileID: 2800000, guid: bc9ec2d9fd3ac644f9d7d0f5bbd156f2, type: 3}
   owner: {fileID: 0}
   slots:
@@ -35,3 +34,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c17fb7bd564336e479cf487f1cc3dc89, type: 2}
   tabletPrefab: {fileID: 8448579534215354899, guid: ace316ba9a583b141b31007ca0879c52, type: 3}
   slotPrefab: {fileID: 1881896027706196343, guid: 7b4fc5a074e11734695476f0948d04d2, type: 3}
+  trait: Spin
