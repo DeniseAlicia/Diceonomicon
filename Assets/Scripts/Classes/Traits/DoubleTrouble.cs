@@ -13,6 +13,9 @@ public class DoubleTrouble : Trait
         battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
 
+        description = "Whena every slot is filled, double all the dice values";
+        tablet.descText.text = description;
+
         // sceneStart = true;
         roundStart = true;
         acvitveCombatStart = true;

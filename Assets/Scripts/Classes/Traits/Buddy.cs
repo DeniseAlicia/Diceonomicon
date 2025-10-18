@@ -15,6 +15,9 @@ public class Buddy : Trait
         battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
 
+        description = "Fill a random slot with a dummy die";
+        tablet.descText.text = description;
+
         // sceneStart = true;
         roundStart = true;
         //acvitveCombatStart = true;

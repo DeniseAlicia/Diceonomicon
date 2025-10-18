@@ -7,7 +7,7 @@ public abstract class Trait : MonoBehaviour
     public bool placementDone;
     public bool acvitveCombatStart;
     public bool acvitveCombatEnd;
-
+    public string description;
 
     public abstract void OnSceneStart();
     public abstract void OnRoundStart();

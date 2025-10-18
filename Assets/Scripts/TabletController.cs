@@ -3,6 +3,7 @@ using TMPro;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 
 public class TabletController : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class TabletController : MonoBehaviour
     public TMP_Text descText;
     public Renderer artworkRenderer;
     public Entity owner;
-    public Component trait;
+    public Component script;
     public List<DiceSlotController> tabletSlots;
 
     public void SetData(TabletData data)
@@ -19,9 +20,10 @@ public class TabletController : MonoBehaviour
         nameText.text = data.name;
         descText.text = data.desc;
         owner = data.owner;
-        if (data.trait != null) {
+        if (data.trait != null)
+        {
             Type type = Type.GetType(data.trait);
-            trait = gameObject.AddComponent(type);
+            script = gameObject.AddComponent(type);
         }
         artworkRenderer.material.mainTexture = data.artwork;
         data.CreateSlots(tabletMainTransform, this);

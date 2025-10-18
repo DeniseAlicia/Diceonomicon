@@ -17,6 +17,9 @@ public class Lifedrink : Trait
         battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
 
+        description = "Heal by 1 whenever you use a Damage die";
+        tablet.descText.text = description;
+
         // sceneStart = true;
         //roundStart = true;
         acvitveCombatStart = true;
@@ -43,8 +46,6 @@ public class Lifedrink : Trait
         {
             battleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
         }
-
-        Debug.Log("Starting...");
     }
 
 

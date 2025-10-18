@@ -25,7 +25,7 @@ public class BuffSlotData : DiceSlotData
             int newValue = Int32.Parse(x.ToString());
             int angle = newValue * 45 - 45 - die.dieRotation;
             directions.Add(angle);
-            Debug.Log(angle);
+            //Debug.Log(angle);
         }
     }
 
@@ -59,7 +59,6 @@ public class BuffSlotData : DiceSlotData
                     return null;
                 }
             }
-            // return targets;
         }
         return targets;
     }
