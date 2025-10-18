@@ -10,6 +10,9 @@ public class Magician : Trait
         battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
 
+        description = "Spell dice gain a +1 bonus and Damage dice get a -1 penalty";
+        tablet.descText.text = description;
+
         // sceneStart = true;
         // roundStart = true;
         acvitveCombatStart = true;
@@ -36,8 +39,6 @@ public class Magician : Trait
         {
             battleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
         }
-
-        Debug.Log("Starting...");
     }
 
     public override void OnSceneStart()

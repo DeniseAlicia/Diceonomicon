@@ -9,7 +9,10 @@ public class SubTrait : Trait
     {
         battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
-        
+
+        description = "...";
+        tablet.descText.text = description;
+
         sceneStart = true;
         roundStart = true;
         acvitveCombatStart = true;

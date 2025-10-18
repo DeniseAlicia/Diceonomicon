@@ -76,7 +76,6 @@ public class Die : MonoBehaviour
             isDraggable = false;
             isResting = false;
         }
-
     }
 
     void FixedUpdate()
@@ -130,13 +129,9 @@ public class Die : MonoBehaviour
         }
 
         if (upSide == null) return;
-        // Debug.Log(upSide.name); // log the die value
 
         sideUp = upSide;
-
-        //boxCollider.enabled = false;
         value = int.Parse(upSide.name);
-        //Debug.Log("Value: " + value);
 
         switch (value)
         {
@@ -160,7 +155,6 @@ public class Die : MonoBehaviour
                 break;
         }
 
-        //boxCollider.enabled = true;
         isRolling = false;
 
         if (!dieTags.Contains("Buff"))
@@ -222,22 +216,17 @@ public class Die : MonoBehaviour
             Vector3 yOffset = new Vector3(0, 0, -0.2f);
             RaycastHit hit = new RaycastHit();
 
-            //Debug.DrawRay(transform.position + yOffset, Vector3.forward * 10, Color.green, 100);
             if (Physics.Raycast(transform.position + yOffset, Vector3.forward, out hit, 100))
             {
                 GameObject hitSlot = hit.transform.gameObject;
-                // Debug.Log("RaycastHit:" + hitSlot);
 
                 DiceSlotController slotController = hitSlot.GetComponent<DiceSlotController>();
                 if (slotController != null)
                 {
                     DiceSlotData slotData = slotController.slotData;
-                    // Debug.Log(slotData);
 
                     if (this.dieTags.Contains(slotData.tag) && slotController.isFilled == false && slotController.owner.GetType() == typeof(Player))
                     {
-                        //Debug.Log("Slotted!");
-
                         if (transform.parent != null)
                         {
                             Transform parent = transform.parent;
@@ -246,7 +235,6 @@ public class Die : MonoBehaviour
                             slot.slottedDie = null;
                             transform.SetParent(null);
                         }
-
                         transform.SetParent(hitSlot.transform);
                         transform.localPosition = new Vector3(0, 3, 0);
                         transform.Rotate(new Vector3(-90, 0, 0), Space.World);
@@ -276,10 +264,7 @@ public class Die : MonoBehaviour
                             transform.Rotate(new Vector3(0, 0, dieRotation), Space.World);
                             transform.localScale = new Vector3(6f, 6f, 6f);
                         }
-                        //Debug.Log(slotData.slottedDie);
                     }
-                    // Debug.Log(hit.collider.transform.gameObject.name);
-                    // Debug.Log(hitSlot);
                 }
                 else
                 {
@@ -291,7 +276,6 @@ public class Die : MonoBehaviour
                         slot.slottedDie = null;
                         transform.SetParent(null);
                     }
-
                     MoveToLayer("Gameplay");
                     transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                     transform.position = lastPosition;
@@ -309,7 +293,6 @@ public class Die : MonoBehaviour
                     slot.slottedDie = null;
                     transform.SetParent(null);
                 }
-
                 MoveToLayer("Gameplay");
                 transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                 transform.position = lastPosition;
@@ -340,7 +323,6 @@ public class Die : MonoBehaviour
 
                 if (!int.TryParse(child.name, out int index))
                 {
-                    // Debug.LogWarning($"Invalid child name '{child.name}'");
                     continue;
                 }
 
@@ -371,7 +353,6 @@ public class Die : MonoBehaviour
                 t.ForceMeshUpdate();
             }
         }
-
         isCopy = true;
         isPlaced = false;
         isResting = true;

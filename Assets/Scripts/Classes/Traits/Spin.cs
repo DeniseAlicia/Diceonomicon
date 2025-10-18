@@ -3,11 +3,15 @@ using UnityEngine;
 public class Spin : Trait
 {
     private BattleSceneManager battleSceneManager;
-
+    private TabletController tablet;
 
     public void Start()
     {
         battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
+        tablet = GetComponent<TabletController>();
+
+        description = "You can rotate your tablets one additional time per round";
+        tablet.descText.text = description;
 
         sceneStart = true;
         // roundStart = true;
@@ -35,8 +39,6 @@ public class Spin : Trait
         {
             battleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
         }
-
-        Debug.Log("Starting...");
     }
 
 

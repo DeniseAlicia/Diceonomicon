@@ -9,6 +9,9 @@ public class Adaptive : Trait
     {
         battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
+        
+        description = "Damage dice gain a +1 bonus and Block dice get a -1 penalty";
+        tablet.descText.text = description;
 
         // sceneStart = true;
         // roundStart = true;
@@ -36,8 +39,6 @@ public class Adaptive : Trait
         {
             battleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
         }
-
-        Debug.Log("Starting...");
     }
 
     public override void OnSceneStart()

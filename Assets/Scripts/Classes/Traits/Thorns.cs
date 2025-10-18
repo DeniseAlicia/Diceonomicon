@@ -17,6 +17,9 @@ public class Thorns : Trait
         battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
 
+        description = "Deal 1 damage whenever you use a Block die";
+        tablet.descText.text = description;
+
         // sceneStart = true;
         // roundStart = true;
         acvitveCombatStart = true;
@@ -43,8 +46,6 @@ public class Thorns : Trait
         {
             battleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
         }
-
-        Debug.Log("Starting...");
     }
 
 

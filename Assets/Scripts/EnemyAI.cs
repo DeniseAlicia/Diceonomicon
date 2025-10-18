@@ -313,7 +313,7 @@ public class EnemyAI : MonoBehaviour
             int newValue = Int32.Parse(x.ToString());
             int angle = newValue * 45 - 45 - die.dieRotation;
             directions.Add(angle);
-            Debug.Log(angle);
+            //Debug.Log(angle);
         }
     }
 

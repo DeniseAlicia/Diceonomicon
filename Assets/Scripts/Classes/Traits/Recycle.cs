@@ -10,6 +10,9 @@ public class Recycle : Trait
         battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
 
+        description = "Heal by 1 for every unused die";
+        tablet.descText.text = description;
+
         // sceneStart = true;
         // roundStart = true;
         acvitveCombatStart = true;
@@ -17,9 +20,9 @@ public class Recycle : Trait
         // acvitveCombatEnd = true;
 
         if (sceneStart)
-        {
-            battleSceneManager.OnSceneStart.AddListener(OnSceneStart);
-        }
+            {
+                battleSceneManager.OnSceneStart.AddListener(OnSceneStart);
+            }
         if (roundStart)
         {
             battleSceneManager.OnRoundStart.AddListener(OnRoundStart);

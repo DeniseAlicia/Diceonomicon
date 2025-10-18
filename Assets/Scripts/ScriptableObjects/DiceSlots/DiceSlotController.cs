@@ -120,13 +120,18 @@ public class DiceSlotController : MonoBehaviour
 
         if (Physics.Raycast(raydown, out RaycastHit hit, 666))
         {
-            // Debug.Log($"Ray hit: {hit.collider.name} at {hit.point}");
-
             Die die = hit.collider.GetComponent<Die>();
-            if (die != null && die.dieTags.Intersect(slottedDie.dieTags).Any())
+
+            if (die != null)
             {
-                mult += 1;
-                DetectLinksDown(rayPosition);
+                Transform parent = die.transform.parent;
+                DiceSlotController slot = parent.gameObject.GetComponent<DiceSlotController>();
+
+                if (tag == slot.tag)
+                {
+                    mult += 1;
+                    DetectLinksDown(rayPosition);
+                }
             }
         }
     }
@@ -138,13 +143,17 @@ public class DiceSlotController : MonoBehaviour
 
         if (Physics.Raycast(raydown, out RaycastHit hit, 666))
         {
-            // Debug.Log($"Ray hit: {hit.collider.name} at {hit.point}");
-
             Die die = hit.collider.GetComponent<Die>();
-            if (die != null && die.dieTags.Intersect(slottedDie.dieTags).Any())
+
+            if (die != null)
             {
-                mult += 1;
-                DetectLinksUp(rayPosition);
+                Transform parent = die.transform.parent;
+                DiceSlotController slot = parent.gameObject.GetComponent<DiceSlotController>();
+
+                if (tag == slot.tag)
+                {
+                    mult += 1;
+                }
             }
         }
     }
