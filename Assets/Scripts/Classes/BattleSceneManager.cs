@@ -20,7 +20,6 @@ public class BattleSceneManager : MonoBehaviour
     private static List<List<DiceSlotController>> playerSlots;
     private static List<List<DiceSlotController>> enemySlots;
     private static DiceSlotController[] allSlots;
-    public List<Die> unusedDice;
 
     // Combat Stats
     public int level;
@@ -30,6 +29,7 @@ public class BattleSceneManager : MonoBehaviour
     public float[] columnStartPositions = new float[] { -7.65f, -6.9f, -6.1f };
     public static int CurrentColumn { get; private set; }
     public bool intermission;
+    public List<Die> unusedDice;
 
     // UI Elements & Buttons
     private InputAction tooltipAction;
@@ -42,11 +42,11 @@ public class BattleSceneManager : MonoBehaviour
     public TMP_Text highscoreText;
 
     // Events
-    public UnityEvent OnSceneStart;
-    public UnityEvent OnRoundStart;
-    public UnityEvent OnPlacementDone;
-    public UnityEvent OnAcvitveCombatStart;
-    public UnityEvent OnAcvitveCombatEnd;
+    public static UnityEvent OnSceneStart = new UnityEvent();
+    public static UnityEvent OnRoundStart = new UnityEvent();
+    public static UnityEvent OnPlacementDone = new UnityEvent();
+    public static UnityEvent OnAcvitveCombatStart = new UnityEvent();
+    public static UnityEvent OnAcvitveCombatEnd = new UnityEvent();
 
     // FMOD
     public FMODUnity.EventReference DiceRollEvent;
@@ -65,7 +65,10 @@ public class BattleSceneManager : MonoBehaviour
         Camera camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
         camBattleTablets.gameObject.SetActive(false);
         camBattleTablets.gameObject.SetActive(true);
+    }
 
+    private void Start()
+    {
         tooltipAction = InputSystem.actions.FindAction("ShowInfo");
         player.CreateDiceDeck();
 
@@ -78,10 +81,7 @@ public class BattleSceneManager : MonoBehaviour
         player.damage = 0;
         player.block = 0;
         UpdateDamageBlockUI();
-    }
 
-    private void Start()
-    {
         scoreText.text = Score.ToString();
         opponent.currentHealth = opponent.maxHealth;
         player.alpha = 0.9f;
@@ -111,12 +111,22 @@ public class BattleSceneManager : MonoBehaviour
     private void StartNewRound()
     {
         OnRoundStart.Invoke();
-        allSlots = GameObject.FindObjectsByType<DiceSlotController>(FindObjectsSortMode.None);
-
         if (opponent.currentHealth == 0)
         {
             NewEncounter(player.level, player.area);
         }
+
+        allSlots = GameObject.FindObjectsByType<DiceSlotController>(FindObjectsSortMode.None);
+
+        int debugCounter = 0;
+        foreach (DiceSlotController slot in allSlots)
+        {
+            if (slot.isFilled)
+            {
+                debugCounter++;
+            }
+        }
+        Debug.Log(debugCounter);
 
         foreach (GameObject banner in playerColumnBanner)
         {
@@ -247,24 +257,7 @@ public class BattleSceneManager : MonoBehaviour
             yield break;
 
         GetActiveColumn(column);
-
-        foreach (GameObject banner in playerColumnBanner)
-        {
-            Image sprite = banner.GetComponent<Image>();
-            sprite.color = new Color(0.25f, 0.25f, 0.25f, 1f);
-        }
-
-        foreach (GameObject opponentBanner in opponentColumnBanner)
-        {
-            Image sprite = opponentBanner.GetComponent<Image>();
-            sprite.color = new Color(0.25f, 0.25f, 0.25f, 1f);
-        }
-
-        Image playerBannerSprite = playerColumnBanner[column - 1].GetComponent<Image>();
-        playerBannerSprite.color = new Color(1f, 1f, 1f, 1f);
-
-        Image opponentBannerSprite = opponentColumnBanner[column - 1].GetComponent<Image>();
-        opponentBannerSprite.color = new Color(1f, 1f, 1f, 1f);
+        UpdateBannersUI(column);
 
         playerSlots = SortActiveSlots(playerActiveColumn);
         enemySlots = SortActiveSlots(enemyActiveColumn);
@@ -293,14 +286,10 @@ public class BattleSceneManager : MonoBehaviour
 
         CalculateDamage();
 
-
-
         yield return new WaitForSeconds(1f);
-
         ClearActiveColumn();
 
         CurrentColumn = column;
-
         playerSlots.Clear();
         enemySlots.Clear();
 
@@ -561,7 +550,7 @@ public class BattleSceneManager : MonoBehaviour
 
     //////////////////////////////////////////////////////////////////////////
     // 
-    // END OF COMBAT
+    // END OF COMBAT // CLEAN UP
     // 
     //////////////////////////////////////////////////////////////////////////
 
@@ -569,46 +558,25 @@ public class BattleSceneManager : MonoBehaviour
     {
         ResetEntity(player);
         ResetEntity(opponent);
-        ResetTabletSlots();
-        RotationButton.ResetRotationButton();
+        ResetDiceSlots();
+        ResetDice();
+        RotationButton.ResetRotationButton(RotationButton.allButtons);
 
-        Die[] dice = FindObjectsByType<Die>(FindObjectsSortMode.None);
-        foreach (Die die in dice)
-        {
-            die.isFrozen = false;
-        }
-
-        unusedDice.Clear();
         OnAcvitveCombatEnd.Invoke();
-
         StartDelay(1f, () => StartNewRound());
     }
 
     private void ResetEntity(Entity entity)
     {
         List<DiceData> dicardedDice = new List<DiceData>(entity.drawnDice);
-
         foreach (DiceData dieData in dicardedDice)
         {
             entity.discardPile.Add(dieData);
             entity.drawnDice.Remove(dieData);
         }
 
-        Die[] dice = FindObjectsByType<Die>(FindObjectsSortMode.None);
-
-        foreach (Die die in dice)
-        {
-            if (die.isFrozen == false)
-            {
-                GameObject dieObject = die.transform.gameObject;
-                Destroy(dieObject);
-            }
-        }
-
-        opponent.damage = 0;
-        opponent.block = 0;
-        player.damage = 0;
-        player.block = 0;
+        entity.damage = 0;
+        entity.block = 0;
         UpdateDamageBlockUI();
     }
 
@@ -629,6 +597,35 @@ public class BattleSceneManager : MonoBehaviour
         TabletManager.Instance.tablets = newTablets;
         Vector3 startPosition = new Vector3(4.9f, -2.5f, 0f);
         TabletManager.Instance.SpawnTablets(startPosition);
+    }
+
+    public void ResetDiceSlots()
+    {
+        foreach (DiceSlotController slot in allSlots)
+        {
+            if (slot.slottedDie != null)
+            {
+                if (!slot.slottedDie.isFrozen)
+                {
+                    slot.isFilled = false;
+                }
+            }
+        }
+    }
+
+    public void ResetDice()
+    {
+        Die[] dice = FindObjectsByType<Die>(FindObjectsSortMode.None);
+        foreach (Die die in dice)
+        {
+            if (!die.isFrozen)
+            {
+                GameObject dieObject = die.transform.gameObject;
+                Destroy(dieObject);
+            }
+            die.isFrozen = false;
+        }
+        unusedDice.Clear();
     }
 
     public void UpdateScoreDisplay()
@@ -733,7 +730,6 @@ public class BattleSceneManager : MonoBehaviour
                 }
             }
 
-
             if (slot)
             {
                 slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0.1f, 0.1f, 0.1f, 0.1f));
@@ -743,21 +739,6 @@ public class BattleSceneManager : MonoBehaviour
 
         playerActiveColumn.Clear();
         enemyActiveColumn.Clear();
-    }
-
-    public void ResetTabletSlots()
-    {
-        foreach (DiceSlotController slot in allSlots)
-        {
-            if (slot.wasFrozen == false)
-            {
-                slot.isFilled = false;
-                if (slot.slottedDie)
-                {
-                    slot.slottedDie = null;
-                }
-            }
-        }
     }
 
     private static List<List<DiceSlotController>> SortActiveSlots(List<DiceSlotController> activeColumn)
@@ -854,9 +835,12 @@ public class BattleSceneManager : MonoBehaviour
 
     private void OnEnable()
     {
-        tooltipAction.performed += ctx => ShowInfo();
-        tooltipAction.canceled += ctx => HideInfo();
-        tooltipAction.Enable();
+        if (tooltipAction != null)
+        {
+            tooltipAction.performed += ctx => ShowInfo();
+            tooltipAction.canceled += ctx => HideInfo();
+            tooltipAction.Enable();
+        }
     }
 
     private void OnDisable()
@@ -881,5 +865,26 @@ public class BattleSceneManager : MonoBehaviour
         {
             slot.slotName.gameObject.SetActive(false);
         }
+    }
+
+    public void UpdateBannersUI(int column)
+    {
+        foreach (GameObject banner in playerColumnBanner)
+        {
+            Image sprite = banner.GetComponent<Image>();
+            sprite.color = new Color(0.25f, 0.25f, 0.25f, 1f);
+        }
+
+        foreach (GameObject opponentBanner in opponentColumnBanner)
+        {
+            Image sprite = opponentBanner.GetComponent<Image>();
+            sprite.color = new Color(0.25f, 0.25f, 0.25f, 1f);
+        }
+
+        Image playerBannerSprite = playerColumnBanner[column - 1].GetComponent<Image>();
+        playerBannerSprite.color = new Color(1f, 1f, 1f, 1f);
+
+        Image opponentBannerSprite = opponentColumnBanner[column - 1].GetComponent<Image>();
+        opponentBannerSprite.color = new Color(1f, 1f, 1f, 1f);
     }
 }
