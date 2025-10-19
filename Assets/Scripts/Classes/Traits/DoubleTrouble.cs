@@ -24,23 +24,23 @@ public class DoubleTrouble : Trait
 
         if (sceneStart)
         {
-            battleSceneManager.OnSceneStart.AddListener(OnSceneStart);
+            BattleSceneManager.OnSceneStart.AddListener(OnSceneStart);
         }
         if (roundStart)
         {
-            battleSceneManager.OnRoundStart.AddListener(OnRoundStart);
+            BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
         }
         if (placementDone)
         {
-            battleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
+            BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
         }
         if (acvitveCombatStart)
         {
-            battleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
+            BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
         }
         if (acvitveCombatEnd)
         {
-            battleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
+            BattleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
         }
     }
 

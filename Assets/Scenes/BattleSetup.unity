@@ -4821,6 +4821,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268619073}
   m_CullTransparentMesh: 1
+--- !u!1 &1271074826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1271074827}
+  - component: {fileID: 1271074829}
+  - component: {fileID: 1271074828}
+  m_Layer: 5
+  m_Name: Diceonomicon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1271074827
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271074826}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 641228878}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 305, y: -186}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1271074828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271074826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 846a401ff57cbbe4fb9f0bba224195e3, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1271074829
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271074826}
+  m_CullTransparentMesh: 1
 --- !u!1 &1298606664
 GameObject:
   m_ObjectHideFlags: 0
@@ -4974,7 +5049,6 @@ MonoBehaviour:
   - {fileID: 823886337}
   playerActiveColumn: []
   enemyActiveColumn: []
-  unusedDice: []
   level: 0
   round: 0
   columnStartPositions:
@@ -4985,6 +5059,7 @@ MonoBehaviour:
   - 7.4
   - 8.2
   intermission: 0
+  unusedDice: []
   endScene: {fileID: 1464295274}
   placementButton: {fileID: 1078122327}
   intermissionButton: {fileID: 1420239865}
@@ -4992,21 +5067,6 @@ MonoBehaviour:
   combatBolt: {fileID: 386940530}
   scoreText: {fileID: 1634790042}
   highscoreText: {fileID: 1725913185}
-  OnSceneStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnRoundStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPlacementDone:
-    m_PersistentCalls:
-      m_Calls: []
-  OnAcvitveCombatStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnAcvitveCombatEnd:
-    m_PersistentCalls:
-      m_Calls: []
   DiceRollEvent:
     Guid:
       Data1: -208536345
@@ -5779,8 +5839,9 @@ MonoBehaviour:
   health:
   - {fileID: 1580371268}
   - {fileID: 460898971}
-  buttons: {fileID: 786751210}
+  buttons: {fileID: 73024968}
   textbubble: {fileID: 244253377}
+  book: {fileID: 1271074826}
   text: {fileID: 122248664}
   sceneManager: {fileID: 1301764763}
   topEntryOffset: {x: 0, y: 50, z: 0}
@@ -7633,6 +7694,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8176232002357514268, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 244253378}
+    - targetCorrespondingSourceObject: {fileID: 8176232002357514268, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1271074827}
     - targetCorrespondingSourceObject: {fileID: 8460817899730068866, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1725913184}

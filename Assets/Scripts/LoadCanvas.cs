@@ -17,6 +17,7 @@ public class LoadCanvas : MonoBehaviour
     public GameObject[] health;
     public GameObject buttons;
     public GameObject textbubble;
+    public GameObject book;
     public TMP_Text text;
     public BattleSceneManager sceneManager;
 
@@ -45,6 +46,7 @@ public class LoadCanvas : MonoBehaviour
         AnimateGroup(health, staggerDelay * 0.3f, bottomEntryOffset);
         AnimateSingle(chest, 0.5f, bottomEntryOffset);
         AnimateSingle(buttons, 0.6f, bottomEntryOffset);
+        AnimateSingle(book, 0.8f, bottomEntryOffset);
     }
 
     private void AnimateGroup(GameObject[] objects, float delayStep, Vector3 entryOffset)

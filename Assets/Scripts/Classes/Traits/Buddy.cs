@@ -26,23 +26,23 @@ public class Buddy : Trait
 
         if (sceneStart)
         {
-            battleSceneManager.OnSceneStart.AddListener(OnSceneStart);
+            BattleSceneManager.OnSceneStart.AddListener(OnSceneStart);
         }
         if (roundStart)
         {
-            battleSceneManager.OnRoundStart.AddListener(OnRoundStart);
+            BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
         }
         if (placementDone)
         {
-            battleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
+            BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
         }
         if (acvitveCombatStart)
         {
-            battleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
+            BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
         }
         if (acvitveCombatEnd)
         {
-            battleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
+            BattleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
         }
     }
 
@@ -69,15 +69,33 @@ public class Buddy : Trait
         GameObject dieInstance = Instantiate(battleSceneManager.player.diePrefab, randomSlots[0].transform.position, Quaternion.identity);
         Die die = dieInstance.GetComponent<Die>();
 
+
+
         die.nameText = "Buddy Die";
         die.descText = "Value 1";
         //textureRenderer.material.SetTexture("_BaseMap", dieData.texture);
         die.range = new int[] { 1, 1, 1, 1, 1, 1 };
         die.dieTags = new string[] { "Damage", "Spell", "Block" };
-        die.usedTexture = Resources.Load<Texture2D>("Dice/Materials/Used_DiceBlank_Texture");
+
         die.TranslateValueAtStart();
 
         DiceSlotController chosenSlot = randomSlots[0];
+
+        if (chosenSlot.tag == "Spell")
+        {
+            Texture texture = Resources.Load<Texture2D>("Dice/Materials/Dummy_DiceSpell_Texture");
+            die.textureRenderer.material.SetTexture("_BaseMap", texture);
+        }
+        else if (chosenSlot.tag == "Damage")
+        {
+            Texture texture = Resources.Load<Texture2D>("Dice/Materials/Dummy_DiceDamage_Texture");
+            die.textureRenderer.material.SetTexture("_BaseMap", texture);
+        }
+        else if (chosenSlot.tag == "Block")
+        {
+            Texture texture = Resources.Load<Texture2D>("Dice/Materials/Dummy_DiceBlock_Texture");
+            die.textureRenderer.material.SetTexture("_BaseMap", texture);
+        }
 
         die.GetSideFacingUp();
         die.isResting = true;

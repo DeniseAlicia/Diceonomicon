@@ -14,7 +14,7 @@ public class RotationButton : MonoBehaviour
 
     private MeshRenderer meshRenderer;
     private Material materialInstance;
-
+    public static RotationButton[] allButtons;
 
     private static bool isRotating = false;
     private static int currentRotations = 0;
@@ -26,6 +26,27 @@ public class RotationButton : MonoBehaviour
         {
             materialInstance = meshRenderer.material;
             materialInstance.color = baseColor;
+        }
+
+        allButtons = Object.FindObjectsByType<RotationButton>(FindObjectsSortMode.None);
+
+        BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
+        BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
+    }
+
+    private void OnRoundStart()
+    {
+        foreach (RotationButton button in allButtons)
+        {
+            button.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnAcvitveCombatStart()
+    {
+        foreach (RotationButton button in allButtons)
+        {
+            button.gameObject.SetActive(false);
         }
     }
 
@@ -58,20 +79,6 @@ public class RotationButton : MonoBehaviour
         isRotating = true;
         currentRotations += 1;
 
-        // Disable button visuals when player can't rotate anymore
-        if (currentRotations >= maxRotations)
-        {
-            RotationButton[] allButtons = Object.FindObjectsByType<RotationButton>(FindObjectsSortMode.None);
-
-            foreach (RotationButton button in allButtons)
-            {
-                foreach (MeshRenderer mr in button.GetComponentsInChildren<MeshRenderer>())
-                {
-                    mr.enabled = false;
-                }
-            }
-        }
-
         // Rotate tablet over time
         Quaternion startRot = targetObject.rotation;
         Quaternion endRot = startRot * Quaternion.Euler(0f, angle, 0f);
@@ -99,20 +106,24 @@ public class RotationButton : MonoBehaviour
 
         targetObject.rotation = endRot;
         isRotating = false;
+
+        // Disable button visuals when player can't rotate anymore
+        if (currentRotations >= maxRotations)
+        {
+            foreach (RotationButton button in allButtons)
+            {
+                button.gameObject.SetActive(false);
+            }
+        }
     }
 
-    public static void ResetRotationButton()
+    public static void ResetRotationButton(RotationButton[] allButtons)
     {
         currentRotations = 0;
 
-        RotationButton[] allButtons = Object.FindObjectsByType<RotationButton>(FindObjectsSortMode.None);
-
         foreach (RotationButton button in allButtons)
         {
-            foreach (MeshRenderer mr in button.GetComponentsInChildren<MeshRenderer>())
-            {
-                mr.enabled = true;
-            }
+            button.gameObject.SetActive(true);
         }
     }
 }
