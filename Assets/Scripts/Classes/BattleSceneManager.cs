@@ -47,6 +47,7 @@ public class BattleSceneManager : MonoBehaviour
     public static UnityEvent OnPlacementDone = new UnityEvent();
     public static UnityEvent OnAcvitveCombatStart = new UnityEvent();
     public static UnityEvent OnAcvitveCombatEnd = new UnityEvent();
+    public static UnityEvent OnLoss = new UnityEvent();
 
     // FMOD
     public FMODUnity.EventReference DiceRollEvent;
@@ -117,16 +118,6 @@ public class BattleSceneManager : MonoBehaviour
         }
 
         allSlots = GameObject.FindObjectsByType<DiceSlotController>(FindObjectsSortMode.None);
-
-        int debugCounter = 0;
-        foreach (DiceSlotController slot in allSlots)
-        {
-            if (slot.isFilled)
-            {
-                debugCounter++;
-            }
-        }
-        Debug.Log(debugCounter);
 
         foreach (GameObject banner in playerColumnBanner)
         {
@@ -487,9 +478,11 @@ public class BattleSceneManager : MonoBehaviour
         if (player.currentHealth <= 0)
         {
             endScene.Lose();
-            ScoreList.Add(Score);
-            UpdateScoreDisplay();
+            // ScoreList.Add(Score);
+            // UpdateScoreDisplay();
+            OnLoss.Invoke();
             StartIntermissionPhase();
+
         }
     }
 
@@ -628,18 +621,19 @@ public class BattleSceneManager : MonoBehaviour
         unusedDice.Clear();
     }
 
-    public void UpdateScoreDisplay()
+    public void UpdateScoreDisplay(HighscoreEntry[] highscores)
     {
         // Get top 5 scores (sorted descending)
-        var topScores = ScoreList
-            .OrderByDescending(s => s)
+        var topScores = highscores
+            .OrderByDescending(s => s.score)
             .Take(5)
             .ToList();
 
         string scoreText = "High Scores:\n";
         for (int i = 0; i < topScores.Count; i++)
         {
-            scoreText += $"{i + 1}. {topScores[i]}\n";
+            var entry = topScores[i];
+            scoreText += $"{i + 1}. {entry.player_name} - {entry.score}\n";
         }
 
         highscoreText.text = scoreText;

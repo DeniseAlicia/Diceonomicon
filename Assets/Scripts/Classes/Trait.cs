@@ -18,7 +18,6 @@ public abstract class Trait : MonoBehaviour
     // Unsubscribe to EventListeners to prevent Memory Leak 
     protected virtual void OnDestroy()
     {
-        Debug.Log("Base OnDestroy called");
         UnsubscribeFromEvents();
     }
 
