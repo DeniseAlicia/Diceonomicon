@@ -74,6 +74,7 @@ public class Buddy : Trait
         die.nameText = "Buddy Die";
         die.descText = "Value 1";
         //textureRenderer.material.SetTexture("_BaseMap", dieData.texture);
+        die.usedTexture = Resources.Load<Texture2D>("Dice/Materials/Used_DiceBlank_Texture");
         die.range = new int[] { 1, 1, 1, 1, 1, 1 };
         die.dieTags = new string[] { "Damage", "Spell", "Block" };
 

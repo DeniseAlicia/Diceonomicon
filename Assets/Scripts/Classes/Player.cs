@@ -13,9 +13,25 @@ public class Player : Entity
 
     public List<TabletData> SetImplingRoster()
     {
-        ImplingRoster.Add("Cubie");
-        ImplingRoster.Add("Stabo");
-        ImplingRoster.Add("Spike");
+        List<string> implings = new List<string> { "MrMimic", "Stabo", "Spike", "Hie", "Cubie", "Beempling", "Haunt", "Spooding" };
+
+        System.Random rng = new System.Random();
+        int n = implings.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            (implings[k], implings[n]) = (implings[n], implings[k]);
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            ImplingRoster.Add(implings[i]);
+        }
+
+        // ImplingRoster.Add("MrMimic");
+        // ImplingRoster.Add("Spike");
+        // ImplingRoster.Add("Stabo");
 
 
         foreach (var impName in ImplingRoster)

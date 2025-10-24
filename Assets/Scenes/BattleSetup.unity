@@ -5018,6 +5018,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1301764764}
   - component: {fileID: 1301764763}
+  - component: {fileID: 1301764765}
   m_Layer: 2
   m_Name: BattleSceneManager
   m_TagString: Untagged
@@ -5110,6 +5111,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1301764765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301764762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fad76badedea8c64a92ec1dc30bb6eed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HighscoreManager
+  sceneManager: {fileID: 1301764763}
 --- !u!114 &1334437248 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5193170739373225666, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
@@ -5150,8 +5164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091628ef8a97e614ab597a3e6a8a282f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 33
-  maxHealth: 33
+  currentHealth: 65
+  maxHealth: 65
   candle: {fileID: 82667264}
   healthText: {fileID: 229039875}
   damageText: {fileID: 6429603912121983631}
@@ -7549,8 +7563,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4726494649420518881, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4726494649420518881, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_RaycastTarget
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5679295662882322632, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_Enabled
