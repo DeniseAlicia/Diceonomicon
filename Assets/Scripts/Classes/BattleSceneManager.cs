@@ -63,6 +63,7 @@ public class BattleSceneManager : MonoBehaviour
 
     private void Awake()
     {
+        tooltipAction = InputSystem.actions.FindAction("ShowInfo");
         Camera camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
         camBattleTablets.gameObject.SetActive(false);
         camBattleTablets.gameObject.SetActive(true);
@@ -70,7 +71,7 @@ public class BattleSceneManager : MonoBehaviour
 
     private void Start()
     {
-        tooltipAction = InputSystem.actions.FindAction("ShowInfo");
+
         player.CreateDiceDeck();
 
         round = 0;
@@ -623,10 +624,10 @@ public class BattleSceneManager : MonoBehaviour
 
     public void UpdateScoreDisplay(HighscoreEntry[] highscores)
     {
-        // Get top 5 scores (sorted descending)
+        // Get top 10 scores (sorted descending)
         var topScores = highscores
             .OrderByDescending(s => s.score)
-            .Take(5)
+            .Take(10)
             .ToList();
 
         string scoreText = "High Scores:\n";
