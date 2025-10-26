@@ -64,9 +64,12 @@ public static class DiceManager
             diePos.z += overflow * distance;
             //dice[i].transform.position = diePos;
 
-            dice[i].transform.DOMove(diePos, 0.6f).SetEase(Ease.OutQuad);
+            dice[i].transform.DOMove(diePos, 0.2f).SetEase(Ease.OutQuad);
+        }
 
-            dice[i].isResting = false;
+        foreach (Die die in sceneManager.player.dice)
+        {
+            die.isResting = false;
         }
 
         button.gameObject.SetActive(true);

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using TMPro;
 
 [System.Serializable]
 public class HighscoreEntry
@@ -21,10 +22,23 @@ public class HighscoreManager : MonoBehaviour
 {
     private const string baseUrl = "http://localhost:8000/highscores";
     public BattleSceneManager sceneManager;
+    public GameObject enterNameField;
+    public TMP_Text enteredName;
 
     public void Start()
     {
-        BattleSceneManager.OnLoss.AddListener(() => StartCoroutine(SaveAndLoadHighscores()));
+        //BattleSceneManager.OnLoss.AddListener(() => StartCoroutine(SaveAndLoadHighscores()));
+    }
+
+    public void AddHighscore()
+    {
+        StartCoroutine(SaveAndLoadHighscores());
+    }
+
+    public string GetPlayerName()
+    {
+        enterNameField.SetActive(false);
+        return enteredName.text;
     }
 
     private IEnumerator SaveAndLoadHighscores()
@@ -45,8 +59,21 @@ public class HighscoreManager : MonoBehaviour
 
     private IEnumerator PostHighscore()
     {
+        int charLimit = 5;
+        int minChar = 1;
         int newScore = sceneManager.Score;
-        string playerName = "Test"; //Needs variable implementation
+        string playerName = GetPlayerName();
+
+        if (playerName.Length > charLimit)
+        {
+            playerName = playerName.Substring(0, charLimit);
+        }
+        
+        if (playerName.Length <= minChar)
+        {
+            playerName = "Empty";
+        }
+
         List<string> roster = sceneManager.player.ImplingRoster;
 
         HighscoreEntry entry = new()
