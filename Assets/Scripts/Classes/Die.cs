@@ -176,19 +176,16 @@ public class Die : MonoBehaviour
             if (gameObject.layer == LayerMask.NameToLayer("Gameplay"))
             {
                 lastPosition = transform.position;
+                MoveToLayer("BattleTablets");
+
                 mouseOffset = Input.mousePosition - GetDiePosition(camGameplay);
                 transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-
                 lastRotation = transform.eulerAngles;
-                transform.Rotate(new Vector3(-90, 0, 0), Space.World);
-
-                MoveToLayer("BattleTablets");
             }
             else
             {
                 mouseOffset = Input.mousePosition - GetDiePosition(camBattleTablets);
                 transform.localScale = new Vector3(7f, 7f, 7f);
-
             }
 
         }
@@ -199,10 +196,11 @@ public class Die : MonoBehaviour
         if (isDraggable)
         {
             transform.position = camBattleTablets.ScreenToWorldPoint(Input.mousePosition - mouseOffset);
+            transform.position = new Vector3(transform.position.x, 2f, transform.position.z);
 
             if (Mouse.current.rightButton.wasPressedThisFrame && this.dieTags.Contains("Buff"))
             {
-                transform.Rotate(new Vector3(0, 0, 90), Space.World);
+                transform.Rotate(new Vector3(0, 90, 0), Space.World);
                 dieRotation += 90;
             }
         }
@@ -213,10 +211,9 @@ public class Die : MonoBehaviour
         if (isDraggable)
         {
             transform.eulerAngles = lastRotation;
-            Vector3 yOffset = new Vector3(0, 0, -0.2f);
             RaycastHit hit = new RaycastHit();
 
-            if (Physics.Raycast(transform.position + yOffset, Vector3.forward, out hit, 100))
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 100))
             {
                 GameObject hitSlot = hit.transform.gameObject;
 
@@ -237,8 +234,6 @@ public class Die : MonoBehaviour
                         }
                         transform.SetParent(hitSlot.transform);
                         transform.localPosition = new Vector3(0, 3, 0);
-                        transform.Rotate(new Vector3(-90, 0, 0), Space.World);
-                        transform.Rotate(new Vector3(0, 0, dieRotation), Space.World);
                         transform.localScale = new Vector3(6f, 6f, 6f);
 
                         slotController.isFilled = true;
@@ -260,8 +255,6 @@ public class Die : MonoBehaviour
                         else
                         {
                             transform.localPosition = new Vector3(0, 3, 0);
-                            transform.Rotate(new Vector3(-90, 0, 0), Space.World);
-                            transform.Rotate(new Vector3(0, 0, dieRotation), Space.World);
                             transform.localScale = new Vector3(6f, 6f, 6f);
                         }
                     }
@@ -333,11 +326,15 @@ public class Die : MonoBehaviour
         }
     }
 
-    public void TranslateValue()
+    public void TranslateValue(bool debuffed = false)
     {
         GameObject child = sideUp.gameObject;
         GameObject childText = child.transform.GetChild(0).gameObject;
         childText.GetComponent<TMP_Text>().text = value.ToString();
+        if (debuffed)
+        {
+            childText.GetComponent<TMP_Text>().color = Color.purple;
+        }
     }
 
     public void InitializeAsCopy()

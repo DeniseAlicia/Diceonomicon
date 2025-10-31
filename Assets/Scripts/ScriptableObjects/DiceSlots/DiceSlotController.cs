@@ -115,8 +115,8 @@ public class DiceSlotController : MonoBehaviour
 
     public void DetectLinksDown(Vector3 pos)
     {
-        Vector3 rayPosition = new Vector3(pos.x, pos.y - 0.8f, pos.z - 10);
-        Ray raydown = new Ray(rayPosition, Vector3.forward);
+        Vector3 rayPosition = new Vector3(pos.x, pos.y + 1, pos.z - 0.8f);
+        Ray raydown = new Ray(rayPosition, Vector3.down);
 
         if (Physics.Raycast(raydown, out RaycastHit hit, 666))
         {
@@ -138,8 +138,8 @@ public class DiceSlotController : MonoBehaviour
 
     public void DetectLinksUp(Vector3 pos)
     {
-        Vector3 rayPosition = new Vector3(pos.x, pos.y + 0.8f, pos.z - 10);
-        Ray raydown = new Ray(rayPosition, Vector3.forward);
+        Vector3 rayPosition = new Vector3(pos.x, pos.y + 1, pos.z + 0.8f);
+        Ray raydown = new Ray(rayPosition, Vector3.down);
 
         if (Physics.Raycast(raydown, out RaycastHit hit, 666))
         {
@@ -227,8 +227,6 @@ public class DiceSlotController : MonoBehaviour
                 die.lastRotation = die.transform.eulerAngles;
                 die.transform.SetParent(this.transform);
                 die.transform.localPosition = new Vector3(0, 3, 0);
-                die.transform.Rotate(new Vector3(-90, 0, 0), Space.World);
-                die.transform.Rotate(new Vector3(0, 0, die.dieRotation), Space.World);
                 die.transform.localScale = new Vector3(6f, 6f, 6f);
 
                 isFilled = true;

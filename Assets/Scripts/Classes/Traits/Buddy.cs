@@ -106,7 +106,6 @@ public class Buddy : Trait
 
         die.transform.SetParent(chosenSlot.transform);
         die.transform.localPosition = new Vector3(0, 3, 0);
-        die.transform.Rotate(new Vector3(-90, 0, 0), Space.World);
         die.transform.localScale = new Vector3(6f, 6f, 6f);
 
         chosenSlot.isFilled = true;

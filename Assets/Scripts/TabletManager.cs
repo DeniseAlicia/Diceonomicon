@@ -29,7 +29,7 @@ public class TabletManager : MonoBehaviour
             tablets = Encounters.SetEnemyRoster(1, "Green");
             owner = FindFirstObjectByType<Opponent>();
             opponent.SetEnemyRoster(tablets);
-            goalPosition = new Vector3(4.9f, -2.5f, 0f);
+            goalPosition = new Vector3(4.9f, 1f, 3f);
             startPosition = new Vector3(goalPosition.x + 6f, goalPosition.y, goalPosition.z);
         }
         else
@@ -37,7 +37,7 @@ public class TabletManager : MonoBehaviour
             Player player = Object.FindFirstObjectByType<Player>();
             tablets = player.SetImplingRoster();
             owner = FindFirstObjectByType<Player>();
-            goalPosition = new Vector3(-6.9f, -2.5f, 0f);
+            goalPosition = new Vector3(-6.9f, 1f, 3f);
             startPosition = new Vector3(goalPosition.x - 6f, goalPosition.y, goalPosition.z); ;
         }
 
@@ -47,17 +47,18 @@ public class TabletManager : MonoBehaviour
     public void SpawnTablets(Vector3 currentPosition)
     {
         float speed = 1f;
+        Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
 
         foreach (TabletData tablet in tablets)
         {
-            GameObject tabletInstance = Instantiate(tablet.tabletPrefab, currentPosition, Quaternion.identity);
+            GameObject tabletInstance = Instantiate(tablet.tabletPrefab, currentPosition, rotation);
 
             TabletController controller = tabletInstance.GetComponent<TabletController>();
             controller.SetData(tablet);
             controller.owner = owner;
 
             Renderer renderer = tabletInstance.GetComponentInChildren<Renderer>();
-            float height = renderer.bounds.size.y;
+            float height = renderer.bounds.size.z;
 
             if (tablet.tabletPrefab.name.Contains("Small"))
             {
@@ -68,8 +69,8 @@ public class TabletManager : MonoBehaviour
                 height *= 0.7f;
             }
 
-            goalPosition.y = currentPosition.y;
-            currentPosition.y -= height + spacing;
+            goalPosition.z = currentPosition.z;
+            currentPosition.z -= height + spacing;
 
             if (controller.owner == enemy)
             {
