@@ -49,15 +49,15 @@ public class EnemyAI : MonoBehaviour
         for (int j = 0; j < columnStartPositions.Length; j++)
         {
             float columnPosX = columnStartPositions[j];
-            Vector3 raycastVector = new Vector3(columnPosX, -1.8f, -0.1f);
+            Vector3 raycastVector = new Vector3(columnPosX, 3f, 3.6f);
 
             for (int i = 0; i < 9; i++)
             {
-                float yJump = i * -0.8f;
-                Vector3 rayPosition = new Vector3(columnPosX + 14.3f, raycastVector.y + yJump, raycastVector.z);
-                Ray ray = new Ray(rayPosition, Vector3.forward);
+                float zJump = i * -0.8f;
+                Vector3 rayPosition = new Vector3(columnPosX + 14.3f, raycastVector.y, raycastVector.z + zJump);
+                Ray ray = new Ray(rayPosition, Vector3.down);
 
-                //Debug.DrawRay(rayPosition, Vector3.forward * 10, Color.purple, 666);
+                //Debug.DrawRay(rayPosition, Vector3.down * 2, Color.purple, 666);
                 if (Physics.Raycast(ray, out RaycastHit hit2, 666))
                 {
                     DiceSlotController slotController = hit2.collider.GetComponent<DiceSlotController>();
@@ -193,7 +193,6 @@ public class EnemyAI : MonoBehaviour
                     {
                         die.transform.SetParent(slot.transform);
                         die.transform.localPosition = new Vector3(0, 3, 0);
-                        die.transform.Rotate(new Vector3(-90, 0, 0), Space.World);
                         die.transform.localScale = new Vector3(6f, 6f, 6f);
 
                         slot.isFilled = true;
@@ -241,7 +240,6 @@ public class EnemyAI : MonoBehaviour
                 {
                     die.transform.SetParent(slot.transform);
                     die.transform.localPosition = new Vector3(0, 3, 0);
-                    die.transform.Rotate(new Vector3(-90, 0, 0), Space.World);
                     die.transform.localScale = new Vector3(6f, 6f, 6f);
 
                     slot.isFilled = true;
@@ -280,7 +278,6 @@ public class EnemyAI : MonoBehaviour
                 {
                     die.transform.SetParent(slot.transform);
                     die.transform.localPosition = new Vector3(0, 3, 0);
-                    die.transform.Rotate(new Vector3(-90, 0, 0), Space.World);
                     die.transform.localScale = new Vector3(6f, 6f, 6f);
 
                     slot.isFilled = true;
@@ -326,14 +323,14 @@ public class EnemyAI : MonoBehaviour
 
         foreach (int angle in dirAngles)
         {
-            Vector3 direction = Quaternion.Euler(-20, angle, -20) * Vector3.back;
+            Vector3 direction = Quaternion.Euler(-35, angle, -35) * Vector3.back;
 
             Transform originTransform = slot.transform;
 
-            Vector3 raycastVector = new Vector3(originTransform.position.x, originTransform.position.y, originTransform.position.z - 0.3f);
+            Vector3 raycastVector = new Vector3(originTransform.position.x, originTransform.position.y + 0.5f, originTransform.position.z);
 
             Ray ray = new Ray(raycastVector, originTransform.TransformDirection(direction));
-            Debug.DrawRay(raycastVector, originTransform.TransformDirection(direction) * 666, Color.red, 222f);
+            //Debug.DrawRay(raycastVector, originTransform.TransformDirection(direction) * 3, Color.red, 666f);
 
             if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
             {
@@ -356,10 +353,10 @@ public class EnemyAI : MonoBehaviour
 
     public void DetectLinksDown(DiceSlotController slot)
     {
-        Vector3 rayPosition = new Vector3(slot.transform.position.x, slot.transform.position.y - 0.8f, slot.transform.position.z - 10);
-        Ray raydown = new Ray(rayPosition, Vector3.forward);
+        Vector3 rayPosition = new Vector3(slot.transform.position.x, slot.transform.position.y + 0.2f , slot.transform.position.z - 0.8f);
+        Ray raydown = new Ray(rayPosition, Vector3.down);
 
-        if (Physics.Raycast(raydown, out RaycastHit hit, 666))
+        if (Physics.Raycast(raydown, out RaycastHit hit, 66))
         {
             DiceSlotController hitSlot = hit.collider.GetComponent<DiceSlotController>();
             if (hitSlot != null && hitSlot.tag == slot.tag)
@@ -372,10 +369,10 @@ public class EnemyAI : MonoBehaviour
 
     public void DetectLinksUp(DiceSlotController slot)
     {
-        Vector3 rayPosition = new Vector3(slot.transform.position.x, slot.transform.position.y + 0.8f, slot.transform.position.z - 10);
-        Ray rayup = new Ray(rayPosition, Vector3.forward);
+        Vector3 rayPosition = new Vector3(slot.transform.position.x, slot.transform.position.y + 0.2f, slot.transform.position.z + 0.8f);
+        Ray rayup = new Ray(rayPosition, Vector3.down);
 
-        if (Physics.Raycast(rayup, out RaycastHit hit, 666))
+        if (Physics.Raycast(rayup, out RaycastHit hit, 66))
         {
             DiceSlotController hitSlot = hit.collider.GetComponent<DiceSlotController>();
             if (hitSlot != null && hitSlot.tag == slot.tag)
@@ -388,10 +385,10 @@ public class EnemyAI : MonoBehaviour
 
     public void CheckDieUpDown(Die die)
     {
-        Vector3 rayPosition = new Vector3(die.transform.position.x, die.transform.position.y + 0.8f, die.transform.position.z - 10);
+        Vector3 rayPosition = new Vector3(die.transform.position.x, die.transform.position.y + 0.2f, die.transform.position.z + 0.8f);
         Ray rayup = new Ray(rayPosition, Vector3.forward);
 
-        if (Physics.Raycast(rayup, out RaycastHit hit, 666))
+        if (Physics.Raycast(rayup, out RaycastHit hit, 66))
         {
             DiceSlotController hitSlot = hit.collider.GetComponent<DiceSlotController>();
             if (hitSlot != null && die.dieTags.Contains(hitSlot.tag))
@@ -400,10 +397,10 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        Vector3 rayPosition2 = new Vector3(die.transform.position.x, die.transform.position.y - 0.8f, die.transform.position.z - 10);
+        Vector3 rayPosition2 = new Vector3(die.transform.position.x, die.transform.position.y + 0.2f , die.transform.position.z - 0.8f);
         Ray raydown = new Ray(rayPosition2, Vector3.forward);
 
-        if (Physics.Raycast(raydown, out RaycastHit hit2, 666))
+        if (Physics.Raycast(raydown, out RaycastHit hit2, 66))
         {
             DiceSlotController hitSlot = hit2.collider.GetComponent<DiceSlotController>();
             if (hitSlot != null && die.dieTags.Contains(hitSlot.tag))
@@ -420,13 +417,13 @@ public class EnemyAI : MonoBehaviour
         for (int j = 0; j < 3; j++)
         {
             float xJump = j * 0.8f;
-            Vector3 raycastVector = new Vector3(slot.transform.position.x - 0.8f + xJump, slot.transform.position.y + 0.8f, slot.transform.position.z - 10);
+            Vector3 raycastVector = new Vector3(slot.transform.position.x - 0.8f + xJump, slot.transform.position.y + 0.2f, slot.transform.position.z);
 
             for (int i = 0; i < 3; i++)
             {
-                float yJump = i * -0.8f;
-                Vector3 rayPosition = new Vector3(raycastVector.x, raycastVector.y + yJump, raycastVector.z);
-                Ray ray = new Ray(rayPosition, Vector3.forward);
+                float zJump = i * -0.8f;
+                Vector3 rayPosition = new Vector3(raycastVector.x, raycastVector.y, raycastVector.z + zJump);
+                Ray ray = new Ray(rayPosition, Vector3.down);
 
                 if (Physics.Raycast(ray, out RaycastHit hit2, 666))
                 {

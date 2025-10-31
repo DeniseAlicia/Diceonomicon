@@ -28,10 +28,10 @@ public class PoisonSlotData : DiceSlotData
 
             if (targetSlot.isFilled)
             {
-                if (!targetSlot.slottedDie.dieTags.Contains("Buff"))
+                if (targetSlot.slottedDie.dieTags.Contains("Damage") || targetSlot.slottedDie.dieTags.Contains("Block") || targetSlot.slottedDie.dieTags.Contains("Spell")) 
                 {
                     targetSlot.slottedDie.value -= 1;
-                    targetSlot.slottedDie.TranslateValue();
+                    targetSlot.slottedDie.TranslateValue(true);
                 }
             }
         }

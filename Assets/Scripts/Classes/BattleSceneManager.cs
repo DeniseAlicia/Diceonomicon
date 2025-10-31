@@ -589,7 +589,7 @@ public class BattleSceneManager : MonoBehaviour
         opponent.SetEnemyRoster(newTablets);
 
         TabletManager.Instance.tablets = newTablets;
-        Vector3 startPosition = new Vector3(4.9f, -2.5f, 0f);
+        Vector3 startPosition = new Vector3(4.9f, 1f, 0f);
         TabletManager.Instance.SpawnTablets(startPosition);
     }
 
@@ -661,20 +661,21 @@ public class BattleSceneManager : MonoBehaviour
     public void GetActiveColumn(int column)
     {
         float columnPosX = columnStartPositions[column - 1];
-        Vector3 raycastVector = new Vector3(columnPosX, -1.8f, -0.1f);
+        Vector3 raycastVector = new Vector3(columnPosX, 1.25f, 3.6f);
 
         for (int i = 0; i < 9; i++)
         {
-            float yJump = i * -0.8f;
+            float zJump = i * -0.8f;
 
-            Vector3 rayPosition = new Vector3(raycastVector.x, raycastVector.y + yJump, raycastVector.z);
-            Ray ray = new Ray(rayPosition, Vector3.forward);
-            if (Physics.Raycast(ray, out RaycastHit hit, 666))
+            Vector3 rayPosition = new Vector3(raycastVector.x, raycastVector.y, raycastVector.z + zJump);
+            Ray ray = new Ray(rayPosition, Vector3.down);
+            Debug.DrawRay(rayPosition, Vector3.down * 1f, Color.red, 66);
+            if (Physics.Raycast(ray, out RaycastHit hit, 66))
             {
-                Vector3 ray2Position = new Vector3(raycastVector.x + 14.3f, raycastVector.y + yJump, raycastVector.z);
-                Ray ray2 = new Ray(ray2Position, Vector3.forward);
-                Debug.DrawRay(ray2Position, Vector3.forward * 10, Color.green, 666);
-                if (Physics.Raycast(ray2, out RaycastHit hit2, 666))
+                Vector3 ray2Position = new Vector3(raycastVector.x + 14.3f, raycastVector.y, raycastVector.z + zJump);
+                Ray ray2 = new Ray(ray2Position, Vector3.down);
+                Debug.DrawRay(ray2Position, Vector3.down * 1f, Color.green, 66);
+                if (Physics.Raycast(ray2, out RaycastHit hit2, 66))
                 {
                     DiceSlotController slotController2 = hit2.collider.GetComponent<DiceSlotController>();
                     if (slotController2 != null)
@@ -683,7 +684,7 @@ public class BattleSceneManager : MonoBehaviour
                     }
                     else
                     {
-                        return;
+                        //continue;
                     }
                 }
 
