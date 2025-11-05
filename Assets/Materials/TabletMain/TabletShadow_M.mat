@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TabletMain3_M
+  m_Name: TabletShadow_M
   m_Shader: {fileID: 4800000, guid: 421c2680e7fa73c438c42af20a9cb9e5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -52,11 +52,11 @@ Material:
     - _RimPower: 2.2
     - _RimStep: 1
     - _RimStepSmooth: 1
-    - _Roughness: 0.7
-    - _ShadowStep: 0.5
-    - _ShadowStepSmooth: 0.5
-    - _SpecularStep: 0.3
-    - _SpecularStepSmooth: 0.6
+    - _Roughness: 1
+    - _ShadowStep: 1
+    - _ShadowStepSmooth: 1
+    - _SpecularStep: 0
+    - _SpecularStepSmooth: 0
     - _Step: 0.432
     - _Step1: 0.537
     - _Step2: 0.018
@@ -64,7 +64,7 @@ Material:
     - _Step4: 0.025
     m_Colors:
     - _AlphaMaskOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _BaseColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _HighColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 0, g: 0, b: 0, a: 1}

@@ -5,6 +5,7 @@ public class HoverGlowController : MonoBehaviour
     private Renderer rend;
     private MaterialPropertyBlock mpb;
     public bool isHovered = false;
+    public DiceSlotController thisSlot;
 
     void Start()
     {
@@ -14,7 +15,13 @@ public class HoverGlowController : MonoBehaviour
 
     public void SetHover(bool hover)
     {
-        if (isHovered == hover) return;
+        if (thisSlot.isFilled)
+        {
+            rend.GetPropertyBlock(mpb);
+            mpb.SetFloat("_HoverTrigger", isHovered ? 1f : 0f);
+            rend.SetPropertyBlock(mpb);
+        }
+        else if (isHovered == hover) return;
         isHovered = hover;
 
         rend.GetPropertyBlock(mpb);

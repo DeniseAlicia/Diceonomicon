@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class Player : Entity
 {
@@ -29,10 +30,12 @@ public class Player : Entity
             ImplingRoster.Add(implings[i]);
         }
 
-        // ImplingRoster.Add("MrMimic");
-        // ImplingRoster.Add("Spike");
-        // ImplingRoster.Add("Stabo");
-
+        // Check if it's the tutorial
+        if (SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            ImplingRoster.Clear();
+            ImplingRoster.Add("Tutorial");
+        }
 
         foreach (var impName in ImplingRoster)
         {

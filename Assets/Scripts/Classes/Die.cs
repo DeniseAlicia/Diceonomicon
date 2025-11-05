@@ -234,7 +234,7 @@ public class Die : MonoBehaviour
                         }
                         transform.SetParent(hitSlot.transform);
                         transform.localPosition = new Vector3(0, 3, 0);
-                        transform.localScale = new Vector3(6f, 6f, 6f);
+                        transform.localScale = new Vector3(5.5f, 5.5f, 5.5f);
 
                         slotController.isFilled = true;
                         slotController.slottedDie = this;
@@ -255,7 +255,7 @@ public class Die : MonoBehaviour
                         else
                         {
                             transform.localPosition = new Vector3(0, 3, 0);
-                            transform.localScale = new Vector3(6f, 6f, 6f);
+                            transform.localScale = new Vector3(5.5f, 5.5f, 5.5f);
                         }
                     }
                 }

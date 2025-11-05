@@ -26,7 +26,8 @@ public class TabletManager : MonoBehaviour
         if (enemy)
         {
             Opponent opponent = Object.FindFirstObjectByType<Opponent>();
-            tablets = Encounters.SetEnemyRoster(1, "Green");
+            Player player = Object.FindFirstObjectByType<Player>();
+            tablets = Encounters.SetEnemyRoster(player.level, player.area);
             owner = FindFirstObjectByType<Opponent>();
             opponent.SetEnemyRoster(tablets);
             goalPosition = new Vector3(4.9f, 1f, 3f);
