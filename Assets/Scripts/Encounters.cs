@@ -10,7 +10,7 @@ public class Encounters
         {
          { (0, "None"), new List<List<string>>
             {
-                new List<string>{ "Diedra", "Diedra", "Diedra" },
+                new List<string>{ "TutorialEnemy" },
             }
         },
         { (1, "Green"), new List<List<string>>

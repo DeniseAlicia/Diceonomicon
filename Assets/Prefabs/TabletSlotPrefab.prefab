@@ -684,6 +684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHovered: 0
+  thisSlot: {fileID: 2055618050963800535}
 --- !u!1001 &1293473480325363102
 PrefabInstance:
   m_ObjectHideFlags: 0

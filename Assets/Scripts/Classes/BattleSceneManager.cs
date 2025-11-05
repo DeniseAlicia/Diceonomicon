@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using TMPro;
 
 public class BattleSceneManager : MonoBehaviour
 {
+    public bool isTutorial;
     public Player player;
     public Opponent opponent;
     public GameObject[] playerColumnBanner;
@@ -76,8 +76,8 @@ public class BattleSceneManager : MonoBehaviour
 
         round = 0;
         Score = 0;
-        player.level = 1;
-        player.area = "Green";
+        player.level = 0;
+        player.area = "None";
         opponent.damage = 0;
         opponent.block = 0;
         player.damage = 0;
@@ -101,7 +101,10 @@ public class BattleSceneManager : MonoBehaviour
         intermissionButton.gameObject.SetActive(false);
 
         OnSceneStart.Invoke();
-        StartNewRound();
+        if (!isTutorial)
+        {
+            StartNewRound();
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -110,7 +113,7 @@ public class BattleSceneManager : MonoBehaviour
     // 
     //////////////////////////////////////////////////////////////////////////
 
-    private void StartNewRound()
+    public void StartNewRound()
     {
         OnRoundStart.Invoke();
         if (opponent.currentHealth == 0)
@@ -548,7 +551,7 @@ public class BattleSceneManager : MonoBehaviour
     // 
     //////////////////////////////////////////////////////////////////////////
 
-    private void EndOfRound()
+    public void EndOfRound()
     {
         ResetEntity(player);
         ResetEntity(opponent);

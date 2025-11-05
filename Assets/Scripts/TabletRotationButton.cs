@@ -120,10 +120,12 @@ public class RotationButton : MonoBehaviour
     public static void ResetRotationButton(RotationButton[] allButtons)
     {
         currentRotations = 0;
-
-        foreach (RotationButton button in allButtons)
+        if (allButtons != null)
         {
-            button.gameObject.SetActive(true);
+            foreach (RotationButton button in allButtons)
+            {
+                button.gameObject.SetActive(true);
+            }
         }
     }
 }

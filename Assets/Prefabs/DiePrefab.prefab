@@ -61,7 +61,7 @@ MonoBehaviour:
   tag: 
   owner: 
   lastPosition: {x: 0, y: 0, z: 0}
-  isDraggable: 1
+  isDraggable: 0
   isPlaced: 0
   isResting: 0
   isFrozen: 0
