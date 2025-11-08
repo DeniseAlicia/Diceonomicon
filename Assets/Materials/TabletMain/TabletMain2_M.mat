@@ -25,11 +25,11 @@ Material:
     m_TexEnvs:
     - _AlphaMask:
         m_Texture: {fileID: 2800000, guid: 481f195ef3d66004e81ae959f10cff50, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 3, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: f1fc4f5cf7f444742b849ed2c113017d, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 3, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: 7a6b712e179503d42ae5d33024bb29f2, type: 3}
@@ -37,7 +37,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
         m_Texture: {fileID: 2800000, guid: 9db936a65e479f74289823075abba805, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 3, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RoughnessMap:
         m_Texture: {fileID: 0}
@@ -52,11 +52,11 @@ Material:
     - _RimPower: 2.2
     - _RimStep: 1
     - _RimStepSmooth: 1
-    - _Roughness: 0.7
+    - _Roughness: 0.9
     - _ShadowStep: 0.5
     - _ShadowStepSmooth: 0.5
-    - _SpecularStep: 0.1
-    - _SpecularStepSmooth: 1
+    - _SpecularStep: 0.05
+    - _SpecularStepSmooth: 0.6
     - _Step: 0.432
     - _Step1: 0.537
     - _Step2: 0.018

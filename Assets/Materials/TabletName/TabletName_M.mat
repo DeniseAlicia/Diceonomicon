@@ -52,11 +52,11 @@ Material:
     - _RimPower: 2.2
     - _RimStep: 1
     - _RimStepSmooth: 1
-    - _Roughness: 0.92
+    - _Roughness: 0.9
     - _ShadowStep: 0.5
     - _ShadowStepSmooth: 0.5
-    - _SpecularStep: 1
-    - _SpecularStepSmooth: 1
+    - _SpecularStep: 0.65
+    - _SpecularStepSmooth: 0
     - _Step: 0.432
     - _Step1: 0.537
     - _Step2: 0.018
@@ -68,6 +68,6 @@ Material:
     - _HighColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecularColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
+    - _SpecularColor: {r: 0.01886791, g: 0.01886791, b: 0.01886791, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
