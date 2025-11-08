@@ -9,6 +9,7 @@ public class Opponent : Entity
 
     public void SetEnemyRoster(List<TabletData> army)
     {
+        maxHealth = 1;
         ActiveImplings = army;
 
         foreach (TabletData demon in army)

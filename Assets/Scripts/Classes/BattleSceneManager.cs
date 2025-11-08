@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class BattleSceneManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class BattleSceneManager : MonoBehaviour
     private static List<List<DiceSlotController>> playerSlots;
     private static List<List<DiceSlotController>> enemySlots;
     private static DiceSlotController[] allSlots;
+    private MapStateManager mapStateManager;
 
     // Combat Stats
     public int level;
@@ -67,6 +69,7 @@ public class BattleSceneManager : MonoBehaviour
         Camera camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
         camBattleTablets.gameObject.SetActive(false);
         camBattleTablets.gameObject.SetActive(true);
+        mapStateManager = FindFirstObjectByType<MapStateManager>();
     }
 
     private void Start()
@@ -76,8 +79,8 @@ public class BattleSceneManager : MonoBehaviour
 
         round = 0;
         Score = 0;
-        player.level = 0;
-        player.area = "None";
+        player.level = 1;
+        player.area = "Green";
         opponent.damage = 0;
         opponent.block = 0;
         player.damage = 0;
@@ -116,10 +119,10 @@ public class BattleSceneManager : MonoBehaviour
     public void StartNewRound()
     {
         OnRoundStart.Invoke();
-        if (opponent.currentHealth == 0)
-        {
-            NewEncounter(player.level, player.area);
-        }
+        // if (opponent.currentHealth == 0)
+        // {
+        //     NewEncounter(player.level, player.area);
+        // }
 
         allSlots = GameObject.FindObjectsByType<DiceSlotController>(FindObjectsSortMode.None);
 
@@ -505,6 +508,8 @@ public class BattleSceneManager : MonoBehaviour
                 Destroy(tablet);
             }
 
+            mapStateManager.battleWon = true;
+            SceneManager.LoadScene("Map", LoadSceneMode.Single);
         }
     }
 
@@ -577,24 +582,24 @@ public class BattleSceneManager : MonoBehaviour
         UpdateDamageBlockUI();
     }
 
-    private void NewEncounter(int level, string area)
-    {
-        Score += player.currentHealth + 20;
-        scoreText.text = Score.ToString();
-        opponent.currentHealth = opponent.maxHealth;
-        opponent.healthText.text = opponent.currentHealth.ToString();
-        RectTransform candle = opponent.candle.GetComponent<RectTransform>();
-        Vector3 pos = candle.anchoredPosition;
-        pos.y = 16.2f;
-        candle.anchoredPosition = pos;
+    // private void NewEncounter(int level, string area)
+    // {
+    //     Score += player.currentHealth + 20;
+    //     scoreText.text = Score.ToString();
+    //     opponent.currentHealth = opponent.maxHealth;
+    //     opponent.healthText.text = opponent.currentHealth.ToString();
+    //     RectTransform candle = opponent.candle.GetComponent<RectTransform>();
+    //     Vector3 pos = candle.anchoredPosition;
+    //     pos.y = 16.2f;
+    //     candle.anchoredPosition = pos;
 
-        List<TabletData> newTablets = Encounters.SetEnemyRoster(level, area);
-        opponent.SetEnemyRoster(newTablets);
+    //     List<TabletData> newTablets = Encounters.SetEnemyRoster(level, area);
+    //     opponent.SetEnemyRoster(newTablets);
 
-        TabletManager.Instance.tablets = newTablets;
-        Vector3 startPosition = new Vector3(4.9f, 1f, 0f);
-        TabletManager.Instance.SpawnTablets(startPosition);
-    }
+    //     TabletManager.Instance.tablets = newTablets;
+    //     Vector3 startPosition = new Vector3(4.9f, 1f, 0f);
+    //     TabletManager.Instance.SpawnTablets(startPosition);
+    // }
 
     public void ResetDiceSlots()
     {
@@ -625,23 +630,23 @@ public class BattleSceneManager : MonoBehaviour
         unusedDice.Clear();
     }
 
-    public void UpdateScoreDisplay(HighscoreEntry[] highscores)
-    {
-        // Get top 10 scores (sorted descending)
-        var topScores = highscores
-            .OrderByDescending(s => s.score)
-            .Take(10)
-            .ToList();
+    // public void UpdateScoreDisplay(HighscoreEntry[] highscores)
+    // {
+    //     // Get top 10 scores (sorted descending)
+    //     var topScores = highscores
+    //         .OrderByDescending(s => s.score)
+    //         .Take(10)
+    //         .ToList();
 
-        string scoreText = "High Scores:\n";
-        for (int i = 0; i < topScores.Count; i++)
-        {
-            var entry = topScores[i];
-            scoreText += $"{i + 1}. {entry.player_name} - {entry.score}\n";
-        }
+    //     string scoreText = "High Scores:\n";
+    //     for (int i = 0; i < topScores.Count; i++)
+    //     {
+    //         var entry = topScores[i];
+    //         scoreText += $"{i + 1}. {entry.player_name} - {entry.score}\n";
+    //     }
 
-        highscoreText.text = scoreText;
-    }
+    //     highscoreText.text = scoreText;
+    // }
 
     //////////////////////////////////////////////////////////////////////////
     // 
