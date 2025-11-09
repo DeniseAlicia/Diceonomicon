@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using System.Linq;
+using Unity.IO.LowLevel.Unsafe;
 
 public class Die : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class Die : MonoBehaviour
     public bool isResting = false;
     public bool isFrozen = false;
     public bool isCopy;
+    public int didDamage;
+    public int priority;
 
     [SerializeField] float forceX;
     [SerializeField] float forceY;
@@ -40,6 +43,7 @@ public class Die : MonoBehaviour
     public Renderer textureRenderer;
     public DiceData data;
     public Texture usedTexture;
+    public DiceSlotController parentSlot;
 
     public int currentValue;
     public Transform sideUp;
@@ -55,6 +59,7 @@ public class Die : MonoBehaviour
         range = dieData.range;
         dieTags = dieData.tags;
         usedTexture = dieData.usedTexture;
+        priority = dieData.priority;
         TranslateValueAtStart();
     }
 
@@ -222,14 +227,14 @@ public class Die : MonoBehaviour
                 {
                     DiceSlotData slotData = slotController.slotData;
 
-                    if (this.dieTags.Contains(slotData.tag) && slotController.isFilled == false && slotController.owner.GetType() == typeof(Player))
+                    if (this.dieTags.Contains(slotData.tag) && slotController.isFilled == false && slotController.owner.GetType() == typeof(Player) || dieTags.Contains("Debuff") && slotController.owner.GetType() == typeof(Opponent))
                     {
                         if (transform.parent != null)
                         {
                             Transform parent = transform.parent;
-                            DiceSlotController slot = parent.gameObject.GetComponent<DiceSlotController>();
-                            slot.isFilled = false;
-                            slot.slottedDie = null;
+                            parentSlot = parent.gameObject.GetComponent<DiceSlotController>();
+                            parentSlot.isFilled = false;
+                            parentSlot.slottedDie = null;
                             transform.SetParent(null);
                         }
                         transform.SetParent(hitSlot.transform);
@@ -238,6 +243,7 @@ public class Die : MonoBehaviour
 
                         slotController.isFilled = true;
                         slotController.slottedDie = this;
+                        parentSlot = slotController;
                         isPlaced = true;
 
                         FMOD.Studio.EventInstance placeDieAudio = FMODUnity.RuntimeManager.CreateInstance(DiePlacementEvent);
@@ -264,9 +270,9 @@ public class Die : MonoBehaviour
                     if (transform.parent != null)
                     {
                         Transform parent = transform.parent;
-                        DiceSlotController slot = parent.gameObject.GetComponent<DiceSlotController>();
-                        slot.isFilled = false;
-                        slot.slottedDie = null;
+                        parentSlot = parent.gameObject.GetComponent<DiceSlotController>();
+                        parentSlot.isFilled = false;
+                        parentSlot.slottedDie = null;
                         transform.SetParent(null);
                     }
                     MoveToLayer("Gameplay");
@@ -281,9 +287,9 @@ public class Die : MonoBehaviour
                 if (transform.parent != null)
                 {
                     Transform parent = transform.parent;
-                    DiceSlotController slot = parent.gameObject.GetComponent<DiceSlotController>();
-                    slot.isFilled = false;
-                    slot.slottedDie = null;
+                    parentSlot = parent.gameObject.GetComponent<DiceSlotController>();
+                    parentSlot.isFilled = false;
+                    parentSlot.slottedDie = null;
                     transform.SetParent(null);
                 }
                 MoveToLayer("Gameplay");

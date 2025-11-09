@@ -15,7 +15,7 @@ public class BuffDie_Data : DiceData
 
     public List<Arrows> arrows;
 
-    public override void DoEffect()
+    public override void DoEffect(Die die)
     {
         int maxDistance = 4;
 

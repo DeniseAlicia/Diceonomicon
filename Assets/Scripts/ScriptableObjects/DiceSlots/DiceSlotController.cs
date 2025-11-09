@@ -27,6 +27,7 @@ public class DiceSlotController : MonoBehaviour
     public int priority;
     public int synergy;
     public int mult = 1;
+    public int tempMult = 0;
     public Die slottedDie;
     public new string tag;
     public Die die;
@@ -106,10 +107,11 @@ public class DiceSlotController : MonoBehaviour
             wasFrozen = true;
         }
 
-        mult = 1;
+        mult = 1 + tempMult;
         DetectLinksDown(this.transform.position);
         DetectLinksUp(this.transform.position);
         slotData.Effect(slottedDie, mult, activeSceneManager, owner, this);
+        tempMult = 0;
         return;
     }
 
@@ -221,6 +223,7 @@ public class DiceSlotController : MonoBehaviour
                     Transform parent = die.transform.parent;
                     isFilled = false;
                     slottedDie = null;
+                    die.parentSlot = null;
                     die.transform.SetParent(null);
                 }
                 die.lastPosition = die.transform.position;
@@ -228,7 +231,7 @@ public class DiceSlotController : MonoBehaviour
                 die.transform.SetParent(this.transform);
                 die.transform.localPosition = new Vector3(0, 3, 0);
                 die.transform.localScale = new Vector3(6f, 6f, 6f);
-
+                die.parentSlot = this;
                 isFilled = true;
                 slottedDie = die;
                 die.isPlaced = true;

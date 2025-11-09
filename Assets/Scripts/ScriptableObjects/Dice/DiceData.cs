@@ -1,6 +1,5 @@
+using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.UI;
-using System.Linq;
 
 public abstract class DiceData : ScriptableObject
 {
@@ -13,6 +12,8 @@ public abstract class DiceData : ScriptableObject
 
     public int[] range; 
     public string[] tags;
+    public int priority;
 
-    public abstract void DoEffect();
+
+    public abstract void DoEffect(Die die);
 }

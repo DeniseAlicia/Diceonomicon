@@ -5285,7 +5285,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1301764764}
   - component: {fileID: 1301764763}
-  - component: {fileID: 1301764765}
   m_Layer: 2
   m_Name: BattleSceneManager
   m_TagString: Untagged
@@ -5379,21 +5378,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1301764765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301764762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fad76badedea8c64a92ec1dc30bb6eed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HighscoreManager
-  sceneManager: {fileID: 1301764763}
-  enterNameField: {fileID: 1424472400}
-  enteredName: {fileID: 338153787}
 --- !u!114 &1334437248 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5193170739373225666, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
@@ -6003,7 +5987,7 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1301764765}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: HighscoreManager, Assembly-CSharp
         m_MethodName: AddHighscore
         m_Mode: 1
