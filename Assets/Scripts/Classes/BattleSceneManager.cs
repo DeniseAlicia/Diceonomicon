@@ -11,6 +11,8 @@ using UnityEngine.SceneManagement;
 
 public class BattleSceneManager : MonoBehaviour
 {
+    public static BattleSceneManager Instance;
+
     public bool isTutorial;
     public Player player;
     public Opponent opponent;
@@ -70,6 +72,7 @@ public class BattleSceneManager : MonoBehaviour
         camBattleTablets.gameObject.SetActive(false);
         camBattleTablets.gameObject.SetActive(true);
         mapStateManager = FindFirstObjectByType<MapStateManager>();
+        Instance = this;
     }
 
     private void Start()
@@ -225,6 +228,65 @@ public class BattleSceneManager : MonoBehaviour
     {
         player.inColumnPhase = true;
 
+        Die[] dice = FindObjectsByType<Die>(FindObjectsSortMode.None);
+        foreach (Die die in dice)
+        {
+            if (die.priority == 1 && die.isPlaced)
+            {
+                die.data.DoEffect(die);
+                if (die.didDamage > 0)
+                {
+                    if (die.parentSlot.owner.GetType() == typeof(Player))
+                    {
+                        int dmg = die.didDamage;
+                        die.didDamage = 0;
+                        int targetHealth = player.currentHealth - dmg;
+                        player.currentHealth -= dmg;
+                        player.healthText.text = player.currentHealth.ToString();
+                        StartCoroutine(AnimatePlayerHealthDecrease(targetHealth, dmg));
+                    }
+                    if (die.parentSlot.owner.GetType() == typeof(Opponent))
+                    {
+                        int dmg = die.didDamage;
+                        die.didDamage = 0;
+                        int targetHealth = opponent.currentHealth - dmg;
+                        opponent.currentHealth -= dmg;
+                        opponent.healthText.text = opponent.currentHealth.ToString();
+                        StartCoroutine(AnimateOpponentHealthDecrease(targetHealth, dmg));
+                    }
+                }
+            }
+        }
+
+        foreach (Die die in dice)
+        {
+            if (die.priority == 2 && die.isPlaced)
+            {
+                die.data.DoEffect(die);
+                if (die.didDamage > 0)
+                {
+                    if (die.parentSlot.owner.GetType() == typeof(Player))
+                    {
+                        int dmg = die.didDamage;
+                        die.didDamage = 0;
+                        int targetHealth = player.currentHealth - dmg;
+                        player.currentHealth -= dmg;
+                        player.healthText.text = player.currentHealth.ToString();
+                        StartCoroutine(AnimatePlayerHealthDecrease(targetHealth, dmg));
+                    }
+                    if (die.parentSlot.owner.GetType() == typeof(Opponent))
+                    {
+                        int dmg = die.didDamage;
+                        die.didDamage = 0;
+                        int targetHealth = opponent.currentHealth - dmg;
+                        opponent.currentHealth -= dmg;
+                        opponent.healthText.text = opponent.currentHealth.ToString();
+                        StartCoroutine(AnimateOpponentHealthDecrease(targetHealth, dmg));
+                    }
+                }
+            }
+        }
+
         DiceSlotController[] slots = GameObject.FindObjectsByType<DiceSlotController>(FindObjectsSortMode.None);
         List<DiceSlotController> buffSlots = new List<DiceSlotController>();
         foreach (DiceSlotController slot in slots)
@@ -329,6 +391,32 @@ public class BattleSceneManager : MonoBehaviour
             {
                 if (slot != null && !slot.Equals(null))
                 {
+                    if (slot.slottedDie.data != null && slot.slottedDie.priority == 3)
+                    {
+                        slot.slottedDie.data.DoEffect(slot.slottedDie);
+                        if (slot.slottedDie.didDamage > 0)
+                        {
+                            if (slot.owner.GetType() == typeof(Player))
+                            {
+                                int dmg = slot.slottedDie.didDamage;
+                                slot.slottedDie.didDamage = 0;
+                                int targetHealth = player.currentHealth - dmg;
+                                player.currentHealth -= dmg;
+                                player.healthText.text = player.currentHealth.ToString();
+                                StartCoroutine(AnimatePlayerHealthDecrease(targetHealth, dmg));
+                            }
+                            if (slot.owner.GetType() == typeof(Opponent))
+                            {
+                                int dmg = slot.slottedDie.didDamage;
+                                slot.slottedDie.didDamage = 0;
+                                int targetHealth = opponent.currentHealth - dmg;
+                                opponent.currentHealth -= dmg;
+                                opponent.healthText.text = opponent.currentHealth.ToString();
+                                StartCoroutine(AnimateOpponentHealthDecrease(targetHealth, dmg));
+                            }
+                        }
+                    }
+
                     slot.DoEffect();
                     UpdateDamageBlockUI();
                 }
@@ -891,4 +979,7 @@ public class BattleSceneManager : MonoBehaviour
         Image opponentBannerSprite = opponentColumnBanner[column - 1].GetComponent<Image>();
         opponentBannerSprite.color = new Color(1f, 1f, 1f, 1f);
     }
+
+
+
 }

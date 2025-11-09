@@ -1,11 +1,7 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using System.Linq;
 using DG.Tweening;
 
 
