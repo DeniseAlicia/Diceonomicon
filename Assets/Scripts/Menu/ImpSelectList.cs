@@ -1,17 +1,18 @@
+using Mono.Cecil.Cil;
 using UnityEngine;
 
-public class ImpMenuList : MonoBehaviour
+public class ImpSelectList : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private Transform contentParent; //grid-object
-    [SerializeField] private GameObject implingDisplayPrefab; //DispalyPrefab
+    [SerializeField] private GameObject impSelectDisplayPrefab; //DispalyPrefab
 
     private void Start()
     {
-        PopulateList();
+        PopulateSelectList();
     }
 
-    private void PopulateList()
+    private void PopulateSelectList()
     {
         //delete old displays
         foreach (Transform child in contentParent)
@@ -29,9 +30,9 @@ public class ImpMenuList : MonoBehaviour
         // create a display for every tablet
         foreach (var data in allImplings)
         {
-            GameObject instance = Instantiate(implingDisplayPrefab, contentParent);
-            instance.GetComponent<ImplingDisplay>().SetData(data);
-            instance.transform.localScale = Vector3.one;
+            GameObject obj = Instantiate(impSelectDisplayPrefab, contentParent);
+            obj.GetComponent<ImpSelectDisplay>().SetData(data);
+            obj.transform.localScale = Vector3.one;
         }
     }
 }

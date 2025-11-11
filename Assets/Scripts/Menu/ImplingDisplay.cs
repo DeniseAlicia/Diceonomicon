@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +22,7 @@ public class ImplingDisplay : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"Artwork für {data.name} ist keine Texture2D!");
+            Debug.LogWarning($"Artwork für {data.name} ist keine Texture.");
         }
 
         nameText.text = data.name;
