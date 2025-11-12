@@ -20,6 +20,8 @@ public class Waypoint : MonoBehaviour
     public string type;
     private int growthCount = 0;
 
+    public bool hasBranched;
+
     public List<Vector3> curvePoints = new List<Vector3>();
 
     [Header("Details")]
@@ -40,7 +42,7 @@ public class Waypoint : MonoBehaviour
     public Material pathMaterial;
     public Renderer nodeRenderer;
     private MapManager mapManager;
-    private MapStateManager mapStateManager;
+    private GameStateManager mapStateManager;
 
     [Header("Spawn / Spiral")]
     public float coreRadius = 3f;               // radius of central cylinder surface
@@ -63,8 +65,6 @@ public class Waypoint : MonoBehaviour
     [Header("Angle tweak")]
     public float smallAnglePairSeparation = 10.0f; // degrees offset to separate upper branches sideways
 
-    bool hasBranched = false;
-
     // Hold-to-spawn variables
     private Coroutine holdCoroutine;
     private bool isHolding = false;
@@ -80,16 +80,17 @@ public class Waypoint : MonoBehaviour
         ApplyColor();
         OrientOutward();
 
-        if (MapStateManager.Instance != null)
+        if (GameStateManager.Instance != null)
         {
-            MapStateManager.Instance.RegisterNode(gameObject);
+            GameStateManager.Instance.RegisterNode(gameObject, null);
         }
 
-        if (MapStateManager.Instance.battleWon && hasBranched)
+        if (GameStateManager.Instance.battleWon && nodeID == GameStateManager.Instance.pendingBranchNodeId)
         {
-            MapStateManager.Instance.battleWon = false;
             SpawnCluster();
+            Debug.Log("Spawning");
         }
+        GameStateManager.Instance.RebuildTube(this);
     }
 
     public Vector3 GetBranchDirection()
@@ -145,8 +146,9 @@ public class Waypoint : MonoBehaviour
         {
             Waypoint instance = this;
             hasBranched = true;
+            Debug.Log(hasBranched.ToString());
             SaveMapDebounced();
-            MapStateManager.Instance.TriggerWaypoint(instance);
+            GameStateManager.Instance.TriggerWaypoint(instance);
         }
         isHolding = false;
     }
@@ -244,6 +246,14 @@ public class Waypoint : MonoBehaviour
                 newIndex = Mathf.Clamp(colorIndex + offset, 0, colors.Length - 1);
             }
 
+            float diff = p2.y - transform.position.y;
+            Debug.Log(diff.ToString());
+            if (diff < -1f)
+            {
+                waypoint.level += 1;
+            }
+
+            waypoint.hasBranched = false;
             waypoint.colorIndex = newIndex;
             waypoint.ApplyColor();
         }
@@ -289,10 +299,10 @@ public class Waypoint : MonoBehaviour
             waypoint.curvePoints = new List<Vector3>(full);
         }
         // Ensure child is registered!
-        MapStateManager.Instance.RegisterNode(nextNode, nodeID);
+        GameStateManager.Instance.RegisterNode(nextNode, nodeID);
 
         // Mark latest for camera restore
-        MapStateManager.Instance.lastSpawnedNodeId = waypoint.nodeID;
+        GameStateManager.Instance.lastWaypoint = waypoint.nodeID;
 
         // Save immediately when cluster completes
         Invoke(nameof(SaveMapDebounced), 0.5f);
@@ -302,13 +312,13 @@ public class Waypoint : MonoBehaviour
         //----------- SAVE SYSTEM NEW -----------
 
         // Register this child node
-        if (MapStateManager.Instance != null)
+        if (GameStateManager.Instance != null)
         {
             Waypoint childIdent = nextNode.GetComponent<Waypoint>();
             if (string.IsNullOrEmpty(childIdent.nodeID))
                 childIdent.nodeID = System.Guid.NewGuid().ToString();
 
-            MapStateManager.Instance.RegisterNode(nextNode);
+            GameStateManager.Instance.RegisterNode(nextNode, null);
 
             // Count branch completions
             growthCount++;
@@ -318,7 +328,7 @@ public class Waypoint : MonoBehaviour
                 // MapStateManager.Instance.lastSpawnedNodeId = childIdent.nodeID;
 
                 // Save full state to disk once per cluster
-                MapStateManager.Instance.SaveToDisk();
+                GameStateManager.Instance.SaveToDisk();
                 Debug.Log("Cluster saved! Nodes: " + growthCount);
             }
         }
@@ -375,15 +385,15 @@ public class Waypoint : MonoBehaviour
 
     public void ApplyColor()
     {
-        if (nodeRenderer == null || mapManager == null || MapStateManager.Instance == null)
+        if (nodeRenderer == null || mapManager == null || GameStateManager.Instance == null)
         {
             return;
         }
 
-        Debug.Log(MapStateManager.Instance.waypoints.Count.ToString());
-        if (MapStateManager.Instance.waypoints.Count < 6)
+        Debug.Log(GameStateManager.Instance.waypoints.Count.ToString());
+        if (GameStateManager.Instance.waypoints.Count < 6)
         {
-            colorIndex = MapStateManager.Instance.waypoints.Count;
+            colorIndex = GameStateManager.Instance.waypoints.Count;
             nodeRenderer.material.color = colors[colorIndex];
             area = areas[colorIndex];
         }
@@ -401,13 +411,13 @@ public class Waypoint : MonoBehaviour
         SetWaypointData();
         ApplyColor();
         OrientOutward();
-        MapStateManager.Instance.RegisterNode(gameObject, parentID);
+        GameStateManager.Instance.RegisterNode(gameObject, parentID);
     }
 
     void SaveMapDebounced()
     {
-        if (MapStateManager.Instance != null)
-            MapStateManager.Instance.SaveToDisk();
+        if (GameStateManager.Instance != null)
+            GameStateManager.Instance.SaveToDisk();
     }
 
     public void LoadFromData(WaypointSaveData data)
@@ -420,6 +430,7 @@ public class Waypoint : MonoBehaviour
         area = data.area;
         colorIndex = data.colorIndex;
         curvePoints = new List<Vector3>(data.curvePoints);
+        hasBranched = data.hasBranched;
 
         ApplyColor();
         OrientOutward();

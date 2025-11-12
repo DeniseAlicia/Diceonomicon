@@ -596,8 +596,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 1, g: 0, b: 0.020870686, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 0.91248584, b: 0.8392157, a: 1}
+  m_Intensity: 0.75
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -659,13 +659,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163008478}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.60876137, y: 0, z: 0, w: 0.7933534}
-  m_LocalPosition: {x: 0, y: 2.35, z: 0}
+  m_LocalRotation: {x: -0.40821788, y: 0.23456976, z: 0.10938167, w: 0.8754261}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -75, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -50, y: 30, z: 0}
 --- !u!1 &1204303363
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,7 +839,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 0.8443396, g: 0.9797408, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -1205,7 +1205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   saveFileName: savedata.json
   waypointPrefab: {fileID: 567605444498356301, guid: 5dea53784f89a094da0bc55571feceac, type: 3}
-  tubeMaterial: {fileID: 2100000, guid: c011d0fe80447b848b18b121dc44eb2c, type: 2}
+  tubeMaterial: {fileID: 2100000, guid: 08f29ce404ffff74b891665f07d2e5a0, type: 2}
   player:
     playerID: 
     level: 0

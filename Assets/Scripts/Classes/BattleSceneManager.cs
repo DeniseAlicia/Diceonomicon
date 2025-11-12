@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -23,7 +22,7 @@ public class BattleSceneManager : MonoBehaviour
     private static List<List<DiceSlotController>> playerSlots;
     private static List<List<DiceSlotController>> enemySlots;
     private static DiceSlotController[] allSlots;
-    private MapStateManager mapStateManager;
+    private GameStateManager gameState;
 
     // Combat Stats
     public int level;
@@ -71,19 +70,16 @@ public class BattleSceneManager : MonoBehaviour
         Camera camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
         camBattleTablets.gameObject.SetActive(false);
         camBattleTablets.gameObject.SetActive(true);
-        mapStateManager = FindFirstObjectByType<MapStateManager>();
+        gameState = FindFirstObjectByType<GameStateManager>();
         Instance = this;
     }
 
     private void Start()
     {
-
-        player.CreateDiceDeck();
-
         round = 0;
         Score = 0;
-        player.level = 1;
-        player.area = "Green";
+        player.level = gameState.player.level;
+        player.area = gameState.player.area;
         opponent.damage = 0;
         opponent.block = 0;
         player.damage = 0;
@@ -127,7 +123,7 @@ public class BattleSceneManager : MonoBehaviour
         //     NewEncounter(player.level, player.area);
         // }
 
-        allSlots = GameObject.FindObjectsByType<DiceSlotController>(FindObjectsSortMode.None);
+        allSlots = FindObjectsByType<DiceSlotController>(FindObjectsSortMode.None);
 
         foreach (GameObject banner in playerColumnBanner)
         {
@@ -447,10 +443,9 @@ public class BattleSceneManager : MonoBehaviour
     {
         RectTransform candle = player.candle.GetComponent<RectTransform>();
 
-        float wait = 0.1f;
+        float wait;
         float startY = 16.2f;   // full health
         float endY = -36.8f;  // zero health
-        float rangeY = startY - endY;
 
         while (player.currentHealth > Mathf.Max(targetHealth, 0))
         {
@@ -460,7 +455,7 @@ public class BattleSceneManager : MonoBehaviour
             }
             else
             {
-                wait = 1.5f / damage;
+                wait = 1f / damage;
             }
 
             FMOD.Studio.EventInstance damageAudio = FMODUnity.RuntimeManager.CreateInstance(DamageEvent);
@@ -596,7 +591,9 @@ public class BattleSceneManager : MonoBehaviour
                 Destroy(tablet);
             }
 
-            mapStateManager.battleWon = true;
+            player.diceDeck = gameState.player.diceDeck;
+            gameState.battleWon = true;
+            gameState.OnBattleEnd();
             SceneManager.LoadScene("Map", LoadSceneMode.Single);
         }
     }

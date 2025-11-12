@@ -27,8 +27,8 @@ MonoBehaviour:
   startingDice:
   - {fileID: 11400000, guid: 013d7f42c12578c4db7d68c950d47efb, type: 2}
   - {fileID: 11400000, guid: dcd31eb0e9d04494db454cb296ebc1ab, type: 2}
-  - {fileID: 11400000, guid: dc5105a80cb4b724b81c7a1c3dc4977f, type: 2}
-  - {fileID: 11400000, guid: dc5105a80cb4b724b81c7a1c3dc4977f, type: 2}
+  - {fileID: 11400000, guid: 91555ac14dbdcb94ab787137a9af03fa, type: 2}
+  - {fileID: 11400000, guid: b8d0d9ec3d76fe94db20818391d158f2, type: 2}
   tabletPrefab: {fileID: 8448579534215354899, guid: 14f85f77b028e6f4ea22296f402eee74, type: 3}
   slotPrefab: {fileID: 1881896027706196343, guid: 7b4fc5a074e11734695476f0948d04d2, type: 3}
   trait: Lifedrink

@@ -11,7 +11,6 @@ public class ChainDie_Data : DiceData
         DetectLinksUp(die.transform.position, die);
         if (linkCount > 0)
         {
-            Debug.Log("Test Self");
             die.parentSlot.tempMult += 1;
         }
     }
@@ -29,7 +28,6 @@ public class ChainDie_Data : DiceData
             {
                 if (hitSlot.slottedDie != null && die.parentSlot.tag == hitSlot.tag)
                 {
-                    Debug.Log("Test Down");
                     hitSlot.tempMult += 1;
                     linkCount += 1;
                     DetectLinksDown(rayPosition, die);
@@ -51,7 +49,6 @@ public class ChainDie_Data : DiceData
             {
                 if (hitSlot.slottedDie != null && die.parentSlot.tag == hitSlot.tag)
                 {
-                    Debug.Log("Test Up");
                     hitSlot.tempMult += 1;
                     linkCount += 1;
                     DetectLinksUp(rayPosition, die);
