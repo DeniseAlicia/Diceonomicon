@@ -1,0 +1,71 @@
+{
+    "playerData": {
+        "playerID": "301e3d7c-c837-415d-9417-9718b99476aa",
+        "level": 0,
+        "area": "None",
+        "currentHealth": 100,
+        "maxHealth": 100,
+        "diceDeck": [
+            {
+                "instanceID": 44550
+            },
+            {
+                "instanceID": 45058
+            },
+            {
+                "instanceID": 44562
+            },
+            {
+                "instanceID": 44562
+            },
+            {
+                "instanceID": 45054
+            },
+            {
+                "instanceID": 44562
+            },
+            {
+                "instanceID": 45054
+            },
+            {
+                "instanceID": 45054
+            },
+            {
+                "instanceID": 45482
+            },
+            {
+                "instanceID": 45482
+            },
+            {
+                "instanceID": 44626
+            },
+            {
+                "instanceID": 44626
+            }
+        ],
+        "implings": [
+            "Beempling",
+            "Hie",
+            "Cubie"
+        ],
+        "unlockedImplings": [],
+        "activeImplings": [
+            {
+                "instanceID": 45532
+            },
+            {
+                "instanceID": 44510
+            },
+            {
+                "instanceID": 14516
+            }
+        ],
+        "mapSaveData": ""
+    },
+    "mapData": {
+        "nodes": [],
+        "lastWaypoint": "",
+        "battleWon": false,
+        "pendingBranchNodeId": ""
+    }
+}

@@ -11,59 +11,74 @@ public class Player : Entity
 
     public int level;
     public string area;
+    public static Player Instance;
 
-    public List<TabletData> SetImplingRoster()
+    public void Awake()
     {
-        // List<string> implings = new List<string> { "MrMimic", "Stabo", "Spike", "Hie", "Cubie", "Beempling", "Haunt", "Spooding" };
+        Instance = this;
+    }
 
-        // System.Random rng = new System.Random();
-        // int n = implings.Count;
-        // while (n > 1)
-        // {
-        //     n--;
-        //     int k = rng.Next(n + 1);
-        //     (implings[k], implings[n]) = (implings[n], implings[k]);
-        // }
-
-        // for (int i = 0; i < 3; i++)
-        // {
-        //     ImplingRoster.Add(implings[i]);
-        // }
-
-        ImplingRoster.Add("Beempling");
-        ImplingRoster.Add("Hie");
-        ImplingRoster.Add("Cubie");
-
-        // Check if it's the tutorial
-        if (SceneManager.GetActiveScene().name == "Tutorial")
-        {
-            ImplingRoster.Clear();
-            ImplingRoster.Add("Tutorial");
-        }
-
-        foreach (var impName in ImplingRoster)
-        {
-            string dataName = impName + "Data";
-
-            TabletData data = Resources.Load<TabletData>($"Implings/{dataName}");
-            if (data != null)
-            {
-                ActiveImplings.Add(data);
-            }
-        }
+    public List<TabletData> LoadPlayer()
+    {
+        ActiveImplings = GameStateManager.Instance.player.activeImplings;
+        diceDeck = GameStateManager.Instance.player.diceDeck;
         return ActiveImplings;
     }
 
-    public void CreateDiceDeck()
-    {
-        foreach (TabletData impling in ActiveImplings)
-        {
-            for (int i = 0; i < impling.startingDice.Length; i++)
-            {
-                diceDeck.Add(impling.startingDice[i]);
-            }
-        }
-    }
+    // public List<TabletData> SetImplingRoster()
+    // {
+    //     List<string> implings = new List<string> { "MrMimic", "Stabo", "Spike", "Hie", "Cubie", "Beempling", "Haunt", "Spooding" };
+
+    //     System.Random rng = new System.Random();
+    //     int n = implings.Count;
+    //     while (n > 1)
+    //     {
+    //         n--;
+    //         int k = rng.Next(n + 1);
+    //         (implings[k], implings[n]) = (implings[n], implings[k]);
+    //     }
+
+    //     for (int i = 0; i < 3; i++)
+    //     {
+    //         ImplingRoster.Add(implings[i]);
+    //     }
+
+
+    //     ImplingRoster.Add("Beempling");
+    //     ImplingRoster.Add("Hie");
+    //     ImplingRoster.Add("Cubie");
+
+    //     // Check if it's the tutorial
+    //     if (SceneManager.GetActiveScene().name == "Tutorial")
+    //     {
+    //         ImplingRoster.Clear();
+    //         ImplingRoster.Add("Tutorial");
+    //     }
+
+    //     foreach (var impName in ImplingRoster)
+    //     {
+    //         string dataName = impName + "Data";
+
+    //         TabletData data = Resources.Load<TabletData>($"Implings/{dataName}");
+    //         if (data != null)
+    //         {
+    //             ActiveImplings.Add(data);
+    //         }
+    //     }
+    //     ActiveImplings = GameStateManager.Instance.player.activeImplings;
+    //     
+    // }
+
+    // public void CreateDiceDeck()
+    // {
+    //     foreach (TabletData impling in ActiveImplings)
+    //     {
+    //         for (int i = 0; i < impling.startingDice.Length; i++)
+    //         {
+    //             diceDeck.Add(impling.startingDice[i]);
+    //         }
+    //     }
+    // }
 
     public override void RollDice()
     {

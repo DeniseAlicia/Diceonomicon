@@ -22,12 +22,14 @@ public class TabletManager : MonoBehaviour
         Instance = this;
 
         Vector3 startPosition = new Vector3();
+        string area = GameStateManager.Instance.player.area;
+        int level = GameStateManager.Instance.player.level;
 
         if (enemy)
         {
-            Opponent opponent = Object.FindFirstObjectByType<Opponent>();
-            Player player = Object.FindFirstObjectByType<Player>();
-            tablets = Encounters.SetEnemyRoster(player.level, player.area);
+            Opponent opponent = FindFirstObjectByType<Opponent>();
+            Player player = FindFirstObjectByType<Player>();
+            tablets = Encounters.SetEnemyRoster(level, area);
             owner = FindFirstObjectByType<Opponent>();
             opponent.SetEnemyRoster(tablets);
             goalPosition = new Vector3(4.9f, 1f, 3f);
@@ -36,7 +38,7 @@ public class TabletManager : MonoBehaviour
         else
         {
             Player player = Object.FindFirstObjectByType<Player>();
-            tablets = player.SetImplingRoster();
+            tablets = player.LoadPlayer();
             owner = FindFirstObjectByType<Player>();
             goalPosition = new Vector3(-6.9f, 1f, 3f);
             startPosition = new Vector3(goalPosition.x - 6f, goalPosition.y, goalPosition.z); ;

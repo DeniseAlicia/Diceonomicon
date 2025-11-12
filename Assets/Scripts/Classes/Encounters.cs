@@ -1,6 +1,4 @@
 using UnityEngine;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 
 public class Encounters
@@ -13,7 +11,7 @@ public class Encounters
                 new List<string>{ "TutorialEnemy" },
             }
         },
-        { (1, "Green"), new List<List<string>>
+        { (0, "Green"), new List<List<string>>
             {
                 new List<string>{ "Greemlin", "Toksick"},
                 new List<string>{ "Diedra", "Diedra" },
@@ -33,10 +31,10 @@ public class Encounters
 
         if (!encounterTable.TryGetValue((level, area), out var encounterList))
         {
-            encounterList = encounterTable[(0, "None")];
+            encounterList = encounterTable[(0, "Green")];
         }
 
-        int randomIndex = UnityEngine.Random.Range(0, encounterList.Count);
+        int randomIndex = Random.Range(0, encounterList.Count);
         List<string> encounter = encounterList[randomIndex];
 
         foreach (var impName in encounter)
