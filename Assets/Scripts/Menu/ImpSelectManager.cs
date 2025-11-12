@@ -1,13 +1,21 @@
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class ImpSelectManager : MonoBehaviour
 {
     public static ImpSelectManager Instance;
 
-    public int maxSelections = 5;
 
+    [Header("Selection Settings")]
+    public int maxSelections = 3;
     public List<TabletData> selectedImplings = new List<TabletData>();
+
+    [Header("UI References")]
+    [SerializeField] private GameObject warningPanel;
+
+    private Coroutine hideCoroutine;
 
     public void Awake()
     {
@@ -18,6 +26,9 @@ public class ImpSelectManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        if (warningPanel != null)
+            warningPanel.SetActive(false);
     }
 
     public bool Selection(TabletData data)
@@ -35,6 +46,49 @@ public class ImpSelectManager : MonoBehaviour
 
         selectedImplings.Add(data);
         return true;
+    }
+
+    public void ConfirmSelection()
+    {
+        if (selectedImplings.Count < maxSelections)
+        {
+            ShowWarning();
+            return;
+        }
+
+        if (GameStateManager.Instance != null)
+        {
+            GameStateManager.Instance.player.activeImplings = selectedImplings;
+        }
+
+        SceneManager.LoadScene("Map");
+    }
+
+    private void ShowWarning()
+    {
+        if (warningPanel == null)
+            return;
+
+        warningPanel.SetActive(true);
+
+        if (hideCoroutine != null)
+            StopCoroutine(hideCoroutine);
+
+        hideCoroutine = StartCoroutine(HideWarningAfterDelay(3f));
+    }
+
+    private void HideWarning()
+    {
+        if (warningPanel == null)
+            return;
+
+        warningPanel.SetActive(false);
+    }
+
+    private IEnumerator HideWarningAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        HideWarning();
     }
 
 }
