@@ -6,19 +6,330 @@ public class Encounters
     private static Dictionary<(int level, string area), List<List<string>>> encounterTable
         = new Dictionary<(int, string), List<List<string>>>()
         {
+    // -----------------------------------------------------------------------
+    // TUTORIAL
+    // -----------------------------------------------------------------------
          { (0, "None"), new List<List<string>>
             {
                 new List<string>{ "TutorialEnemy" },
             }
         },
+   // -----------------------------------------------------------------------
+    // Green (Buff)
+    // -----------------------------------------------------------------------
         { (0, "Green"), new List<List<string>>
             {
                 new List<string>{ "Greemlin", "Toksick"},
-                new List<string>{ "Diedra", "Diedra" },
+            }
+        },
+        { (1, "Green"), new List<List<string>>
+            {
                 new List<string>{ "Greemlin", "Greemlin"},
-                new List<string>{ "Toksick", "Toksick" },
+            }
+        },
+        { (2, "Green"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick"},
+            }
+        },
+        { (3, "Green"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick", "Greemlin"},
+            }
+        },
+        { (4, "Green"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Diedra", "Greemlin"},
+            }
+        },
+        { (5, "Green"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Toksick"},
+            }
+        },
+        { (6, "Green"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Greemlin"},
+            }
+        },
+        { (7, "Green"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick"},
+            }
+        },
+        { (8, "Green"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick", "Greemlin"},
+            }
+        },
+        { (9, "Green"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Diedra", "Greemlin"},
+            }
+        },
+    // -----------------------------------------------------------------------
+    // Red (Damage)
+    // -----------------------------------------------------------------------
+         { (0, "Red"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Greemlin"},
+            }
+        },
+        { (1, "Red"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Greemlin"},
+            }
+        },
+        { (2, "Red"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick"},
+            }
+        },
+        { (3, "Red"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick", "Greemlin"},
+            }
+        },
+        { (4, "Red"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Diedra", "Greemlin"},
+            }
+        },
+        { (5, "Red"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Toksick"},
+            }
+        },
+        { (6, "Red"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Greemlin"},
+            }
+        },
+        { (7, "Red"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick"},
+            }
+        },
+        { (8, "Red"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick", "Greemlin"},
+            }
+        },
+        { (9, "Red"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Diedra", "Greemlin"},
+            }
+        },
+    // -----------------------------------------------------------------------
+    // Blue (Block)
+    // -----------------------------------------------------------------------
+        { (0, "Blue"), new List<List<string>>
+            {
                 new List<string>{ "Diedra", "Toksick" },
+            }
+        },
+        { (1, "Blue"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Greemlin"},
+            }
+        },
+        { (2, "Blue"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick"},
+            }
+        },
+        { (3, "Blue"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick", "Greemlin"},
+            }
+        },
+        { (4, "Blue"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Diedra", "Greemlin"},
+            }
+        },
+        { (5, "Blue"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Toksick"},
+            }
+        },
+        { (6, "Blue"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Greemlin"},
+            }
+        },
+        { (7, "Blue"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick"},
+            }
+        },
+        { (8, "Blue"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick", "Greemlin"},
+            }
+        },
+        { (9, "Blue"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Diedra", "Greemlin"},
+            }
+        },
+    // -----------------------------------------------------------------------
+    // Purple (Spell)
+    // -----------------------------------------------------------------------
+        { (0, "Purple"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Toksick"},
+            }
+        },
+        { (1, "Purple"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Greemlin"},
+            }
+        },
+        { (2, "Purple"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick"},
+            }
+        },
+        { (3, "Purple"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick", "Greemlin"},
+            }
+        },
+        { (4, "Purple"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Diedra", "Greemlin"},
+            }
+        },
+        { (5, "Purple"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Toksick"},
+            }
+        },
+        { (6, "Purple"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Greemlin"},
+            }
+        },
+        { (7, "Purple"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick"},
+            }
+        },
+        { (8, "Purple"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick", "Greemlin"},
+            }
+        },
+        { (9, "Purple"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Diedra", "Greemlin"},
+            }
+        },
+    // -----------------------------------------------------------------------
+    // Yellow (Debuff)
+    // -----------------------------------------------------------------------
+        { (0, "Yellow"), new List<List<string>>
+            {
                 new List<string>{ "Greemlin", "Diedra"}
+            }
+        },
+                { (1, "Yellow"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Greemlin"},
+            }
+        },
+        { (2, "Yellow"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick"},
+            }
+        },
+        { (3, "Yellow"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick", "Greemlin"},
+            }
+        },
+        { (4, "Yellow"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Diedra", "Greemlin"},
+            }
+        },
+        { (5, "Yellow"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Toksick"},
+            }
+        },
+        { (6, "Yellow"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Greemlin"},
+            }
+        },
+        { (7, "Yellow"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick"},
+            }
+        },
+        { (8, "Yellow"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick", "Greemlin"},
+            }
+        },
+        { (9, "Yellow"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Diedra", "Greemlin"},
+            }
+        },
+    // -----------------------------------------------------------------------
+    // White (Neutral)
+    // -----------------------------------------------------------------------
+        { (0, "White"), new List<List<string>>
+            {
+                new List<string>{ "Diedra", "Diedra" },
+            }
+        },
+                { (1, "White"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Greemlin"},
+            }
+        },
+        { (2, "White"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick"},
+            }
+        },
+        { (3, "White"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick", "Greemlin"},
+            }
+        },
+        { (4, "White"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Diedra", "Greemlin"},
+            }
+        },
+        { (5, "White"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Toksick"},
+            }
+        },
+        { (6, "White"), new List<List<string>>
+            {
+                new List<string>{ "Greemlin", "Greemlin"},
+            }
+        },
+        { (7, "White"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick"},
+            }
+        },
+        { (8, "White"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Toksick", "Greemlin"},
+            }
+        },
+        { (9, "White"), new List<List<string>>
+            {
+                new List<string>{ "Toksick", "Diedra", "Greemlin"},
             }
         },
     };

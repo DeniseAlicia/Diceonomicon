@@ -17,7 +17,7 @@ MonoBehaviour:
   desc: 
   texture: {fileID: 2800000, guid: adaf1da36c271fc469d6e4da6c9dac6a, type: 3}
   usedTexture: {fileID: 2800000, guid: 23415d40b3196294ab7de1cbfff1d5c9, type: 3}
-  range: 030000000400000005000000060000000700000008000000
+  range: fdfffffffcfffffffbfffffffafffffff9fffffff8ffffff
   tags:
   - Debuff
   priority: 1

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using System.Linq;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Collider))]
 public class Waypoint : MonoBehaviour
@@ -19,6 +19,8 @@ public class Waypoint : MonoBehaviour
     public int colorIndex;
     public string type;
     private int growthCount = 0;
+    public WaypointData data;
+    public Renderer waypointIcon;
 
     public bool hasBranched;
 
@@ -70,6 +72,21 @@ public class Waypoint : MonoBehaviour
     private bool isHolding = false;
     private float holdDuration = 1f;
 
+    public enum WaypointType
+    {
+        Battle,
+        Dice,
+        Candlemaker,
+    }
+
+    Dictionary<WaypointType, float> waypointWeights = new Dictionary<WaypointType, float>()
+    {
+        { WaypointType.Battle, 5f },
+        { WaypointType.Dice, 12f },
+        //{ WaypointType.Candlemaker, 0.1f },
+    };
+
+
     void Start()
     {
         cameraController = FindFirstObjectByType<CameraOrbitController>();
@@ -95,7 +112,7 @@ public class Waypoint : MonoBehaviour
 
     public Vector3 GetBranchDirection()
     {
-        Vector3 dir = (transform.position - centralCylinder.position);
+        Vector3 dir = transform.position - centralCylinder.position;
         dir.y = 0f;
         return dir.normalized;
     }
@@ -106,10 +123,34 @@ public class Waypoint : MonoBehaviour
         {
             nodeID = System.Guid.NewGuid().ToString();
         }
+
+        if (type == "")
+        {
+            GetRandomWaypoint();
+        }
+
+        if (data.waypointArt != null)
+        {
+            waypointIcon.material.mainTexture = data.waypointArt;
+        }
+    }
+
+    public void GetRandomWaypoint()
+    {
+        WaypointType randomType = GetWeightedRandom(waypointWeights);
+        type = randomType.ToString();
+
+        if (type != null)
+        {
+            string dataName = type + "WaypointData";
+            data = Resources.Load<WaypointData>($"Waypoints/{dataName}");
+        }
     }
 
     private void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
         if (!hasBranched && !isHolding)
         {
             isHolding = true;
@@ -146,7 +187,7 @@ public class Waypoint : MonoBehaviour
         {
             Waypoint instance = this;
             hasBranched = true;
-            Debug.Log(hasBranched.ToString());
+            // Debug.Log(hasBranched.ToString());
             SaveMapDebounced();
             GameStateManager.Instance.TriggerWaypoint(instance);
         }
@@ -435,4 +476,28 @@ public class Waypoint : MonoBehaviour
         ApplyColor();
         OrientOutward();
     }
+
+    public T GetWeightedRandom<T>(Dictionary<T, float> weights)
+    {
+        float totalWeight = 0f;
+        foreach (var w in weights.Values)
+            totalWeight += w;
+
+        float roll = Random.value;
+
+        float cumulative = 0f;
+
+        foreach (var kvp in weights)
+        {
+            float normalized = kvp.Value / totalWeight;
+            cumulative += normalized;
+
+            if (roll <= cumulative)
+                return kvp.Key;
+        }
+
+        return default;
+    }
+
+
 }

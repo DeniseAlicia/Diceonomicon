@@ -131,10 +131,14 @@ MonoBehaviour:
   blocked: 0
   nodeID: 
   parentID: 
+  position: {x: 0, y: 0, z: 0}
   level: 0
   area: 
   colorIndex: 0
-  type: Random
+  type: 
+  data: {fileID: 0}
+  waypointIcon: {fileID: 2433961254861938603}
+  hasBranched: 0
   curvePoints: []
   colors:
   - {r: 1, g: 0, b: 0, a: 1}
@@ -191,13 +195,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5613107136400928239}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.0000000037252899, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.9, y: 1.2, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3105924999334006444}
-  m_LocalEulerAnglesHint: {x: -5.895, y: 28.451, z: -92.952}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &7415200262900039741
 MeshFilter:
   m_ObjectHideFlags: 0

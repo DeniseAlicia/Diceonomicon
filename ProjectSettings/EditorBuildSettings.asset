@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test.unity
     guid: a135ce05df30098408bc37db9e6fd9ac
+  - enabled: 1
+    path: Assets/Scenes/WaypointScenes/RewardSelection.unity
+    guid: 61390582f1ecf3f4dbaf91da373b1383
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3e1df1f834f58674ca2a6b183d5063c6, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

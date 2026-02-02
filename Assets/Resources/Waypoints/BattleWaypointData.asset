@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb29cf34680a6747b0f1985989df765, type: 3}
+  m_Name: BattleWaypointData
+  m_EditorClassIdentifier: Assembly-CSharp::BallteWaypointData
+  type: Battle
+  subType: 
+  desc: 
+  waypointArt: {fileID: 2800000, guid: df13998def691b24c8df1ab54dc69cbd, type: 3}
+  closedPathArt: {fileID: 2800000, guid: df13998def691b24c8df1ab54dc69cbd, type: 3}

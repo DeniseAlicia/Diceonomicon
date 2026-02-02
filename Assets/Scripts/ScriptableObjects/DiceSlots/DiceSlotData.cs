@@ -1,8 +1,7 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "DiceSlotData", menuName = "DiceSlots/DiceSlotData")]
-public class DiceSlotData : ScriptableObject
+public class DiceSlotData : CollectableData
 {
     public new string name; //Tooltip Header
     public string desc; //Tooltip Content
