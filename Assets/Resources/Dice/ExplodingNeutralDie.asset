@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd87507bfa7b6341bef6c6f8dadefc5, type: 3}
+  m_Name: ExplodingNeutralDie
+  m_EditorClassIdentifier: Assembly-CSharp::ExplodingDie_Data
+  prefab: {fileID: 118036309713981090, guid: b478b503530ed88419f4ee2c9f690297, type: 3}
+  title: Exploding Neutral
+  desc: Take damage for each adjacent die
+  flavorText: Take damage for each adjacent die
+  texture: {fileID: 2800000, guid: 778c8683e0e197f4eb28b29f2899e9fd, type: 3}
+  usedTexture: {fileID: 2800000, guid: beb0659a5f342e94db882636a697f2b1, type: 3}
+  image: {fileID: 0}
+  range: 030000000300000005000000050000000700000007000000
+  tags:
+  - Neutral
+  priority: 2

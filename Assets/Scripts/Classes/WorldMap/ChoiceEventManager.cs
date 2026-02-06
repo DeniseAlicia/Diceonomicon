@@ -43,7 +43,7 @@ public class ChoiceEventManager : MonoBehaviour
         {
             amount = 3;
         }
-        quality = 0;
+        quality = gameState.player.level;
 
         SetChoices();
     }
@@ -70,7 +70,15 @@ public class ChoiceEventManager : MonoBehaviour
                     nameTexts[i].text = data.title;
                     descTexts[i].text = data.desc;
                     flavorTexts[i].text = data.flavorText;
-                    images[i].sprite = data.image;
+
+                    if (images[i].sprite != null)
+                    {
+                        images[i].sprite = data.image;
+                    }
+                    else
+                    {
+                        images[i].sprite = Resources.Load<Sprite>($"Placeholder/empty");
+                    }
                     rewards.Add(data);
                 }
                 break;

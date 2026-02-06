@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.EventSystems;
+using Unity.Mathematics;
 
 [RequireComponent(typeof(Collider))]
 public class Waypoint : MonoBehaviour
@@ -253,7 +254,7 @@ public class Waypoint : MonoBehaviour
         Vector3 outward = (end - centralCylinder.position).normalized;
         mid += outward * radialOffsetOutwards;
         // small random jitter for organic look (tiny)
-        mid += Random.insideUnitSphere * 0.02f;
+        mid += UnityEngine.Random.insideUnitSphere * 0.02f;
         return mid;
     }
 
@@ -275,7 +276,7 @@ public class Waypoint : MonoBehaviour
         {
             // Decide whether to keep same color or shift ±1
             int newIndex;
-            if (Random.value < sameColorProbability)
+            if (UnityEngine.Random.value < sameColorProbability)
             {
                 // Same color
                 newIndex = colorIndex;
@@ -283,16 +284,14 @@ public class Waypoint : MonoBehaviour
             else
             {
                 // ±1 index shift
-                int offset = Random.value < 0.5f ? -1 : 1;
+                int offset = UnityEngine.Random.value < 0.5f ? -1 : 1;
                 newIndex = Mathf.Clamp(colorIndex + offset, 0, colors.Length - 1);
             }
 
             float diff = p2.y - transform.position.y;
             Debug.Log(diff.ToString());
-            if (diff < -1f)
-            {
-                waypoint.level += 1;
-            }
+
+            waypoint.level = (int)math.ceil(transform.position.y / -4);
 
             waypoint.hasBranched = false;
             waypoint.colorIndex = newIndex;
@@ -422,6 +421,7 @@ public class Waypoint : MonoBehaviour
         outward.Normalize();
         transform.rotation = Quaternion.LookRotation(outward, Vector3.forward);
         transform.Rotate(0f, -90f, 0f, Space.World);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, -90f);
     }
 
     public void ApplyColor()
@@ -483,7 +483,7 @@ public class Waypoint : MonoBehaviour
         foreach (var w in weights.Values)
             totalWeight += w;
 
-        float roll = Random.value;
+        float roll = UnityEngine.Random.value;
 
         float cumulative = 0f;
 
