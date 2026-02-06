@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fdcaf01f5eb4fa4c9a0a5ea4678a0e3, type: 3}
+  m_Name: CrackedDamageDie
+  m_EditorClassIdentifier: Assembly-CSharp::CrackedDie_Data
+  prefab: {fileID: 118036309713981090, guid: b478b503530ed88419f4ee2c9f690297, type: 3}
+  title: Cracked Damage
+  desc: Once per Battle Only
+  flavorText: Once per Battle Only
+  texture: {fileID: 2800000, guid: e05eb33387eb24e4c9dfb2677a6f0369, type: 3}
+  usedTexture: {fileID: 2800000, guid: 31137a2f0d3de504d858f7cb0de9fe4d, type: 3}
+  image: {fileID: 21300000, guid: fef580aa3e034b9418328318fdebbbf9, type: 3}
+  range: 040000000400000006000000060000000800000008000000
+  tags:
+  - Damage
+  priority: 3

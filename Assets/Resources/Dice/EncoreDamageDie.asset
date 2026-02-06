@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d0b384df586fa4895fdb6ead969296, type: 3}
+  m_Name: EncoreDamageDie
+  m_EditorClassIdentifier: Assembly-CSharp::EncoreDie_Data
+  prefab: {fileID: 118036309713981090, guid: b478b503530ed88419f4ee2c9f690297, type: 3}
+  title: Encore Damage
+  desc: Improves with each other dice of the same color
+  flavorText: Improves with each other dice of the same color
+  texture: {fileID: 2800000, guid: fbbc41f041b49734a84c466b004420af, type: 3}
+  usedTexture: {fileID: 2800000, guid: f81bc0d48c118244ab1674d8d191d32c, type: 3}
+  image: {fileID: 0}
+  range: 000000000000000000000000010000000100000001000000
+  tags:
+  - Damage
+  priority: 2

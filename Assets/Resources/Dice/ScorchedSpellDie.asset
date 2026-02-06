@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3de74db0536fa14884ac25ce76ac157, type: 3}
+  m_Name: ScorchedSpellDie
+  m_EditorClassIdentifier: Assembly-CSharp::ScorchedDie_Data
+  prefab: {fileID: 118036309713981090, guid: b478b503530ed88419f4ee2c9f690297, type: 3}
+  title: Scorched Spell
+  desc: Take a damage when used
+  flavorText: Take a damage when used
+  texture: {fileID: 2800000, guid: 3673fa6384420d94fbe38c6ee05d1d5d, type: 3}
+  usedTexture: {fileID: 2800000, guid: 681c42075353e0948a14d3033cedb18c, type: 3}
+  image: {fileID: 0}
+  range: 020000000200000003000000030000000400000004000000
+  tags:
+  - Spell
+  priority: 2

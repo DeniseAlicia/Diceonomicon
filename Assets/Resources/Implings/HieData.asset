@@ -28,10 +28,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
   - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
   startingDice:
-  - {fileID: 11400000, guid: dc5105a80cb4b724b81c7a1c3dc4977f, type: 2}
-  - {fileID: 11400000, guid: e8714898c77b3814b98e96984867ae85, type: 2}
-  - {fileID: 11400000, guid: daadc6f59ac138442a6da1b2411d41ac, type: 2}
-  - {fileID: 11400000, guid: 4377dc3f10a6c47439047e7a33eb1e01, type: 2}
+  - {fileID: 11400000, guid: 8a33abe298e513a41894f1c6b0d9a21c, type: 2}
+  - {fileID: 11400000, guid: 74128a7cf78e81b41ad6b85beb4c440f, type: 2}
+  - {fileID: 11400000, guid: 74128a7cf78e81b41ad6b85beb4c440f, type: 2}
+  - {fileID: 11400000, guid: c2dcd459aa01fbd42a9f975166570284, type: 2}
   tabletPrefab: {fileID: 8448579534215354899, guid: ace316ba9a583b141b31007ca0879c52, type: 3}
   slotPrefab: {fileID: 1881896027706196343, guid: 7b4fc5a074e11734695476f0948d04d2, type: 3}
   trait: Adaptive

@@ -46,6 +46,7 @@ public class GameStateManager : MonoBehaviour
     public string lastWaypoint;
     public bool battleWon;
     public string pendingBranchNodeId;
+    public Waypoint tempWp;
     private MapSaveData cachedMapData;
 
     private List<WaypointSaveData> loadedData;
@@ -125,7 +126,9 @@ public class GameStateManager : MonoBehaviour
         pendingBranchNodeId = waypoint.nodeID;
         waypoint.hasBranched = true;
 
-        SceneManager.LoadScene("BattleSetup", LoadSceneMode.Single);
+        tempWp = waypoint;
+        waypoint.data.DoEffect();
+        // SceneManager.LoadScene("BattleSetup", LoadSceneMode.Single);
     }
 
     // NEW overload that includes parent linkage

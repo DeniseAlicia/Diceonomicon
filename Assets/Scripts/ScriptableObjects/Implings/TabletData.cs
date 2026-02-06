@@ -1,8 +1,7 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "TabletData", menuName = "Data/TabletData")]
-public class TabletData : ScriptableObject
+public class TabletData : CollectableData
 {
     public bool enemy = false;
 
