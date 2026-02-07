@@ -30,9 +30,12 @@ public class ImpSelectList : MonoBehaviour
         // create a display for every tablet
         foreach (var data in allImplings)
         {
-            GameObject obj = Instantiate(impSelectDisplayPrefab, contentParent);
-            obj.GetComponent<ImpSelectDisplay>().SetData(data);
-            obj.transform.localScale = Vector3.one;
+            if (data.unlocked == true)
+            {
+                GameObject obj = Instantiate(impSelectDisplayPrefab, contentParent);
+                obj.GetComponent<ImpSelectDisplay>().SetData(data);
+                obj.transform.localScale = Vector3.one;
+            }
         }
     }
 }

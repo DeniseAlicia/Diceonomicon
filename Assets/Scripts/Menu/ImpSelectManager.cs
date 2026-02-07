@@ -11,6 +11,7 @@ public class ImpSelectManager : MonoBehaviour
     [Header("Selection Settings")]
     public int maxSelections = 3;
     public List<TabletData> selectedImplings = new List<TabletData>();
+    public bool newGame;
 
     [Header("UI References")]
     [SerializeField] private GameObject warningPanel;
@@ -20,7 +21,10 @@ public class ImpSelectManager : MonoBehaviour
     public void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         else
         {
             Destroy(gameObject);
@@ -61,7 +65,25 @@ public class ImpSelectManager : MonoBehaviour
             GameStateManager.Instance.player.activeImplings = selectedImplings;
         }
 
+        newGame = true;
         SceneManager.LoadScene("Map");
+    }
+
+        public void ConfirmSelectionTutorial()
+    {
+        if (selectedImplings.Count < maxSelections)
+        {
+            ShowWarning();
+            return;
+        }
+
+        if (GameStateManager.Instance != null)
+        {
+            GameStateManager.Instance.player.activeImplings = selectedImplings;
+        }
+
+        newGame = true;
+        SceneManager.LoadScene("Tutorial");
     }
 
     private void ShowWarning()

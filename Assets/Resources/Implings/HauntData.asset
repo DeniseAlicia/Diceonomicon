@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: HauntData
   m_EditorClassIdentifier: 
   enemy: 0
+  unlocked: 1
   name: Haunt
   desc: Don't touch him!
   artwork: {fileID: 2800000, guid: 11b8a71323b4c8c4eb7bf0cc9e4cacf9, type: 3}

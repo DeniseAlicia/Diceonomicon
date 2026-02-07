@@ -9,26 +9,32 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScreen.unity
     guid: 2505bc9db4e026644a49377af81c552a
   - enabled: 1
-    path: Assets/Scenes/MainMenuScene.unity
+    path: Assets/Scenes/OLD/MainMenuScene.unity
     guid: fa7303d75aef2b940813e0c38d26af9c
   - enabled: 1
     path: Assets/Scenes/BattleSetup.unity
     guid: 5c930bdfd37251c4c9c372f231ad5a34
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/OLD/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
-    path: Assets/Scenes/LevelOne.unity
+    path: Assets/Scenes/OLD/LevelOne.unity
     guid: faf419c66272c3349a075278f3dc4d06
   - enabled: 1
     path: Assets/Scenes/Map.unity
     guid: fc14d76180fe03a43aa6ca3cdb178695
   - enabled: 1
-    path: Assets/Scenes/Test.unity
+    path: Assets/Scenes/OLD/Test.unity
     guid: a135ce05df30098408bc37db9e6fd9ac
   - enabled: 1
     path: Assets/Scenes/WaypointScenes/RewardSelection.unity
     guid: 61390582f1ecf3f4dbaf91da373b1383
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 5fc53047f26a7db4283a5d73844d01b1
+  - enabled: 1
+    path: Assets/Scenes/Main_Menu.unity
+    guid: b4eb8bba14a6b004582cdc01c564d46c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3e1df1f834f58674ca2a6b183d5063c6, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

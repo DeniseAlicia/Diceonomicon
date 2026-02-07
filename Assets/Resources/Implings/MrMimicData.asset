@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MrMimicData
   m_EditorClassIdentifier: 
   enemy: 0
+  unlocked: 1
   name: Mr. Mimic
   desc: ...
   artwork: {fileID: 2800000, guid: 124a454e45e01cf498b1469ac00eb067, type: 3}

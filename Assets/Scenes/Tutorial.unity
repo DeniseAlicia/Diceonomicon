@@ -4383,7 +4383,7 @@ MonoBehaviour:
   MaxImplings: 3
   dice: []
   level: 0
-  area: None
+  area: Tutorial
 --- !u!4 &1213689260
 Transform:
   m_ObjectHideFlags: 0
@@ -4782,8 +4782,6 @@ MonoBehaviour:
   intermissionButton: {fileID: 1420239865}
   rollDiceButton: {fileID: 881584063}
   combatBolt: {fileID: 386940530}
-  scoreText: {fileID: 1634790042}
-  highscoreText: {fileID: 1725913185}
   DiceRollEvent:
     Guid:
       Data1: -208536345

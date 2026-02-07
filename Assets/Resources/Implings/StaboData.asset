@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: StaboData
   m_EditorClassIdentifier: 
   enemy: 0
+  unlocked: 1
   name: Stabo
   desc: You can rotate your tablets one additional time per round
   artwork: {fileID: 2800000, guid: 487ca30a792ef1d40810d47339efb669, type: 3}

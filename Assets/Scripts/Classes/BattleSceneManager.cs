@@ -27,8 +27,6 @@ public class BattleSceneManager : MonoBehaviour
     // Combat Stats
     public int level;
     public int round;
-    public int Score { get; private set; }
-    public List<int> ScoreList { get; private set; } = new List<int>();
     public float[] columnStartPositions = new float[] { -7.65f, -6.9f, -6.1f };
     public static int CurrentColumn { get; private set; }
     public bool intermission;
@@ -41,8 +39,6 @@ public class BattleSceneManager : MonoBehaviour
     public Button intermissionButton;
     public Button rollDiceButton;
     public GameObject combatBolt;
-    public TMP_Text scoreText;
-    public TMP_Text highscoreText;
 
     // Events
     public static UnityEvent OnSceneStart = new UnityEvent();
@@ -77,7 +73,6 @@ public class BattleSceneManager : MonoBehaviour
     private void Start()
     {
         round = 0;
-        Score = 0;
         player.level = gameState.player.level;
         player.area = gameState.player.area;
         opponent.damage = 0;
@@ -86,7 +81,6 @@ public class BattleSceneManager : MonoBehaviour
         player.block = 0;
         UpdateDamageBlockUI();
 
-        scoreText.text = Score.ToString();
         opponent.currentHealth = opponent.maxHealth;
         player.alpha = 0.9f;
         opponent.alpha = 0.9f;
@@ -568,8 +562,6 @@ public class BattleSceneManager : MonoBehaviour
         if (player.currentHealth <= 0)
         {
             endScene.Lose();
-            // ScoreList.Add(Score);
-            // UpdateScoreDisplay();
             OnLoss.Invoke();
             StartIntermissionPhase();
 
@@ -667,25 +659,6 @@ public class BattleSceneManager : MonoBehaviour
         UpdateDamageBlockUI();
     }
 
-    // private void NewEncounter(int level, string area)
-    // {
-    //     Score += player.currentHealth + 20;
-    //     scoreText.text = Score.ToString();
-    //     opponent.currentHealth = opponent.maxHealth;
-    //     opponent.healthText.text = opponent.currentHealth.ToString();
-    //     RectTransform candle = opponent.candle.GetComponent<RectTransform>();
-    //     Vector3 pos = candle.anchoredPosition;
-    //     pos.y = 16.2f;
-    //     candle.anchoredPosition = pos;
-
-    //     List<TabletData> newTablets = Encounters.SetEnemyRoster(level, area);
-    //     opponent.SetEnemyRoster(newTablets);
-
-    //     TabletManager.Instance.tablets = newTablets;
-    //     Vector3 startPosition = new Vector3(4.9f, 1f, 0f);
-    //     TabletManager.Instance.SpawnTablets(startPosition);
-    // }
-
     public void ResetDiceSlots()
     {
         foreach (DiceSlotController slot in allSlots)
@@ -714,24 +687,6 @@ public class BattleSceneManager : MonoBehaviour
         }
         unusedDice.Clear();
     }
-
-    // public void UpdateScoreDisplay(HighscoreEntry[] highscores)
-    // {
-    //     // Get top 10 scores (sorted descending)
-    //     var topScores = highscores
-    //         .OrderByDescending(s => s.score)
-    //         .Take(10)
-    //         .ToList();
-
-    //     string scoreText = "High Scores:\n";
-    //     for (int i = 0; i < topScores.Count; i++)
-    //     {
-    //         var entry = topScores[i];
-    //         scoreText += $"{i + 1}. {entry.player_name} - {entry.score}\n";
-    //     }
-
-    //     highscoreText.text = scoreText;
-    // }
 
     //////////////////////////////////////////////////////////////////////////
     // 

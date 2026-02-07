@@ -4,6 +4,7 @@ using UnityEngine;
 public class TabletData : CollectableData
 {
     public bool enemy = false;
+    public bool unlocked = false;
 
     public new string name;
     public string desc;
