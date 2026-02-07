@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,6 +42,7 @@ public class GameStateManager : MonoBehaviour
     [Header("Runtime State")]
     public PlayerData player = new();
     public Dictionary<string, GameObject> waypoints = new();
+    public ImpSelectManager impSelect;
 
     [Header("Map Progress")]
     public string lastWaypoint;
@@ -65,6 +67,13 @@ public class GameStateManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+
+        impSelect = FindAnyObjectByType<ImpSelectManager>();
+        if (impSelect.newGame == true)
+        {
+            impSelect.newGame = false;
+            ResetSave();
         }
     }
 
@@ -93,17 +102,18 @@ public class GameStateManager : MonoBehaviour
     private List<TabletData> SetImplingRoster()
     {
         List<TabletData> list = new();
-        foreach (string impName in player.implings)
+        foreach (TabletData impName in impSelect.selectedImplings)
         {
-            string dataName = impName + "Data";
-            TabletData data = Resources.Load<TabletData>($"Implings/{dataName}");
+            // string dataName = impName + "Data";
+            // TabletData data = Resources.Load<TabletData>($"Implings/{dataName}");
+            TabletData data = impName;
             if (data != null)
                 list.Add(data);
         }
         return list;
     }
 
-    private void CreateDiceDeck()
+    public void CreateDiceDeck()
     {
         player.diceDeck.Clear();
         foreach (TabletData impling in player.activeImplings)
@@ -127,7 +137,9 @@ public class GameStateManager : MonoBehaviour
         waypoint.hasBranched = true;
 
         tempWp = waypoint;
+        BlockPaths();
         waypoint.data.DoEffect();
+
         // SceneManager.LoadScene("BattleSetup", LoadSceneMode.Single);
     }
 
@@ -171,6 +183,18 @@ public class GameStateManager : MonoBehaviour
             tubesRoot = go.transform;
         }
         tubeObj.transform.SetParent(tubesRoot);
+    }
+
+    public void BlockPaths()
+    {
+        Waypoint[] allWaypoints = FindObjectsByType<Waypoint>(FindObjectsSortMode.None);
+
+        foreach (Waypoint wp in allWaypoints)
+        {
+            wp.isBlocked = true;
+            wp.nodeRenderer.material.color = Color.gray5;
+        }
+
     }
 
     //─────────────────────────────────────────────
@@ -343,6 +367,12 @@ public class GameStateManager : MonoBehaviour
     public void OnBattleEnd()
     {
         battleWon = true;
+        if (SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            // do something
+            player.activeImplings = SetImplingRoster();
+            CreateDiceDeck();
+        }
         SaveToDisk();
     }
 
@@ -375,7 +405,10 @@ public class GameStateManager : MonoBehaviour
             diceDeck = new List<DiceData>()
         };
 
-        player.activeImplings = SetImplingRoster();
+        if (player.activeImplings.Count == 0)
+        {
+            player.activeImplings = SetImplingRoster();
+        }
         CreateDiceDeck();
 
         lastWaypoint = null;
@@ -388,7 +421,7 @@ public class GameStateManager : MonoBehaviour
         }
         else
         {
-            SaveToDisk(); 
+            SaveToDisk();
         }
         Debug.Log("Reset complete.");
     }

@@ -8,13 +8,13 @@ public class StartGame : MonoBehaviour
     public void StartGameToMainMenu()
     {
         UIManager.menuToOpenOnLoad = MenuType.Main;
-        SceneManager.LoadScene("MainMenuScene");
+        SceneManager.LoadScene("Main_Menu");
     }
 
     public void StartGameToSettings()
     {
         UIManager.menuToOpenOnLoad = MenuType.Settings;
-        SceneManager.LoadScene("MainMenuScene");
+        SceneManager.LoadScene("Main_Menu");
     }
 
     public void OnQuitButtonPressed()

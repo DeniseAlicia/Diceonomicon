@@ -47,9 +47,10 @@ public class Tutorial : MonoBehaviour
     public void Start()
     {
         battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
-
         player = battleSceneManager.player;
         opponent = battleSceneManager.opponent;
+
+
 
         // Disable UI
         RotationButton[] allButtons = Object.FindObjectsByType<RotationButton>(FindObjectsSortMode.None);

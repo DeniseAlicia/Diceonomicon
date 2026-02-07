@@ -1,5 +1,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using Mono.Cecil;
+using System.Collections.Generic;
 
 public class MapManager : MonoBehaviour
 {
@@ -38,5 +40,19 @@ public class MapManager : MonoBehaviour
         {
             GameStateManager.Instance.LoadFromDisk();
         }
+    }
+
+    public void StartTutorial()
+    {
+        GameStateManager.Instance.player.area = "Tutorial";
+        GameStateManager.Instance.player.level = 0;
+
+        GameStateManager.Instance.player.activeImplings = new List<TabletData>();
+        TabletData tutorialImpling = Resources.Load<TabletData>($"Implings/TutorialData");
+        GameStateManager.Instance.player.diceDeck = new List<DiceData>();
+        GameStateManager.Instance.CreateDiceDeck();
+        GameStateManager.Instance.player.activeImplings.Add(tutorialImpling);
+
+        SceneManager.LoadScene("Tutorial");
     }
 }

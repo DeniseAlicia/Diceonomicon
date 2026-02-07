@@ -9,7 +9,7 @@ public class Encounters
     // -----------------------------------------------------------------------
     // TUTORIAL
     // -----------------------------------------------------------------------
-         { (0, "None"), new List<List<string>>
+         { (0, "Tutorial"), new List<List<string>>
             {
                 new List<string>{ "TutorialEnemy" },
             }

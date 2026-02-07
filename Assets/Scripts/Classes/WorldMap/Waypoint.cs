@@ -9,7 +9,7 @@ public class Waypoint : MonoBehaviour
 {
     [Header("Attributes")]
     public bool startingNode;
-    public bool blocked;
+    public bool isBlocked = false;
 
     [Header("Info")]
     public string nodeID;
@@ -43,6 +43,7 @@ public class Waypoint : MonoBehaviour
     private Transform centralCylinder;
     private CameraOrbitController cameraController;
     public Material pathMaterial;
+    public MeshRenderer pathMeshRenderer;
     public Renderer nodeRenderer;
     private MapManager mapManager;
     private GameStateManager mapStateManager;
@@ -54,13 +55,13 @@ public class Waypoint : MonoBehaviour
 
     [Header("Cluster Layout")]
     public float sideRadiusDelta = 0.1f;       // small radius delta for the two upper branches
-    public float upperYOffset = 0f;             // upper branches same Y as clicked (so 0)
+    public float upperYOffset = -0.7f;             // upper branches same Y as clicked (so 0)
     public float lowerYOffset = -1.4f;          // lower branch Y relative to clicked
     public float radialOffsetOutwards = 0.5f;  // how much mid control is pulled outward for curve
 
     [Header("Tube / Growth")]
     public GameObject nodePrefab;
-    public float tubeRadius = 0.07f;
+    public float tubeRadius = 1f;
     public int tubeSegments = 16;
     public float growthDuration = 1.0f;
     public int bezierSamples = 36;
@@ -82,8 +83,8 @@ public class Waypoint : MonoBehaviour
 
     Dictionary<WaypointType, float> waypointWeights = new Dictionary<WaypointType, float>()
     {
-        { WaypointType.Battle, 5f },
-        { WaypointType.Dice, 12f },
+        { WaypointType.Battle, 20f },
+        { WaypointType.Dice, 80f },
         //{ WaypointType.Candlemaker, 0.1f },
     };
 
@@ -97,6 +98,8 @@ public class Waypoint : MonoBehaviour
         SetWaypointData();
         ApplyColor();
         OrientOutward();
+
+        isBlocked = false;
 
         if (GameStateManager.Instance != null)
         {
@@ -120,14 +123,20 @@ public class Waypoint : MonoBehaviour
 
     public void SetWaypointData()
     {
-        if (string.IsNullOrEmpty(nodeID))
-        {
-            nodeID = System.Guid.NewGuid().ToString();
-        }
-
         if (type == "")
         {
             GetRandomWaypoint();
+        }
+
+        if (data == null)
+        {
+            data = Resources.Load<WaypointData>($"Waypoints/{type}" + "WaypointData");
+        }
+        ;
+
+        if (string.IsNullOrEmpty(nodeID))
+        {
+            nodeID = System.Guid.NewGuid().ToString();
         }
 
         if (data.waypointArt != null)
@@ -152,7 +161,7 @@ public class Waypoint : MonoBehaviour
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
 
-        if (!hasBranched && !isHolding)
+        if (!hasBranched && !isHolding && !isBlocked)
         {
             isHolding = true;
             holdCoroutine = StartCoroutine(HoldAndSpawn());
@@ -269,6 +278,7 @@ public class Waypoint : MonoBehaviour
         if (waypoint != null)
         {
             CopySettingsTo(waypoint);
+
             waypoint.InitializeNewNode(this);
         }
 
@@ -304,7 +314,10 @@ public class Waypoint : MonoBehaviour
         GameObject tubeObj = new GameObject("GrowingTube");
         MeshFilter mf = tubeObj.AddComponent<MeshFilter>();
         MeshRenderer mr = tubeObj.AddComponent<MeshRenderer>();
-        mr.material = pathMaterial;
+        waypoint.pathMeshRenderer = mr;
+        waypoint.pathMeshRenderer.material = new Material(pathMaterial);
+        mr.material.color = waypoint.colors[colorIndex];
+
 
         // precompute full bezier curve
         Vector3[] full = new Vector3[bezierSamples];
@@ -449,6 +462,7 @@ public class Waypoint : MonoBehaviour
     {
         nodeID = System.Guid.NewGuid().ToString();
         parentID = parent != null ? parent.nodeID : null;
+        GetRandomWaypoint();
         SetWaypointData();
         ApplyColor();
         OrientOutward();

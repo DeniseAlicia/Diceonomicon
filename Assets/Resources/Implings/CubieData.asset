@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CubieData
   m_EditorClassIdentifier: 
   enemy: 0
+  unlocked: 1
   name: Cubie
   desc: I'm too cool to have an ability
   artwork: {fileID: 2800000, guid: bc9ec2d9fd3ac644f9d7d0f5bbd156f2, type: 3}
