@@ -9,10 +9,22 @@ public class TabletController : MonoBehaviour
 {
     public TMP_Text nameText;
     public TMP_Text descText;
+    public TMP_Text overloadText;
     public Renderer artworkRenderer;
     public Entity owner;
     public Component script;
     public List<DiceSlotController> tabletSlots;
+
+    public enum Emotions
+    {
+        Anger,
+        Sadness,
+        Envy,
+        Fear,
+        Indifference,
+        Temptation
+    }
+    public int[] emotionValues = new int[System.Enum.GetValues(typeof(Emotions)).Length];
 
     public void SetData(TabletData data)
     {
