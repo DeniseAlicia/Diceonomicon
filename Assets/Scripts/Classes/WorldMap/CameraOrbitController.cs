@@ -5,6 +5,7 @@ public class CameraOrbitController : MonoBehaviour
 {
     [Header("Orbit Target")]
     public Transform centerTransform;
+    public Transform wpTransform;
     public float distance = 15f;    // constant radius around center
     public float rotateSpeed = 120f;
     public float focusSpeed = 3f;
@@ -36,19 +37,19 @@ public class CameraOrbitController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (centerTransform == null) return;
-
-        Vector3 offset = Quaternion.Euler(0f, yaw, 0f) * Vector3.right * distance;
-        transform.position = new Vector3(offset.x, currentHeight, offset.z) + centerTransform.position;
-        transform.LookAt(centerTransform.position);
+        if (wpTransform != null)
+        {
+            Vector3 offset = Quaternion.Euler(0f, yaw, 0f) * Vector3.right * distance/1.5f;
+            transform.position = new Vector3(offset.x, currentHeight, offset.z) + wpTransform.position;
+            transform.LookAt(wpTransform.position);
+        }
+        else if (centerTransform != null)
+        {
+            Vector3 offset = Quaternion.Euler(0f, yaw, 0f) * Vector3.right * distance;
+            transform.position = new Vector3(offset.x, currentHeight, offset.z) + centerTransform.position;
+            transform.LookAt(centerTransform.position);
+        }
     }
-
-    // public Vector3 GetBranchDirection()
-    // {
-    //     Vector3 dir = (transform.position - centralCylinder.position);
-    //     dir.y = 0f;
-    //     return dir.normalized;
-    // }
 
     void HandleMouseOrbit()
     {

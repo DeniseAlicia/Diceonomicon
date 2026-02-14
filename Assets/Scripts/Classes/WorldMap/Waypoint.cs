@@ -84,8 +84,8 @@ public class Waypoint : MonoBehaviour
     Dictionary<WaypointType, float> waypointWeights = new Dictionary<WaypointType, float>()
     {
         { WaypointType.Battle, 20f },
-        { WaypointType.Dice, 80f },
-        //{ WaypointType.Candlemaker, 0.1f },
+        { WaypointType.Dice, 40f },
+        { WaypointType.Candlemaker, 40f },
     };
 
 
@@ -197,6 +197,7 @@ public class Waypoint : MonoBehaviour
         {
             Waypoint instance = this;
             hasBranched = true;
+            GameStateManager.Instance.player.type = this.type;
             // Debug.Log(hasBranched.ToString());
             SaveMapDebounced();
             GameStateManager.Instance.TriggerWaypoint(instance);
@@ -306,6 +307,8 @@ public class Waypoint : MonoBehaviour
             waypoint.hasBranched = false;
             waypoint.colorIndex = newIndex;
             waypoint.ApplyColor();
+            
+            cameraController.wpTransform = waypoint.transform;
         }
 
         nextNode.SetActive(false);

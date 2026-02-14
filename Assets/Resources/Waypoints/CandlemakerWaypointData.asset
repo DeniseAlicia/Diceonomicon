@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CandlemakerWaypointData
   type: Candlemaker
   subType: 
-  desc: 
+  desc: Upgrade your Candle
   waypointArt: {fileID: 2800000, guid: 8c44de35391a23a42be04c9ff79004fe, type: 3}
   closedPathArt: {fileID: 2800000, guid: 8c44de35391a23a42be04c9ff79004fe, type: 3}
