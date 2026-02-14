@@ -38,6 +38,9 @@ public class ChoiceEventManager : MonoBehaviour
     public List<CandleData> candleRewards;
     public CandleData chosenCandle;
 
+    public List<RelicData> relicRewards;
+    public RelicData chosenRelic;
+
     void Start()
     {
         gameState = FindFirstObjectByType<GameStateManager>();
@@ -140,7 +143,7 @@ public class ChoiceEventManager : MonoBehaviour
                 for (int i = 0; i < amount; i++)
                 {
                     string dataName = choiceList[i];
-                    CandleData data = Resources.Load<CandleData>($"Candles/{dataName}"+"CandleData");
+                    CandleData data = Resources.Load<CandleData>($"Candles/{dataName}" + "CandleData");
                     nameTexts[i].text = data.title;
                     descTexts[i].text = data.desc;
                     flavorTexts[i].text = data.flavorText;
@@ -158,6 +161,37 @@ public class ChoiceEventManager : MonoBehaviour
                     candleRewards.Add(data);
                 }
                 break;
+            case "Relic":
+                RelicReward.GetRewards(type, quality, area, amount);
+                choiceList = RelicReward.options;
+
+                if (choiceList.Count < 3)
+                {
+                    Debug.LogError("Not enough rewards returned! Need 3, got " + choiceList.Count);
+                    return;
+                }
+
+                for (int i = 0; i < amount; i++)
+                {
+                    string dataName = choiceList[i];
+                    RelicData data = Resources.Load<RelicData>($"Relics/{dataName}");
+                    nameTexts[i].text = data.title;
+                    descTexts[i].text = data.desc;
+                    flavorTexts[i].text = data.flavorText;
+
+                    if (images[i].sprite != null)
+                    {
+                        images[i].sprite = data.image;
+                    }
+
+                    if (images[i].sprite == null)
+                    {
+                        images[i].sprite = placeholder;
+                    }
+
+                    relicRewards.Add(data);
+                }
+                break;
             default:
                 break;
         }
@@ -165,9 +199,9 @@ public class ChoiceEventManager : MonoBehaviour
 
     public void AddChoice(Button button)
     {
+        int i = 0;
         foreach (Button choice in choices)
         {
-            int i = 0;
             if (button.name == choice.name)
             {
                 switch (type)
@@ -183,6 +217,11 @@ public class ChoiceEventManager : MonoBehaviour
                         CandleData candle = candleRewards[i];
                         candle.DoEffect();
                         Debug.Log("Candle effect!");
+                        break;
+                    case "Relic":
+                        RelicData relic = relicRewards[i];
+                        GameStateManager.Instance.player.relics.Add(relic);
+                        Debug.Log("Added Relic!");
                         break;
                     default:
                         break;

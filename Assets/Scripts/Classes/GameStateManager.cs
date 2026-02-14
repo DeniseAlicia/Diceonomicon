@@ -31,6 +31,7 @@ public class GameStateManager : MonoBehaviour
         public List<string> implings = new();
         public List<TabletData> activeImplings = new();
         public List<TabletData> unlockedImplings = new();
+        public List<RelicData> relics = new();
     }
 
     [Serializable]

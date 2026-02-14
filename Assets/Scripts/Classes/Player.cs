@@ -8,6 +8,7 @@ public class Player : Entity
     public List<TabletData> ActiveImplings;
     public int MaxImplings;
     public List<Die> dice;
+    public List<RelicData> relics;
 
     public int level;
     public string area;

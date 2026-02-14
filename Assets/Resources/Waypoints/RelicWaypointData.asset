@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b253d2dcbe69ca45b4a32aca3c6eb4e, type: 3}
+  m_Name: RelicWaypointData
+  m_EditorClassIdentifier: Assembly-CSharp::SelectionWaypointData
+  type: Relic
+  subType: 
+  desc: Choose Relic
+  waypointArt: {fileID: 2800000, guid: 507cd805ad331e54cb9e9cab5a9270b5, type: 3}
+  closedPathArt: {fileID: 2800000, guid: 507cd805ad331e54cb9e9cab5a9270b5, type: 3}

@@ -48,6 +48,7 @@ public class PlayerSaveData
     public List<string> implings;
     public List<TabletData> unlockedImplings;
     public List<TabletData> activeImplings;
+    public List<RelicData> relics;
 
     // Map Info
     public string mapSaveData;
