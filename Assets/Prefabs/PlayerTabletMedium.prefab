@@ -318,7 +318,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800233817655024173}
   m_LocalRotation: {x: -0, y: 0.70710677, z: -0.70710677, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 2.402636}
+  m_LocalPosition: {x: 0, y: 0, z: 2.4}
   m_LocalScale: {x: 1, y: 2.1075704, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -326,7 +326,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.060013, y: -0.24000406}
+  m_AnchoredPosition: {x: -5.060013, y: -0.04}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &7041043157385709851
@@ -1453,6 +1453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3620997622594802804}
   - component: {fileID: 6255826648385007587}
+  - component: {fileID: 3125673578042627070}
   m_Layer: 8
   m_Name: PlayerTabletMedium
   m_TagString: Untagged
@@ -1493,12 +1494,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 3128393181539325428}
   descText: {fileID: 667069786231741173}
-  overloadText: {fileID: 994053096070213045}
   artworkRenderer: {fileID: 4123861950717567092}
   owner: {fileID: 0}
   script: {fileID: 0}
   tabletSlots: []
   emotionValues: 000000000000000000000000000000000000000000000000
+--- !u!114 &3125673578042627070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8448579534215354899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a551d4e46072abb4fbefb66efdc6aa60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Overload
+  isOverloading: 0
+  isOverloaded: 0
+  tablet: {fileID: 6255826648385007587}
+  overloadText: {fileID: 994053096070213045}
 --- !u!1 &8457177599187312549
 GameObject:
   m_ObjectHideFlags: 0

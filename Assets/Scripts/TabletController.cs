@@ -9,7 +9,6 @@ public class TabletController : MonoBehaviour
 {
     public TMP_Text nameText;
     public TMP_Text descText;
-    public TMP_Text overloadText;
     public Renderer artworkRenderer;
     public Entity owner;
     public Component script;

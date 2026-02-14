@@ -24,18 +24,7 @@ public class BattleSceneManager : MonoBehaviour
     private static List<List<DiceSlotController>> playerSlots;
     private static List<List<DiceSlotController>> enemySlots;
     private static DiceSlotController[] allSlots;
-    private static TabletController[] allTablets;
     private GameStateManager gameState;
-    private string[] diceTags = new string[] { "Damage", "Block", "Spell", "Buff", "Neutral", "Debuff" };
-    public Color[] colors = new Color[]
-               {
-        Color.red,
-        Color.blue,
-        new(0.6f, 0f, 0.7f),
-        Color.green,
-        Color.white,
-        Color.yellow
-               };
 
     // Combat Stats
     public int level;
@@ -131,42 +120,10 @@ public class BattleSceneManager : MonoBehaviour
         // }
 
         allSlots = FindObjectsByType<DiceSlotController>(FindObjectsSortMode.None);
-        allTablets = FindObjectsByType<TabletController>(FindObjectsSortMode.None);
-        foreach (TabletController tablet in allTablets)
-        {
-            for (int i = 0; i < tablet.emotionValues.Length; i++)
-            {
-                if (tablet.emotionValues[i] > 0)
-                {
-                    tablet.emotionValues[i] -= 1;
-                }
-            }
-        }
 
-        foreach (TabletController tablet in allTablets)
-        {
-            if (tablet.owner.GetType() == typeof(Player))
-            {
-                for (int i = 0; i < tablet.emotionValues.Length; i++)
-                {
-                    int valueOfOtherEmotions = 0;
 
-                    for (int j = 0; j < tablet.emotionValues.Length; j++)
-                    {
-                        if (j == i) continue;
-
-                        valueOfOtherEmotions += tablet.emotionValues[j];
-                    }
-
-                    if (tablet.emotionValues[i] > 5 && tablet.emotionValues[i] > valueOfOtherEmotions)
-                    {
-                        {
-                            HandleOverload(tablet, i);
-                        }
-                    }
-                }
-            }
-        }
+        // Overload.DecayEmotions(allTablets);
+        // Overload.UpdateEmotions(allTablets);
 
         foreach (GameObject banner in playerColumnBanner)
         {
@@ -258,23 +215,7 @@ public class BattleSceneManager : MonoBehaviour
             }
         }
 
-        foreach (DiceSlotController slot in allSlots)
-        {
-            if (slot.isFilled)
-            {
-                TabletController tablet = slot.GetComponentInParent<TabletController>();
-                Die die = slot.GetComponentInChildren<Die>();
-                foreach (string tag in die.dieTags)
-                {
-                    int index = System.Array.IndexOf(diceTags, tag);
-
-                    if (index >= 0)
-                    {
-                        tablet.emotionValues[index] += 1;
-                    }
-                }
-            }
-        }
+        //Overload.AddEmotion(allSlots);
 
         OnAcvitveCombatStart.Invoke();
         // Proceed to Next Phase
@@ -473,7 +414,6 @@ public class BattleSceneManager : MonoBehaviour
                             }
                         }
                     }
-
                     slot.DoEffect();
                     UpdateDamageBlockUI();
                 }
@@ -761,39 +701,6 @@ public class BattleSceneManager : MonoBehaviour
     // 
     //////////////////////////////////////////////////////////////////////////
 
-    public void HandleOverload(TabletController tablet, int emotionIndex)
-    {
-        tablet.overloadText.color = colors[emotionIndex];
-
-        switch (emotionIndex)
-        {
-            case 0: // Anger
-                tablet.overloadText.text = "Raging";
-                break;
-            case 1: // Sadness
-                tablet.overloadText.text = "Weeping";
-                break;
-            case 2: // Envy
-                tablet.overloadText.text = "Resentful";
-                break;
-            case 3: // Fear
-                tablet.overloadText.text = "Terrified";
-                break;
-            case 4: // Indifference
-                tablet.overloadText.text = "Detached";
-                break;
-            case 5: // Temptation
-                tablet.overloadText.text = "Stunned";
-                break;
-        }
-    }
-
-    //////////////////////////////////////////////////////////////////////////
-    // 
-    // HELPFUL METHODS
-    // 
-    //////////////////////////////////////////////////////////////////////////
-
     public void GainHealth()
     {
         player.currentHealth += 1;
@@ -1031,7 +938,4 @@ public class BattleSceneManager : MonoBehaviour
         Image opponentBannerSprite = opponentColumnBanner[column - 1].GetComponent<Image>();
         opponentBannerSprite.color = new Color(1f, 1f, 1f, 1f);
     }
-
-
-
 }
