@@ -22,8 +22,21 @@ public class ChoiceEventManager : MonoBehaviour
     public List<TMP_Text> descTexts;
     public List<TMP_Text> flavorTexts;
     public List<Image> images;
-    public List<CollectableData> rewards;
-    public CollectableData reward;
+    public List<Texture> textures;
+
+    public Sprite placeholder;
+    //public List<CollectableData> rewards;
+    //public CollectableData reward;
+
+    // RewardData
+    public List<DiceData> diceRewards;
+    public DiceData chosenDie;
+
+    public List<TabletData> impRewards;
+    public TabletData chosenImp;
+
+    public List<CandleData> candleRewards;
+    public CandleData chosenCandle;
 
     void Start()
     {
@@ -32,8 +45,8 @@ public class ChoiceEventManager : MonoBehaviour
         waypoint = GameStateManager.Instance.tempWp;
         level = gameState.player.level;
         area = gameState.player.area;
-        // type = gameState.player.type;
-        type = "Dice";
+        type = gameState.player.type;
+        //type = "Dice";
         isRandom = false;
         if (isRandom)
         {
@@ -43,26 +56,25 @@ public class ChoiceEventManager : MonoBehaviour
         {
             amount = 3;
         }
-        quality = gameState.player.level;
+        quality = level;
 
         SetChoices();
     }
 
     public void SetChoices()
     {
-
-        Rewards.GetRewards(type, quality, area, amount);
-        choiceList = Rewards.options;
-
-        if (choiceList.Count < 3)
-        {
-            Debug.LogError("Not enough rewards returned! Need 3, got " + choiceList.Count);
-            return;
-        }
-
         switch (type)
         {
             case "Dice":
+                DiceReward.GetRewards(type, quality, area, amount);
+                choiceList = DiceReward.options;
+
+                if (choiceList.Count < 3)
+                {
+                    Debug.LogError("Not enough rewards returned! Need 3, got " + choiceList.Count);
+                    return;
+                }
+
                 for (int i = 0; i < amount; i++)
                 {
                     string dataName = choiceList[i];
@@ -75,14 +87,76 @@ public class ChoiceEventManager : MonoBehaviour
                     {
                         images[i].sprite = data.image;
                     }
-                    else
+
+                    if (images[i].sprite == null)
                     {
-                        images[i].sprite = Resources.Load<Sprite>($"Placeholder/empty");
+                        images[i].sprite = placeholder;
                     }
-                    rewards.Add(data);
+
+                    diceRewards.Add(data);
                 }
                 break;
             case "Impling":
+                ImpReward.GetRewards(type, quality, area, amount);
+                choiceList = ImpReward.options;
+
+                if (choiceList.Count < 3)
+                {
+                    Debug.LogError("Not enough rewards returned! Need 3, got " + choiceList.Count);
+                    return;
+                }
+
+                for (int i = 0; i < amount; i++)
+                {
+                    string dataName = choiceList[i];
+                    TabletData data = Resources.Load<TabletData>($"Implings/{dataName}");
+                    nameTexts[i].text = data.name;
+                    descTexts[i].text = data.desc;
+                    flavorTexts[i].text = data.trait;
+
+                    if (textures[i] != null)
+                    {
+                        textures[i] = data.artwork;
+                    }
+
+                    if (textures[i] == null)
+                    {
+                        textures[i] = Resources.Load<Texture>($"Placeholder/ImpPlaceholder");
+                    }
+
+                    impRewards.Add(data);
+                }
+                break;
+            case "Candlemaker":
+                CandleReward.GetRewards(type, quality, area, amount);
+                choiceList = CandleReward.options;
+
+                if (choiceList.Count < 3)
+                {
+                    Debug.LogError("Not enough rewards returned! Need 3, got " + choiceList.Count);
+                    return;
+                }
+
+                for (int i = 0; i < amount; i++)
+                {
+                    string dataName = choiceList[i];
+                    CandleData data = Resources.Load<CandleData>($"Candles/{dataName}"+"CandleData");
+                    nameTexts[i].text = data.title;
+                    descTexts[i].text = data.desc;
+                    flavorTexts[i].text = data.flavorText;
+
+                    if (images[i].sprite != null)
+                    {
+                        images[i].sprite = data.image;
+                    }
+
+                    if (images[i].sprite == null)
+                    {
+                        images[i].sprite = placeholder;
+                    }
+
+                    candleRewards.Add(data);
+                }
                 break;
             default:
                 break;
@@ -99,11 +173,16 @@ public class ChoiceEventManager : MonoBehaviour
                 switch (type)
                 {
                     case "Dice":
-                        DiceData die = (DiceData)rewards[i];
+                        DiceData die = diceRewards[i];
                         GameStateManager.Instance.player.diceDeck.Add(die);
                         //Debug.Log(die.name + " added");
                         break;
                     case "Impling":
+                        break;
+                    case "Candlemaker":
+                        CandleData candle = candleRewards[i];
+                        candle.DoEffect();
+                        Debug.Log("Candle effect!");
                         break;
                     default:
                         break;

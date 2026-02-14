@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public class Rewards
+public class DiceReward
 {
     public static List<string> options;
     public static int quality;
