@@ -10,6 +10,7 @@ public class Overload : MonoBehaviour
     public bool isOverloaded;
     public TabletController tablet;
     public TMP_Text overloadText;
+    public Animator animator;
 
     public void Start()
     {
@@ -103,21 +104,27 @@ public class Overload : MonoBehaviour
         {
             case 0: // Anger
                 overloadText.text = "Raging";
+                animator.Play("Angry");
                 break;
             case 1: // Sadness
                 overloadText.text = "Weeping";
+                animator.Play("Sad");
                 break;
             case 2: // Fear
                 overloadText.text = "Terrified";
+                animator.Play("Afraid");
                 break;
             case 3: // Envy
                 overloadText.text = "Resentful";
+                animator.Play("Envious");
                 break;
             case 4: // Indifference
                 overloadText.text = "Detached";
+                animator.Play("Indifferent");
                 break;
             case 5: // Temptation
                 overloadText.text = "Stunned";
+                animator.Play("Tempted");
                 break;
         }
     }

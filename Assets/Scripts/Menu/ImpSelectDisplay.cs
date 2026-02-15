@@ -68,15 +68,15 @@ public class ImpSelectDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         if (currentTabletInstance.name.Contains("Small"))
         {
-            cameras.transform.position = new(cameras.transform.position.x, cameras.transform.position.y, 1.25f);
+            cameras.transform.position = new(cameras.transform.position.x, cameras.transform.position.y, 4f);
         }
         else if (currentTabletInstance.name.Contains("Medium"))
         {
-            cameras.transform.position = new(cameras.transform.position.x, cameras.transform.position.y, 1.75f);
+            cameras.transform.position = new(cameras.transform.position.x, cameras.transform.position.y, 3f);
         }
         else
         {
-            cameras.transform.position = new(cameras.transform.position.x, cameras.transform.position.y, 1.5f);
+            cameras.transform.position = new(cameras.transform.position.x, cameras.transform.position.y, 2f);
         }
 
         TraitInfo trait = currentTabletInstance.GetComponentInChildren<TraitInfo>();

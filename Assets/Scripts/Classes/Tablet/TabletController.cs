@@ -13,6 +13,7 @@ public class TabletController : MonoBehaviour
     public Entity owner;
     public Component script;
     public List<DiceSlotController> tabletSlots;
+    public Animator animator;
 
     public enum Emotions
     {
