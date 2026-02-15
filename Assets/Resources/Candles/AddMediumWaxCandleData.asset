@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d33963910fed27045befdd39f882597a, type: 3}
-  m_Name: BurnCandleData
-  m_EditorClassIdentifier: Assembly-CSharp::BurnCandleData
-  title: Burn
-  desc: Pay 10% of current Health for currency
-  flavorText: Ouch!
+  m_Script: {fileID: 11500000, guid: cefa22e246ca48c4982d08699700a5c6, type: 3}
+  m_Name: AddMediumWaxCandleData
+  m_EditorClassIdentifier: Assembly-CSharp::AddWaxCandleData
+  title: Add Wax
+  desc: Increases Max Health by 15
+  flavorText: Wow that's cool!
   image: {fileID: 0}
+  amount: 15

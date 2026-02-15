@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0efa9aacc33bdc641a829b1c54ef4a5f, type: 3}
-  m_Name: RestoreCandleData
-  m_EditorClassIdentifier: Assembly-CSharp::RestoreCandleData
-  title: Restore
-  desc: Restors 30-50% Health
-  flavorText: Feels good!
+  m_Script: {fileID: 11500000, guid: d33963910fed27045befdd39f882597a, type: 3}
+  m_Name: BurnSmallCandleData
+  m_EditorClassIdentifier: Assembly-CSharp::BurnCandleData
+  title: Burn
+  desc: Pay 10% of current Health for currency
+  flavorText: Ouch!
   image: {fileID: 0}
+  amount: 0.1

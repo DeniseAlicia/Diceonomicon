@@ -25,8 +25,6 @@ public class ChoiceEventManager : MonoBehaviour
     public List<Texture> textures;
 
     public Sprite placeholder;
-    //public List<CollectableData> rewards;
-    //public CollectableData reward;
 
     // RewardData
     public List<DiceData> diceRewards;
@@ -49,7 +47,7 @@ public class ChoiceEventManager : MonoBehaviour
         level = gameState.player.level;
         area = gameState.player.area;
         type = gameState.player.type;
-        //type = "Dice";
+  
         isRandom = false;
         if (isRandom)
         {
@@ -131,7 +129,7 @@ public class ChoiceEventManager : MonoBehaviour
                 }
                 break;
             case "Candlemaker":
-                CandleReward.GetRewards(type, quality, area, amount);
+                CandleReward.GetRewards();
                 choiceList = CandleReward.options;
 
                 if (choiceList.Count < 3)
@@ -216,12 +214,12 @@ public class ChoiceEventManager : MonoBehaviour
                     case "Candlemaker":
                         CandleData candle = candleRewards[i];
                         candle.DoEffect();
-                        Debug.Log("Candle effect!");
+                        //Debug.Log("Candle effect!");
                         break;
                     case "Relic":
                         RelicData relic = relicRewards[i];
                         GameStateManager.Instance.player.relics.Add(relic);
-                        Debug.Log("Added Relic!");
+                        //Debug.Log("Added Relic!");
                         break;
                     default:
                         break;

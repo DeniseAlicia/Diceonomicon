@@ -1,6 +1,9 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.InputSystem;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
+using System;
 
 public class TraitInfo : MonoBehaviour
 {
@@ -13,7 +16,7 @@ public class TraitInfo : MonoBehaviour
     [SerializeField] private Vector3 hoverOffset = new Vector3(0f, 0f, -3f);
     [SerializeField] private float moveDuration = 0.3f;
 
-    private Vector3 initialLocalPos;
+    public Vector3 initialLocalPos;
 
     private void Awake()
     {
@@ -37,14 +40,18 @@ public class TraitInfo : MonoBehaviour
         MoveObjects(initialLocalPos - hoverOffset, false);
     }
 
-    private void MoveObjects(Vector3 targetLocalPos, bool activateAfterMove)
+    public void MoveObjects(Vector3 targetLocalPos, bool activateAfterMove)
     {
         moveTween?.Kill();
 
         var tween = nameObject.DOLocalMove(targetLocalPos, moveDuration)
                               .SetEase(Ease.OutQuad);
 
-        if (activateAfterMove)
+        if (SceneManager.GetActiveScene().name.Equals("Main_Menu", StringComparison.OrdinalIgnoreCase))
+        {
+            traitObject.SetActive(true);
+        }
+        else if (activateAfterMove)
         {
             tween.OnComplete(() =>
             {

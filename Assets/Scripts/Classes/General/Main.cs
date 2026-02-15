@@ -16,4 +16,6 @@ public class Main
     {
         "Damage", "Block", "Buff", "Spell", "Neutral", "Debuff"
     };
+
+    public static readonly string[] areas = { "Red", "Blue", "Green", "Purple", "White", "Yellow" };
 }
