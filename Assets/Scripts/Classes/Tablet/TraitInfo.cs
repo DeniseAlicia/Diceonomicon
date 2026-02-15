@@ -47,7 +47,7 @@ public class TraitInfo : MonoBehaviour
         var tween = nameObject.DOLocalMove(targetLocalPos, moveDuration)
                               .SetEase(Ease.OutQuad);
 
-        if (SceneManager.GetActiveScene().name.Equals("Main_Menu", StringComparison.OrdinalIgnoreCase))
+        if (SceneManager.GetActiveScene().name.Equals("MainMenu", StringComparison.OrdinalIgnoreCase))
         {
             traitObject.SetActive(true);
         }
