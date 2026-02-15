@@ -18,6 +18,9 @@ public class ImpSelectDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private Image selectionColor;
 
     private TabletData currentData;
+    private GameObject currentTabletInstance;
+
+    public GameObject cameras;
 
     public void SetData(TabletData data)
     {
@@ -26,21 +29,21 @@ public class ImpSelectDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         Highlight(false);
 
-        Texture2D tex = data.artwork as Texture2D;
-        if (tex != null)
+        Texture2D texture = data.artwork as Texture2D;
+        if (texture != null)
         {
             portraitImage.sprite = Sprite.Create(
-                tex,
-                new Rect(0, 0, tex.width, tex.height),
+                texture,
+                new Rect(0, 0, texture.width, texture.height),
                 new Vector2(0.5f, 0.5f)
             );
         }
         else
         {
-            Debug.LogWarning($"Artwork für {data.name} ist keine Texture.");
+            Debug.LogWarning("No Texture.");
         }
 
-        nameText.text = data.name;
+        //nameText.text = data.name;
         descriptionText.text = data.desc;
         traitText.text = data.trait;
 
@@ -55,15 +58,43 @@ public class ImpSelectDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        normalView.SetActive(false);
+        //normalView.SetActive(false);
         hoverView.SetActive(true);
-        Debug.Log("Hover");
+        
+        currentTabletInstance = Instantiate(currentData.tabletPrefab);
+        currentTabletInstance.transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
+
+        cameras = FindFirstObjectByType<ImpSelectList>().cameras;
+
+        if (currentTabletInstance.name.Contains("Small"))
+        {
+            cameras.transform.position = new(cameras.transform.position.x, cameras.transform.position.y, 1.25f);
+        }
+        else if (currentTabletInstance.name.Contains("Medium"))
+        {
+            cameras.transform.position = new(cameras.transform.position.x, cameras.transform.position.y, 1.75f);
+        }
+        else
+        {
+            cameras.transform.position = new(cameras.transform.position.x, cameras.transform.position.y, 1.5f);
+        }
+
+        TraitInfo trait = currentTabletInstance.GetComponentInChildren<TraitInfo>();
+
+        trait.MoveObjects(trait.initialLocalPos, true);
+
+        TabletController controller = currentTabletInstance.GetComponent<TabletController>();
+        controller.SetData(currentData);
+
+       //Debug.Log("Hover");
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        normalView.SetActive(true);
+        //normalView.SetActive(true);
         hoverView.SetActive(false);
+
+        Destroy(currentTabletInstance);
     }
 
     public void OnPointerClick(PointerEventData eventData)

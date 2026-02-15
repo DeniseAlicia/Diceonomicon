@@ -279,7 +279,7 @@ public class GameStateManager : MonoBehaviour
         string path = Path.Combine(Application.persistentDataPath, saveFileName);
         File.WriteAllText(path, json);
 
-        Debug.Log($"Saved game with {container.mapData?.nodes?.Count ?? 0} waypoints and player data to {path}");
+        //Debug.Log($"Saved game with {container.mapData?.nodes?.Count ?? 0} waypoints and player data to {path}");
     }
 
     public void LoadFromDisk()

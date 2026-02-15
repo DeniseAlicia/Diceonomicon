@@ -27,18 +27,6 @@ public class Waypoint : MonoBehaviour
 
     public List<Vector3> curvePoints = new List<Vector3>();
 
-    [Header("Details")]
-    public Color[] colors = new Color[]
-               {
-        Color.red,
-        Color.blue,
-        Color.green,
-        new(0.6f, 0f, 0.7f),
-        Color.white,
-        Color.yellow
-               };
-    public string[] areas = { "Red", "Blue", "Green", "Purple", "White", "Yellow" };
-
     [Header("References")]
     private Transform centralCylinder;
     private CameraOrbitController cameraController;
@@ -298,11 +286,11 @@ public class Waypoint : MonoBehaviour
             {
                 // ±1 index shift
                 int offset = UnityEngine.Random.value < 0.5f ? -1 : 1;
-                newIndex = Mathf.Clamp(colorIndex + offset, 0, colors.Length - 1);
+                newIndex = Mathf.Clamp(colorIndex + offset, 0, Main.colors.Length - 1);
             }
 
             float diff = p2.y - transform.position.y;
-            Debug.Log(diff.ToString());
+            //Debug.Log(diff.ToString());
 
             waypoint.level = (int)math.ceil(transform.position.y / -4);
 
@@ -321,7 +309,7 @@ public class Waypoint : MonoBehaviour
         MeshRenderer mr = tubeObj.AddComponent<MeshRenderer>();
         waypoint.pathMeshRenderer = mr;
         waypoint.pathMeshRenderer.material = new Material(pathMaterial);
-        mr.material.color = waypoint.colors[colorIndex];
+        mr.material.color = Main.colors[colorIndex];
 
 
         // precompute full bezier curve
@@ -387,7 +375,7 @@ public class Waypoint : MonoBehaviour
 
                 // Save full state to disk once per cluster
                 GameStateManager.Instance.SaveToDisk();
-                Debug.Log("Cluster saved! Nodes: " + growthCount);
+                //Debug.Log("Cluster saved! Nodes: " + growthCount);
             }
         }
         //---------------------------------------
@@ -449,17 +437,17 @@ public class Waypoint : MonoBehaviour
             return;
         }
 
-        Debug.Log(GameStateManager.Instance.waypoints.Count.ToString());
+        //Debug.Log(GameStateManager.Instance.waypoints.Count.ToString());
         if (GameStateManager.Instance.waypoints.Count < 6)
         {
             colorIndex = GameStateManager.Instance.waypoints.Count;
-            nodeRenderer.material.color = colors[colorIndex];
-            area = areas[colorIndex];
+            nodeRenderer.material.color = Main.colors[colorIndex];
+            area = Main.areas[colorIndex];
         }
         else
         {
-            nodeRenderer.material.color = colors[colorIndex];
-            area = areas[colorIndex];
+            nodeRenderer.material.color = Main.colors[colorIndex];
+            area = Main.areas[colorIndex];
         }
     }
 

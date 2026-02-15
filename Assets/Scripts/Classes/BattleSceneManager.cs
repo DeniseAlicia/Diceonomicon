@@ -724,12 +724,12 @@ public class BattleSceneManager : MonoBehaviour
 
             Vector3 rayPosition = new Vector3(raycastVector.x, raycastVector.y, raycastVector.z + zJump);
             Ray ray = new Ray(rayPosition, Vector3.down);
-            Debug.DrawRay(rayPosition, Vector3.down * 1f, Color.red, 66);
+            //Debug.DrawRay(rayPosition, Vector3.down * 1f, Color.red, 66);
             if (Physics.Raycast(ray, out RaycastHit hit, 66))
             {
                 Vector3 ray2Position = new Vector3(raycastVector.x + 14.3f, raycastVector.y, raycastVector.z + zJump);
                 Ray ray2 = new Ray(ray2Position, Vector3.down);
-                Debug.DrawRay(ray2Position, Vector3.down * 1f, Color.green, 66);
+                //Debug.DrawRay(ray2Position, Vector3.down * 1f, Color.green, 66);
                 if (Physics.Raycast(ray2, out RaycastHit hit2, 66))
                 {
                     DiceSlotController slotController2 = hit2.collider.GetComponent<DiceSlotController>();

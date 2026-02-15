@@ -6,6 +6,7 @@ public class ImpSelectList : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private Transform contentParent; //grid-object
     [SerializeField] private GameObject impSelectDisplayPrefab; //DispalyPrefab
+    public GameObject cameras;
 
     private void Start()
     {
@@ -23,7 +24,7 @@ public class ImpSelectList : MonoBehaviour
 
         if (allImplings.Length == 0)
         {
-            Debug.LogWarning("Keine Implings gefunden.");
+            Debug.LogWarning("No Implings Found.");
             return;
         }
 
@@ -34,7 +35,7 @@ public class ImpSelectList : MonoBehaviour
             {
                 GameObject obj = Instantiate(impSelectDisplayPrefab, contentParent);
                 obj.GetComponent<ImpSelectDisplay>().SetData(data);
-                obj.transform.localScale = Vector3.one;
+                obj.transform.localScale = Vector3.one*0.75f;
             }
         }
     }
