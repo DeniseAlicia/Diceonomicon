@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a8f82ef4a092b145bbcc04a968f305a, type: 3}
-  m_Name: SpawnNeutralDie_Data
+  m_Name: SpawnNeutralDie
   m_EditorClassIdentifier: Assembly-CSharp::SpawnDie_Data
   prefab: {fileID: 118036309713981090, guid: b478b503530ed88419f4ee2c9f690297, type: 3}
   title: Spawn Neutral

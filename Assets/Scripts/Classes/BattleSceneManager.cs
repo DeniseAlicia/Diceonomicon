@@ -8,6 +8,7 @@ using UnityEngine.Events;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using System.Linq;
 //using UnityEngine.UIElements;
 
 public class BattleSceneManager : MonoBehaviour
@@ -25,6 +26,7 @@ public class BattleSceneManager : MonoBehaviour
     private static List<List<DiceSlotController>> enemySlots;
     private static DiceSlotController[] allSlots;
     private GameStateManager gameState;
+    public DiceData[] startingDiceDeck;
 
     // Combat Stats
     public int level;
@@ -83,6 +85,7 @@ public class BattleSceneManager : MonoBehaviour
         player.block = 0;
         UpdateDamageBlockUI();
 
+        startingDiceDeck = player.diceDeck.ToArray();
         opponent.currentHealth = opponent.maxHealth;
         player.alpha = 0.9f;
         opponent.alpha = 0.9f;
@@ -590,8 +593,16 @@ public class BattleSceneManager : MonoBehaviour
                 Destroy(tablet);
             }
 
-            player.diceDeck = gameState.player.diceDeck;
             gameState.battleWon = true;
+
+            foreach (DiceData discardedDie in player.discardPile)
+            {
+                player.diceDeck.Add(discardedDie);
+            }
+
+            player.diceDeck = startingDiceDeck.ToList();
+            GameStateManager.Instance.player.diceDeck = startingDiceDeck.ToList();
+
             gameState.OnBattleEnd();
             SceneManager.LoadScene("Map", LoadSceneMode.Single);
         }

@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d0284e47f70f6042a1b22081b3a9fc3, type: 3}
-  m_Name: RainbowDie_Data
+  m_Name: HybridDamageSpellDie
   m_EditorClassIdentifier: Assembly-CSharp::BasicDie_Data
   prefab: {fileID: 118036309713981090, guid: b478b503530ed88419f4ee2c9f690297, type: 3}
-  title: Basic Rainbow
-  desc: All the Colors
-  flavorText: Taste the rainbow!
-  texture: {fileID: 2800000, guid: 7cb60d84967d9dc4bb19e1b75b65d580, type: 3}
+  title: Hybrid Damage Spell
+  desc: Damage and Spell
+  flavorText: Wowzer
+  texture: {fileID: 2800000, guid: 7f094bf0f25703c4692530feed40c8fd, type: 3}
   usedTexture: {fileID: 2800000, guid: b14bd1ebc95ce154cafae61cd1461a70, type: 3}
   image: {fileID: 0}
-  range: 010000000200000002000000030000000300000004000000
+  range: 010000000100000002000000020000000300000003000000
   tags:
   - Damage
-  - Block
   - Spell
   priority: 0

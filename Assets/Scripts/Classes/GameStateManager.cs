@@ -370,10 +370,10 @@ public class GameStateManager : MonoBehaviour
         battleWon = true;
         if (SceneManager.GetActiveScene().name == "Tutorial")
         {
-            // do something
             player.activeImplings = SetImplingRoster();
             CreateDiceDeck();
         }
+        
         SaveToDisk();
     }
 

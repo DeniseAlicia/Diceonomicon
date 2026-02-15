@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 using System.Linq;
 using Unity.IO.LowLevel.Unsafe;
+using UnityEngine.SocialPlatforms;
 
 public class Die : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class Die : MonoBehaviour
     public Rigidbody rigidBody;
     private BoxCollider boxCollider;
     public bool isRolling = false;
-    public Vector3 lastRotation;
+    //public Vector3 lastRotation;
     public int dieRotation;
     Vector3 mouseOffset;
     private Vector3 defaultGravity = Physics.gravity;
@@ -185,7 +186,7 @@ public class Die : MonoBehaviour
 
                 mouseOffset = Input.mousePosition - GetDiePosition(camGameplay);
                 transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-                lastRotation = transform.eulerAngles;
+                //lastRotation = transform.eulerAngles;
             }
             else
             {
@@ -215,7 +216,7 @@ public class Die : MonoBehaviour
     {
         if (isDraggable)
         {
-            transform.eulerAngles = lastRotation;
+            //transform.eulerAngles = lastRotation;
             RaycastHit hit = new RaycastHit();
 
             if (Physics.Raycast(transform.position, Vector3.down, out hit, 100))
@@ -240,6 +241,12 @@ public class Die : MonoBehaviour
                         transform.SetParent(hitSlot.transform);
                         transform.localPosition = new Vector3(0, 3, 0);
                         transform.localScale = new Vector3(5.5f, 5.5f, 5.5f);
+
+                        if (dieTags.Contains("Buff"))
+                        {
+                            //transform.Rotate(new Vector3(0, dieRotation, 0), Space.World);
+                            //dieRotation = 0;
+                        }
 
                         slotController.isFilled = true;
                         slotController.slottedDie = this;

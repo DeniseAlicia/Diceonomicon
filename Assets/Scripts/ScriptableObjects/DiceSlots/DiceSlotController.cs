@@ -227,7 +227,7 @@ public class DiceSlotController : MonoBehaviour
                     die.transform.SetParent(null);
                 }
                 die.lastPosition = die.transform.position;
-                die.lastRotation = die.transform.eulerAngles;
+                //die.lastRotation = die.transform.eulerAngles;
                 die.transform.SetParent(this.transform);
                 die.transform.localPosition = new Vector3(0, 3, 0);
                 die.transform.localScale = new Vector3(6f, 6f, 6f);
