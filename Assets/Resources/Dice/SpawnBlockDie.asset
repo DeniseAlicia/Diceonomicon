@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a8f82ef4a092b145bbcc04a968f305a, type: 3}
-  m_Name: SpawnDamageDie_Data
+  m_Name: SpawnBlockDie
   m_EditorClassIdentifier: Assembly-CSharp::SpawnDie_Data
   prefab: {fileID: 118036309713981090, guid: b478b503530ed88419f4ee2c9f690297, type: 3}
-  title: Spawn Damage
+  title: Spawn Block
   desc: Summon die for enemy
   flavorText: Summon die for enemy
-  texture: {fileID: 2800000, guid: cfd77fc9d0e117b4eb6e5915adf347e5, type: 3}
+  texture: {fileID: 2800000, guid: af2dcfe8176fbab4bb1c28e99db3342d, type: 3}
   usedTexture: {fileID: 2800000, guid: 23415d40b3196294ab7de1cbfff1d5c9, type: 3}
   image: {fileID: 0}
   range: 030000000400000005000000060000000700000008000000
   tags:
-  - Damage
+  - Block
   priority: 1
