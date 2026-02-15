@@ -33,7 +33,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Tutorial.unity
     guid: 5fc53047f26a7db4283a5d73844d01b1
   - enabled: 1
-    path: Assets/Scenes/Main_Menu.unity
+    path: Assets/Scenes/MainMenu.unity
     guid: b4eb8bba14a6b004582cdc01c564d46c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3e1df1f834f58674ca2a6b183d5063c6, type: 2}
