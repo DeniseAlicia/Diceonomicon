@@ -66,6 +66,8 @@ MonoBehaviour:
   isResting: 0
   isFrozen: 0
   isCopy: 0
+  didDamage: 0
+  priority: 0
   forceX: 5
   forceY: 5
   forceZ: 5
@@ -73,7 +75,6 @@ MonoBehaviour:
   tempGravity: {x: 0, y: -100, z: 0}
   rigidBody: {fileID: 8297382084870351055}
   isRolling: 0
-  lastRotation: {x: 0, y: 0, z: 0}
   dieRotation: 0
   nameText: 
   descText: 
@@ -81,6 +82,7 @@ MonoBehaviour:
   textureRenderer: {fileID: 2085206390153914367}
   data: {fileID: 0}
   usedTexture: {fileID: 0}
+  parentSlot: {fileID: 0}
   currentValue: 0
   sideUp: {fileID: 0}
   DiePlacementEvent:

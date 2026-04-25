@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
+using UnityEngine.SceneManagement;
 
 public class Tutorial : MonoBehaviour
 {
@@ -31,6 +31,9 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private float textSpeed;
     private int lineIndex;
     private int dialogueIndex;
+    private bool canClick = true;
+    private Coroutine typingCoroutine;
+    private bool isTyping = false;
 
     // UI
     [SerializeField] private GameObject buttonContainer;
@@ -88,18 +91,21 @@ public class Tutorial : MonoBehaviour
 
     void Update()
     {
-        if (textbox.activeInHierarchy)
+        if (textbox.activeInHierarchy && canClick)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (text.text == currentLines[lineIndex] && textbox.activeInHierarchy)
+                if (isTyping)
                 {
-                    NextLine();
+                    if (typingCoroutine != null)
+                        StopCoroutine(typingCoroutine);
+
+                    text.text = currentLines[lineIndex];
+                    isTyping = false;
                 }
                 else
                 {
-                    StopAllCoroutines();
-                    text.text = currentLines[lineIndex];
+                    NextLine();
                 }
             }
         }
@@ -521,6 +527,7 @@ public class Tutorial : MonoBehaviour
                 text.text = string.Empty;
                 StartDialogue();
                 dialogueIndex++;
+                SceneManager.LoadScene("MainMenu");
             }
 
         }
@@ -628,16 +635,26 @@ public class Tutorial : MonoBehaviour
     {
         textbox.SetActive(true);
         lineIndex = 0;
-        StartCoroutine(TypeLine());
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+        }
+
+        typingCoroutine = StartCoroutine(TypeLine());
     }
 
     private IEnumerator TypeLine()
     {
-        foreach (char c in currentLines[lineIndex].ToCharArray())
+        isTyping = true;
+        text.text = "";
+
+        foreach (char c in currentLines[lineIndex])
         {
             text.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+
+        isTyping = false;
     }
 
     private void NextLine()
@@ -646,12 +663,32 @@ public class Tutorial : MonoBehaviour
         {
             lineIndex++;
             text.text = string.Empty;
-            StartCoroutine(TypeLine());
+            typingCoroutine = StartCoroutine(TypeLine());
         }
         else
         {
             textbox.SetActive(false);
             dialogueIndex++;
         }
+    }
+
+    private IEnumerator HandleClick()
+    {
+        canClick = false;
+
+        if (isTyping)
+        {
+            if (typingCoroutine != null)
+                StopCoroutine(typingCoroutine);
+            text.text = currentLines[lineIndex];
+            isTyping = false;
+        }
+        else
+        {
+            NextLine();
+        }
+
+        yield return new WaitForSeconds(0.35f);
+        canClick = true;
     }
 }

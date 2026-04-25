@@ -60,7 +60,7 @@ public class ImpSelectDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         //normalView.SetActive(false);
         hoverView.SetActive(true);
-        
+
         currentTabletInstance = Instantiate(currentData.tabletPrefab);
         currentTabletInstance.transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
 
@@ -81,26 +81,31 @@ public class ImpSelectDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         TraitInfo trait = currentTabletInstance.GetComponentInChildren<TraitInfo>();
 
-        trait.MoveObjects(trait.initialLocalPos, true);
+        // trait.MoveObjects(trait.initialLocalPos, true);
+
 
         TabletController controller = currentTabletInstance.GetComponent<TabletController>();
         controller.SetData(currentData);
 
-       //Debug.Log("Hover");
+        GameObject traitBox = controller.descText.gameObject;
+        traitBox.transform.position = new(traitBox.transform.position.x + 3.5f, traitBox.transform.position.y, traitBox.transform.position.z + 1.075f);
+
+        GameObject nameBox = controller.nameText.gameObject;
+        nameBox.transform.position = new(nameBox.transform.position.x, nameBox.transform.position.y, nameBox.transform.position.z - 1);
+
+        //Debug.Log("Hover");
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         //normalView.SetActive(true);
         hoverView.SetActive(false);
-
         Destroy(currentTabletInstance);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         bool added = ImpSelectManager.Instance.Selection(currentData);
-
         Highlight(added);
     }
 
