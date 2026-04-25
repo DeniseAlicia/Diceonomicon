@@ -295,7 +295,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4960864564835095298, guid: 57aa3dea8a440f148ac26793a1fc94dc, type: 2}
+  - {fileID: 7187092230417700545, guid: b91194d54eba9fa4e900003f3db5bbaa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -340,8 +340,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 57aa3dea8a440f148ac26793a1fc94dc, type: 2}
-  m_sharedMaterial: {fileID: -4960864564835095298, guid: 57aa3dea8a440f148ac26793a1fc94dc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b91194d54eba9fa4e900003f3db5bbaa, type: 2}
+  m_sharedMaterial: {fileID: 7187092230417700545, guid: b91194d54eba9fa4e900003f3db5bbaa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1005,7 +1005,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4960864564835095298, guid: cb44e13185fa08a48839111498875ed3, type: 2}
+  - {fileID: 7187092230417700545, guid: b91194d54eba9fa4e900003f3db5bbaa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1050,8 +1050,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Haunt
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cb44e13185fa08a48839111498875ed3, type: 2}
-  m_sharedMaterial: {fileID: -4960864564835095298, guid: cb44e13185fa08a48839111498875ed3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b91194d54eba9fa4e900003f3db5bbaa, type: 2}
+  m_sharedMaterial: {fileID: 7187092230417700545, guid: b91194d54eba9fa4e900003f3db5bbaa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1075,7 +1075,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 18.85
   m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1085,7 +1085,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 2
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

@@ -9,6 +9,7 @@ public class TabletData : CollectableData
     public new string name;
     public string desc;
     public Texture artwork;
+    public Sprite uiArtwork;
     public Entity owner;
     public DiceSlotData[] slots;
     public DiceData[] startingDice;

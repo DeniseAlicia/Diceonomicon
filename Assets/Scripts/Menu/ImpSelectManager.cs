@@ -1,8 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
+using UnityEngine.UI;
+
 public class ImpSelectManager : MonoBehaviour
 {
     public static ImpSelectManager Instance;
@@ -13,8 +17,12 @@ public class ImpSelectManager : MonoBehaviour
     public List<TabletData> selectedImplings = new List<TabletData>();
     public bool newGame;
 
+    [Header("Selection Preview")]
+    public ImplingPreview[] preview;
+
     [Header("UI References")]
     [SerializeField] private GameObject warningPanel;
+    public Button startButton;
 
     private Coroutine hideCoroutine;
 
@@ -39,7 +47,22 @@ public class ImpSelectManager : MonoBehaviour
     {
         if (selectedImplings.Contains(data))
         {
+            foreach (ImplingPreview imp in preview)
+            {
+                if (imp.impName.text == data.name)
+                {
+                    imp.impSprite.color = new Color(1, 1, 1, 0);
+                    imp.impName.text = "";
+                    imp.assigned = false;
+                    float speed = 1f;
+                    imp.gameObject.transform.DOMove(imp.startPosition, speed).SetEase(Ease.OutQuad);
+                    speed += 0.1f;
+                    break;
+                }
+            }
+
             selectedImplings.Remove(data);
+            startButton.interactable = false;
             return false;
         }
 
@@ -49,6 +72,27 @@ public class ImpSelectManager : MonoBehaviour
         }
 
         selectedImplings.Add(data);
+        if (selectedImplings.Count == maxSelections)
+        {
+            startButton.interactable = true;
+        }
+        else
+        {
+            startButton.interactable = false;
+        }
+
+        foreach (ImplingPreview imp in preview)
+        {
+            if (!imp.assigned)
+            {
+                imp.impSprite.sprite = data.uiArtwork;
+                imp.impSprite.color = new Color(1, 1, 1, 1);
+                imp.impName.text = data.name;
+                imp.assigned = true;
+                break;
+            }
+        }
+
         return true;
     }
 
@@ -69,7 +113,7 @@ public class ImpSelectManager : MonoBehaviour
         SceneManager.LoadScene("Map");
     }
 
-        public void ConfirmSelectionTutorial()
+    public void ConfirmSelectionTutorial()
     {
         if (selectedImplings.Count < maxSelections)
         {
@@ -112,5 +156,6 @@ public class ImpSelectManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         HideWarning();
     }
+
 
 }
