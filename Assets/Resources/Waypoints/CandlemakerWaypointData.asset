@@ -15,5 +15,5 @@ MonoBehaviour:
   type: Candlemaker
   subType: 
   desc: Upgrade your Candle
-  waypointArt: {fileID: 2800000, guid: 8c44de35391a23a42be04c9ff79004fe, type: 3}
-  closedPathArt: {fileID: 2800000, guid: 8c44de35391a23a42be04c9ff79004fe, type: 3}
+  waypointArt: {fileID: 2800000, guid: d61a96eec6f3b3e4f830385b95529aa8, type: 3}
+  closedPathArt: {fileID: 2800000, guid: d61a96eec6f3b3e4f830385b95529aa8, type: 3}

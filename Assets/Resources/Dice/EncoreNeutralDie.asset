@@ -18,7 +18,7 @@ MonoBehaviour:
   flavorText: Improves with each other dice of the same color
   texture: {fileID: 2800000, guid: 159bc2421a0a82c4fb88f7519f70eb7f, type: 3}
   usedTexture: {fileID: 2800000, guid: f81bc0d48c118244ab1674d8d191d32c, type: 3}
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 2b0a7fc848ccb5c429e526e5b8453085, type: 3}
   range: 010000000100000002000000020000000300000003000000
   tags:
   - Neutral

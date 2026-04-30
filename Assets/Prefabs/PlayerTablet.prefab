@@ -1005,7 +1005,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7187092230417700545, guid: b91194d54eba9fa4e900003f3db5bbaa, type: 2}
+  - {fileID: -3015601760660382280, guid: 085adafaab711c24687e2d72130f8d18, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1050,8 +1050,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Haunt
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b91194d54eba9fa4e900003f3db5bbaa, type: 2}
-  m_sharedMaterial: {fileID: 7187092230417700545, guid: b91194d54eba9fa4e900003f3db5bbaa, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 085adafaab711c24687e2d72130f8d18, type: 2}
+  m_sharedMaterial: {fileID: -3015601760660382280, guid: 085adafaab711c24687e2d72130f8d18, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1182,8 +1182,8 @@ Transform:
   m_GameObject: {fileID: 6128394071063509810}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: -1}
-  m_LocalPosition: {x: -0.1, y: -0.05, z: 0.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.17, y: -0.05, z: -0.181}
+  m_LocalScale: {x: 0.8800694, y: 0.8800694, z: 0.8800694}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1808634125615332951}

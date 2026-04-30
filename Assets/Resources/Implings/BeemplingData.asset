@@ -16,8 +16,8 @@ MonoBehaviour:
   unlocked: 1
   name: Beempling
   desc: Buzz buzz!
-  artwork: {fileID: 2800000, guid: 7cb46c60614817441b1bbeb1b8a274c6, type: 3}
-  uiArtwork: {fileID: 21300000, guid: 7cb46c60614817441b1bbeb1b8a274c6, type: 3}
+  artwork: {fileID: 2800000, guid: 7ab6f41e09ab82b48b558024b46a762e, type: 3}
+  uiArtwork: {fileID: 21300000, guid: 7ab6f41e09ab82b48b558024b46a762e, type: 3}
   owner: {fileID: 0}
   slots:
   - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}

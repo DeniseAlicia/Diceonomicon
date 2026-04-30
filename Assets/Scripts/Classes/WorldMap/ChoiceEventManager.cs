@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class ChoiceEventManager : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class ChoiceEventManager : MonoBehaviour
     public List<TMP_Text> flavorTexts;
     public List<Image> images;
     public List<Texture> textures;
+    public List<Image> emotions;
+    public List<GameObject> backgroundObject;
 
     public Sprite placeholder;
 
@@ -47,7 +50,7 @@ public class ChoiceEventManager : MonoBehaviour
         level = gameState.player.level;
         area = gameState.player.area;
         type = gameState.player.type;
-  
+
         isRandom = false;
         if (isRandom)
         {
@@ -93,6 +96,11 @@ public class ChoiceEventManager : MonoBehaviour
                     {
                         images[i].sprite = placeholder;
                     }
+
+                    string type = data.tags[0];
+                    int emotionColor = Array.IndexOf(Main.diceTags, type);
+                    emotions[i].color = Main.colors[emotionColor];
+                    backgroundObject[i].SetActive(true);
 
                     diceRewards.Add(data);
                 }
