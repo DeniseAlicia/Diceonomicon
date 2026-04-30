@@ -604,7 +604,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7749196493141667160, guid: b91194d54eba9fa4e900003f3db5bbaa, type: 2}
+  - {fileID: -3015601760660382280, guid: 085adafaab711c24687e2d72130f8d18, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -649,8 +649,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Diedra
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b91194d54eba9fa4e900003f3db5bbaa, type: 2}
-  m_sharedMaterial: {fileID: 7749196493141667160, guid: b91194d54eba9fa4e900003f3db5bbaa, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 085adafaab711c24687e2d72130f8d18, type: 2}
+  m_sharedMaterial: {fileID: -3015601760660382280, guid: 085adafaab711c24687e2d72130f8d18, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -678,7 +678,7 @@ MonoBehaviour:
   m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 20
+  m_fontSizeMin: 18
   m_fontSizeMax: 22
   m_fontStyle: 32
   m_HorizontalAlignment: 4

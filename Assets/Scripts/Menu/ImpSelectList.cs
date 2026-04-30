@@ -35,7 +35,7 @@ public class ImpSelectList : MonoBehaviour
             {
                 GameObject obj = Instantiate(impSelectDisplayPrefab, contentParent);
                 obj.GetComponent<ImpSelectDisplay>().SetData(data);
-                obj.transform.localScale = Vector3.one*0.75f;
+                obj.transform.localScale = Vector3.one*0.60f;
             }
         }
     }

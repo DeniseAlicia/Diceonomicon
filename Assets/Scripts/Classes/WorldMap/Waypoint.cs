@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.EventSystems;
 using Unity.Mathematics;
+using Microsoft.Unity.VisualStudio.Editor;
 
 [RequireComponent(typeof(Collider))]
 public class Waypoint : MonoBehaviour
@@ -35,6 +36,7 @@ public class Waypoint : MonoBehaviour
     public Renderer nodeRenderer;
     private MapManager mapManager;
     private GameStateManager mapStateManager;
+    public Renderer innerWaypointRenderer;
 
     [Header("Spawn / Spiral")]
     public float coreRadius = 3f;               // radius of central cylinder surface
@@ -163,6 +165,8 @@ public class Waypoint : MonoBehaviour
         if (isHolding)
         {
             isHolding = false;
+            this.transform.localScale = new(0.5f, 0.02f, 0.5f);
+            innerWaypointRenderer.material.color = new(1f, 1f, 1f, 1f);
             if (holdCoroutine != null)
             {
                 StopCoroutine(holdCoroutine);
@@ -180,6 +184,14 @@ public class Waypoint : MonoBehaviour
                 yield break;
             }
             timer += Time.deltaTime;
+            // float scale = 0.99f + timer*0.3f;
+            // pressUI.localScale = new(scale, 0.2f, scale);
+
+            float colorShift = 1f - timer;
+            Color holdColor = new(colorShift, colorShift, colorShift, 1f);
+            innerWaypointRenderer.material.color = holdColor;
+            float waypointScale = 0.02f - timer * 0.012f;
+            this.transform.localScale = new(0.5f, waypointScale, 0.5f);
             yield return null;
         }
 
@@ -193,6 +205,8 @@ public class Waypoint : MonoBehaviour
             GameStateManager.Instance.TriggerWaypoint(instance);
         }
         isHolding = false;
+        this.transform.localScale = new(0.5f, 0.02f, 0.5f);
+        innerWaypointRenderer.material.color = new(1f, 1f, 1f, 1f);
     }
 
     public void SpawnCluster()
@@ -297,7 +311,7 @@ public class Waypoint : MonoBehaviour
             waypoint.hasBranched = false;
             waypoint.colorIndex = newIndex;
             waypoint.ApplyColor();
-            
+
             cameraController.wpTransform = waypoint.transform;
         }
 

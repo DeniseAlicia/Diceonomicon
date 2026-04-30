@@ -15,5 +15,5 @@ MonoBehaviour:
   type: Dice
   subType: 
   desc: Gain Dice
-  waypointArt: {fileID: 2800000, guid: 626f4da63baef7b4db16d547fe0459e8, type: 3}
-  closedPathArt: {fileID: 2800000, guid: 626f4da63baef7b4db16d547fe0459e8, type: 3}
+  waypointArt: {fileID: 2800000, guid: d7818673a0c596a4f9a04d4b2a3b7064, type: 3}
+  closedPathArt: {fileID: 2800000, guid: d7818673a0c596a4f9a04d4b2a3b7064, type: 3}

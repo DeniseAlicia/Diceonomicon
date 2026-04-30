@@ -15,5 +15,5 @@ MonoBehaviour:
   type: Battle
   subType: 
   desc: Fight!
-  waypointArt: {fileID: 2800000, guid: df13998def691b24c8df1ab54dc69cbd, type: 3}
-  closedPathArt: {fileID: 2800000, guid: df13998def691b24c8df1ab54dc69cbd, type: 3}
+  waypointArt: {fileID: 2800000, guid: 504367bd920bdb249b3370b8c36ed67c, type: 3}
+  closedPathArt: {fileID: 2800000, guid: 504367bd920bdb249b3370b8c36ed67c, type: 3}

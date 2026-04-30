@@ -15,5 +15,5 @@ MonoBehaviour:
   type: Relic
   subType: 
   desc: Choose Relic
-  waypointArt: {fileID: 2800000, guid: 507cd805ad331e54cb9e9cab5a9270b5, type: 3}
-  closedPathArt: {fileID: 2800000, guid: 507cd805ad331e54cb9e9cab5a9270b5, type: 3}
+  waypointArt: {fileID: 2800000, guid: 678f2e6cbbf876a469d7aa81ea979ac7, type: 3}
+  closedPathArt: {fileID: 2800000, guid: 678f2e6cbbf876a469d7aa81ea979ac7, type: 3}
