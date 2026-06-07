@@ -23,7 +23,7 @@ public class BuffSlotData : DiceSlotData
         foreach (char x in valueString)
         {
             int newValue = Int32.Parse(x.ToString());
-            int angle = newValue * 45 - 45 - die.dieRotation;
+            int angle = newValue * 45 - 45 + die.dieRotation;
             directions.Add(angle);
             //Debug.Log(angle);
         }
@@ -42,6 +42,7 @@ public class BuffSlotData : DiceSlotData
             Transform originTransform = slot.transform;
 
             Ray ray = new Ray(originTransform.position, originTransform.TransformDirection(direction));
+            Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red, 200f);
             if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
             {
                 //Debug.Log($"Ray hit: {hit.collider.name} at {hit.point}");

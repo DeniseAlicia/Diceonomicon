@@ -29,6 +29,7 @@ public class BuffDie_Data : DiceData
                 Vector3 direction = Quaternion.Euler(0, angle, 0) * Vector3.forward;
 
                 Ray ray = new Ray(originTransform.position, originTransform.TransformDirection(direction));
+                Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.green, 200f);
                 if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
                 {
                     Debug.Log($"Ray hit: {hit.collider.name} at {hit.point}");

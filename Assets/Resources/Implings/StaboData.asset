@@ -25,10 +25,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
   - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
   - {fileID: 11400000, guid: c11cd3df102418f43a108888c7b677bc, type: 2}
+  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
   - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
-  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
   - {fileID: 11400000, guid: fc7e5ba1be96c1c4cb534392a95c6f42, type: 2}
-  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
+  - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
   startingDice:
   - {fileID: 11400000, guid: c2dcd459aa01fbd42a9f975166570284, type: 2}
   - {fileID: 11400000, guid: 74128a7cf78e81b41ad6b85beb4c440f, type: 2}

@@ -17,8 +17,10 @@ public class ImplingPreview : MonoBehaviour
 
     public void Start()
     {
-        startPosition = this.transform.position;
-        goalPosition = new Vector3(startPosition.x + 135, startPosition.y, startPosition.z);
+        goalPosition = this.transform.position;
+        startPosition = new Vector3(transform.position.x - 135, transform.position.y, transform.position.z);
+    
+        this.transform.position = startPosition;
     }
 
     public void Update()

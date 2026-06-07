@@ -1,13 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class StartGame : MonoBehaviour
 {
+    public TutorialInitiater tutorial;
+    public GameObject gameManagerObject;
+
     public void StartNewGame()
     {
         SceneManager.LoadScene("MainMenu");
+        Destroy(gameManagerObject);
     }
 
     public void StartTutorial()

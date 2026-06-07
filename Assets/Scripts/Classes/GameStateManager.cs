@@ -11,7 +11,7 @@ public class GameStateManager : MonoBehaviour
     public static GameStateManager Instance;
 
     [Header("File Settings")]
-    public string saveFileName = "savedata.json";
+    public string saveFileName = "";
 
     [Header("Prefabs & Materials")]
     public GameObject waypointPrefab;
@@ -70,6 +70,16 @@ public class GameStateManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        // Check for Save File matching player profile
+        if (saveFileName == player.playerID)
+        {
+            return;
+        }
+        else
+        {
+            saveFileName = "player.playerID" + ".json";
+        }
+
         impSelect = FindAnyObjectByType<ImpSelectManager>();
         if (impSelect.newGame == true)
         {
@@ -89,27 +99,30 @@ public class GameStateManager : MonoBehaviour
 
     private void Start()
     {
-        if (!HasSaveFile())
-        {
-            Debug.LogWarning("No save found. Starting new map!");
-            ResetSave();  // will spawn new default nodes
-        }
-        else
-        {
-            LoadFromDisk();
-        }
+        // if (!HasSaveFile())
+        // {
+        //     Debug.LogWarning("No save found. Starting new map!");
+        //     ResetSave();  // will spawn new default nodes
+        // }
+        // else
+        // {
+        //     LoadFromDisk();
+        // }
     }
 
     private List<TabletData> SetImplingRoster()
     {
         List<TabletData> list = new();
-        foreach (TabletData impName in impSelect.selectedImplings)
+        if (impSelect != null)
         {
-            // string dataName = impName + "Data";
-            // TabletData data = Resources.Load<TabletData>($"Implings/{dataName}");
-            TabletData data = impName;
-            if (data != null)
-                list.Add(data);
+            foreach (TabletData impName in impSelect.selectedImplings)
+            {
+                // string dataName = impName + "Data";
+                // TabletData data = Resources.Load<TabletData>($"Implings/{dataName}");
+                TabletData data = impName;
+                if (data != null)
+                    list.Add(data);
+            }
         }
         return list;
     }
@@ -373,7 +386,7 @@ public class GameStateManager : MonoBehaviour
             player.activeImplings = SetImplingRoster();
             CreateDiceDeck();
         }
-        
+
         SaveToDisk();
     }
 
@@ -419,6 +432,7 @@ public class GameStateManager : MonoBehaviour
         if (currentScene.Equals("Map", StringComparison.OrdinalIgnoreCase))
         {
             StartCoroutine(SpawnAndSaveNextFrame());
+            SaveToDisk();
         }
         else
         {
