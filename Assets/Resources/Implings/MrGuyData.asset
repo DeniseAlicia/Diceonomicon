@@ -16,8 +16,8 @@ MonoBehaviour:
   unlocked: 1
   name: Mr. Guy
   desc: 
-  artwork: {fileID: 2800000, guid: dfbb9b2316381bb4c8c8d41c3b88a09b, type: 3}
-  uiArtwork: {fileID: 21300000, guid: dfbb9b2316381bb4c8c8d41c3b88a09b, type: 3}
+  artwork: {fileID: 2800000, guid: d8cf78f8fa6e92f4fb32f6b33690dd13, type: 3}
+  uiArtwork: {fileID: 21300000, guid: d8cf78f8fa6e92f4fb32f6b33690dd13, type: 3}
   owner: {fileID: 0}
   slots:
   - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}

@@ -74,10 +74,10 @@ public class Waypoint : MonoBehaviour
 
     Dictionary<WaypointType, float> waypointWeights = new Dictionary<WaypointType, float>()
     {
-        { WaypointType.Battle, 10f },
-        { WaypointType.Dice, 40f },
-        { WaypointType.Candlemaker, 30f },
-        { WaypointType.Relic, 20f },
+        { WaypointType.Battle, 75f },
+        { WaypointType.Dice, 20f },
+        { WaypointType.Candlemaker, 5f },
+        //{ WaypointType.Relic, 0f },
     };
 
 

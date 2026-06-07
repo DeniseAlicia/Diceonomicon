@@ -100,6 +100,7 @@ public class ChoiceEventManager : MonoBehaviour
                     string type = data.tags[0];
                     int emotionColor = Array.IndexOf(Main.diceTags, type);
                     emotions[i].color = Main.colors[emotionColor];
+                    images[i].color = Main.colors[emotionColor];
                     backgroundObject[i].SetActive(true);
 
                     diceRewards.Add(data);

@@ -8,6 +8,7 @@ public class MapManager : MonoBehaviour
     public GameObject prefab;      // The prefab to spawn
     public int numberOfPrefabs = 6; // Number of prefabs to spawn
     public float radius = 5f;       // Radius of the circle
+    public bool resetted = false;
 
     [System.Obsolete]
     void Update()
@@ -40,19 +41,27 @@ public class MapManager : MonoBehaviour
         {
             GameStateManager.Instance.LoadFromDisk();
         }
+        else
+        {
+            Debug.LogWarning("No save found. Starting new map!");
+            GameStateManager.Instance.ResetSave();
+            SceneManager.LoadScene(
+           SceneManager.GetActiveScene().buildIndex
+           );
+        }
     }
 
-    public void StartTutorial()
-    {
-        GameStateManager.Instance.player.area = "Tutorial";
-        GameStateManager.Instance.player.level = 0;
+    // public void StartTutorial()
+    // {
+    //     GameStateManager.Instance.player.area = "Tutorial";
+    //     GameStateManager.Instance.player.level = 0;
 
-        GameStateManager.Instance.player.activeImplings = new List<TabletData>();
-        TabletData tutorialImpling = Resources.Load<TabletData>($"Implings/TutorialData");
-        GameStateManager.Instance.player.diceDeck = new List<DiceData>();
-        GameStateManager.Instance.CreateDiceDeck();
-        GameStateManager.Instance.player.activeImplings.Add(tutorialImpling);
+    //     GameStateManager.Instance.player.activeImplings = new List<TabletData>();
+    //     TabletData tutorialImpling = Resources.Load<TabletData>($"Implings/TutorialData");
+    //     GameStateManager.Instance.player.diceDeck = new List<DiceData>();
+    //     GameStateManager.Instance.CreateDiceDeck();
+    //     GameStateManager.Instance.player.activeImplings.Add(tutorialImpling);
 
-        SceneManager.LoadScene("Tutorial");
-    }
+    //     SceneManager.LoadScene("Tutorial");
+    // }
 }

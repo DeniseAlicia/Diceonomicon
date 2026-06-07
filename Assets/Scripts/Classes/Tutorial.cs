@@ -527,6 +527,11 @@ public class Tutorial : MonoBehaviour
                 text.text = string.Empty;
                 StartDialogue();
                 dialogueIndex++;
+                
+                GameStateManager gameManagerObject = FindFirstObjectByType<GameStateManager>();
+
+                GameObject.Destroy(gameManagerObject);
+
                 SceneManager.LoadScene("MainMenu");
             }
 
