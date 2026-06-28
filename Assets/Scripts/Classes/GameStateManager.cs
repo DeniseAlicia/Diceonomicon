@@ -51,6 +51,7 @@ public class GameStateManager : MonoBehaviour
     public string pendingBranchNodeId;
     public Waypoint tempWp;
     private MapSaveData cachedMapData;
+    public int battlesWon;
 
     private List<WaypointSaveData> loadedData;
     private readonly int radius = 6;
@@ -375,17 +376,32 @@ public class GameStateManager : MonoBehaviour
         if (scene.name.Equals("Map", StringComparison.OrdinalIgnoreCase))
         {
             LoadFromDisk();
+
+            if (battlesWon == 3)
+            {
+                SceneManager.LoadScene("EndScreen");
+            }
+
+            if (battleWon)
+            {
+                player.type = "Dice";
+                SceneManager.LoadScene("RewardSelection", LoadSceneMode.Additive);
+            }
         }
     }
 
     public void OnBattleEnd()
     {
         battleWon = true;
+        battlesWon++;
+
         if (SceneManager.GetActiveScene().name == "Tutorial")
         {
             player.activeImplings = SetImplingRoster();
             CreateDiceDeck();
         }
+
+
 
         SaveToDisk();
     }

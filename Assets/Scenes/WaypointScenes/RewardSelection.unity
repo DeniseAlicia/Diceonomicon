@@ -390,8 +390,8 @@ MonoBehaviour:
   textures: []
   emotions:
   - {fileID: 7546895235002670110}
-  - {fileID: 1340545549}
-  - {fileID: 1270792726}
+  - {fileID: 1865193381}
+  - {fileID: 1277064497}
   backgroundObject:
   - {fileID: 1594106986}
   - {fileID: 74514230}
@@ -1203,9 +1203,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   typeText: {fileID: 1217960101}
   gameState: {fileID: 0}
---- !u!114 &1270792726 stripped
+--- !u!114 &1277064497 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5242816913216698607, guid: 3597e620449fe714dab5d37a7de37ba9, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4261215893359280991, guid: 3597e620449fe714dab5d37a7de37ba9, type: 3}
   m_PrefabInstance: {fileID: 1521929242}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -1289,17 +1289,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1339981996}
   m_CullTransparentMesh: 1
---- !u!114 &1340545549 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5242816913216698607, guid: 3597e620449fe714dab5d37a7de37ba9, type: 3}
-  m_PrefabInstance: {fileID: 467413994}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &1521929242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1486,6 +1475,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6233581440101528480, guid: 3597e620449fe714dab5d37a7de37ba9, type: 3}
   m_PrefabInstance: {fileID: 7546895235002670105}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1865193381 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4261215893359280991, guid: 3597e620449fe714dab5d37a7de37ba9, type: 3}
+  m_PrefabInstance: {fileID: 467413994}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &1895989150 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6233581440101528480, guid: 3597e620449fe714dab5d37a7de37ba9, type: 3}
@@ -1987,7 +1987,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &7546895235002670110 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5242816913216698607, guid: 3597e620449fe714dab5d37a7de37ba9, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4261215893359280991, guid: 3597e620449fe714dab5d37a7de37ba9, type: 3}
   m_PrefabInstance: {fileID: 7546895235002670105}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 293612044}
   m_Layer: 0
   m_Name: GameStateManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -432,6 +432,7 @@ MonoBehaviour:
   battleWon: 0
   pendingBranchNodeId: 
   tempWp: {fileID: 0}
+  battlesWon: 0
 --- !u!4 &293612045
 Transform:
   m_ObjectHideFlags: 0

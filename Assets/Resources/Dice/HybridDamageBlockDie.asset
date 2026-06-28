@@ -18,7 +18,7 @@ MonoBehaviour:
   flavorText: Wowie
   texture: {fileID: 2800000, guid: 1a2849b202d79a1488cb12d88b77e7e6, type: 3}
   usedTexture: {fileID: 2800000, guid: b14bd1ebc95ce154cafae61cd1461a70, type: 3}
-  image: {fileID: 21300000, guid: 44c0bed5d9376244cb87136140308eb9, type: 3}
+  image: {fileID: 21300000, guid: cb9f28579783a5b40ad8d294546b8381, type: 3}
   range: 010000000100000003000000030000000500000005000000
   tags:
   - Damage

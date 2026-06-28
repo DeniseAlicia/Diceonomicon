@@ -236,7 +236,7 @@ public class ChoiceEventManager : MonoBehaviour
             }
             i++;
         }
-        waypoint.SpawnCluster();
+        //waypoint.SpawnCluster();
         SceneManager.UnloadSceneAsync("RewardSelection");
     }
 

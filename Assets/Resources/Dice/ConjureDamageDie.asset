@@ -18,7 +18,7 @@ MonoBehaviour:
   flavorText: Summons another die
   texture: {fileID: 2800000, guid: 24360064fbbf0a34bb9679d7d02c36d2, type: 3}
   usedTexture: {fileID: 2800000, guid: 3dd8b4e2d6370104189b70153b944c5d, type: 3}
-  image: {fileID: 21300000, guid: b64c7158db2b13b44a5169128c443905, type: 3}
+  image: {fileID: 21300000, guid: ec0dbd77731e57a4c977e49efcb89d05, type: 3}
   range: 010000000200000003000000040000000500000006000000
   tags:
   - Damage
