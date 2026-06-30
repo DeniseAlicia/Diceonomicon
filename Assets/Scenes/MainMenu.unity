@@ -420,17 +420,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Welcome to Hell!
-
-
-    I am the Diceonomicon -
-
-    mightiest crature
-    in this realm!
-
-
-
-'
+  m_text: "Welcome!\nI am the Diceonomicon \u2014 your faithful companion and guide
+    through hell!\nIn order to amount an escape you will have to select 3 Implings
+    to join you on your attempt!\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8b65635ede0d98f47b2cb78c3d2c5dc0, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8b65635ede0d98f47b2cb78c3d2c5dc0, type: 2}
@@ -460,18 +452,18 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 24
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
+  m_paragraphSpacing: 55
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
@@ -495,7 +487,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -159.43149, y: 49.07608, z: -134.60858, w: -287.4452}
+  m_margin: {x: -110.294586, y: 49.07608, z: -123.926575, w: -287.4452}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

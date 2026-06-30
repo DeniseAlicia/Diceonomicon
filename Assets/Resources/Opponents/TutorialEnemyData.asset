@@ -16,8 +16,8 @@ MonoBehaviour:
   unlocked: 0
   name: Bouncer
   desc: Let me show you how it's done!
-  artwork: {fileID: 2800000, guid: 2ab89a5fc19f3534aadde597d71af27a, type: 3}
-  uiArtwork: {fileID: 21300000, guid: 2ab89a5fc19f3534aadde597d71af27a, type: 3}
+  artwork: {fileID: 2800000, guid: 256c3da27ef6b344393af9a33fff3bb4, type: 3}
+  uiArtwork: {fileID: 21300000, guid: 256c3da27ef6b344393af9a33fff3bb4, type: 3}
   owner: {fileID: 0}
   slots:
   - {fileID: 11400000, guid: c11cd3df102418f43a108888c7b677bc, type: 2}
