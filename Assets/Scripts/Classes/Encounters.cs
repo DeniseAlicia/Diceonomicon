@@ -19,17 +19,17 @@ public class Encounters
     // -----------------------------------------------------------------------
         { (0, "Green"), new List<List<string>>
             {
-                new List<string>{ "Greemlin", "Toksick"},
+                new List<string>{ "Diedra", "Diedra"},
             }
         },
         { (1, "Green"), new List<List<string>>
             {
-                new List<string>{ "Greemlin", "Greemlin"},
+                new List<string>{ "Toksick", "Toksick"},
             }
         },
         { (2, "Green"), new List<List<string>>
             {
-                new List<string>{ "Toksick", "Toksick"},
+                new List<string>{ "Diedra", "Toksick", "Diedra"},
             }
         },
         { (3, "Green"), new List<List<string>>
@@ -72,7 +72,7 @@ public class Encounters
     // -----------------------------------------------------------------------
          { (0, "Red"), new List<List<string>>
             {
-                new List<string>{ "Greemlin", "Greemlin"},
+                new List<string>{ "Maddo", "Greemlin"},
             }
         },
         { (1, "Red"), new List<List<string>>
@@ -82,7 +82,7 @@ public class Encounters
         },
         { (2, "Red"), new List<List<string>>
             {
-                new List<string>{ "Toksick", "Toksick"},
+                new List<string>{ "Greemlin", "Maddo", "Greemlin"},
             }
         },
         { (3, "Red"), new List<List<string>>
@@ -125,17 +125,17 @@ public class Encounters
     // -----------------------------------------------------------------------
         { (0, "Blue"), new List<List<string>>
             {
-                new List<string>{ "Diedra", "Toksick" },
+                new List<string>{ "Maddo", "Maddo" },
             }
         },
         { (1, "Blue"), new List<List<string>>
             {
-                new List<string>{ "Greemlin", "Greemlin"},
+                new List<string>{ "Maddo", "Greemlin"},
             }
         },
         { (2, "Blue"), new List<List<string>>
             {
-                new List<string>{ "Toksick", "Toksick"},
+                new List<string>{ "Maddo", "Maddo", "Maddo"},
             }
         },
         { (3, "Blue"), new List<List<string>>
@@ -178,17 +178,17 @@ public class Encounters
     // -----------------------------------------------------------------------
         { (0, "Purple"), new List<List<string>>
             {
-                new List<string>{ "Greemlin", "Toksick"},
+                new List<string>{ "Greemlin", "Greemlin"},
             }
         },
         { (1, "Purple"), new List<List<string>>
             {
-                new List<string>{ "Greemlin", "Greemlin"},
+                new List<string>{ "Toksick", "Greemlin"},
             }
         },
         { (2, "Purple"), new List<List<string>>
             {
-                new List<string>{ "Toksick", "Toksick"},
+                new List<string>{ "Greemlin", "Toksick", "Diedra"},
             }
         },
         { (3, "Purple"), new List<List<string>>
@@ -231,17 +231,17 @@ public class Encounters
     // -----------------------------------------------------------------------
         { (0, "Yellow"), new List<List<string>>
             {
-                new List<string>{ "Greemlin", "Diedra"}
+                new List<string>{ "Toksick", "Diedra"}
             }
         },
                 { (1, "Yellow"), new List<List<string>>
             {
-                new List<string>{ "Greemlin", "Greemlin"},
+                new List<string>{ "Toksick", "Toksick"},
             }
         },
         { (2, "Yellow"), new List<List<string>>
             {
-                new List<string>{ "Toksick", "Toksick"},
+                new List<string>{ "Toksick", "Toksick", "Toksick"},
             }
         },
         { (3, "Yellow"), new List<List<string>>
@@ -284,17 +284,17 @@ public class Encounters
     // -----------------------------------------------------------------------
         { (0, "White"), new List<List<string>>
             {
-                new List<string>{ "Diedra", "Diedra" },
+                new List<string>{ "Maddo", "Maddo" },
             }
         },
                 { (1, "White"), new List<List<string>>
             {
-                new List<string>{ "Greemlin", "Greemlin"},
+                new List<string>{ "Maddo", "Maddo"},
             }
         },
         { (2, "White"), new List<List<string>>
             {
-                new List<string>{ "Toksick", "Toksick"},
+                new List<string>{ "Maddo", "Maddo", "Maddo"},
             }
         },
         { (3, "White"), new List<List<string>>

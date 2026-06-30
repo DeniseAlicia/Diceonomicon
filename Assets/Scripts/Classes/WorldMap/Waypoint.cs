@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.EventSystems;
 using Unity.Mathematics;
-using Microsoft.Unity.VisualStudio.Editor;
 
 [RequireComponent(typeof(Collider))]
 public class Waypoint : MonoBehaviour
@@ -74,9 +73,9 @@ public class Waypoint : MonoBehaviour
 
     Dictionary<WaypointType, float> waypointWeights = new Dictionary<WaypointType, float>()
     {
-        { WaypointType.Battle, 75f },
-        { WaypointType.Dice, 20f },
-        { WaypointType.Candlemaker, 5f },
+        { WaypointType.Battle, 100f },
+        //{ WaypointType.Dice, 20f },
+        //{ WaypointType.Candlemaker, 5f },
         //{ WaypointType.Relic, 0f },
     };
 

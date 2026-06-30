@@ -228,7 +228,7 @@ public class Die : MonoBehaviour
                 {
                     DiceSlotData slotData = slotController.slotData;
 
-                    if (this.dieTags.Contains(slotData.tag) && slotController.isFilled == false && slotController.owner.GetType() == typeof(Player) || dieTags.Contains("Debuff") && slotController.owner.GetType() == typeof(Opponent))
+                    if (this.dieTags.Contains(slotData.tag) && slotController.isFilled == false && slotController.owner.GetType() == typeof(Player) || dieTags.Contains("Debuff") && slotController.owner.GetType() == typeof(Opponent) && slotController.tag != "Buff")
                     {
                         if (transform.parent != null)
                         {

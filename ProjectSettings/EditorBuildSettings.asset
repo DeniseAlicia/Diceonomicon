@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartScreen.unity
     guid: 2505bc9db4e026644a49377af81c552a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OLD/MainMenuScene.unity
     guid: fa7303d75aef2b940813e0c38d26af9c
   - enabled: 1
@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Map.unity
     guid: fc14d76180fe03a43aa6ca3cdb178695
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OLD/Test.unity
     guid: a135ce05df30098408bc37db9e6fd9ac
   - enabled: 1
@@ -35,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: b4eb8bba14a6b004582cdc01c564d46c
+  - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: 0d8e657065fb63c439825af56d564fa9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3e1df1f834f58674ca2a6b183d5063c6, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

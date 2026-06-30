@@ -53,21 +53,21 @@ public class DiceReward
             },
             new ()
             {
-                ("ExplodingDamageDie", 1f),
-                ("ExplodingDamageDie",  0.5f),
-                ("ExplodingDamageDie",    0.2f),
-                ("ScorchedDamageDie",     1f),
-                ("ScorchedDamageDie",     0.5f),
-                ("ScorchedDamageDie",     0.2f),
+                ("ScorchedDamageDie", 1f),
+                ("ScorchedDamageDie",  0.5f),
+                ("CrackedDamageDie",    0.2f),
+                ("CrackedDamageDie",     1f),
+                ("ChainDamageDie",     0.5f),
+                ("ChainDamageDie",     0.2f),
             },
             new ()
             {
-                ("EncoreDamageDie",    1.2f),
-                ("EncoreDamageDie",    0.5f),
-                ("EncoreDamageDie",    0.2f),
-                ("ChainDamageDie",     1.2f),
+                ("ScorchedDamageDie", 1f),
+                ("ScorchedDamageDie",  0.5f),
+                ("CrackedDamageDie",    0.2f),
+                ("CrackedDamageDie",     1f),
                 ("ChainDamageDie",     0.5f),
-                ("ChainDamageDie",     0.2f)
+                ("ChainDamageDie",     0.2f),
             }
         },
         qualityDistribution: new List<float> { 100f, 0f, 0f, 0f, 0f })
@@ -86,21 +86,21 @@ public class DiceReward
             },
             new ()
             {
-                ("ExplodingBlockDie", 1f),
-                ("ExplodingBlockDie",  0.5f),
-                ("ExplodingBlockDie",    0.2f),
-                ("ScorchedBlockDie",     1f),
-                ("ScorchedBlockDie",     0.5f),
-                ("ScorchedBlockDie",     0.2f),
+                ("ScorchedBlockDie", 1f),
+                ("ScorchedBlockDie",  0.5f),
+                ("CrackedBlockDie",    0.2f),
+                ("CrackedBlockDie",     1f),
+                ("ChainBlockDie",     0.5f),
+                ("ChainBlockDie",     0.2f),
             },
             new ()
             {
-                ("EncoreBlockDie",    1.2f),
-                ("EncoreBlockDie",    0.5f),
-                ("EncoreBlockDie",    0.2f),
-                ("ChainBlockDie",     1.2f),
+                ("ScorchedBlockDie", 1f),
+                ("ScorchedBlockDie",  0.5f),
+                ("CrackedBlockDie",    0.2f),
+                ("CrackedBlockDie",     1f),
                 ("ChainBlockDie",     0.5f),
-                ("ChainBlockDie",     0.2f)
+                ("ChainBlockDie",     0.2f),
             }
         },
         qualityDistribution: new List<float> { 100f, 0f, 0f, 0f, 0f })
@@ -119,21 +119,21 @@ public class DiceReward
             },
             new ()
             {
-                ("ExplodingBlockDie", 1f),
-                ("ExplodingBlockDie",  0.5f),
-                ("ExplodingBlockDie",    0.2f),
-                ("ScorchedBlockDie",     1f),
-                ("ScorchedBlockDie",     0.5f),
-                ("ScorchedBlockDie",     0.2f),
+                ("ScorchedBlockDie", 1f),
+                ("ScorchedBlockDie",  0.5f),
+                ("CrackedBlockDie",    0.2f),
+                ("CrackedBlockDie",     1f),
+                ("ChainBlockDie",     0.5f),
+                ("ChainBlockDie",     0.2f),
             },
             new ()
             {
-                ("EncoreBlockDie",    1.2f),
-                ("EncoreBlockDie",    0.5f),
-                ("EncoreBlockDie",    0.2f),
-                ("ChainBlockDie",     1.2f),
-                ("ChainBlockDie",     0.5f),
-                ("ChainBlockDie",     0.2f)
+                ("ScorchedDamageDie", 1f),
+                ("ScorchedDamageDie",  0.5f),
+                ("CrackedDamageDie",    0.2f),
+                ("CrackedDamageDie",     1f),
+                ("ChainDamageDie",     0.5f),
+                ("ChainDamageDie",     0.2f),
             }
         },
         qualityDistribution: new List<float> { 100f, 0f, 0f, 0f, 0f })
@@ -152,21 +152,21 @@ public class DiceReward
             },
             new ()
             {
-                ("ExplodingSpellDie", 1f),
-                ("ExplodingSpellDie",  0.5f),
-                ("ExplodingSpellDie",    0.2f),
-                ("ScorchedSpellDie",     1f),
-                ("ScorchedSpellDie",     0.5f),
-                ("ScorchedSpellDie",     0.2f),
+                ("ScorchedSpellDie", 1f),
+                ("ScorchedSpellDie",  0.5f),
+                ("CrackedSpellDie",    0.2f),
+                ("CrackedSpellDie",     1f),
+                ("ChainSpellDie",     0.5f),
+                ("ChainSpellDie",     0.2f),
             },
             new ()
             {
-                ("EncoreSpellDie",    1.2f),
-                ("EncoreSpellDie",    0.5f),
-                ("EncoreSpellDie",    0.2f),
-                ("ChainSpellDie",     1.2f),
+                ("ScorchedSpellDie", 1f),
+                ("ScorchedSpellDie",  0.5f),
+                ("CrackedSpellDie",    0.2f),
+                ("CrackedSpellDie",     1f),
                 ("ChainSpellDie",     0.5f),
-                ("ChainSpellDie",     0.2f)
+                ("ChainSpellDie",     0.2f),
             }
         },
         qualityDistribution: new List<float> { 100f, 0f, 0f, 0f, 0f })
@@ -185,21 +185,21 @@ public class DiceReward
             },
             new ()
             {
-                ("ExplodingNeutralDie", 1f),
-                ("ExplodingNeutralDie",  0.5f),
-                ("ExplodingNeutralDie",    0.2f),
-                ("ScorchedNeutralDie",     1f),
-                ("ScorchedNeutralDie",     0.5f),
-                ("ScorchedNeutralDie",     0.2f),
+                ("ScorchedSpellDie", 1f),
+                ("ScorchedSpellDie",  0.5f),
+                ("CrackedSpellDie",    0.2f),
+                ("CrackedSpellDie",     1f),
+                ("ChainSpellDie",     0.5f),
+                ("ChainSpellDie",     0.2f),
             },
             new ()
             {
-                ("EncoreNeutralDie",    1.2f),
-                ("EncoreNeutralDie",    0.5f),
-                ("EncoreNeutralDie",    0.2f),
-                ("ChainNeutralDie",     1.2f),
-                ("ChainNeutralDie",     0.5f),
-                ("ChainNeutralDie",     0.2f)
+                ("ScorchedDamageDie", 1f),
+                ("ScorchedDamageDie",  0.5f),
+                ("CrackedDamageDie",    0.2f),
+                ("CrackedDamageDie",     1f),
+                ("ChainDamageDie",     0.5f),
+                ("ChainDamageDie",     0.2f),
             }
         },
         qualityDistribution: new List<float> { 100f, 0f, 0f, 0f, 0f })
@@ -218,203 +218,203 @@ public class DiceReward
             },
             new ()
             {
-                ("ExplodingDebuffDie", 1f),
-                ("ExplodingDebuffDie",  0.5f),
-                ("ExplodingDebuffDie",    0.2f),
-                ("ScorchedDebuffDie",     1f),
-                ("ScorchedDebuffDie",     0.5f),
-                ("ScorchedDebuffDie",     0.2f),
+                ("ScorchedDebuffDie", 1f),
+                ("ScorchedDebuffDie",  0.5f),
+                ("ScorchedDebuffDie",    0.2f),
+                ("BasicDebuffDie",     1f),
+                ("BasicDebuffDie",     0.5f),
+                ("BasicDebuffDie",     0.2f),
             },
             new ()
             {
-                ("EncoreDebuffDie",    1.2f),
-                ("EncoreDebuffDie",    0.5f),
-                ("EncoreDebuffDie",    0.2f),
-                ("CrackedDebuffDie",     1.2f),
-                ("CrackedDebuffDie",     0.5f),
-                ("CrackedDebuffDie",     0.2f)
+                ("CrackedDebuffDie",    1.2f),
+                ("CrackedDebuffDie",    0.5f),
+                ("CrackedDebuffDie",    0.2f),
+                ("ScorchedDebuffDie", 1f),
+                ("ScorchedDebuffDie",  0.5f),
+                ("ScorchedDebuffDie",    0.2f),
             }
         },
         qualityDistribution: new List<float> { 100f, 0f, 0f, 0f, 0f })
         }
         };
 
-public static void GetRewards(string type, int quality, string area, int amount)
-{
-    if (!rewardTable.TryGetValue((type, area), out var entry))
+    public static void GetRewards(string type, int quality, string area, int amount)
     {
-        entry = rewardTable[("Dice", "None")];
+        if (!rewardTable.TryGetValue((type, area), out var entry))
+        {
+            entry = rewardTable[("Dice", "None")];
+        }
+
+        entry.qualityDistribution = new List<float> { 0f, 0f, 0f, 0f, 0f };
+        SetQuality(entry.qualityDistribution, quality + 1);
+
+        var rewardLists = entry.lists;
+        var qualityWeights = entry.qualityDistribution;
+
+        int tier = GetWeightedIndex(qualityWeights);
+        tier = Mathf.Clamp(tier, 0, rewardLists.Count - 1);
+
+        // First Choice
+        var pool = new List<(string reward, float prob)>(rewardLists[tier]);
+
+        List<(string reward, float prob)> selected = new();
+
+        amount = Mathf.Clamp(amount, 0, pool.Count);
+
+        for (int i = 0; i < amount - 2; i++)
+        {
+            var chosen = GetWeightedRandom(pool);
+            selected.Add(chosen);
+            pool.Remove(chosen);
+        }
+
+        // Second Choice
+        string neighborArea = GetNeighborArea(area);
+
+        if (rewardTable.TryGetValue((type, neighborArea), out var neighborEntry))
+        {
+            var neighborList = neighborEntry.lists[tier];
+            var extendedPool = new List<(string reward, float prob)>(neighborList);
+            var chosen = GetWeightedRandom(extendedPool);
+            selected.Add(chosen);
+            extendedPool.Remove(chosen);
+        }
+
+        // Third Choice
+        string randomArea = GetRandomArea();
+
+        if (rewardTable.TryGetValue((type, randomArea), out var randomEntry))
+        {
+            var randomList = randomEntry.lists[tier];
+            var fullPool = new List<(string reward, float prob)>(randomList);
+            var chosen = GetWeightedRandom(fullPool);
+            selected.Add(chosen);
+            fullPool.Remove(chosen);
+        }
+
+        GetRandomSelection(type, selected);
     }
 
-    entry.qualityDistribution = new List<float> { 0f, 0f, 0f, 0f, 0f };
-    SetQuality(entry.qualityDistribution, quality);
-
-    var rewardLists = entry.lists;
-    var qualityWeights = entry.qualityDistribution;
-
-    int tier = GetWeightedIndex(qualityWeights);
-    tier = Mathf.Clamp(tier, 0, rewardLists.Count - 1);
-
-    // First Choice
-    var pool = new List<(string reward, float prob)>(rewardLists[tier]);
-
-    List<(string reward, float prob)> selected = new();
-
-    amount = Mathf.Clamp(amount, 0, pool.Count);
-
-    for (int i = 0; i < amount - 2; i++)
+    public static void SetQuality(List<float> qualityDistributions, int quality)
     {
-        var chosen = GetWeightedRandom(pool);
-        selected.Add(chosen);
-        pool.Remove(chosen);
+        switch (quality)
+        {
+            case 0: // Common
+                qualityDistributions[0] = 80f;
+                if (qualityDistributions.Count > 1) qualityDistributions[1] = 20f;
+                break;
+            case 1: // Uncommon
+                if (qualityDistributions.Count > 1) qualityDistributions[1] = 90f;
+                if (qualityDistributions.Count > 2) qualityDistributions[2] = 10f;
+                break;
+            case 2: // Rare
+                if (qualityDistributions.Count > 1) qualityDistributions[1] = 10f;
+                if (qualityDistributions.Count > 2) qualityDistributions[2] = 80f;
+                if (qualityDistributions.Count > 3) qualityDistributions[3] = 10f;
+                break;
+            case 3: // Very Rare
+                if (qualityDistributions.Count > 2) qualityDistributions[2] = 30f;
+                if (qualityDistributions.Count > 3) qualityDistributions[3] = 70f;
+                break;
+            case 4: // Legendary
+                if (qualityDistributions.Count > 3) qualityDistributions[3] = 10f;
+                if (qualityDistributions.Count > 4) qualityDistributions[4] = 80f;
+                break;
+            default:
+                qualityDistributions[0] = 100f;
+                break;
+        }
     }
 
-    // Second Choice
-    string neighborArea = GetNeighborArea(area);
-
-    if (rewardTable.TryGetValue((type, neighborArea), out var neighborEntry))
+    public static void GetRandomSelection(string type, List<(string reward, float prob)> rewards)
     {
-        var neighborList = neighborEntry.lists[tier];
-        var extendedPool = new List<(string reward, float prob)>(neighborList);
-        var chosen = GetWeightedRandom(extendedPool);
-        selected.Add(chosen);
-        extendedPool.Remove(chosen);
+        options = new();
+
+        switch (type)
+        {
+            case "Dice":
+                foreach (var (reward, prob) in rewards)
+                    options.Add(reward);
+                break;
+            case "Impling":
+                // TODO
+                break;
+            default:
+                Debug.LogWarning($"Reward type '{type}' not recognized.");
+                break;
+        }
     }
 
-    // Third Choice
-    string randomArea = GetRandomArea();
-
-    if (rewardTable.TryGetValue((type, randomArea), out var randomEntry))
+    public static int GetWeightedIndex(List<float> weights)
     {
-        var randomList = randomEntry.lists[tier];
-        var fullPool = new List<(string reward, float prob)>(randomList);
-        var chosen = GetWeightedRandom(fullPool);
-        selected.Add(chosen);
-        fullPool.Remove(chosen);
+        float totalWeight = 0f;
+        foreach (var weight in weights)
+            totalWeight += weight;
+
+        float roll = UnityEngine.Random.value;
+        float cumulative = 0f;
+
+        for (int i = 0; i < weights.Count; i++)
+        {
+            float normalized = weights[i] / totalWeight;
+            cumulative += normalized;
+
+            if (roll <= cumulative)
+                return i;
+        }
+
+        return weights.Count - 1;
     }
 
-    GetRandomSelection(type, selected);
-}
-
-public static void SetQuality(List<float> qualityDistributions, int quality)
-{
-    switch (quality)
+    public static (string reward, float prob) GetWeightedRandom(List<(string reward, float prob)> weights)
     {
-        case 0: // Common
-            qualityDistributions[0] = 80f;
-            if (qualityDistributions.Count > 1) qualityDistributions[1] = 20f;
-            break;
-        case 1: // Uncommon
-            if (qualityDistributions.Count > 1) qualityDistributions[1] = 90f;
-            if (qualityDistributions.Count > 2) qualityDistributions[2] = 10f;
-            break;
-        case 2: // Rare
-            if (qualityDistributions.Count > 1) qualityDistributions[1] = 10f;
-            if (qualityDistributions.Count > 2) qualityDistributions[2] = 80f;
-            if (qualityDistributions.Count > 3) qualityDistributions[3] = 10f;
-            break;
-        case 3: // Very Rare
-            if (qualityDistributions.Count > 2) qualityDistributions[2] = 30f;
-            if (qualityDistributions.Count > 3) qualityDistributions[3] = 70f;
-            break;
-        case 4: // Legendary
-            if (qualityDistributions.Count > 3) qualityDistributions[3] = 10f;
-            if (qualityDistributions.Count > 4) qualityDistributions[4] = 80f;
-            break;
-        default:
-            qualityDistributions[0] = 100f;
-            break;
-    }
-}
+        float totalWeight = 0f;
+        foreach (var (_, prob) in weights)
+            totalWeight += prob;
 
-public static void GetRandomSelection(string type, List<(string reward, float prob)> rewards)
-{
-    options = new();
+        float roll = UnityEngine.Random.value;
 
-    switch (type)
-    {
-        case "Dice":
-            foreach (var (reward, prob) in rewards)
-                options.Add(reward);
-            break;
-        case "Impling":
-            // TODO
-            break;
-        default:
-            Debug.LogWarning($"Reward type '{type}' not recognized.");
-            break;
-    }
-}
+        float cumulative = 0f;
 
-public static int GetWeightedIndex(List<float> weights)
-{
-    float totalWeight = 0f;
-    foreach (var weight in weights)
-        totalWeight += weight;
+        foreach (var item in weights)
+        {
+            float normalized = item.prob / totalWeight;
+            cumulative += normalized;
 
-    float roll = UnityEngine.Random.value;
-    float cumulative = 0f;
+            if (roll <= cumulative)
+                return item;
+        }
 
-    for (int i = 0; i < weights.Count; i++)
-    {
-        float normalized = weights[i] / totalWeight;
-        cumulative += normalized;
-
-        if (roll <= cumulative)
-            return i;
+        return weights[^1];
     }
 
-    return weights.Count - 1;
-}
-
-public static (string reward, float prob) GetWeightedRandom(List<(string reward, float prob)> weights)
-{
-    float totalWeight = 0f;
-    foreach (var (_, prob) in weights)
-        totalWeight += prob;
-
-    float roll = UnityEngine.Random.value;
-
-    float cumulative = 0f;
-
-    foreach (var item in weights)
+    private static string GetNeighborArea(string current)
     {
-        float normalized = item.prob / totalWeight;
-        cumulative += normalized;
+        int index = Array.IndexOf(areas, current);
+        if (index < 0)
+            return areas[UnityEngine.Random.Range(0, areas.Length)];
 
-        if (roll <= cumulative)
-            return item;
+        // Roll 0..99
+        int roll = UnityEngine.Random.Range(0, 100);
+
+        // 60% chance: same area
+        if (roll < 60)
+            return current;
+
+        // otherwise: 40% split to 20% left, 20% right    
+        int leftIndex = (index - 1 + areas.Length) % areas.Length;
+        int rightIndex = (index + 1) % areas.Length;
+
+        // 20% left (roll < 80), 20% right (roll >= 80)
+        if (roll < 80)
+            return areas[leftIndex];
+        else
+            return areas[rightIndex];
     }
 
-    return weights[^1];
-}
-
-private static string GetNeighborArea(string current)
-{
-    int index = Array.IndexOf(areas, current);
-    if (index < 0)
+    private static string GetRandomArea()
+    {
         return areas[UnityEngine.Random.Range(0, areas.Length)];
-
-    // Roll 0..99
-    int roll = UnityEngine.Random.Range(0, 100);
-
-    // 60% chance: same area
-    if (roll < 60)
-        return current;
-
-    // otherwise: 40% split to 20% left, 20% right    
-    int leftIndex = (index - 1 + areas.Length) % areas.Length;
-    int rightIndex = (index + 1) % areas.Length;
-
-    // 20% left (roll < 80), 20% right (roll >= 80)
-    if (roll < 80)
-        return areas[leftIndex];
-    else
-        return areas[rightIndex];
-}
-
-private static string GetRandomArea()
-{
-    return areas[UnityEngine.Random.Range(0, areas.Length)];
-}
+    }
 }

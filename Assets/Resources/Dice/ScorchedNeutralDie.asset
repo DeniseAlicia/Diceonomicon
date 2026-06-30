@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScorchedDie_Data
   prefab: {fileID: 118036309713981090, guid: b478b503530ed88419f4ee2c9f690297, type: 3}
   title: Scorched Neutral
-  desc: Take a damage when used
-  flavorText: Take a damage when used
+  desc: You take one damage when you use this die.
+  flavorText: '"Ouch! Why would you do that?!"'
   texture: {fileID: 2800000, guid: e649188f834881a44b2075524a46d5a9, type: 3}
   usedTexture: {fileID: 2800000, guid: 681c42075353e0948a14d3033cedb18c, type: 3}
   image: {fileID: 21300000, guid: 5e629e019244f824a99e63553cd55fad, type: 3}

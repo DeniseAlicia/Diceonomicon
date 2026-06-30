@@ -4,18 +4,22 @@ using System.Collections.Generic;
 
 public class StartGame : MonoBehaviour
 {
-    public TutorialInitiater tutorial;
-    public GameObject gameManagerObject;
+    private TutorialInitiater tutorial;
+    private GameObject gameManagerObject;
+    private GameObject impManagerObject;
+
 
     private void Awake()
     {
         gameManagerObject = GameObject.FindGameObjectWithTag("GameManager");
+        impManagerObject = GameObject.FindGameObjectWithTag("ImpManager");
     }
 
     public void StartNewGame()
     {
         SceneManager.LoadScene("MainMenu");
         Destroy(gameManagerObject);
+        Destroy(impManagerObject);
     }
 
     public void StartTutorial()

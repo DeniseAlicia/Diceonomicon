@@ -10,30 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7461de8d2d83b9145a5eb8eee13cf27c, type: 3}
-  m_Name: JauntData
+  m_Name: MaddoData
   m_EditorClassIdentifier: 
-  enemy: 0
-  unlocked: 1
-  name: Jaunt
-  desc: Don't touch him!
-  artwork: {fileID: 2800000, guid: 7d075397179f0e94481125cc0a2a1898, type: 3}
-  uiArtwork: {fileID: 21300000, guid: 7d075397179f0e94481125cc0a2a1898, type: 3}
+  enemy: 1
+  unlocked: 0
+  name: Maddo
+  desc: I'm too toxic to have an ability
+  artwork: {fileID: 2800000, guid: abe3df471ea7ca842bf7230000337cf2, type: 3}
+  uiArtwork: {fileID: 21300000, guid: abe3df471ea7ca842bf7230000337cf2, type: 3}
   owner: {fileID: 0}
   slots:
-  - {fileID: 11400000, guid: c11cd3df102418f43a108888c7b677bc, type: 2}
-  - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
-  - {fileID: 11400000, guid: fc7e5ba1be96c1c4cb534392a95c6f42, type: 2}
-  - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
-  - {fileID: 11400000, guid: c11cd3df102418f43a108888c7b677bc, type: 2}
-  - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
-  - {fileID: 11400000, guid: fc7e5ba1be96c1c4cb534392a95c6f42, type: 2}
   - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
+  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
+  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
+  - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
   - {fileID: 11400000, guid: c11cd3df102418f43a108888c7b677bc, type: 2}
+  - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
+  - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
+  - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
+  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
   startingDice:
   - {fileID: 11400000, guid: 74128a7cf78e81b41ad6b85beb4c440f, type: 2}
   - {fileID: 11400000, guid: 74128a7cf78e81b41ad6b85beb4c440f, type: 2}
+  - {fileID: 11400000, guid: 74128a7cf78e81b41ad6b85beb4c440f, type: 2}
   - {fileID: 11400000, guid: 8a33abe298e513a41894f1c6b0d9a21c, type: 2}
-  - {fileID: 11400000, guid: c2dcd459aa01fbd42a9f975166570284, type: 2}
-  tabletPrefab: {fileID: 8448579534215354899, guid: ace316ba9a583b141b31007ca0879c52, type: 3}
+  - {fileID: 11400000, guid: 8a33abe298e513a41894f1c6b0d9a21c, type: 2}
+  - {fileID: 11400000, guid: 8a33abe298e513a41894f1c6b0d9a21c, type: 2}
+  tabletPrefab: {fileID: 5131653183145106394, guid: 5db0b940a508efc4795299c77058b820, type: 3}
   slotPrefab: {fileID: 1881896027706196343, guid: 7b4fc5a074e11734695476f0948d04d2, type: 3}
-  trait: Thorns
+  trait: Traitless
