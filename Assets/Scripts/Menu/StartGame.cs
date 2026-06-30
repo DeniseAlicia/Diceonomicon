@@ -7,6 +7,11 @@ public class StartGame : MonoBehaviour
     public TutorialInitiater tutorial;
     public GameObject gameManagerObject;
 
+    private void Awake()
+    {
+        gameManagerObject = GameObject.FindGameObjectWithTag("GameManager");
+    }
+
     public void StartNewGame()
     {
         SceneManager.LoadScene("MainMenu");
@@ -31,4 +36,10 @@ public class StartGame : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void GoToStartScreen()
+    {
+        SceneManager.LoadScene("StartScreen");
+    }
+
 }

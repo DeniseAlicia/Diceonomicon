@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
@@ -37,8 +38,11 @@ public class Tutorial : MonoBehaviour
 
     // UI
     [SerializeField] private GameObject buttonContainer;
+    [SerializeField] private Button confirmButton;
+    [SerializeField] private Button rollButton;
     [SerializeField] private GameObject playerCandle;
     [SerializeField] private GameObject enemyCandle;
+
 
     // Slot States
     private bool emptyState;
@@ -71,8 +75,10 @@ public class Tutorial : MonoBehaviour
 
         text.text = string.Empty;
 
-        string[] lines = { "Well, well, well, seems like you found yourself in a bit of a pickle.", 
-        "But don't worry,I'll show you how to rumble and tumble with these goons." };
+        string[] lines = {
+            "Well, well, well, seems like you found yourself in a bit of a pickle.",
+            "But don't worry, I'll show you how to rumble and tumble with these goons."
+        };
         currentLines = lines;
 
         dialogueAnim.Play();
@@ -137,12 +143,16 @@ public class Tutorial : MonoBehaviour
                     opponent.diceDeck.Add(attackDie);
                 }
                 battleSceneManager.StartNewRound();
+                rollButton.interactable = false;
+                confirmButton.interactable = false;
                 buttonContainer.SetActive(true);
                 dialogueIndex++;
             }
             else if (dialogueIndex == 4)
             {
-                string[] lines = { "Press the button to Roll your dice!" };
+                string[] lines = {
+                    "Press the button to roll your dice!"
+                     };
                 currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
@@ -150,6 +160,7 @@ public class Tutorial : MonoBehaviour
             }
             else if (dialogueIndex == 6)
             {
+                rollButton.interactable = true;
                 if (player.dice.Count > 0)
                 {
                     if (player.dice[0].isDraggable)
@@ -168,15 +179,19 @@ public class Tutorial : MonoBehaviour
                     }
                 }
 
-                string[] lines = { "That Bouncer is really mad. He is going to hit us if we don't shield us.", 
-                    "The good news is any damage we take will be absorbed by the wax from our candle, but if we run out, we gotta start all over.", 
-                    "Now back on topic. Place the dice in the Shield slots.", };
+                string[] lines = {
+                    "That Bouncer is really angry. He is going to hit us if we don't shield us.",
+                    "The good news is any damage we take will be absorbed by the wax from our candle, but if we run out we gotta start all over.",
+                    //"Now back on topic. Place the dice in the Shield slots.", };
+                    "Now, place the dice in the blue Shield slots.",
+                    };
                 currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
                 playerCandle.SetActive(true);
                 enemyCandle.SetActive(true);
                 dialogueIndex++;
+
             }
             else if (dialogueIndex == 9)
             {
@@ -224,7 +239,7 @@ public class Tutorial : MonoBehaviour
                     damageValue = value;
                 }
 
-                if (damageValue < blockValue)
+                if (damageValue <= blockValue)
                 {
                     line = "Great job! We might get out of here harmfree.";
                 }
@@ -233,13 +248,19 @@ public class Tutorial : MonoBehaviour
                     line = "Watch out! It looks like we will catch some heat.";
                 }
 
-                string[] lines = { line, "The values of each dice in a column will be added up. once you confirm your placement!" };
+                string[] lines = { line, "The values of each dice in a column will be added up once you confirm your placement!" };
                 currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
                 player.drawnDice.Clear();
                 opponent.drawnDice.Clear();
-                dialogueIndex = -1;
+                dialogueIndex++;
+
+            }
+            else if (dialogueIndex == 12)
+            {
+                confirmButton.interactable = true;
+                dialogueIndex = 0;
             }
         }
 
@@ -258,6 +279,9 @@ public class Tutorial : MonoBehaviour
             }
             else if (dialogueIndex == 1)
             {
+                rollButton.interactable = false;
+                confirmButton.interactable = false;
+                attackState = true;
                 for (int i = 0; i < 2; i++)
                 {
                     player.diceDeck.Add(blockDie);
@@ -271,29 +295,39 @@ public class Tutorial : MonoBehaviour
                 }
 
                 text.text = string.Empty;
-                string[] lines = { "Hmmm...You might have some talent for this afterall...",
-                    "Always remember that attacking and blocking only count for the column their in, so you can not block damage the enemy deals in the first column by placing blocking dice in the second column."
+                string[] lines = {
+                    //"Hmmm...You might have some talent for this afterall...",
+                    //"Always remember that attacking and blocking only count for the column their in, so you can not block damage the enemy deals in the first column by placing blocking dice in the second column."
+                    "Hmmm, you might have some talent for this afterall...",
+                    "Remember that dice only count for the column they are in.",
+                    "So you can not block damage the enemy deals in the first column by shielding yourself in the second column."
                     };
+                currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
                 dialogueIndex++;
             }
             else if (dialogueIndex == 3)
             {
-                attackState = true;
                 dialogueIndex++;
             }
             else if (dialogueIndex == 4)
             {
                 text.text = string.Empty;
-                string[] lines = { "Now that you learned about blocking let's get on the offense.",
-                    "You attack by placing red dice in your tablet's attack slots.", 
-                    "The enemies will of course try to block your attacks in turn, so pay attention to the way they place their dice.",
-                    "See how the enemie's blue dice touch each other vertically?", 
-                    "This is called a combo and will make any dice with numbers on them more powerful.", 
-                    "The values of all the dice in a combo are multiplied by however many dice there are in a combo.", 
-                    "But be careful, a combo can only be made with same-colored dice and if they are directly touching each other vertically!", 
-                    "Now try to build an attack combo in your second column."};
+                string[] lines = { 
+                    //"Now that you learned about blocking let's get on the offense.",
+                    //"You attack by placing red dice in your tablet's attack slots.",
+                    //"The enemies will of course try to block your attacks in turn, so pay attention to the way they place their dice.",
+                    //"See how the enemie's blue dice touch each other vertically?",
+                    //"This is called a combo and will make any dice with numbers on them more powerful.",
+                    //"The values of all the dice in a combo are multiplied by however many dice there are in a combo.",
+                    //"But be careful, a combo can only be made with same-colored dice and if they are directly touching each other vertically!",
+                    //"Now try to build an attack combo in your second column."
+                    "Now let's get on the offense.",
+                    "See how the enemy's blue dice are lined up vertically?",
+                    "That's a combo! The value of the dice will be multiplied by however many dice there are in a combo.",
+                    "Combos can only be created with same-colored dice and if lined up vertically!",
+                    };
                 currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
@@ -306,8 +340,11 @@ public class Tutorial : MonoBehaviour
             }
             else if (dialogueIndex == 7)
             {
+                rollButton.interactable = true;
                 text.text = string.Empty;
-                string[] lines = { "Place your dice!" };
+                string[] lines = {
+                    "Now place your red dice in your tablet's Attack slots and build an attack combo!"
+                    };
                 currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
@@ -329,15 +366,23 @@ public class Tutorial : MonoBehaviour
             else if (dialogueIndex == 10)
             {
                 text.text = string.Empty;
-                string[] lines = { "Looks good! Try to build combos as often as you can.", 
-                    "You need to master the art of combo building if you ever plan on getting out of here!",
-                    "One last bit of advice on combos: You can build multiple different combos in a single column as long as the same-colored dice are touching."};
+                string[] lines = {
+                    "That's it! Try to build combos as often as you can."
+                    // "Looks good! Try to build combos as often as you can.",
+                    // "You need to master the art of combo building if you ever plan on getting out of here!",
+                    // "One last bit of advice on combos: You can build multiple different combos in a single column as long as the same-colored dice are touching."
+                    };
                 currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
                 player.drawnDice.Clear();
                 opponent.drawnDice.Clear();
-                dialogueIndex = -1;
+                dialogueIndex++;
+            }
+            else if (dialogueIndex == 12)
+            {
+                confirmButton.interactable = true;
+                dialogueIndex = 0;
             }
         }
 
@@ -356,6 +401,9 @@ public class Tutorial : MonoBehaviour
             }
             else if (dialogueIndex == 1)
             {
+                spellState = true;
+                rollButton.interactable = false;
+                confirmButton.interactable = false;
                 for (int i = 0; i < 2; i++)
                 {
                     player.diceDeck.Add(blockDie);
@@ -371,7 +419,10 @@ public class Tutorial : MonoBehaviour
                 }
 
                 text.text = string.Empty;
-                string[] lines = { "I'm impressed! You are naturally gifted when it comes to dice combat." };
+                string[] lines = {
+                    //"I'm impressed! You are naturally gifted when it comes to dice combat."
+                    "You will need to do more than just attacking and blocking to defeating other hell dwellers.",
+                     };
                 currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
@@ -379,18 +430,22 @@ public class Tutorial : MonoBehaviour
             }
             else if (dialogueIndex == 3)
             {
-                spellState = true;
                 dialogueIndex++;
             }
             else if (dialogueIndex == 4)
             {
                 text.text = string.Empty;
-                string[] lines = { "But attacking and blocking are not the only techniques at your disposal when it comes to defeating other hell dwellers.", 
-                    "For example, purple dice are for casting nasty spells on your opponents.",
-                    "What kinda spell you cast depends on the spell slots you place the dice in.",
-                    "These spell slots are poison spells, meaning that they will weaken the opponents dice in their respective column.",
-                    "This is some powerful magic, so don't expect to be able to perfectly control which dice are affected when you cast it.",
-                    "Now try poisoning your opponent with the poison spell!" };
+                string[] lines = {
+                    //"But attacking and blocking are not the only techniques at your disposal when it comes to defeating other hell dwellers.",
+                    //"For example, purple dice are for casting nasty spells on your opponents.",
+                    //"What kinda spell you cast depends on the spell slots you place the dice in.",
+                    // "These spell slots are poison spells, meaning that they will weaken the opponents dice in their respective column.",
+                    // "This is some powerful magic, so don't expect to be able to perfectly control which dice are affected when you cast it.",
+                    // "Now try poisoning your opponent with the poison spell!"
+                    "With purple dice you cast nasty spells on your enemies.",
+                    "This is some powerful magic. Don't expect to be able to perfectly control which dice are affected when you cast it.",
+
+                    };
                 currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
@@ -402,8 +457,12 @@ public class Tutorial : MonoBehaviour
             }
             else if (dialogueIndex == 7)
             {
+                rollButton.interactable = true;
                 text.text = string.Empty;
-                string[] lines = { "Roll and place your dice!" };
+                string[] lines = {
+                    "What kinda spell you cast depends on the spell slots you place your dice in.",
+                    "You can hover your cursor over any slot to see its effects."
+                     };
                 currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
@@ -427,15 +486,23 @@ public class Tutorial : MonoBehaviour
             else if (dialogueIndex == 10)
             {
                 text.text = string.Empty;
-                string[] lines = { "Great! Now you know how to cast spells! But remember that the spells you can cast depends on the available spell slots on your tablets.",
-                    "If you are unsure which spell a spell slot unleashes, you can always hover above the slot to gain more information.",
-                    "This works on all kinds of tablet slots, so hover your cursor over any slot to see its effects."};
+                string[] lines = {
+                     "Great! Now you know how to cast spells!",
+                    // "Great! Now you know how to cast spells! But remember that the spells you can cast depends on the available spell slots on your tablets.",
+                    // "If you are unsure which spell a spell slot unleashes, you can always hover above the slot to gain more information.",
+                    // "This works on all kinds of tablet slots, so hover your cursor over any slot to see its effects."
+                    };
                 currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
                 player.drawnDice.Clear();
                 opponent.drawnDice.Clear();
-                dialogueIndex = -1;
+                dialogueIndex++;
+            }
+            else if (dialogueIndex == 12)
+            {
+                confirmButton.interactable = true;
+                dialogueIndex = 0;
             }
         }
 
@@ -454,6 +521,8 @@ public class Tutorial : MonoBehaviour
             }
             else if (dialogueIndex == 1)
             {
+                rollButton.interactable = false;
+                confirmButton.interactable = false;
                 for (int i = 0; i < 2; i++)
                 {
                     player.diceDeck.Add(blockDie);
@@ -471,7 +540,9 @@ public class Tutorial : MonoBehaviour
                 }
 
                 text.text = string.Empty;
-                string[] lines = { "Very good, if you continue like this the bouncer will not hold out much longer!" };
+                string[] lines = {
+                    "Very good! If you continue like this the bouncer will not hold out much longer!"
+                    };
                 currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
@@ -485,14 +556,19 @@ public class Tutorial : MonoBehaviour
             else if (dialogueIndex == 4)
             {
                 text.text = string.Empty;
-                string[] lines = { "Now that you mastered the art of spellcasting let's improve our own dice.", 
-                    "Green buff dice work a bit differently then your other dice.",
-                    "You can place them in buff slots on your tablet to improve the other dice you placed around them.",
-                    "The buff dice point to adjacent dice slots, making dice in those slots more powerful.",
-                    "While holding a buff dice, press the right mouse button to rotate the buff dice and change the direction it points in.",
-                    "These buff slots will add power to any affected die, indicated by the number in the buff slot.",
-                    "But just like the spell slots, there are different buff slots with different effects, so make sure to check which buff is activated by hovering over the buff slot.",
-                    "Now try buffing your dice before finalizing your die placement." };
+                string[] lines = {
+                    //"Now that you mastered the art of spellcasting let's improve our own dice.",
+                    // "Green buff dice work a bit differently then your other dice.",
+                    // "You can place them in buff slots on your tablet to improve the other dice you placed around them.",
+                    // "The buff dice point to adjacent dice slots, making dice in those slots more powerful.",
+                    // "While holding a buff dice, press the right mouse button to rotate the buff dice and change the direction it points in.",
+                    //"These buff slots will add power to any affected die, indicated by the number in the buff slot.",
+                    //"But just like the spell slots, there are different buff slots with different effects, so make sure to check which buff is activated by hovering over the buff slot.",
+                    //"Now try buffing your dice before finalizing your die placement."
+                    "Green dice work differently than your other dice.",
+                    "You can place them in the green buff slots to improve adjacent dice.",
+                    "The arrows show which dice will be affected.",
+                    };
                 currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
@@ -504,8 +580,12 @@ public class Tutorial : MonoBehaviour
             }
             else if (dialogueIndex == 7)
             {
+                rollButton.interactable = true;
                 text.text = string.Empty;
-                string[] lines = { "Roll and place your dice!" };
+                string[] lines = {
+                    "You can rotate the green dice by pressing the right mouse button while dragging them.",
+                    //"Now try buffing your dice before finalizing your dice placement."
+                    };
                 currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
@@ -531,14 +611,21 @@ public class Tutorial : MonoBehaviour
             else if (dialogueIndex == 10)
             {
                 text.text = string.Empty;
-                string[] lines = { "I must say, you are an excellent student!",
+                string[] lines = { 
+                    //"I must say, you are an excellent student!",
                     "Notice how the buff dice effects are not limited to their own column?",
                     "This means that you can place buff dice in a way that they affect multiple columns at once.",
-                    "Remember this if you want to efficiently use your available buff slots!"};
+                    //"Remember this if you want to efficiently use your available buff slots!"
+                    };
                 currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
-                dialogueIndex = -1;
+                dialogueIndex++;
+            }
+            else if (dialogueIndex == 12)
+            {
+                confirmButton.interactable = true;
+                dialogueIndex = 0;
             }
         }
 
@@ -552,14 +639,20 @@ public class Tutorial : MonoBehaviour
             else if (dialogueIndex == 1)
             {
                 text.text = string.Empty;
-                string[] lines = { "You have now mastered the basics of dice combat!",
-                    "If you remember these techniques I taught you, most normal opponents will be no match for you.",
-                    "It is now time for you to venture out into the world and test your skills against the many different infernal creatures that await you."};
+                string[] lines = {
+                    "You have now mastered the basics of dice combat!",
+                    //"If you remember these techniques I taught you, most normal opponents will be no match for you.",
+                    //"It is now time for you to venture out into the world and test your skills against the many different infernal creatures that await you."
+                     "As long as you remember what I taught you most enemies won't be a match for you.",
+                     "Now venture out into the depths of hell and test your skills against the demons that stand in your way."
+                     };
                 currentLines = lines;
                 text.text = string.Empty;
                 StartDialogue();
                 dialogueIndex++;
-                
+            }
+            else if (dialogueIndex == 3)
+            {
                 GameStateManager gameManagerObject = FindFirstObjectByType<GameStateManager>();
 
                 GameObject.Destroy(gameManagerObject);

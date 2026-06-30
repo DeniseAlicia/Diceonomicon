@@ -9,9 +9,9 @@ public class CameraOrbitController : MonoBehaviour
     public float distance = 15f;    // constant radius around center
     public float rotateSpeed = 120f;
     public float focusSpeed = 3f;
-    public float edgeScrollSpeed = 10f;
-    public float topScreenPercent = 0.1f;
-    public float bottomScreenPercent = 0.1f;
+    public float edgeScrollSpeed = 0.001f;
+    public float topScreenPercent = 0.05f;
+    public float bottomScreenPercent = 0.05f;
 
     float yaw = 0f;
     bool isFocusing = false;
@@ -39,7 +39,7 @@ public class CameraOrbitController : MonoBehaviour
     {
         if (wpTransform != null)
         {
-            Vector3 offset = Quaternion.Euler(0f, yaw, 0f) * Vector3.right * distance/1.5f;
+            Vector3 offset = Quaternion.Euler(0f, yaw, 0f) * Vector3.right * distance / 1.5f;
             transform.position = new Vector3(offset.x, currentHeight, offset.z) + wpTransform.position;
             transform.LookAt(wpTransform.position);
         }
@@ -62,23 +62,20 @@ public class CameraOrbitController : MonoBehaviour
 
     void HandleEdgeScroll()
     {
-        if (centerTransform == null) return;
+        if (centerTransform == null || isFocusing) return;
 
-        float mouseY = Input.mousePosition.y;
-        float topEdge = Screen.height * (1f - topScreenPercent);
-        float bottomEdge = Screen.height * bottomScreenPercent;
+        float mouseX = Input.mousePosition.x;
+        float rightEdge = Screen.width * (1f - topScreenPercent);
+        float leftEdge = Screen.width * bottomScreenPercent;
 
-        if (mouseY > topEdge)
+        if (mouseX > rightEdge)
         {
-            currentHeight += edgeScrollSpeed * Time.deltaTime;
+            yaw -= rotateSpeed * 0.25f * Time.deltaTime;
         }
-        if (mouseY < bottomEdge)
+        else if (mouseX < leftEdge)
         {
-            currentHeight -= edgeScrollSpeed * Time.deltaTime;
+            yaw += rotateSpeed * 0.25f * Time.deltaTime;
         }
-
-        // Clamp height to prevent going too low or high
-        currentHeight = Mathf.Clamp(currentHeight, -50f, 50f);
     }
 
     public void FocusOnNode(Transform node)

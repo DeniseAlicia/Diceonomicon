@@ -18,7 +18,7 @@ MonoBehaviour:
   flavorText: Once per Battle Only
   texture: {fileID: 2800000, guid: 9f5d6ad69ded9df4698d5b54c0aca1ca, type: 3}
   usedTexture: {fileID: 2800000, guid: 31137a2f0d3de504d858f7cb0de9fe4d, type: 3}
-  image: {fileID: 21300000, guid: 1bdee2d15fbdb5045968a38d81080d9a, type: 3}
+  image: {fileID: 21300000, guid: 9b0d097c7278118458fc579c3b6414e5, type: 3}
   range: fcfffffffcfffffffafffffffafffffff8fffffff8ffffff
   tags:
   - Debuff
