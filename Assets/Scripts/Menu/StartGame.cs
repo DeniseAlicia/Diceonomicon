@@ -15,11 +15,15 @@ public class StartGame : MonoBehaviour
         impManagerObject = GameObject.FindGameObjectWithTag("ImpManager");
     }
 
+    private void Start(){
+        Application.targetFrameRate = 60;
+    }
+
     public void StartNewGame()
     {
-        SceneManager.LoadScene("MainMenu");
         Destroy(gameManagerObject);
         Destroy(impManagerObject);
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void StartTutorial()

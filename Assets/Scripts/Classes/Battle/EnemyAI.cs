@@ -100,7 +100,7 @@ public class EnemyAI : MonoBehaviour
     public void RollDice()
     {
         dice = new List<Die>();
-        Vector3 startPosition = new Vector3(2f, 5f, -5f);
+        Vector3 startPosition = new Vector3(12f, 5f, -5f);
         float distance = 0.5f;
 
         for (int i = 0; i < opponent.drawnDice.Count; i++)
@@ -145,6 +145,8 @@ public class EnemyAI : MonoBehaviour
 
         foreach (Die die in dice)
         {
+            die.vfx.gameObject.SetActive(true);
+            die.vfx.Play();
             die.GetSideFacingUp();
             die.isResting = true;
             die.isDraggable = false;
@@ -294,30 +296,11 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-
-    public void TranslateDieValue(Die die)
-    {
-        directions.Clear();
-
-        if (die.value > 0 && die.value < 7)
-        {
-            die.value = die.range[die.value - 1];
-        }
-
-        string valueString = die.value.ToString();
-        foreach (char x in valueString)
-        {
-            int newValue = Int32.Parse(x.ToString());
-            int angle = newValue * 45 - 45 - die.dieRotation;
-            directions.Add(angle);
-            //Debug.Log(angle);
-        }
-    }
-
     public List<Die> FindBuffTargetSlots(Die die, DiceSlotController slot)
     {
-        TranslateDieValue(die);
+        DieAction.ValueToAngle(die, directions);
         List<int> dirAngles = directions;
+
         List<Die> targets = new List<Die>();
         int maxDistance = 1;
 
@@ -353,7 +336,7 @@ public class EnemyAI : MonoBehaviour
 
     public void DetectLinksDown(DiceSlotController slot)
     {
-        Vector3 rayPosition = new Vector3(slot.transform.position.x, slot.transform.position.y + 0.2f , slot.transform.position.z - 0.8f);
+        Vector3 rayPosition = new Vector3(slot.transform.position.x, slot.transform.position.y + 0.2f, slot.transform.position.z - 0.8f);
         Ray raydown = new Ray(rayPosition, Vector3.down);
 
         if (Physics.Raycast(raydown, out RaycastHit hit, 66))
@@ -397,7 +380,7 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        Vector3 rayPosition2 = new Vector3(die.transform.position.x, die.transform.position.y + 0.2f , die.transform.position.z - 0.8f);
+        Vector3 rayPosition2 = new Vector3(die.transform.position.x, die.transform.position.y + 0.2f, die.transform.position.z - 0.8f);
         Ray raydown = new Ray(rayPosition2, Vector3.forward);
 
         if (Physics.Raycast(raydown, out RaycastHit hit2, 66))

@@ -22,5 +22,6 @@ MonoBehaviour:
   owner: {fileID: 0}
   slottedDie: {fileID: 0}
   priority: 1
+  synergy: 0
   directions: 000000005a000000b40000000e010000
   bonus: 3

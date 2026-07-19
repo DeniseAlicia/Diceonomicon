@@ -17,16 +17,12 @@ public class DiceReward
         {
             new ()
             {
-                ("BasicDamageDie", 2f),
-                ("BasicDamageDie", 0.5f),
-                ("BasicBlockDie", 2f),
-                ("BasicBlockDie",  0.5f),
-                ("BasicSpellDie",  2f),
-                ("BasicSpellDie",  0.5f),
-                ("BasicBuffDie",  2f),
-                ("BasicBuffDie",  0.5f),
-                ("BasicNeutralDie", 2f),
-                ("BasicNeutralDie",  0.5f),
+                ("BasicDamageDie",      2f),
+                ("BasicBlockDie",       2f),
+                ("BasicSpellDie",       1f),
+                ("BasicBuffDie",        1f),
+                ("BasicDebuffDie",      0.5f),
+                ("BasicNeutralDie",     0.5f),
             },
             new ()
             {
@@ -44,30 +40,24 @@ public class DiceReward
         {
             new ()
             {
-                ("BasicDamageDie", 3f),
-                ("BasicDamageDie", 3f),
-                ("BasicDamageDie", 3f),
-                ("BasicNeutralDie", 1f),
-                ("BasicNeutralDie", 0.1f),
-                ("BasicNeutralDie", 0.1f),
+                ("BasicDamageDie",      3f),
+                ("BasicDamageDie",      3f),
+                ("BasicNeutralDie",     1f),
+                ("BasicNeutralDie",     0.1f),
             },
             new ()
             {
-                ("ScorchedDamageDie", 1f),
-                ("ScorchedDamageDie",  0.5f),
-                ("CrackedDamageDie",    0.2f),
-                ("CrackedDamageDie",     1f),
-                ("ChainDamageDie",     0.5f),
-                ("ChainDamageDie",     0.2f),
+                ("ScorchedDamageDie",   1f),
+                ("CrackedDamageDie",    1f),
+                ("ChainDamageDie",      1f),
+                ("BasicNeutralDie",     0.1f),
             },
             new ()
             {
-                ("ScorchedDamageDie", 1f),
-                ("ScorchedDamageDie",  0.5f),
-                ("CrackedDamageDie",    0.2f),
-                ("CrackedDamageDie",     1f),
-                ("ChainDamageDie",     0.5f),
-                ("ChainDamageDie",     0.2f),
+                ("ScorchedDamageDie",   1f),
+                ("CrackedDamageDie",    1f),
+                ("ChainDamageDie",      1f),
+                ("BasicNeutralDie",     0.1f),
             }
         },
         qualityDistribution: new List<float> { 100f, 0f, 0f, 0f, 0f })
@@ -77,30 +67,25 @@ public class DiceReward
         {
             new ()
             {
-                ("BasicBlockDie", 3f),
-                ("BasicBlockDie", 3f),
-                ("BasicBlockDie", 3f),
+                ("BasicBlockDie",   3f),
+                ("BasicBlockDie",   3f),
                 ("BasicNeutralDie", 1f),
-                ("BasicNeutralDie", 1f),
-                ("BasicNeutralDie", 1f),
+                ("BasicNeutralDie", 0.1f),
             },
             new ()
             {
-                ("ScorchedBlockDie", 1f),
-                ("ScorchedBlockDie",  0.5f),
-                ("CrackedBlockDie",    0.2f),
+                ("ScorchedBlockDie",    1f),
                 ("CrackedBlockDie",     1f),
-                ("ChainBlockDie",     0.5f),
-                ("ChainBlockDie",     0.2f),
+                ("ChainBlockDie",       1f),
+                ("BasicNeutralDie",     0.1f),
             },
             new ()
             {
-                ("ScorchedBlockDie", 1f),
-                ("ScorchedBlockDie",  0.5f),
-                ("CrackedBlockDie",    0.2f),
+                ("ScorchedBlockDie",    1f),
                 ("CrackedBlockDie",     1f),
-                ("ChainBlockDie",     0.5f),
-                ("ChainBlockDie",     0.2f),
+                ("ChainBlockDie",       1f),
+                ("BasicNeutralDie",     0.1f),
+
             }
         },
         qualityDistribution: new List<float> { 100f, 0f, 0f, 0f, 0f })
@@ -110,30 +95,24 @@ public class DiceReward
         {
             new ()
             {
-                ("BasicBuffDie", 3f),
-                ("BasicBuffDie", 3f),
-                ("BasicBuffDie", 3f),
-                ("BasicNeutralDie", 1f),
-                ("BasicNeutralDie", 1f),
-                ("BasicNeutralDie", 1f),
+                ("BasicBuffDie",        3f),
+                ("BasicBuffDie",        3f),
+                ("BasicNeutralDie",     1f),
+                ("BasicNeutralDie",     0.1f),
             },
             new ()
             {
-                ("ScorchedBlockDie", 1f),
-                ("ScorchedBlockDie",  0.5f),
-                ("CrackedBlockDie",    0.2f),
-                ("CrackedBlockDie",     1f),
-                ("ChainBlockDie",     0.5f),
-                ("ChainBlockDie",     0.2f),
+                ("BasicBuffDie",        1f),
+                ("BasicBuffDie",        1f),
+                ("BasicNeutralDie",     1f),
+                ("BasicNeutralDie",     0.1f),
             },
             new ()
             {
-                ("ScorchedDamageDie", 1f),
-                ("ScorchedDamageDie",  0.5f),
-                ("CrackedDamageDie",    0.2f),
-                ("CrackedDamageDie",     1f),
-                ("ChainDamageDie",     0.5f),
-                ("ChainDamageDie",     0.2f),
+                ("BasicBuffDie",        1f),
+                ("BasicBuffDie",        1f),
+                ("BasicNeutralDie",     1f),
+                ("BasicNeutralDie",     0.1f),
             }
         },
         qualityDistribution: new List<float> { 100f, 0f, 0f, 0f, 0f })
@@ -143,30 +122,24 @@ public class DiceReward
         {
              new ()
             {
-                ("BasicSpellDie", 3f),
-                ("BasicSpellDie", 3f),
-                ("BasicSpellDie", 3f),
-                ("BasicNeutralDie", 1f),
-                ("BasicNeutralDie", 1f),
-                ("BasicNeutralDie", 1f),
+                ("BasicSpellDie",       3f),
+                ("BasicSpellDie",       3f),
+                ("BasicNeutralDie",     1f),
+                ("BasicNeutralDie",     0.1f),
             },
             new ()
             {
-                ("ScorchedSpellDie", 1f),
-                ("ScorchedSpellDie",  0.5f),
-                ("CrackedSpellDie",    0.2f),
+                ("ScorchedSpellDie",    1f),
                 ("CrackedSpellDie",     1f),
-                ("ChainSpellDie",     0.5f),
-                ("ChainSpellDie",     0.2f),
+                ("ChainSpellDie",       1f),
+                ("BasicNeutralDie",     0.1f),
             },
             new ()
             {
-                ("ScorchedSpellDie", 1f),
-                ("ScorchedSpellDie",  0.5f),
-                ("CrackedSpellDie",    0.2f),
+                ("ScorchedSpellDie",    1f),
                 ("CrackedSpellDie",     1f),
-                ("ChainSpellDie",     0.5f),
-                ("ChainSpellDie",     0.2f),
+                ("ChainSpellDie",       0.5f),
+                ("BasicNeutralDie",     0.1f),
             }
         },
         qualityDistribution: new List<float> { 100f, 0f, 0f, 0f, 0f })
@@ -176,30 +149,26 @@ public class DiceReward
         {
                 new ()
             {
-                ("BasicNeutralDie", 3f),
-                ("BasicNeutralDie", 3f),
-                ("BasicNeutralDie", 3f),
-                ("BasicSpellDie", 1f),
-                ("BasicDamageDie", 1f),
-                ("BasicBlockDie", 1f),
+                ("BasicNeutralDie",     3f),
+                ("BasicNeutralDie",     3f),
+                ("BasicNeutralDie",     3f),
+                ("BasicSpellDie",       1f),
+                ("BasicDamageDie",      1f),
+                ("BasicBlockDie",       1f),
+                ("BasicBuffDie",        0.1f),
+                ("BasicDebuffDie",      0.1f),
             },
             new ()
             {
-                ("ScorchedSpellDie", 1f),
-                ("ScorchedSpellDie",  0.5f),
-                ("CrackedSpellDie",    0.2f),
-                ("CrackedSpellDie",     1f),
-                ("ChainSpellDie",     0.5f),
-                ("ChainSpellDie",     0.2f),
+                ("ScorchedNeutralDie",    1f),
+                ("CrackedNeutralDie",     1f),
+                ("BasicNeutralDie",       0.1f),
             },
             new ()
             {
-                ("ScorchedDamageDie", 1f),
-                ("ScorchedDamageDie",  0.5f),
-                ("CrackedDamageDie",    0.2f),
-                ("CrackedDamageDie",     1f),
-                ("ChainDamageDie",     0.5f),
-                ("ChainDamageDie",     0.2f),
+                ("ScorchedNeutralDie",    1f),
+                ("CrackedNeutralDie",     1f),
+                ("BasicNeutralDie",       0.1f),
             }
         },
         qualityDistribution: new List<float> { 100f, 0f, 0f, 0f, 0f })
@@ -209,30 +178,24 @@ public class DiceReward
         {
                 new ()
             {
-                ("BasicDebuffDie", 3f),
-                ("BasicDebuffDie", 3f),
-                ("BasicDebuffDie", 3f),
-                ("BasicNeutralDie", 1f),
-                ("BasicNeutralDie", 1f),
-                ("BasicNeutralDie", 1f),
+                ("BasicDebuffDie",      3f),
+                ("BasicDebuffDie",      3f),
+                ("BasicNeutralDie",     1f),
+                ("BasicNeutralDie",     0.1f),
             },
             new ()
             {
-                ("ScorchedDebuffDie", 1f),
-                ("ScorchedDebuffDie",  0.5f),
-                ("ScorchedDebuffDie",    0.2f),
-                ("BasicDebuffDie",     1f),
+                ("ScorchedDebuffDie",   1f),
+                ("CrackedDebuffDie",    1f),
                 ("BasicDebuffDie",     0.5f),
-                ("BasicDebuffDie",     0.2f),
+                ("BasicNeutralDie",     0.1f),
             },
             new ()
             {
-                ("CrackedDebuffDie",    1.2f),
-                ("CrackedDebuffDie",    0.5f),
-                ("CrackedDebuffDie",    0.2f),
-                ("ScorchedDebuffDie", 1f),
-                ("ScorchedDebuffDie",  0.5f),
-                ("ScorchedDebuffDie",    0.2f),
+                ("ScorchedDebuffDie",   1f),
+                ("CrackedDebuffDie",    1f),
+                ("BasicDebuffDie",     0.5f),
+                ("BasicNeutralDie",     0.1f),
             }
         },
         qualityDistribution: new List<float> { 100f, 0f, 0f, 0f, 0f })

@@ -1,4 +1,7 @@
+using System;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -60,9 +63,23 @@ public class ImpSelectDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         //normalView.SetActive(false);
         hoverView.SetActive(true);
+        ImpSelectManager.Instance.diceViewObject.SetActive(true);
+        ImpSelectManager.Instance.healthObject.SetActive(true);
+
+        for (int i = 0; i < ImpSelectManager.Instance.diceSprites.Count(); i++)
+        {
+            ImpSelectManager.Instance.diceSprites[i].sprite = currentData.startingDice[i].image;
+            int emotionColor = Array.IndexOf(Main.diceTags, currentData.startingDice[i].tags[0]);
+            ImpSelectManager.Instance.diceSprites[i].color = Main.colors[emotionColor];
+        }
+
+        ImpSelectManager.Instance.healthObjectText.text = currentData.health.ToString();
 
         currentTabletInstance = Instantiate(currentData.tabletPrefab);
         currentTabletInstance.transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
+
+
+
 
         cameras = FindFirstObjectByType<ImpSelectList>().cameras;
 
@@ -92,7 +109,6 @@ public class ImpSelectDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         GameObject nameBox = controller.nameText.gameObject;
         nameBox.transform.position = new(nameBox.transform.position.x, nameBox.transform.position.y, nameBox.transform.position.z - 1);
-
         //Debug.Log("Hover");
     }
 
@@ -101,6 +117,8 @@ public class ImpSelectDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExi
         //normalView.SetActive(true);
         hoverView.SetActive(false);
         Destroy(currentTabletInstance);
+        ImpSelectManager.Instance.diceViewObject.SetActive(false);
+        ImpSelectManager.Instance.healthObject.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)

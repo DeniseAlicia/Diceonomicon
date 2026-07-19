@@ -11,6 +11,7 @@ public class TabletData : CollectableData
     public Texture artwork;
     public Sprite uiArtwork;
     public Entity owner;
+    public int health;
     public DiceSlotData[] slots;
     public DiceData[] startingDice;
     public GameObject tabletPrefab;

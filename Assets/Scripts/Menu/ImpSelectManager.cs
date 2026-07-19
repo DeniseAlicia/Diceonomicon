@@ -19,12 +19,17 @@ public class ImpSelectManager : MonoBehaviour
 
     [Header("Selection Preview")]
     public ImplingPreview[] preview;
+    [SerializeField] public GameObject diceViewObject;
+    [SerializeField] public List<Image> diceSprites;
+    [SerializeField] public GameObject healthObject;
+    [SerializeField] public TMP_Text healthObjectText;
 
     [Header("UI References")]
     [SerializeField] private GameObject warningPanel;
     public Button startButton;
 
     private Coroutine hideCoroutine;
+    private int combinedHealth;
 
     public void Awake()
     {
@@ -110,6 +115,18 @@ public class ImpSelectManager : MonoBehaviour
         }
 
         newGame = true;
+
+        foreach (TabletData imp in selectedImplings)
+        {
+            combinedHealth += imp.health;
+        }
+
+        if (GameStateManager.Instance != null)
+        { 
+            GameStateManager.Instance.player.maxHealth = combinedHealth;
+            GameStateManager.Instance.player.currentHealth = combinedHealth;
+        }
+
         SceneManager.LoadScene("Map");
     }
 

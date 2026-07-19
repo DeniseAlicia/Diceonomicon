@@ -14,6 +14,7 @@ public class TooltipSystem : MonoBehaviour
     public static void ShowTooltip(string content, string header = "")
     {
         current.tooltip.SetText(content, header);
+        if (string.IsNullOrEmpty(header) && string.IsNullOrEmpty(content)) { return; }
         current.tooltip.gameObject.SetActive(true);
     }
 

@@ -1815,8 +1815,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8277c662d16784eac0d62c876b9983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
+  currentHealth: 0
+  maxHealth: 0
   candle: {fileID: 1903433003}
   healthText: {fileID: 939718653}
   damageText: {fileID: 1989928604}
@@ -1829,6 +1829,7 @@ MonoBehaviour:
   extraDice: []
   tempDice: []
   damage: 0
+  unblockableDamage: 0
   block: 0
   activeColumn: []
   alpha: 0
@@ -2097,8 +2098,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091628ef8a97e614ab597a3e6a8a282f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 65
-  maxHealth: 65
+  currentHealth: 0
+  maxHealth: 0
   candle: {fileID: 82667264}
   healthText: {fileID: 229039875}
   damageText: {fileID: 6429603912121983631}
@@ -2111,6 +2112,7 @@ MonoBehaviour:
   extraDice: []
   tempDice: []
   damage: 0
+  unblockableDamage: 0
   block: 0
   activeColumn: []
   alpha: 0
@@ -3032,6 +3034,14 @@ PrefabInstance:
     - target: {fileID: 3579552707700683435, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4275144588179422410, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799481287589085215, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6157950448794427799, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_IsActive

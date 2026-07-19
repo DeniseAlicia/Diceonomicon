@@ -62,12 +62,12 @@ public class Adaptive : Trait
                     if (battleSceneManager.player.currentHealth < battleSceneManager.player.maxHealth / 2)
                     {
                         slot.slottedDie.value += 1;
-                        slot.slottedDie.TranslateValue();
+                        DieAction.UpdateText(slot.slottedDie);
                     }
                     else
                     {
                         slot.slottedDie.value -= 1;
-                        slot.slottedDie.TranslateValue();
+                        DieAction.UpdateText(slot.slottedDie);
                     }
                 }
             }
@@ -82,12 +82,12 @@ public class Adaptive : Trait
                     if (battleSceneManager.player.currentHealth < battleSceneManager.player.maxHealth / 2)
                     {
                         slot.slottedDie.value -= 1;
-                        slot.slottedDie.TranslateValue();
+                        DieAction.UpdateText(slot.slottedDie);
                     }
                     else
                     {
                         slot.slottedDie.value += 1;
-                        slot.slottedDie.TranslateValue();
+                        DieAction.UpdateText(slot.slottedDie);
                     }
                 }
             }
@@ -105,12 +105,12 @@ public class Adaptive : Trait
                     if (battleSceneManager.player.currentHealth < battleSceneManager.player.maxHealth / 2)
                     {
                         slot.slottedDie.value += 1;
-                        slot.slottedDie.TranslateValue();
+                        DieAction.UpdateText(slot.slottedDie);
                     }
                     else
                     {
                         slot.slottedDie.value -= 1;
-                        slot.slottedDie.TranslateValue();
+                        DieAction.UpdateText(slot.slottedDie);
                     }
                 }
             }
@@ -125,12 +125,12 @@ public class Adaptive : Trait
                     if (battleSceneManager.player.currentHealth < battleSceneManager.player.maxHealth / 2)
                     {
                         slot.slottedDie.value -= 1;
-                        slot.slottedDie.TranslateValue();
+                        DieAction.UpdateText(slot.slottedDie);
                     }
                     else
                     {
                         slot.slottedDie.value += 1;
-                        slot.slottedDie.TranslateValue();
+                        DieAction.UpdateText(slot.slottedDie);
                     }
                 }
             }

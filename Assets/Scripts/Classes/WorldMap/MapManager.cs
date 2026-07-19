@@ -48,6 +48,8 @@ public class MapManager : MonoBehaviour
            SceneManager.GetActiveScene().buildIndex
            );
         }
+
+        
     }
 
     // public void StartTutorial()

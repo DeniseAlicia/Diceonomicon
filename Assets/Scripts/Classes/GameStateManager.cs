@@ -362,6 +362,8 @@ public class GameStateManager : MonoBehaviour
         if (!oldScene.IsValid())
             return;
 
+        if (oldScene.name.Equals("MainMenu", StringComparison.OrdinalIgnoreCase))
+
         if (oldScene.name.Equals("Map", StringComparison.OrdinalIgnoreCase))
         {
             if (waypoints != null && waypoints.Count > 0)
@@ -379,6 +381,7 @@ public class GameStateManager : MonoBehaviour
 
             if (battlesWon == 3)
             {
+                battlesWon = 0;
                 SceneManager.LoadScene("EndScreen");
             }
 
@@ -427,8 +430,8 @@ public class GameStateManager : MonoBehaviour
             level = 0,
             area = "None",
             colorIndex = 0,
-            maxHealth = 100,
-            currentHealth = 100,
+            maxHealth = 0,
+            currentHealth = 0,
             implings = new List<string> { "Beempling", "Hie", "Cubie" },
             activeImplings = new List<TabletData>(),
             unlockedImplings = new List<TabletData>(),

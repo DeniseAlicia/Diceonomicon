@@ -60,7 +60,7 @@ public class Magician : Trait
                 if (slot.slottedDie != null && slot.slottedDie.isCopy)
                 {
                     slot.slottedDie.value += 1;
-                    slot.slottedDie.TranslateValue();
+                    DieAction.UpdateText(slot.slottedDie);
                 }
             }
         }
@@ -72,7 +72,7 @@ public class Magician : Trait
                 if (slot.slottedDie != null && slot.slottedDie.isCopy)
                 {
                     slot.slottedDie.value -= 1;
-                    slot.slottedDie.TranslateValue();
+                    DieAction.UpdateText(slot.slottedDie);
                 }
             }
         }
@@ -87,7 +87,7 @@ public class Magician : Trait
                 if (slot.slottedDie != null)
                 {
                     slot.slottedDie.value += 1;
-                    slot.slottedDie.TranslateValue();
+                    DieAction.UpdateText(slot.slottedDie);
                 }
             }
         }
@@ -99,7 +99,7 @@ public class Magician : Trait
                 if (slot.slottedDie != null)
                 {
                     slot.slottedDie.value -= 1;
-                    slot.slottedDie.TranslateValue();
+                    DieAction.UpdateText(slot.slottedDie);
                 }
             }
         }

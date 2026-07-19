@@ -16,7 +16,7 @@ public class EncoreDie_Data : DiceData
             if (dieInstance.parentSlot != null && dieInstance.parentSlot.owner.GetType() == typeof(Player) && dieInstance.dieTags.Intersect(dieInstance.dieTags).Any())
             {
                 die.value += 1;
-                die.TranslateValue();
+                DieAction.UpdateText(die);
             }
         }
     }

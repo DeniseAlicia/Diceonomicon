@@ -76,6 +76,7 @@ public class BattleSceneManager : MonoBehaviour
 
     private void Start()
     {
+
         round = 0;
         player.level = gameState.player.level;
         player.area = gameState.player.area;
@@ -86,7 +87,17 @@ public class BattleSceneManager : MonoBehaviour
         UpdateDamageBlockUI();
 
         startingDiceDeck = player.diceDeck.ToArray();
-        opponent.currentHealth = opponent.maxHealth;
+
+        if (GameStateManager.Instance.battlesWon == 0)
+        {
+            player.SetHealth();
+        }
+        else
+        {
+            player.currentHealth = GameStateManager.Instance.player.currentHealth;
+        }
+        opponent.SetHealth();
+
         player.alpha = 0.9f;
         opponent.alpha = 0.9f;
         player.healthText.text = player.currentHealth.ToString();
@@ -428,17 +439,21 @@ public class BattleSceneManager : MonoBehaviour
     public void CalculateDamage()
     {
         int damageTaken = opponent.damage - player.block;
-        int targetHealth = Mathf.Max(player.currentHealth - damageTaken, 0);
+        damageTaken = Mathf.Max(damageTaken, 0);
+        int targetHealth = Mathf.Max(player.currentHealth - damageTaken + opponent.unblockableDamage, 0);
         StartCoroutine(AnimatePlayerHealthDecrease(targetHealth, damageTaken));
 
         int opponentDamageTaken = player.damage - opponent.block;
-        int targetOpponentHealth = Mathf.Max(opponent.currentHealth - opponentDamageTaken, 0);
+        opponentDamageTaken = Mathf.Max(opponentDamageTaken, 0);
+        int targetOpponentHealth = Mathf.Max(opponent.currentHealth - opponentDamageTaken + player.unblockableDamage, 0);
         StartCoroutine(AnimateOpponentHealthDecrease(targetOpponentHealth, opponentDamageTaken));
 
         opponent.damage = 0;
+        opponent.unblockableDamage = 0;
         opponent.block = 0;
         player.damage = 0;
         player.block = 0;
+        player.unblockableDamage = 0;
 
         UpdateDamageBlockUI();
     }
@@ -658,6 +673,7 @@ public class BattleSceneManager : MonoBehaviour
         ResetDiceSlots();
         ResetDice();
         RotationButton.ResetRotationButton(RotationButton.allButtons);
+        GameStateManager.Instance.player.currentHealth = player.currentHealth;
 
         OnAcvitveCombatEnd.Invoke();
         StartDelay(1f, () => StartNewRound());
@@ -874,7 +890,7 @@ public class BattleSceneManager : MonoBehaviour
 
         if (player.damage != 0)
         {
-            player.damageText.text = player.damage.ToString();
+            player.damageText.text = (player.damage + player.unblockableDamage).ToString();
             player.damageText.gameObject.SetActive(true);
         }
         else
@@ -885,7 +901,7 @@ public class BattleSceneManager : MonoBehaviour
 
         if (opponent.damage != 0)
         {
-            opponent.damageText.text = opponent.damage.ToString();
+            opponent.damageText.text = (opponent.damage + opponent.unblockableDamage).ToString();
             opponent.damageText.gameObject.SetActive(true);
         }
         else

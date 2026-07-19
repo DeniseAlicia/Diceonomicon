@@ -19,6 +19,7 @@ MonoBehaviour:
   artwork: {fileID: 2800000, guid: d247ea055e2ce3a46813f512f6075f6f, type: 3}
   uiArtwork: {fileID: 21300000, guid: d247ea055e2ce3a46813f512f6075f6f, type: 3}
   owner: {fileID: 0}
+  health: 25
   slots:
   - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
   - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}

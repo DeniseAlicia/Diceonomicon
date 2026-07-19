@@ -10,28 +10,10 @@ public class BuffSlotData : DiceSlotData
 {
     public List<int> directions;
 
-    public void TranslateDieValue(Die die)
-    {
-        directions.Clear();
-
-        if (die.value > 0 && die.value < 7)
-        {
-            die.value = die.range[die.value - 1];
-        }
-
-        string valueString = die.value.ToString();
-        foreach (char x in valueString)
-        {
-            int newValue = Int32.Parse(x.ToString());
-            int angle = newValue * 45 - 45 + die.dieRotation;
-            directions.Add(angle);
-            //Debug.Log(angle);
-        }
-    }
-
     public List<Die> FindTargetDie(Die die, DiceSlotController slot)
     {
-        TranslateDieValue(die);
+        DieAction.ValueToAngle(die, directions);
+
         List<int> dirAngles = directions;
         List<Die> targets = new List<Die>();
         int maxDistance = 1;
