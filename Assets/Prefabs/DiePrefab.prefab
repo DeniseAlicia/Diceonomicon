@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2085206390153914367}
   - component: {fileID: 4556871253204048259}
   - component: {fileID: 8297382084870351055}
+  - component: {fileID: 5143301494135245729}
   m_Layer: 6
   m_Name: DiePrefab
   m_TagString: Untagged
@@ -85,6 +86,7 @@ MonoBehaviour:
   data: {fileID: 0}
   usedTexture: {fileID: 0}
   parentSlot: {fileID: 0}
+  tooltip: {fileID: 0}
   currentValue: 0
   sideUp: {fileID: 0}
   vfx: {fileID: 2454994297500103319}
@@ -199,6 +201,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &5143301494135245729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118036309713981090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085fdf2801e4ed44a9eaf1e68ac3739e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TooltipTrigger
 --- !u!1 &1135902683738039233
 GameObject:
   m_ObjectHideFlags: 0

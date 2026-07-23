@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BasicBlockDie
   m_EditorClassIdentifier: 
   prefab: {fileID: 118036309713981090, guid: b478b503530ed88419f4ee2c9f690297, type: 3}
-  title: Basic Block
-  desc: Blocks incoming damage
+  title: Block
+  desc: 
   flavorText: Du du du duuu
   texture: {fileID: 2800000, guid: 6e6a1aa7874bfd34fb8b0df522a83d88, type: 3}
   usedTexture: {fileID: 2800000, guid: acdc4a141005bf848905f004bb2b1f7c, type: 3}

@@ -200,6 +200,7 @@ public class EnemyAI : MonoBehaviour
                         slot.isFilled = true;
                         slot.slottedDie = die;
                         die.isPlaced = true;
+                        die.parentSlot = slot;
                         die.MoveToLayer("BattleTablets");
 
                         FindBuffTargetSlots(die, slot);
@@ -247,6 +248,7 @@ public class EnemyAI : MonoBehaviour
                     slot.isFilled = true;
                     slot.slottedDie = die;
                     die.isPlaced = true;
+                    die.parentSlot = slot;
                     die.MoveToLayer("BattleTablets");
 
                     if (columnIndex == 1) column1Count++;
@@ -285,6 +287,7 @@ public class EnemyAI : MonoBehaviour
                     slot.isFilled = true;
                     slot.slottedDie = die;
                     die.isPlaced = true;
+                    die.parentSlot = slot;
                     die.MoveToLayer("BattleTablets");
 
                     CheckDieUpDown(die);

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BasicNeutralDie
   m_EditorClassIdentifier: 
   prefab: {fileID: 118036309713981090, guid: b478b503530ed88419f4ee2c9f690297, type: 3}
-  title: Basic Neutral
+  title: Neutral
   desc: This die can be placed anywhere.
   flavorText: You can't read me.
   texture: {fileID: 2800000, guid: b04b707ad59a8f642b40086b50e7df5d, type: 3}

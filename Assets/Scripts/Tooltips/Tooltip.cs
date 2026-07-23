@@ -10,6 +10,7 @@ public class Tooltip : MonoBehaviour
     public LayoutElement layoutElement;
     public int characterWrapLimit;
     public RectTransform rectTransform;
+    public float offset;
 
     private void Start()
     {
@@ -42,7 +43,7 @@ public class Tooltip : MonoBehaviour
         Vector2 position = Input.mousePosition;
 
         float xOffset = 20f;
-        float yOffset = 50f;
+        float yOffset = 50f + offset;
 
         float pivotX = position.x / Screen.width;
         float pivotY = position.y / Screen.height;

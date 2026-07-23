@@ -46,6 +46,7 @@ public class Die : MonoBehaviour
     public DiceData data;
     public Texture usedTexture;
     public DiceSlotController parentSlot;
+    public Tooltip tooltip;
 
     public int currentValue;
     public Transform sideUp;
@@ -343,5 +344,25 @@ public class Die : MonoBehaviour
         isDraggable = true;
         rigidBody.isKinematic = true;
         rigidBody.useGravity = false;
+    }
+
+    public bool HasDieData()
+    {
+        return data != null;
+    }
+
+    public string GetTooltipHeader()
+    {
+        return data != null ? data.title : "???";
+    }
+
+    public string GetTooltipDescription()
+    {
+        return data != null ? data.desc : "";
+    }
+
+    private void OnPointerMove()
+    {
+        tooltip.UpdatePosition();
     }
 }

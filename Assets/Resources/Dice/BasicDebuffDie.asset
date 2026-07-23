@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BasicDebuffDie
   m_EditorClassIdentifier: 
   prefab: {fileID: 118036309713981090, guid: b478b503530ed88419f4ee2c9f690297, type: 3}
-  title: Basic Debuff
+  title: Debuff
   desc: You can place this die in an enemy's slot.
   flavorText: '"I don''t feel so good."'
   texture: {fileID: 2800000, guid: df380c70108707e4cac864c8e5d15d4e, type: 3}
