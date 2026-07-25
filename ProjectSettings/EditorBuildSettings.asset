@@ -38,6 +38,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndScreen.unity
     guid: 0d8e657065fb63c439825af56d564fa9
+  - enabled: 1
+    path: Assets/Scenes/PauseMenu.unity
+    guid: 861dc14ef294a314a8ee8448d37f480f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3e1df1f834f58674ca2a6b183d5063c6, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

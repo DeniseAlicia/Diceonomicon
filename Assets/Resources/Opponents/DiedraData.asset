@@ -31,9 +31,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
   - {fileID: 11400000, guid: 293e1d616b58eb141a6458b6cd6306e1, type: 2}
   startingDice:
-  - {fileID: 11400000, guid: 707b3f61c9339c84693e74aa83332f2f, type: 2}
-  - {fileID: 11400000, guid: 8a33abe298e513a41894f1c6b0d9a21c, type: 2}
-  - {fileID: 11400000, guid: 8a33abe298e513a41894f1c6b0d9a21c, type: 2}
+  - {fileID: 11400000, guid: f793ab4d04c5e5340ab6d16f289ffaea, type: 2}
+  - {fileID: 11400000, guid: f793ab4d04c5e5340ab6d16f289ffaea, type: 2}
+  - {fileID: 11400000, guid: f793ab4d04c5e5340ab6d16f289ffaea, type: 2}
   - {fileID: 11400000, guid: 707b3f61c9339c84693e74aa83332f2f, type: 2}
   - {fileID: 11400000, guid: c2dcd459aa01fbd42a9f975166570284, type: 2}
   - {fileID: 11400000, guid: 8a33abe298e513a41894f1c6b0d9a21c, type: 2}

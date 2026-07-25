@@ -25,11 +25,11 @@ Material:
     m_TexEnvs:
     - _AlphaMask:
         m_Texture: {fileID: 2800000, guid: 338dc6868119d29448291b00a76e9ba1, type: 3}
-        m_Scale: {x: 3, y: 1}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 4bc8d471ed4c1a040a2806d9224e69e0, type: 3}
-        m_Scale: {x: 3, y: 1}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: 7a6b712e179503d42ae5d33024bb29f2, type: 3}
@@ -37,11 +37,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
         m_Texture: {fileID: 2800000, guid: 08c6aa4ab66e6c34b843402315fdf370, type: 3}
-        m_Scale: {x: 3, y: 1}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _RoughnessMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 3, y: 1}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
@@ -55,7 +55,7 @@ Material:
     - _Roughness: 1
     - _ShadowStep: 1
     - _ShadowStepSmooth: 1
-    - _SpecularStep: 0
+    - _SpecularStep: 1
     - _SpecularStepSmooth: 0
     - _Step: 0.432
     - _Step1: 0.537
@@ -68,6 +68,6 @@ Material:
     - _HighColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecularColor: {r: 0.0754717, g: 0.0754717, b: 0.0754717, a: 1}
+    - _SpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -5,11 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
-using TMPro;
-using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 using System.Linq;
-//using UnityEngine.UIElements;
 
 public class BattleSceneManager : MonoBehaviour
 {
@@ -38,7 +34,6 @@ public class BattleSceneManager : MonoBehaviour
 
     // UI Elements & Buttons
     private InputAction tooltipAction;
-    public EndBattle endScene;
     public Button placementButton;
     public Button intermissionButton;
     public Button rollDiceButton;
@@ -586,10 +581,8 @@ public class BattleSceneManager : MonoBehaviour
     {
         if (player.currentHealth <= 0)
         {
-            endScene.Lose();
-            OnLoss.Invoke();
-            StartIntermissionPhase();
-
+            StopAllCoroutines();
+            StartCoroutine(EndCombat(2, false));
         }
     }
 
@@ -618,8 +611,27 @@ public class BattleSceneManager : MonoBehaviour
             player.diceDeck = startingDiceDeck.ToList();
             GameStateManager.Instance.player.diceDeck = startingDiceDeck.ToList();
 
+            StopAllCoroutines();
+            StartCoroutine(EndCombat(2, true));
+        }
+    }
+
+    private IEnumerator EndCombat(int delay, bool win)
+    {
+        LoadCanvas.Instance.AnimateObjectsOut();
+        yield return new WaitForSeconds(delay);
+
+
+        if (win)
+        {
             gameState.OnBattleEnd();
-            SceneManager.LoadScene("Map", LoadSceneMode.Single);
+            SceneTransition.Load("Map");
+        }
+
+        if (!win)
+        {
+            OnLoss.Invoke();
+            SceneTransition.Load("EndScreen");
         }
     }
 
@@ -672,7 +684,6 @@ public class BattleSceneManager : MonoBehaviour
         ResetEntity(opponent);
         ResetDiceSlots();
         ResetDice();
-        RotationButton.ResetRotationButton(RotationButton.allButtons);
         GameStateManager.Instance.player.currentHealth = player.currentHealth;
 
         OnAcvitveCombatEnd.Invoke();

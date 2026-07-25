@@ -2057,7 +2057,7 @@ MonoBehaviour:
   normalStyle: 1
   normalSpacingOffset: -100
   boldStyle: 0.75
-  boldSpacing: 1
+  boldSpacing: 0
   italicStyle: 35
   tabSize: 10
   m_fontInfo:

@@ -127,7 +127,7 @@ public class ImpSelectManager : MonoBehaviour
             GameStateManager.Instance.player.currentHealth = combinedHealth;
         }
 
-        SceneManager.LoadScene("Map");
+        SceneTransition.Load("Map");
     }
 
     public void ConfirmSelectionTutorial()
@@ -144,7 +144,7 @@ public class ImpSelectManager : MonoBehaviour
         }
 
         newGame = true;
-        SceneManager.LoadScene("Tutorial");
+        SceneTransition.Load("Tutorial");
     }
 
     private void ShowWarning()

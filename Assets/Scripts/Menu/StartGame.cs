@@ -1,21 +1,24 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using TransitionSystem;
 
 public class StartGame : MonoBehaviour
 {
-    private TutorialInitiater tutorial;
     private GameObject gameManagerObject;
     private GameObject impManagerObject;
-
+    [SerializeField] public TransitionSettings transition;
 
     private void Awake()
     {
+
         gameManagerObject = GameObject.FindGameObjectWithTag("GameManager");
         impManagerObject = GameObject.FindGameObjectWithTag("ImpManager");
+        TransitionManager.GetInstance().runningTransition = false;
     }
 
-    private void Start(){
+    private void Start()
+    {
         Application.targetFrameRate = 60;
     }
 
@@ -23,7 +26,8 @@ public class StartGame : MonoBehaviour
     {
         Destroy(gameManagerObject);
         Destroy(impManagerObject);
-        SceneManager.LoadScene("MainMenu");
+        SceneTransition.Load("MainMenu");
+        //SceneManager.LoadScene("MainMenu");
     }
 
     public void StartTutorial()
@@ -37,7 +41,8 @@ public class StartGame : MonoBehaviour
         GameStateManager.Instance.CreateDiceDeck();
         GameStateManager.Instance.player.activeImplings.Add(tutorialImpling);
 
-        SceneManager.LoadScene("Tutorial");
+        SceneTransition.Load("Tutorial");
+        //SceneManager.LoadScene("Tutorial");
     }
 
     public void OnQuitButtonPressed()
@@ -45,9 +50,19 @@ public class StartGame : MonoBehaviour
         Application.Quit();
     }
 
+    public void OnResumeButtonPressed()
+    {
+        ResetGame.Instance.paused = false;
+        Time.timeScale = 1;
+        SceneManager.UnloadSceneAsync("PauseMenu");
+    }
+
     public void GoToStartScreen()
     {
-        SceneManager.LoadScene("StartScreen");
+        ResetGame.Instance.paused = false;
+        Time.timeScale = 1;
+        SceneTransition.Load("StartScreen");
+        //SceneManager.LoadScene("StartScreen");
     }
 
 }

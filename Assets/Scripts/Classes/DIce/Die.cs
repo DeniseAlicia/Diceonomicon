@@ -8,7 +8,6 @@ public class Die : MonoBehaviour
     [SerializeField] private Transform[] diceSides;
     public Transform[] GetDiceSides() { return diceSides; }
 
-
     public int[] range; //which values the die can have
     public int value; //which value the die rolled this round
     public int originalValue; //which value the die rolled this round (without buffs/debuffs)
@@ -28,6 +27,7 @@ public class Die : MonoBehaviour
     [SerializeField] float forceZ;
     [SerializeField] float torque = 5f;
     [SerializeField] Vector3 tempGravity = new Vector3(0, -10f, 0);
+    public Vector3 scale = new Vector3(4.75f, 4.75f, 4.75f);
 
     private Camera camGameplay;
     private Camera camBattleTablets;
@@ -191,7 +191,7 @@ public class Die : MonoBehaviour
             else
             {
                 mouseOffset = Input.mousePosition - GetDiePosition(camBattleTablets);
-                transform.localScale = new Vector3(7f, 7f, 7f);
+                transform.localScale = scale;
             }
 
         }
@@ -240,7 +240,7 @@ public class Die : MonoBehaviour
                         }
                         transform.SetParent(hitSlot.transform);
                         transform.localPosition = new Vector3(0, 3, 0);
-                        transform.localScale = new Vector3(5.5f, 5.5f, 5.5f);
+                        transform.localScale = scale;
 
                         if (dieTags.Contains("Buff"))
                         {
@@ -268,7 +268,7 @@ public class Die : MonoBehaviour
                         else
                         {
                             transform.localPosition = new Vector3(0, 3, 0);
-                            transform.localScale = new Vector3(5.5f, 5.5f, 5.5f);
+                            transform.localScale = scale;
                         }
                     }
                 }

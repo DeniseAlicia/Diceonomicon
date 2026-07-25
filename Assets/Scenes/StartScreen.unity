@@ -265,6 +265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 82809625}
   - component: {fileID: 82809624}
+  - component: {fileID: 82809626}
   m_Layer: 0
   m_Name: ResetCommand
   m_TagString: Untagged
@@ -284,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c2f53cc45a5484ba29d15fc55b0d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  paused: 0
 --- !u!4 &82809625
 Transform:
   m_ObjectHideFlags: 0
@@ -299,6 +301,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &82809626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82809623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61430b0086307cc4da3ccc8d39ae88da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TransitionSystem.TransitionManager
+  transitionTemplate: {fileID: 5276914992623515724, guid: 616d511151a6c554caddf1c754e4f91d, type: 3}
+  runningTransition: 0
+  transition: {fileID: 11400000, guid: 06fa0ad2bc756f44ab258bc74947381d, type: 2}
 --- !u!1 &203844586
 GameObject:
   m_ObjectHideFlags: 0
@@ -2123,7 +2140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3456768597155298679, guid: 0b28d04bc9a122543ae0f12a59c00b20, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 24
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3456768597155298679, guid: 0b28d04bc9a122543ae0f12a59c00b20, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
@@ -3238,7 +3255,7 @@ GameObject:
   - component: {fileID: 1224523056}
   - component: {fileID: 1224523055}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: VideoCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4040,6 +4057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68a1d027f151e74d97b25310a68558d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartGame
+  transition: {fileID: 11400000, guid: 06fa0ad2bc756f44ab258bc74947381d, type: 2}
 --- !u!4 &1619816015 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3456768597155298676, guid: 0b28d04bc9a122543ae0f12a59c00b20, type: 3}
@@ -4474,7 +4492,7 @@ GameObject:
   - component: {fileID: 1967078019}
   - component: {fileID: 1967078018}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Main Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5042,10 +5060,10 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 961739753}
+  - {fileID: 1967078021}
   - {fileID: 203844589}
   - {fileID: 1567016648}
   - {fileID: 706851988}
-  - {fileID: 1967078021}
   - {fileID: 388306642}
   - {fileID: 293612045}
   - {fileID: 82809625}

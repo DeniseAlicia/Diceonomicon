@@ -382,13 +382,13 @@ public class GameStateManager : MonoBehaviour
             if (battlesWon == 3)
             {
                 battlesWon = 0;
-                SceneManager.LoadScene("EndScreen");
+                SceneTransition.Load("EndScreen");
             }
 
             if (battleWon)
             {
                 player.type = "Dice";
-                SceneManager.LoadScene("RewardSelection", LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync("RewardSelection", LoadSceneMode.Additive);
             }
         }
     }

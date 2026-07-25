@@ -231,7 +231,7 @@ public class DiceSlotController : MonoBehaviour
                 //die.lastRotation = die.transform.eulerAngles;
                 die.transform.SetParent(this.transform);
                 die.transform.localPosition = new Vector3(0, 3, 0);
-                die.transform.localScale = new Vector3(6f, 6f, 6f);
+                die.transform.localScale = die.scale;
                 die.parentSlot = this;
                 isFilled = true;
                 slottedDie = die;

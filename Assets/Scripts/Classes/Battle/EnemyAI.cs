@@ -195,7 +195,7 @@ public class EnemyAI : MonoBehaviour
                     {
                         die.transform.SetParent(slot.transform);
                         die.transform.localPosition = new Vector3(0, 3, 0);
-                        die.transform.localScale = new Vector3(6f, 6f, 6f);
+                        die.transform.localScale = die.scale;
 
                         slot.isFilled = true;
                         slot.slottedDie = die;
@@ -243,7 +243,7 @@ public class EnemyAI : MonoBehaviour
                 {
                     die.transform.SetParent(slot.transform);
                     die.transform.localPosition = new Vector3(0, 3, 0);
-                    die.transform.localScale = new Vector3(6f, 6f, 6f);
+                    die.transform.localScale = die.scale;
 
                     slot.isFilled = true;
                     slot.slottedDie = die;
@@ -278,11 +278,11 @@ public class EnemyAI : MonoBehaviour
 
             foreach (Die die in dice)
             {
-                if (die.dieTags.Contains(slot.tag))
+                if (die.dieTags.Contains(slot.tag) || die.dieTags.Contains("Neutral") && slot.tag == "Spell" || die.dieTags.Contains("Neutral") && slot.tag == "Block" || die.dieTags.Contains("Neutral") && slot.tag == "Damage")
                 {
                     die.transform.SetParent(slot.transform);
                     die.transform.localPosition = new Vector3(0, 3, 0);
-                    die.transform.localScale = new Vector3(6f, 6f, 6f);
+                    die.transform.localScale = die.scale;
 
                     slot.isFilled = true;
                     slot.slottedDie = die;
