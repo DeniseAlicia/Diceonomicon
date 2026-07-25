@@ -31,7 +31,7 @@ public class PoisonSlotData : DiceSlotData
                 if (targetSlot.slottedDie.dieTags.Contains("Damage") || targetSlot.slottedDie.dieTags.Contains("Block") || targetSlot.slottedDie.dieTags.Contains("Spell")) 
                 {
                     targetSlot.slottedDie.value -= 1;
-                    targetSlot.slottedDie.TranslateValue(true);
+                    DieAction.UpdateText(targetSlot.slottedDie);
                 }
             }
         }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.EventSystems;
 using Unity.Mathematics;
-using Microsoft.Unity.VisualStudio.Editor;
 
 [RequireComponent(typeof(Collider))]
 public class Waypoint : MonoBehaviour
@@ -62,7 +61,7 @@ public class Waypoint : MonoBehaviour
     // Hold-to-spawn variables
     private Coroutine holdCoroutine;
     private bool isHolding = false;
-    private float holdDuration = 1f;
+    private float holdDuration = 0.05f;
 
     public enum WaypointType
     {
@@ -74,9 +73,9 @@ public class Waypoint : MonoBehaviour
 
     Dictionary<WaypointType, float> waypointWeights = new Dictionary<WaypointType, float>()
     {
-        { WaypointType.Battle, 75f },
-        { WaypointType.Dice, 20f },
-        { WaypointType.Candlemaker, 5f },
+        { WaypointType.Battle, 100f },
+        //{ WaypointType.Dice, 20f },
+        //{ WaypointType.Candlemaker, 5f },
         //{ WaypointType.Relic, 0f },
     };
 
@@ -184,14 +183,10 @@ public class Waypoint : MonoBehaviour
                 yield break;
             }
             timer += Time.deltaTime;
-            // float scale = 0.99f + timer*0.3f;
-            // pressUI.localScale = new(scale, 0.2f, scale);
 
-            float colorShift = 1f - timer;
+            float colorShift = 1f - timer * 7;
             Color holdColor = new(colorShift, colorShift, colorShift, 1f);
             innerWaypointRenderer.material.color = holdColor;
-            float waypointScale = 0.02f - timer * 0.012f;
-            this.transform.localScale = new(0.5f, waypointScale, 0.5f);
             yield return null;
         }
 
@@ -456,11 +451,13 @@ public class Waypoint : MonoBehaviour
         {
             colorIndex = GameStateManager.Instance.waypoints.Count;
             nodeRenderer.material.color = Main.colors[colorIndex];
+            nodeRenderer.material.SetColor("_EmissionColor", nodeRenderer.material.color);
             area = Main.areas[colorIndex];
         }
         else
         {
             nodeRenderer.material.color = Main.colors[colorIndex];
+            nodeRenderer.material.SetColor("_EmissionColor", nodeRenderer.material.color);
             area = Main.areas[colorIndex];
         }
     }

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CrackedDie_Data
   prefab: {fileID: 118036309713981090, guid: b478b503530ed88419f4ee2c9f690297, type: 3}
   title: Cracked Damage
-  desc: Once per Battle Only
-  flavorText: Once per Battle Only
+  desc: You can use this die only once per battle.
+  flavorText: '"So unstable..."'
   texture: {fileID: 2800000, guid: e05eb33387eb24e4c9dfb2677a6f0369, type: 3}
   usedTexture: {fileID: 2800000, guid: 31137a2f0d3de504d858f7cb0de9fe4d, type: 3}
   image: {fileID: 21300000, guid: 9b0d097c7278118458fc579c3b6414e5, type: 3}

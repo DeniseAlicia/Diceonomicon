@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BasicSpellDie
   m_EditorClassIdentifier: 
   prefab: {fileID: 118036309713981090, guid: b478b503530ed88419f4ee2c9f690297, type: 3}
-  title: Basic Spell
-  desc: Does magical stuff
+  title: Spell
+  desc: 
   flavorText: Abra Kadabra!
   texture: {fileID: 2800000, guid: 3e8b672b655f87647abe77d960e66b40, type: 3}
   usedTexture: {fileID: 2800000, guid: acdc4a141005bf848905f004bb2b1f7c, type: 3}

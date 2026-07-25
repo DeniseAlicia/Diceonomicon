@@ -521,6 +521,7 @@ public class Tutorial : MonoBehaviour
             }
             else if (dialogueIndex == 1)
             {
+                buffState = true;
                 rollButton.interactable = false;
                 confirmButton.interactable = false;
                 for (int i = 0; i < 2; i++)
@@ -550,7 +551,6 @@ public class Tutorial : MonoBehaviour
             }
             else if (dialogueIndex == 3)
             {
-                buffState = true;
                 dialogueIndex++;
             }
             else if (dialogueIndex == 4)

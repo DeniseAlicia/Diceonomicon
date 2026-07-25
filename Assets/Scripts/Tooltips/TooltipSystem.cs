@@ -2,28 +2,50 @@ using UnityEngine;
 
 public class TooltipSystem : MonoBehaviour
 {
-    private static TooltipSystem current;
+    private static TooltipSystem Instance;
 
     public Tooltip tooltip;
+    public Tooltip tooltipSlot;
+    public Tooltip tooltipDie;
 
     public void Awake()
     {
-        current = this;
+        Instance = this;
     }
 
-    public static void ShowTooltip(string content, string header = "")
+    public static void ShowSlotTooltip(string content, string header = "")
     {
-        current.tooltip.SetText(content, header);
-        current.tooltip.gameObject.SetActive(true);
+        Instance.tooltipSlot.SetText(content, header);
+        if (string.IsNullOrEmpty(header) && string.IsNullOrEmpty(content))
+        {
+            return;
+        }
+        Instance.tooltipSlot.gameObject.SetActive(true);
+    }
+
+
+    public static void ShowDieTooltip(string content, string header = "")
+    {
+        Instance.tooltipDie.SetText(content, header);
+        if (string.IsNullOrEmpty(header) && string.IsNullOrEmpty(content))
+        {
+            return;
+        }
+        Instance.tooltipDie.gameObject.SetActive(true);
     }
 
     public static void HideTooltip()
     {
-        current.tooltip.gameObject.SetActive(false);
+        Instance.tooltipSlot.gameObject.SetActive(false);
+        Instance.tooltipDie.gameObject.SetActive(false);
     }
 
     public static void UpdateTooltip()
     {
-        current.tooltip.UpdatePosition();
+        Instance.tooltip.UpdatePosition();
+        // current.tooltipSlot.UpdatePosition();
+        // current.tooltipDie.UpdatePosition();
     }
+
+
 }

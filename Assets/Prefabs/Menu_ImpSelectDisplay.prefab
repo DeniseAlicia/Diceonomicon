@@ -134,6 +134,7 @@ MonoBehaviour:
   hoverView: {fileID: 6025722202499813941}
   descriptionText: {fileID: 8273185463161502695}
   traitText: {fileID: 10251470185278698}
+  diceView: {fileID: 6651471507071399040, guid: 5a1a655a151fcf94c8b474c029676da7, type: 3}
   selectionColor: {fileID: 906233271311996655}
   cameras: {fileID: 0}
 --- !u!61 &2543400744651721179

@@ -9,7 +9,8 @@ public class Opponent : Entity
 
     public void SetEnemyRoster(List<TabletData> army)
     {
-        maxHealth = 75;
+        maxHealth = 0;
+
         ActiveImplings = army;
 
         foreach (TabletData demon in army)
@@ -26,4 +27,12 @@ public class Opponent : Entity
         return;
     }
 
+    public override void SetHealth()
+    {
+        foreach (TabletData imp in ActiveImplings)
+        {
+            maxHealth += imp.health;
+        }
+        currentHealth = maxHealth;
+    }
 }

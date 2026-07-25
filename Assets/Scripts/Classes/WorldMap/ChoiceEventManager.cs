@@ -103,6 +103,10 @@ public class ChoiceEventManager : MonoBehaviour
                     images[i].color = Main.colors[emotionColor];
                     backgroundObject[i].SetActive(true);
 
+                    ChoiceManager manager = choices[i].GetComponent<ChoiceManager>();
+                    manager.dieData = data;
+                    manager.SetChoicePreview();
+                    
                     diceRewards.Add(data);
                 }
                 break;

@@ -9,6 +9,8 @@ using UnityEngine.InputSystem;
 
 public class LoadCanvas : MonoBehaviour
 {
+    public static LoadCanvas Instance;
+
     [Header("Scene Objects")]
     public GameObject[] banners;
     public GameObject score;
@@ -30,6 +32,11 @@ public class LoadCanvas : MonoBehaviour
     private bool textActive;
     private float delay;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         delay = 20f;
@@ -39,26 +46,51 @@ public class LoadCanvas : MonoBehaviour
 
     private void AnimateObjectsIn()
     {
-        AnimateGroup(banners, staggerDelay, topEntryOffset);
-        AnimateSingle(score, 0.3f, topEntryOffset);
+        AnimateGroup(banners, staggerDelay, topEntryOffset, false);
+        AnimateSingle(score, 0.3f, topEntryOffset, false);
 
-        AnimateGroup(candles, staggerDelay * 0f, bottomEntryOffset * 2);
-        AnimateGroup(health, staggerDelay * 0.3f, bottomEntryOffset);
-        AnimateSingle(chest, 0.5f, bottomEntryOffset);
-        AnimateSingle(buttons, 0.6f, bottomEntryOffset);
-        AnimateSingle(book, 0.8f, bottomEntryOffset);
+        AnimateGroup(candles, staggerDelay * 0f, bottomEntryOffset * 2, false);
+        AnimateGroup(health, staggerDelay * 0.3f, bottomEntryOffset, false);
+        AnimateSingle(chest, 0.5f, bottomEntryOffset, false);
+        AnimateSingle(buttons, 0.6f, bottomEntryOffset, false);
+        AnimateSingle(book, 0.8f, bottomEntryOffset, false);
     }
 
-    private void AnimateGroup(GameObject[] objects, float delayStep, Vector3 entryOffset)
+
+    public void AnimateObjectsOut()
     {
+        AnimateGroup(banners, staggerDelay, topEntryOffset, true);
+        AnimateSingle(score, 0.3f, topEntryOffset, true);
+
+        AnimateGroup(candles, staggerDelay * 0f, bottomEntryOffset * 2, true);
+        AnimateGroup(health, staggerDelay * 0.3f, bottomEntryOffset, true);
+        AnimateSingle(chest, 0.5f, bottomEntryOffset, true);
+        AnimateSingle(buttons, 0.6f, bottomEntryOffset, true);
+        AnimateSingle(book, 0.8f, bottomEntryOffset, true);
+    }
+
+    private void AnimateGroup(GameObject[] objects, float delayStep, Vector3 entryOffset, bool outro)
+    {
+        Vector3 startPos;
+        Vector3 endPos;
+
         for (int i = 0; i < objects.Length; i++)
         {
             var obj = objects[i];
             if (obj == null) continue;
 
             Transform t = obj.transform;
-            Vector3 startPos = t.localPosition + entryOffset;
-            Vector3 endPos = t.localPosition;
+
+            if (!outro)
+            {
+                startPos = t.localPosition + entryOffset;
+                endPos = t.localPosition;
+            }
+            else
+            {
+                startPos = t.localPosition;
+                endPos = t.localPosition + entryOffset;
+            }
 
             t.localPosition = startPos;
             obj.SetActive(true);
@@ -69,13 +101,24 @@ public class LoadCanvas : MonoBehaviour
         }
     }
 
-    private void AnimateSingle(GameObject obj, float delay, Vector3 entryOffset)
+    private void AnimateSingle(GameObject obj, float delay, Vector3 entryOffset, bool outro)
     {
+        Vector3 startPos;
+        Vector3 endPos;
+
         if (obj == null) return;
 
         Transform t = obj.transform;
-        Vector3 startPos = t.localPosition + entryOffset;
-        Vector3 endPos = t.localPosition;
+        if (!outro)
+        {
+            startPos = t.localPosition + entryOffset;
+            endPos = t.localPosition;
+        }
+        else
+        {
+            startPos = t.localPosition;
+            endPos = t.localPosition + entryOffset;
+        }
 
         t.localPosition = startPos;
         obj.SetActive(true);

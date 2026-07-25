@@ -23,5 +23,5 @@ MonoBehaviour:
   slottedDie: {fileID: 0}
   priority: 1
   synergy: 0
-  directions: 000000005a000000b40000000e010000
+  directions: 
   bonus: 5

@@ -13,7 +13,7 @@ public class RallySlotData : BuffSlotData
         foreach (Die targetDie in targetDice)
         {
             targetDie.value += bonus;
-            targetDie.TranslateValue();
+            DieAction.UpdateText(targetDie);
         }
     }
 }

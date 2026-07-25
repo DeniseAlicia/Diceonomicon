@@ -129,7 +129,7 @@ public class DiceSlotController : MonoBehaviour
                 Transform parent = die.transform.parent;
                 DiceSlotController slot = parent.gameObject.GetComponent<DiceSlotController>();
 
-                if (tag == slot.tag)
+                if (tag == slot.tag && die.dieTags.Contains(tag))
                 {
                     mult += 1;
                     DetectLinksDown(rayPosition);
@@ -152,9 +152,10 @@ public class DiceSlotController : MonoBehaviour
                 Transform parent = die.transform.parent;
                 DiceSlotController slot = parent.gameObject.GetComponent<DiceSlotController>();
 
-                if (tag == slot.tag)
+                if (tag == slot.tag && die.dieTags.Contains(tag))
                 {
                     mult += 1;
+                    DetectLinksUp(rayPosition);
                 }
             }
         }
@@ -199,7 +200,7 @@ public class DiceSlotController : MonoBehaviour
         {
             foreach (Die suitableDie in player.dice.OrderBy(d => d.value))
             {
-                if (suitableDie.dieTags.Contains(tag) && !suitableDie.isPlaced && owner is Player && suitableDie.isDraggable)
+                if (suitableDie.dieTags.Contains(tag) && !suitableDie.isPlaced && owner is Player && suitableDie.isDraggable || suitableDie.dieTags.Contains("Neutral") && !suitableDie.isPlaced && owner is Player && suitableDie.isDraggable && tag != "Buff")
                 {
                     die = suitableDie;
                 }
@@ -209,7 +210,7 @@ public class DiceSlotController : MonoBehaviour
             {
                 foreach (Die suitableExtraDie in player.tempDice.OrderBy(d => d.value))
                 {
-                    if (suitableExtraDie.dieTags.Contains(tag) && !suitableExtraDie.isPlaced && owner is Player && suitableExtraDie.isDraggable)
+                    if (suitableExtraDie.dieTags.Contains(tag) && !suitableExtraDie.isPlaced && owner is Player && suitableExtraDie.isDraggable || suitableExtraDie.dieTags.Contains("Neutral") && !suitableExtraDie.isPlaced && owner is Player && suitableExtraDie.isDraggable && tag != "Buff")
                     {
                         die = suitableExtraDie;
                     }
@@ -230,7 +231,7 @@ public class DiceSlotController : MonoBehaviour
                 //die.lastRotation = die.transform.eulerAngles;
                 die.transform.SetParent(this.transform);
                 die.transform.localPosition = new Vector3(0, 3, 0);
-                die.transform.localScale = new Vector3(6f, 6f, 6f);
+                die.transform.localScale = die.scale;
                 die.parentSlot = this;
                 isFilled = true;
                 slottedDie = die;

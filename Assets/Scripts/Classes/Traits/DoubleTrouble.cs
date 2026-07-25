@@ -51,7 +51,7 @@ public class DoubleTrouble : Trait
             foreach (DiceSlotController slot in tablet.tabletSlots)
             {
                 slot.slottedDie.value = slot.slottedDie.value + slot.slottedDie.value;
-                slot.slottedDie.TranslateValue();
+                DieAction.UpdateText(slot.slottedDie);
             }
 
             isInEffect = true;

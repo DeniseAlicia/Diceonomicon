@@ -4,6 +4,10 @@ using UnityEngine;
 public class RotationButton : MonoBehaviour
 {
     public Transform targetObject;
+    [SerializeField] private Transform tabletShadow;
+    [SerializeField] private Transform tabletLight;
+    private Quaternion shadowRotation;
+    private Quaternion lightRotation;
     public float angle = 90f;
     public static int maxRotations = 1;
 
@@ -32,10 +36,14 @@ public class RotationButton : MonoBehaviour
 
         BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
         BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
+
+        shadowRotation = tabletShadow.rotation;
+        lightRotation = tabletLight.rotation;
     }
 
     private void OnRoundStart()
     {
+        currentRotations = 0;
         foreach (RotationButton button in allButtons)
         {
             button.gameObject.SetActive(true);
@@ -88,6 +96,8 @@ public class RotationButton : MonoBehaviour
         {
             float t = elapsed / rotationDuration;
             targetObject.rotation = Quaternion.Slerp(startRot, endRot, t);
+            tabletLight.rotation = Quaternion.Slerp(startRot, endRot, t);
+            tabletShadow.rotation = Quaternion.Slerp(startRot, endRot, t);
             elapsed += Time.deltaTime;
             yield return null;
         }
@@ -104,6 +114,9 @@ public class RotationButton : MonoBehaviour
             child.Rotate(0f, -angle, 0f);
         }
 
+        tabletLight.rotation = lightRotation;
+        tabletShadow.rotation = shadowRotation;
+
         targetObject.rotation = endRot;
         isRotating = false;
 
@@ -117,15 +130,9 @@ public class RotationButton : MonoBehaviour
         }
     }
 
-    public static void ResetRotationButton(RotationButton[] allButtons)
+    public void OnDestroy()
     {
-        currentRotations = 0;
-        if (allButtons != null)
-        {
-            foreach (RotationButton button in allButtons)
-            {
-                button.gameObject.SetActive(true);
-            }
-        }
+        BattleSceneManager.OnRoundStart.RemoveListener(OnRoundStart);
+        BattleSceneManager.OnAcvitveCombatStart.RemoveListener(OnAcvitveCombatStart);
     }
 }

@@ -20,6 +20,7 @@ public abstract class Entity : MonoBehaviour
     public List<Die> extraDice;
     public List<Die> tempDice;
     public int damage = 10;
+    public int unblockableDamage = 0;
     public int block = 0;
     public List<DiceSlotController> activeColumn;
 
@@ -52,6 +53,8 @@ public abstract class Entity : MonoBehaviour
             drawnDice.Add(drawnDie);
         }
     }
+
+    public abstract void SetHealth();
 
     public abstract void RollDice();
 }

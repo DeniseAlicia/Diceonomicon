@@ -1,17 +1,40 @@
 using System.Collections;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TooltipTrigger : MonoBehaviour
 {
-    private DiceSlotController controller;
+    private DiceSlotController slot;
+    private Die die;
     private Coroutine tooltipCoroutine;
     private bool isPointerOver = false;
+    private bool isDie = false;
 
 
     private void Start()
     {
-        controller = GetComponent<DiceSlotController>();
+        die = GetComponent<Die>();
+        if (die != null)
+        {
+            isDie = true;
+        }
+
+        if (isDie)
+        {
+            if (die.parentSlot != null)
+            {
+                slot = die.parentSlot;
+            }
+        }
+        else
+        {
+            slot = GetComponent<DiceSlotController>();
+            if (slot != null && slot.slottedDie != null)
+            {
+                die = slot.slottedDie;
+            }
+        }
     }
 
     public void OnMouseEnter()
@@ -35,13 +58,34 @@ public class TooltipTrigger : MonoBehaviour
         float delay = 0.01f;
         yield return new WaitForSeconds(delay);
 
-        if (isPointerOver && controller != null && controller.HasSlotData())
+        if (isDie)
         {
-            TooltipSystem.ShowTooltip(
-                controller.GetTooltipDescription(),
-                controller.GetTooltipHeader()
-            );
+            if (isPointerOver && die != null && die.HasDieData())
+            {
+                if (die.parentSlot != null && die.parentSlot.HasSlotData() && !die.isRolling)
+                {
+                    slot = die.parentSlot;
+
+                    TooltipSystem.ShowSlotTooltip(
+                        slot.GetTooltipDescription(),
+                        slot.GetTooltipHeader());
+                }
+
+                TooltipSystem.ShowDieTooltip(
+                    die.GetTooltipDescription(),
+                    die.GetTooltipHeader());
+            }
         }
+
+        if (isPointerOver && slot != null && slot.HasSlotData())
+        {
+            TooltipSystem.ShowSlotTooltip(
+                         slot.GetTooltipDescription(),
+                         slot.GetTooltipHeader());
+        }
+
+
+        TooltipSystem.UpdateTooltip();
         tooltipCoroutine = null;
     }
 }

@@ -9,7 +9,7 @@ public class MapLayers : MonoBehaviour
     void Start()
     {
         float baseScale = 2f;
-        float adjustedScale = baseScale + 0.001f * layer;
+        float adjustedScale = baseScale + 0.01f * layer;
 
         transform.localScale = new Vector3(adjustedScale, baseScale, adjustedScale);
     }

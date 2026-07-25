@@ -27,7 +27,7 @@ public class ConjureDie_Data : DiceData
             die.range = new int[] { 1, 1, 1, 1, 1, 1 };
             die.dieTags = new string[] { "Damage", "Spell", "Block" };
 
-            die.TranslateValueAtStart();
+            DieAction.RangeToValue(die);
 
             DiceSlotController chosenSlot = nextSlot;
 
