@@ -295,7 +295,7 @@ public class Waypoint : MonoBehaviour
             {
                 // ±1 index shift
                 int offset = UnityEngine.Random.value < 0.5f ? -1 : 1;
-                newIndex = Mathf.Clamp(colorIndex + offset, 0, Main.colors.Length - 1);
+                newIndex = Mathf.Clamp(colorIndex + offset, 0, Emotions.colors.Length - 1);
             }
 
             float diff = p2.y - transform.position.y;
@@ -318,7 +318,7 @@ public class Waypoint : MonoBehaviour
         MeshRenderer mr = tubeObj.AddComponent<MeshRenderer>();
         waypoint.pathMeshRenderer = mr;
         waypoint.pathMeshRenderer.material = new Material(pathMaterial);
-        mr.material.color = Main.colors[colorIndex];
+        mr.material.color = Emotions.colors[colorIndex];
 
 
         // precompute full bezier curve
@@ -450,15 +450,15 @@ public class Waypoint : MonoBehaviour
         if (GameStateManager.Instance.waypoints.Count < 6)
         {
             colorIndex = GameStateManager.Instance.waypoints.Count;
-            nodeRenderer.material.color = Main.colors[colorIndex];
+            nodeRenderer.material.color = Emotions.colors[colorIndex];
             nodeRenderer.material.SetColor("_EmissionColor", nodeRenderer.material.color);
-            area = Main.areas[colorIndex];
+            area = Emotions.areas[colorIndex];
         }
         else
         {
-            nodeRenderer.material.color = Main.colors[colorIndex];
+            nodeRenderer.material.color = Emotions.colors[colorIndex];
             nodeRenderer.material.SetColor("_EmissionColor", nodeRenderer.material.color);
-            area = Main.areas[colorIndex];
+            area = Emotions.areas[colorIndex];
         }
     }
 

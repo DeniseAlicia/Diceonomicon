@@ -17,6 +17,9 @@ public class DiceSlotData : CollectableData
     public int priority;
     public int synergy;
 
+    public int multipliedValue;
+    public int affectedDice;
+
     public void AssignColorMaterial(string tag)
     {
         switch (tag.ToLower())
@@ -44,7 +47,7 @@ public class DiceSlotData : CollectableData
         }
     }
 
-    public virtual void Effect(Die slottedDie, int mult, BattleSceneManager sceneManager, Entity owner, DiceSlotController slot)
+    public virtual void Effect(Die slottedDie, int mult, Entity owner, DiceSlotController slot)
     {
         Debug.Log("DoEffect not found");
     }

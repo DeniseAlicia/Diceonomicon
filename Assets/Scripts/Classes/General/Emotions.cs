@@ -1,7 +1,18 @@
 using UnityEngine;
 
-public class Main
+public enum Emotion
 {
+    Amnger,
+    Sadness,
+    Fear,
+    Envy,
+    Indifference,
+    Tempation
+}
+
+public class Emotions
+{
+
     public static readonly Color[] colors = new Color[]
         {
         Color.red,
@@ -12,17 +23,11 @@ public class Main
         Color.yellow
         };
 
-    public static readonly string[] diceTags = new string[]
+    public static readonly string[] types = new string[]
     {
         "Damage", "Block", "Buff", "Spell", "Neutral", "Debuff"
     };
 
     public static readonly string[] areas = { "Red", "Blue", "Green", "Purple", "White", "Yellow" };
 
-    public static void ChangeSlotData(int slotNumber, TabletController tablet, DiceSlotData newSlot)
-    {
-        int index = slotNumber - 1;
-        DiceSlotController slotController = tablet.tabletSlots[index];
-        slotController.SetData(newSlot);
-    }
 }

@@ -66,12 +66,12 @@ public class Chaotic : Trait
 
     public override void OnRoundStart()
     {
-        Main.ChangeSlotData(1, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 3.999f))]);
-        Main.ChangeSlotData(2, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
-        Main.ChangeSlotData(3, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
-        Main.ChangeSlotData(4, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 3.999f))]);
-        Main.ChangeSlotData(5, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
-        Main.ChangeSlotData(6, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
+        SlotAction.ChangeSlotData(1, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 3.999f))]);
+        SlotAction.ChangeSlotData(2, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
+        SlotAction.ChangeSlotData(3, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
+        SlotAction.ChangeSlotData(4, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 3.999f))]);
+        SlotAction.ChangeSlotData(5, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
+        SlotAction.ChangeSlotData(6, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
     }
 
     public override void OnPlacementDone()

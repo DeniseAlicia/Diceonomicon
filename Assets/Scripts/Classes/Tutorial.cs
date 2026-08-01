@@ -54,8 +54,8 @@ public class Tutorial : MonoBehaviour
     public void Start()
     {
         battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
-        player = battleSceneManager.player;
-        opponent = battleSceneManager.opponent;
+        player = Player.Instance;
+        opponent = Opponent.Instance;
 
 
 

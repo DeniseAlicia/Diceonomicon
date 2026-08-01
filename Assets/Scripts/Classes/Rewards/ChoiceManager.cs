@@ -27,8 +27,8 @@ public class ChoiceManager : MonoBehaviour
         foreach (Image icon in icons)
         {
             string type = dieData.tags[0];
-            int emotionColor = Array.IndexOf(Main.diceTags, type);
-            icon.color = Main.colors[emotionColor];
+            int emotionColor = Array.IndexOf(Emotions.types, type);
+            icon.color = Emotions.colors[emotionColor];
             icon.sprite = dieData.image;
         }
 

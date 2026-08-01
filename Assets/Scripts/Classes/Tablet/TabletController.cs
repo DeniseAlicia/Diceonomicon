@@ -27,16 +27,7 @@ public class TabletController : MonoBehaviour
     public int maxRotations = 1;
     private float rotationDuration = 0.5f;
 
-    public enum Emotions
-    {
-        Anger,
-        Sadness,
-        Envy,
-        Fear,
-        Indifference,
-        Temptation
-    }
-    public int[] emotionValues = new int[System.Enum.GetValues(typeof(Emotions)).Length];
+    public int[] emotionValues = new int[Enum.GetValues(typeof(Emotion)).Length];
 
     public void Start()
     {

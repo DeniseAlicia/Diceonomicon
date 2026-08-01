@@ -5,17 +5,19 @@ using System.Linq;
 [CreateAssetMenu(fileName = "PoisonSlotData", menuName = "DiceSlots/PoisonSlotData")]
 public class PoisonSlotData : DiceSlotData
 {
-    public override void Effect(Die slottedDie, int mult, BattleSceneManager sceneManager, Entity owner, DiceSlotController slot)
+    public override void Effect(Die slottedDie, int mult, Entity owner, DiceSlotController slot)
     {
+        affectedDice = 0;
         List<DiceSlotController> target;
         int triggers = slottedDie.value * mult;
+        multipliedValue = triggers;
         if (owner is Player)
         {
-            target = sceneManager.enemyActiveColumn;
+            target = BattleSceneManager.Instance.enemyActiveColumn;
         }
         else
         {
-            target = sceneManager.playerActiveColumn;
+            target = BattleSceneManager.Instance.playerActiveColumn;
         }
 
         for (int i = 0; i < triggers; i++)
@@ -28,10 +30,11 @@ public class PoisonSlotData : DiceSlotData
 
             if (targetSlot.isFilled)
             {
-                if (targetSlot.slottedDie.dieTags.Contains("Damage") || targetSlot.slottedDie.dieTags.Contains("Block") || targetSlot.slottedDie.dieTags.Contains("Spell")) 
+                if (!targetSlot.slottedDie.dieTags.Contains("Buff")) 
                 {
                     targetSlot.slottedDie.value -= 1;
                     DieAction.UpdateText(targetSlot.slottedDie);
+                    affectedDice++;
                 }
             }
         }

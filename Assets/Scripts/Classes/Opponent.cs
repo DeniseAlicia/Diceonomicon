@@ -4,8 +4,16 @@ using System.Collections.Generic;
 
 public class Opponent : Entity
 {
+    public static Opponent Instance;
+    public Owner owner = Owner.Opponent;
+    
     public EnemyAI ai;
     public List<TabletData> ActiveImplings;
+
+    public void Awake()
+    {
+        Instance = this;
+    }
 
     public void SetEnemyRoster(List<TabletData> army)
     {

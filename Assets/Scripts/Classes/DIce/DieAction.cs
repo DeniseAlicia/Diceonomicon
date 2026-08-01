@@ -3,8 +3,6 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using System;
-using UnityEditor.Rendering;
-using UnityEngine.TextCore.Text;
 
 public static class DieAction
 {

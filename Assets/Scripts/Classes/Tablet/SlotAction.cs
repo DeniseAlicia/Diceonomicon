@@ -17,4 +17,11 @@ public static class SlotAction
             }
         }
     }
+
+    public static void ChangeSlotData(int slotNumber, TabletController tablet, DiceSlotData newSlot)
+    {
+        int index = slotNumber - 1;
+        DiceSlotController slotController = tablet.tabletSlots[index];
+        slotController.SetData(newSlot);
+    }
 }

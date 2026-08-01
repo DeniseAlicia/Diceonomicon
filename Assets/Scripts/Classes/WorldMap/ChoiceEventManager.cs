@@ -98,9 +98,9 @@ public class ChoiceEventManager : MonoBehaviour
                     }
 
                     string type = data.tags[0];
-                    int emotionColor = Array.IndexOf(Main.diceTags, type);
-                    emotions[i].color = Main.colors[emotionColor];
-                    images[i].color = Main.colors[emotionColor];
+                    int emotionColor = Array.IndexOf(Emotions.types, type);
+                    emotions[i].color = Emotions.colors[emotionColor];
+                    images[i].color = Emotions.colors[emotionColor];
                     backgroundObject[i].SetActive(true);
 
                     ChoiceManager manager = choices[i].GetComponent<ChoiceManager>();

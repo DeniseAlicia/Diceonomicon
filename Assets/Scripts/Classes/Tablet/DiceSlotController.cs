@@ -1,13 +1,7 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 using System;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using TMPro;
-using System.Threading.Tasks;
 using System.Linq;
-using UnityEngine.EventSystems;
 
 public class DiceSlotController : MonoBehaviour
 {
@@ -110,7 +104,7 @@ public class DiceSlotController : MonoBehaviour
         mult = 1 + tempMult;
         DetectLinksDown(this.transform.position);
         DetectLinksUp(this.transform.position);
-        slotData.Effect(slottedDie, mult, activeSceneManager, owner, this);
+        slotData.Effect(slottedDie, mult, owner, this);
         tempMult = 0;
         return;
     }
@@ -239,10 +233,5 @@ public class DiceSlotController : MonoBehaviour
                 die.MoveToLayer("BattleTablets");
             }
         }
-    }
-
-    private void OnPointerMove()
-    {
-        tooltip.UpdatePosition();
     }
 }

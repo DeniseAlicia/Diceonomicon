@@ -2,12 +2,10 @@ using UnityEngine;
 
 public class Adaptive : Trait
 {
-    private BattleSceneManager battleSceneManager;
     private TabletController tablet;
 
     public void Start()
     {
-        battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
         
         description = "Damage dice gain a +1 bonus and Block dice get a -1 penalty";
@@ -59,7 +57,7 @@ public class Adaptive : Trait
             {
                 if (slot.slottedDie != null && slot.slottedDie.isCopy)
                 {
-                    if (battleSceneManager.player.currentHealth < battleSceneManager.player.maxHealth / 2)
+                    if (Player.Instance.currentHealth < Player.Instance.maxHealth / 2)
                     {
                         slot.slottedDie.value += 1;
                         DieAction.UpdateText(slot.slottedDie);
@@ -79,7 +77,7 @@ public class Adaptive : Trait
             {
                 if (slot.slottedDie != null && slot.slottedDie.isCopy)
                 {
-                    if (battleSceneManager.player.currentHealth < battleSceneManager.player.maxHealth / 2)
+                    if (Player.Instance.currentHealth < Player.Instance.maxHealth / 2)
                     {
                         slot.slottedDie.value -= 1;
                         DieAction.UpdateText(slot.slottedDie);
@@ -102,7 +100,7 @@ public class Adaptive : Trait
             {
                 if (slot.slottedDie != null)
                 {
-                    if (battleSceneManager.player.currentHealth < battleSceneManager.player.maxHealth / 2)
+                    if (Player.Instance.currentHealth < Player.Instance.maxHealth / 2)
                     {
                         slot.slottedDie.value += 1;
                         DieAction.UpdateText(slot.slottedDie);
@@ -122,7 +120,7 @@ public class Adaptive : Trait
             {
                 if (slot.slottedDie != null)
                 {
-                    if (battleSceneManager.player.currentHealth < battleSceneManager.player.maxHealth / 2)
+                    if (Player.Instance.currentHealth < Player.Instance.maxHealth / 2)
                     {
                         slot.slottedDie.value -= 1;
                         DieAction.UpdateText(slot.slottedDie);

@@ -34,7 +34,7 @@ public static class DiceManager
 
     public static void SortAllDice(List<Die> dice, BattleSceneManager sceneManager, Button button)
     {
-        foreach (Die die in sceneManager.player.dice)
+        foreach (Die die in Player.Instance.dice)
         {
             die.GetSideFacingUp();
             die.isResting = true;
@@ -63,7 +63,7 @@ public static class DiceManager
             dice[i].transform.DOMove(diePos, 0.2f).SetEase(Ease.OutQuad);
         }
 
-        foreach (Die die in sceneManager.player.dice)
+        foreach (Die die in Player.Instance.dice)
         {
             die.isResting = false;
         }

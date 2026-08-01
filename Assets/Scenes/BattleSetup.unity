@@ -785,11 +785,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1213689260}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &386940530 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6110340823530625300, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
-  m_PrefabInstance: {fileID: 1903433002}
-  m_PrefabAsset: {fileID: 0}
 --- !u!20 &519239972 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 9187365622833992215, guid: c8f26efffb6c7ca4cb32d52f1503d4a8, type: 3}
@@ -1996,7 +1991,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3975af494267e41a0f73c365acf0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTutorial: 0
   player: {fileID: 1213689259}
   opponent: {fileID: 1334747538}
   playerColumnBanner:
@@ -2024,7 +2018,6 @@ MonoBehaviour:
   placementButton: {fileID: 1078122327}
   intermissionButton: {fileID: 1420239865}
   rollDiceButton: {fileID: 881584063}
-  combatBolt: {fileID: 386940530}
   DiceRollEvent:
     Guid:
       Data1: -208536345

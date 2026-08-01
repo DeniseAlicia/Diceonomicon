@@ -79,7 +79,7 @@ public class Unpredictable : Trait
         for (int i = 1; i - 1 < Instance.tablet.tabletSlots.Count; i++)
         {
             int randomNumber = (int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f));
-            Main.ChangeSlotData(i, tablet, slots[ValidateRandom(randomNumber)]);
+            SlotAction.ChangeSlotData(i, tablet, slots[ValidateRandom(randomNumber)]);
         }
     }
 
@@ -92,7 +92,7 @@ public class Unpredictable : Trait
         for (int i = 1; i - 1 < Instance.tablet.tabletSlots.Count; i++)
         {
             int randomNumber = (int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f));
-            Main.ChangeSlotData(i, tablet, slots[ValidateRandom(randomNumber)]);
+            SlotAction.ChangeSlotData(i, tablet, slots[ValidateRandom(randomNumber)]);
         }
     }
 

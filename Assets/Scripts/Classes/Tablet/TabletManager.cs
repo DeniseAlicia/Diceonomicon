@@ -69,7 +69,7 @@ public class TabletManager : MonoBehaviour
             }
             else if (tablet.tabletPrefab.name.Contains("Medium"))
             {
-                height *= 0.7f;
+                height *= 1.5f;
             }
 
             goalPosition.z = currentPosition.z;
