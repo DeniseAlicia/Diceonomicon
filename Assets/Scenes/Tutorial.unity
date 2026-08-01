@@ -2001,6 +2001,7 @@ MonoBehaviour:
   extraDice: []
   tempDice: []
   damage: 0
+  unblockableDamage: 0
   block: 0
   activeColumn: []
   alpha: 0
@@ -2083,7 +2084,6 @@ MonoBehaviour:
   - 8.2
   intermission: 0
   unusedDice: []
-  endScene: {fileID: 1464295274}
   placementButton: {fileID: 217784873}
   intermissionButton: {fileID: 217784872}
   rollDiceButton: {fileID: 217784871}
@@ -2185,6 +2185,7 @@ MonoBehaviour:
   extraDice: []
   tempDice: []
   damage: 0
+  unblockableDamage: 0
   block: 0
   activeColumn: []
   alpha: 0
@@ -2399,17 +2400,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1424472400}
   m_CullTransparentMesh: 1
---- !u!114 &1464295274 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8805293676216415657, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
-  m_PrefabInstance: {fileID: 1903433002}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca123bee44e0ee442895f4eb2bb200f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1502743518
 GameObject:
   m_ObjectHideFlags: 0
@@ -3295,6 +3285,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5796026250881351335, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5867069732715213220, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5867069732715213220, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5907483897637747453, guid: 7d6617704bb153548a8e251b5bfd2f1e, type: 3}

@@ -1,24 +1,23 @@
+using System;
 using UnityEngine;
 
-public class Spin : Trait
+public class Rotator : Trait
 {
-    private BattleSceneManager battleSceneManager;
     private TabletController tablet;
+    private float[] angle = { -90, 90 };
 
     public void Start()
     {
-        battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
 
         description = "You can rotate your tablets one additional time per round";
         tablet.descText.text = description;
 
         OnSceneStart();
-        sceneStart = true;
         // roundStart = true;
         // acvitveCombatStart = true;
         // placementDone = true;
-        // acvitveCombatEnd = true;
+        acvitveCombatEnd = true;
 
         if (sceneStart)
         {
@@ -45,7 +44,8 @@ public class Spin : Trait
 
     public override void OnSceneStart()
     {
-        tablet.maxRotations += 1;
+        int i = (int)Math.Round(UnityEngine.Random.Range(0f, 1f));
+        tablet.Rotate(angle[i]);
     }
 
     public override void OnRoundStart()
@@ -65,6 +65,7 @@ public class Spin : Trait
 
     public override void OnAcvitveCombatEnd()
     {
-        Debug.Log("Triggered on AcvitveCombatEnd");
+        int i = (int)UnityEngine.Random.Range(0f, 1f);
+        tablet.Rotate(angle[i]);
     }
 }

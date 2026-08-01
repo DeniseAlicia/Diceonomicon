@@ -683,9 +683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a04a2f2562eebc94bb37e0dd9546413f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 2344501088090392704}
-  tabletShadow: {fileID: 3669435671842242504}
-  tabletLight: {fileID: 7561678322941030979}
+  tablet: {fileID: 6255826648385007587}
   angle: 90
 --- !u!114 &7034594573635377334
 MonoBehaviour:
@@ -1529,9 +1527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a04a2f2562eebc94bb37e0dd9546413f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 2344501088090392704}
-  tabletShadow: {fileID: 3669435671842242504}
-  tabletLight: {fileID: 7561678322941030979}
+  tablet: {fileID: 6255826648385007587}
   angle: -90
 --- !u!114 &6282539652914104086
 MonoBehaviour:
@@ -1857,6 +1853,11 @@ MonoBehaviour:
   script: {fileID: 0}
   tabletSlots: []
   animator: {fileID: 0}
+  mainTablet: {fileID: 3310092662065365521}
+  tabletShadow: {fileID: 1824467489810038550}
+  tabletLight: {fileID: 1804848392998607278}
+  currentRotations: 0
+  maxRotations: 1
   emotionValues: 000000000000000000000000000000000000000000000000
 --- !u!114 &8817816280853982109
 MonoBehaviour:
