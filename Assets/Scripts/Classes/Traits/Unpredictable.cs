@@ -1,8 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.Analytics;
+using UnityEngine.UIElements;
 
 public class Unpredictable : Trait
 {
+    private Unpredictable Instance;
+
     private BattleSceneManager battleSceneManager;
     private TabletController tablet;
 
@@ -10,24 +14,33 @@ public class Unpredictable : Trait
     private DiceSlotData blockSlot;
     private DiceSlotData poisonSlot;
 
-    private DiceSlotData[] slots = new DiceSlotData[4];
+    private int attacks;
+    private int blocks;
+    private int poisons;
+
+    private DiceSlotData[] slots = new DiceSlotData[3];
+
+    public void Awake()
+    {
+        Instance = this;
+    }
 
     public void Start()
     {
         battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
-        tablet = GetComponent<TabletController>();
+        Instance.tablet = GetComponent<TabletController>();
 
         attackSlot = Resources.Load<DiceSlotData>($"Slots/AttackSlot");
         blockSlot = Resources.Load<DiceSlotData>($"Slots/ShieldSlot");
         poisonSlot = Resources.Load<DiceSlotData>($"Slots/PoisonSlot");
 
-        slots = new DiceSlotData[] { attackSlot, poisonSlot, blockSlot};
+        slots = new DiceSlotData[] { attackSlot, blockSlot , poisonSlot};
 
         description = "Randomizes the slots every round.";
         tablet.descText.text = description;
 
-        sceneStart = true;
-        roundStart = true;
+        Instance.OnSceneStart();
+        Instance.roundStart = true;
         // acvitveCombatStart = true;
         // placementDone = true;
         // acvitveCombatEnd = true;
@@ -59,26 +72,28 @@ public class Unpredictable : Trait
 
     public override void OnSceneStart()
     {
-        Main.ChangeSlotData(1, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
-        Main.ChangeSlotData(2, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
-        Main.ChangeSlotData(3, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
-        Main.ChangeSlotData(4, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
-        Main.ChangeSlotData(6, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
-        Main.ChangeSlotData(7, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
-        Main.ChangeSlotData(8, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
-        Main.ChangeSlotData(9, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
+        Instance.attacks = 0;
+        Instance.blocks = 0;
+        Instance.poisons = 0;
+
+        for (int i = 1; i - 1 < Instance.tablet.tabletSlots.Count; i++)
+        {
+            int randomNumber = (int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f));
+            Main.ChangeSlotData(i, tablet, slots[ValidateRandom(randomNumber)]);
+        }
     }
 
     public override void OnRoundStart()
     {
-        Main.ChangeSlotData(1, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
-        Main.ChangeSlotData(2, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
-        Main.ChangeSlotData(3, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
-        Main.ChangeSlotData(4, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
-        Main.ChangeSlotData(6, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
-        Main.ChangeSlotData(7, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
-        Main.ChangeSlotData(8, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
-        Main.ChangeSlotData(9, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 1.999f))]);
+        Instance.attacks = 0;
+        Instance.blocks = 0;
+        Instance.poisons = 0;
+
+        for (int i = 1; i - 1 < Instance.tablet.tabletSlots.Count; i++)
+        {
+            int randomNumber = (int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f));
+            Main.ChangeSlotData(i, tablet, slots[ValidateRandom(randomNumber)]);
+        }
     }
 
     public override void OnPlacementDone()
@@ -94,5 +109,39 @@ public class Unpredictable : Trait
     public override void OnAcvitveCombatEnd()
     {
         Debug.Log("Triggered on AcvitveCombatEnd");
+    }
+
+
+    public int ValidateRandom(int randomNumber)
+    {
+        switch (randomNumber)
+        {
+            case 0:
+                if (Instance.attacks < 3)
+                {
+                    Instance.attacks++;
+                    return randomNumber;
+                }
+                goto case 1;
+            case 1:
+                if (Instance.blocks < 3)
+                {
+                    Instance.blocks++;
+                    randomNumber = 1;
+                    return randomNumber;
+                }
+                goto case 2;
+            case 2:
+                if (Instance.poisons < 3)
+                {
+                    Instance.poisons++;
+                    randomNumber = 2;
+                    return randomNumber;
+                }
+                goto case default;
+            default:
+                randomNumber = 0;
+                return randomNumber;
+        }
     }
 }

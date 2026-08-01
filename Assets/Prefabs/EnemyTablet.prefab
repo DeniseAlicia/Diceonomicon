@@ -1031,6 +1031,12 @@ MonoBehaviour:
   script: {fileID: 0}
   tabletSlots: []
   animator: {fileID: 0}
+  mainTablet: {fileID: 7019726916196569228}
+  tabletShadow: {fileID: 4862140192727388296}
+  tabletLight: {fileID: 1876587063036535791}
+  isRotating: 0
+  currentRotations: 0
+  maxRotations: 1
   emotionValues: 000000000000000000000000000000000000000000000000
 --- !u!1 &5173259861328246865
 GameObject:
