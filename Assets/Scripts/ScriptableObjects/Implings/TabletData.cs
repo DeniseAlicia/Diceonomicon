@@ -18,7 +18,7 @@ public class TabletData : CollectableData
     public GameObject slotPrefab;
     public string trait;
 
-    private Vector3 startSlotPosition = new Vector3(-3, 0, -3);
+    private Vector3 startSlotPosition = new Vector3(-3, 0.1f, -3);
 
     public void CreateSlots(Transform tabletTransform, TabletController tablet)
     {
@@ -39,7 +39,7 @@ public class TabletData : CollectableData
             Transform targetSlot = tabletTransform.Find(slotName);
 
             GameObject diceSlotInstance = Instantiate(slotPrefab, targetSlot);
-            diceSlotInstance.transform.localPosition = Vector3.zero;
+            diceSlotInstance.transform.localPosition = new Vector3(0, 0.1f, 0);
 
             diceSlotInstance.name = $"SlotInstance{i + 1}";
 

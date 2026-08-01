@@ -6,7 +6,7 @@ public class RallySlotData : BuffSlotData
 {
     public int bonus;
 
-    public override void Effect(Die slottedDie, int mult, BattleSceneManager sceneManager, Entity owner, DiceSlotController slot)
+    public override void Effect(Die slottedDie, int mult, Entity owner, DiceSlotController slot)
     {
         List<Die> targetDice = FindTargetDie(slottedDie, slot);
 

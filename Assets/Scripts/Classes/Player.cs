@@ -10,6 +10,7 @@ public class Player : Entity
     public int MaxImplings;
     public List<Die> dice;
     public List<RelicData> relics;
+    public Owner owner = Owner.Player;
 
     public int level;
     public string area;

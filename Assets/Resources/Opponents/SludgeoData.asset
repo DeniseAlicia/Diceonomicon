@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7461de8d2d83b9145a5eb8eee13cf27c, type: 3}
-  m_Name: ToksickData 1
+  m_Name: SludgeoData
   m_EditorClassIdentifier: 
   enemy: 1
   unlocked: 0
@@ -39,4 +39,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74128a7cf78e81b41ad6b85beb4c440f, type: 2}
   tabletPrefab: {fileID: 5131653183145106394, guid: 5db0b940a508efc4795299c77058b820, type: 3}
   slotPrefab: {fileID: 1881896027706196343, guid: 7b4fc5a074e11734695476f0948d04d2, type: 3}
-  trait: Hex
+  trait: Toxic

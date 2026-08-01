@@ -11,7 +11,7 @@ public class ChargeSlotData : DiceSlotData
         BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
     }
 
-    public override void Effect(Die slottedDie, int mult, BattleSceneManager sceneManager, Entity owner, DiceSlotController slot)
+    public override void Effect(Die slottedDie, int mult, Entity owner, DiceSlotController slot)
     {
         if (CheckDamageTaken())
         {
@@ -21,12 +21,12 @@ public class ChargeSlotData : DiceSlotData
 
     public void OnPlacementDone()
     {
-        health = BattleSceneManager.Instance.player.currentHealth;
+        health = Player.Instance.currentHealth;
     }
 
     public bool CheckDamageTaken()
     {
-        if (health != BattleSceneManager.Instance.player.currentHealth)
+        if (health != Player.Instance.currentHealth)
         {
             return false;
         }

@@ -66,7 +66,7 @@ public class Buddy : Trait
 
         Shuffle(randomSlots);
 
-        GameObject dieInstance = Instantiate(battleSceneManager.player.diePrefab, randomSlots[0].transform.position, Quaternion.identity);
+        GameObject dieInstance = Instantiate(Player.Instance.diePrefab, randomSlots[0].transform.position, Quaternion.identity);
         Die die = dieInstance.GetComponent<Die>();
 
 

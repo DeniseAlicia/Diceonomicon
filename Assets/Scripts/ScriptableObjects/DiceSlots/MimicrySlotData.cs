@@ -5,17 +5,17 @@ using System.Linq;
 [CreateAssetMenu(fileName = "MimicrySlotData", menuName = "DiceSlots/MimicrySlotData")]
 public class MimicrySlotData : DiceSlotData
 {
-    public override void Effect(Die slottedDie, int mult, BattleSceneManager sceneManager, Entity owner, DiceSlotController slot)
+    public override void Effect(Die slottedDie, int mult, Entity owner, DiceSlotController slot)
     {
         List<DiceSlotController> target;
         int triggers = slottedDie.value * mult;
         if (owner is Player)
         {
-            target = sceneManager.enemyActiveColumn;
+            target = BattleSceneManager.Instance.enemyActiveColumn;
         }
         else
         {
-            target = sceneManager.playerActiveColumn;
+            target = BattleSceneManager.Instance.playerActiveColumn;
         }
 
         for (int i = 0; i < triggers; i++)
@@ -39,7 +39,7 @@ public class MimicrySlotData : DiceSlotData
 
         if (owner.extraDice.Count > 0)
         {
-            sceneManager.intermission = true;
+            BattleSceneManager.Instance.intermission = true;
         }
 
     }

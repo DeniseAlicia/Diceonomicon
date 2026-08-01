@@ -8,7 +8,7 @@ public class SpawnDie_Data : DiceData
 
     public override void DoEffect(Die currentDie)
     {
-        List<DiceSlotController> allSlots = BattleSceneManager.Instance.opponent.ai.emptySlots;
+        List<DiceSlotController> allSlots = Opponent.Instance.ai.emptySlots;
         List<DiceSlotController> emptySlots = new();
 
         foreach (DiceSlotController slot in allSlots)

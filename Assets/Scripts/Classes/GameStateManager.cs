@@ -82,7 +82,7 @@ public class GameStateManager : MonoBehaviour
         }
 
         impSelect = FindAnyObjectByType<ImpSelectManager>();
-        if (impSelect.newGame == true)
+        if ( impSelect != null && impSelect.newGame == true )
         {
             impSelect.newGame = false;
             ResetSave();

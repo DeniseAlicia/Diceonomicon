@@ -2,12 +2,10 @@ using UnityEngine;
 
 public class Recycle : Trait
 {
-    private BattleSceneManager battleSceneManager;
     private TabletController tablet;
 
     public void Start()
     {
-        battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
 
         description = "Heal by 1 for every unused die";
@@ -56,7 +54,7 @@ public class Recycle : Trait
     {
         int healing = 0;
 
-        foreach (Die die in battleSceneManager.player.tempDice)
+        foreach (Die die in Player.Instance.tempDice)
         {
             if (!die.isPlaced)
             {
@@ -64,15 +62,15 @@ public class Recycle : Trait
             }
         }
 
-        int newHealth = battleSceneManager.player.currentHealth + healing;
-        StartCoroutine(battleSceneManager.AnimatePlayerHealthIncrease(newHealth, healing));
+        int newHealth = Player.Instance.currentHealth + healing;
+        StartCoroutine(BattleSceneManager.Instance.AnimatePlayerHealthIncrease(newHealth, healing));
     }
 
     public override void OnAcvitveCombatStart()
     {
-        int healing = battleSceneManager.unusedDice.Count;
-        int newHealth = battleSceneManager.player.currentHealth + healing;
-        StartCoroutine(battleSceneManager.AnimatePlayerHealthIncrease(newHealth, healing));
+        int healing = BattleSceneManager.Instance.unusedDice.Count;
+        int newHealth = Player.Instance.currentHealth + healing;
+        StartCoroutine(BattleSceneManager.Instance.AnimatePlayerHealthIncrease(newHealth, healing));
     }
 
     public override void OnAcvitveCombatEnd()

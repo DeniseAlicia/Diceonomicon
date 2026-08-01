@@ -11,9 +11,11 @@ public class BattleSceneManager : MonoBehaviour
 {
     public static BattleSceneManager Instance;
 
-    public bool isTutorial;
-    public Player player;
-    public Opponent opponent;
+    private bool isTutorial;
+    [SerializeField] private Player player;
+    [SerializeField] private Opponent opponent;
+
+
     public GameObject[] playerColumnBanner;
     public GameObject[] opponentColumnBanner;
     public List<DiceSlotController> playerActiveColumn;
@@ -21,8 +23,7 @@ public class BattleSceneManager : MonoBehaviour
     private static List<List<DiceSlotController>> playerSlots;
     private static List<List<DiceSlotController>> enemySlots;
     private static DiceSlotController[] allSlots;
-    private GameStateManager gameState;
-    public DiceData[] startingDiceDeck;
+    [SerializeField] private DiceData[] startingDiceDeck;
 
     // Combat Stats
     public int level;
@@ -37,7 +38,6 @@ public class BattleSceneManager : MonoBehaviour
     public Button placementButton;
     public Button intermissionButton;
     public Button rollDiceButton;
-    public GameObject combatBolt;
 
     // Events
     public static UnityEvent OnSceneStart = new UnityEvent();
@@ -46,6 +46,12 @@ public class BattleSceneManager : MonoBehaviour
     public static UnityEvent OnAcvitveCombatStart = new UnityEvent();
     public static UnityEvent OnAcvitveCombatEnd = new UnityEvent();
     public static UnityEvent OnLoss = new UnityEvent();
+
+    public delegate void EnterPhaseEvent(BattlePhase phase);
+    public static event EnterPhaseEvent OnPhaseEntered; // when phase changes event
+
+    public delegate void BattleEvent(DiceSlotController slot);
+    public static event BattleEvent OnSlotTriggered; // On slot triggered event
 
     // FMOD
     public FMODUnity.EventReference DiceRollEvent;
@@ -65,7 +71,6 @@ public class BattleSceneManager : MonoBehaviour
         Camera camBattleTablets = GameObject.Find("BattleTablets").GetComponent<Camera>();
         camBattleTablets.gameObject.SetActive(false);
         camBattleTablets.gameObject.SetActive(true);
-        gameState = FindFirstObjectByType<GameStateManager>();
         Instance = this;
     }
 
@@ -73,8 +78,8 @@ public class BattleSceneManager : MonoBehaviour
     {
 
         round = 0;
-        player.level = gameState.player.level;
-        player.area = gameState.player.area;
+        player.level = GameStateManager.Instance.player.level;
+        player.area = GameStateManager.Instance.player.area;
         opponent.damage = 0;
         opponent.block = 0;
         player.damage = 0;
@@ -424,6 +429,7 @@ public class BattleSceneManager : MonoBehaviour
                         }
                     }
                     slot.DoEffect();
+                    OnSlotTriggered?.Invoke(slot);
                     UpdateDamageBlockUI();
                 }
                 yield return new WaitForSeconds(delay);
@@ -457,21 +463,20 @@ public class BattleSceneManager : MonoBehaviour
     {
         RectTransform candle = player.candle.GetComponent<RectTransform>();
 
-        float wait;
         float startY = 16.2f;   // full health
         float endY = -36.8f;  // zero health
 
+        int finalHealth = Mathf.Max(targetHealth, 0);
+        int healthToLose = player.currentHealth - finalHealth;
+
+        if (healthToLose <= 0)
+            yield break;
+
+        float totalDuration = 0.3f;
+        float wait = totalDuration / healthToLose;
+
         while (player.currentHealth > Mathf.Max(targetHealth, 0))
         {
-            if (damage < 11)
-            {
-                wait = 0.1f;
-            }
-            else
-            {
-                wait = 1f / damage;
-            }
-
             FMOD.Studio.EventInstance damageAudio = FMODUnity.RuntimeManager.CreateInstance(DamageEvent);
             damageAudio.start();
 
@@ -486,6 +491,7 @@ public class BattleSceneManager : MonoBehaviour
             candle.anchoredPosition = pos;
 
             yield return new WaitForSeconds(wait);
+
             damageAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             CheckLossState();
         }
@@ -601,7 +607,7 @@ public class BattleSceneManager : MonoBehaviour
                 Destroy(tablet);
             }
 
-            gameState.battleWon = true;
+            GameStateManager.Instance.battleWon = true;
 
             foreach (DiceData discardedDie in player.discardPile)
             {
@@ -624,7 +630,7 @@ public class BattleSceneManager : MonoBehaviour
 
         if (win)
         {
-            gameState.OnBattleEnd();
+            GameStateManager.Instance.OnBattleEnd();
             SceneTransition.Load("Map");
         }
 
@@ -975,5 +981,10 @@ public class BattleSceneManager : MonoBehaviour
 
         Image opponentBannerSprite = opponentColumnBanner[column - 1].GetComponent<Image>();
         opponentBannerSprite.color = new Color(1f, 1f, 1f, 1f);
+    }
+
+    void EnterPhase(BattlePhase phase)
+    {
+        OnPhaseEntered?.Invoke(phase); // sending signal about the event change
     }
 }

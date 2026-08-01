@@ -7,14 +7,12 @@ using System.Linq;
 
 public class Lifedrink : Trait
 {
-    private BattleSceneManager battleSceneManager;
     private TabletController tablet;
 
     private int initialHealing;
 
     public void Start()
     {
-        battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
 
         description = "Heal by 1 whenever you use a Damage die";
@@ -74,8 +72,8 @@ public class Lifedrink : Trait
         healing -= initialHealing;
         initialHealing = healing;
 
-        int newHealth = battleSceneManager.player.currentHealth + healing;
-        StartCoroutine(battleSceneManager.AnimatePlayerHealthIncrease(newHealth, healing));
+        int newHealth = Player.Instance.currentHealth + healing;
+        StartCoroutine(BattleSceneManager.Instance.AnimatePlayerHealthIncrease(newHealth, healing));
     }
 
     public override void OnAcvitveCombatStart()
@@ -92,8 +90,8 @@ public class Lifedrink : Trait
         }
 
         initialHealing = healing;
-        int newHealth = battleSceneManager.player.currentHealth + healing;
-        StartCoroutine(battleSceneManager.AnimatePlayerHealthIncrease(newHealth, healing));
+        int newHealth = Player.Instance.currentHealth + healing;
+        StartCoroutine(BattleSceneManager.Instance.AnimatePlayerHealthIncrease(newHealth, healing));
     }
 
     public override void OnAcvitveCombatEnd()

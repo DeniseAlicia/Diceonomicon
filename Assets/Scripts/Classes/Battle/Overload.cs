@@ -40,7 +40,7 @@ public class Overload : MonoBehaviour
                 Die die = slot.GetComponentInChildren<Die>();
                 foreach (string tag in die.dieTags)
                 {
-                    int index = System.Array.IndexOf(Main.diceTags, tag);
+                    int index = System.Array.IndexOf(Emotions.types, tag);
 
                     if (index >= 0)
                     {
@@ -98,7 +98,7 @@ public class Overload : MonoBehaviour
     {
         isOverloading = false;
         isOverloaded = true;
-        overloadText.color = Main.colors[emotionIndex];
+        overloadText.color = Emotions.colors[emotionIndex];
 
         switch (emotionIndex)
         {

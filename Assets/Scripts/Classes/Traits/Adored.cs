@@ -33,12 +33,12 @@ public class Adored : Trait
             }
         }
 
-        if (tablet.nameText.text == "Jaunt")
+        if (tablet.nameText.text == "Jaunt" && Player.Instance != null)
         {
-            BattleSceneManager.Instance.player.maxDrawSize += 1;
+            Player.Instance.maxDrawSize += 1;
             if (couple)
             {
-                BattleSceneManager.Instance.player.maxDrawSize += 1;
+                Player.Instance.maxDrawSize += 1;
             }
         }
 
@@ -103,7 +103,7 @@ public class Adored : Trait
             damage -= initialDamage;
             initialDamage = damage;
 
-            int newHealth = BattleSceneManager.Instance.opponent.currentHealth - damage;
+            int newHealth = Opponent.Instance.currentHealth - damage;
             StartCoroutine(BattleSceneManager.Instance.AnimateOpponentHealthDecrease(newHealth, damage));
         }
     }
@@ -128,7 +128,7 @@ public class Adored : Trait
             damage -= initialDamage;
             initialDamage = damage;
 
-            int newHealth = BattleSceneManager.Instance.opponent.currentHealth - damage;
+            int newHealth = Opponent.Instance.currentHealth - damage;
             StartCoroutine(BattleSceneManager.Instance.AnimateOpponentHealthDecrease(newHealth, damage));
         }
     }

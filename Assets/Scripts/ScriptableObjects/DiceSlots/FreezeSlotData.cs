@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "FreezeSlotData", menuName = "DiceSlots/FreezeSlotData")]
 public class FreezeSlotData : BuffSlotData
 {
-    public override void Effect(Die slottedDie, int mult, BattleSceneManager sceneManager, Entity owner, DiceSlotController slot)
+    public override void Effect(Die slottedDie, int mult, Entity owner, DiceSlotController slot)
     {
         List<Die> targetDice = FindTargetDie(slottedDie, slot);
 

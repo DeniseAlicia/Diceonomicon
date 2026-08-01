@@ -7,14 +7,12 @@ using System.Linq;
 
 public class Thorns : Trait
 {
-    private BattleSceneManager battleSceneManager;
     private TabletController tablet;
 
     private int initialDamage;
     
     public void Start()
     {
-        battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
 
         description = "Deal 1 damage whenever you use a Block die";
@@ -74,8 +72,8 @@ public class Thorns : Trait
         damage -= initialDamage;
         initialDamage = damage;
 
-        int newHealth = battleSceneManager.opponent.currentHealth - damage;
-        StartCoroutine(battleSceneManager.AnimateOpponentHealthDecrease(newHealth, damage));
+        int newHealth = Opponent.Instance.currentHealth - damage;
+        StartCoroutine(BattleSceneManager.Instance.AnimateOpponentHealthDecrease(newHealth, damage));
     }
 
     public override void OnAcvitveCombatStart()
@@ -91,8 +89,8 @@ public class Thorns : Trait
         }
 
         initialDamage = damage;
-        int newHealth = battleSceneManager.opponent.currentHealth - damage;
-        StartCoroutine(battleSceneManager.AnimateOpponentHealthDecrease(newHealth, damage));
+        int newHealth = Opponent.Instance.currentHealth - damage;
+        StartCoroutine(BattleSceneManager.Instance.AnimateOpponentHealthDecrease(newHealth, damage));
     }
 
     public override void OnAcvitveCombatEnd()

@@ -1,20 +1,15 @@
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 using System;
 using System.Linq;
 
 public class Hex : Trait
 {
-    private BattleSceneManager battleSceneManager;
     private TabletController tablet;
 
     private int initialDamage;
     
     public void Start()
     {
-        battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
 
         description = "Deal 1 damage whenever you use a Spell die";
@@ -74,8 +69,8 @@ public class Hex : Trait
         damage -= initialDamage;
         initialDamage = damage;
 
-        int newHealth = battleSceneManager.opponent.currentHealth - damage;
-        StartCoroutine(battleSceneManager.AnimateOpponentHealthDecrease(newHealth, damage));
+        int newHealth = Opponent.Instance.currentHealth - damage;
+        StartCoroutine(BattleSceneManager.Instance.AnimateOpponentHealthDecrease(newHealth, damage));
     }
 
     public override void OnAcvitveCombatStart()
@@ -91,8 +86,8 @@ public class Hex : Trait
         }
 
         initialDamage = damage;
-        int newHealth = battleSceneManager.opponent.currentHealth - damage;
-        StartCoroutine(battleSceneManager.AnimateOpponentHealthDecrease(newHealth, damage));
+        int newHealth = Opponent.Instance.currentHealth - damage;
+        StartCoroutine(BattleSceneManager.Instance.AnimateOpponentHealthDecrease(newHealth, damage));
     }
 
     public override void OnAcvitveCombatEnd()

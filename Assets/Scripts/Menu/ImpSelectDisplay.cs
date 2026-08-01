@@ -69,8 +69,8 @@ public class ImpSelectDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExi
         for (int i = 0; i < ImpSelectManager.Instance.diceSprites.Count(); i++)
         {
             ImpSelectManager.Instance.diceSprites[i].sprite = currentData.startingDice[i].image;
-            int emotionColor = Array.IndexOf(Main.diceTags, currentData.startingDice[i].tags[0]);
-            ImpSelectManager.Instance.diceSprites[i].color = Main.colors[emotionColor];
+            int emotionColor = Array.IndexOf(Emotions.types, currentData.startingDice[i].tags[0]);
+            ImpSelectManager.Instance.diceSprites[i].color = Emotions.colors[emotionColor];
         }
 
         ImpSelectManager.Instance.healthObjectText.text = currentData.health.ToString();
