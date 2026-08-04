@@ -136,9 +136,9 @@ public class Encounters
     // -----------------------------------------------------------------------
         { (0, "Blue"), new List<List<string>>
             {
-                new List<string>{ "Saddie", "Maddo" },
-                new List<string>{ "Saddie", "Saddie" },
-                new List<string>{ "Maddo", "Saddie" },
+                new List<string>{ "Tentice", "Tentice" },
+                // new List<string>{ "Saddie", "Saddie" },
+                // new List<string>{ "Maddo", "Saddie" },
                 new List<string>{ "Tentice", "Saddie" },
                 new List<string>{ "Maddo", "Tentice" },
             }

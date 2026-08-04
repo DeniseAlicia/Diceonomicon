@@ -241,9 +241,10 @@ public class BattleSceneManager : MonoBehaviour
         player.inColumnPhase = true;
 
         Die[] dice = FindObjectsByType<Die>(FindObjectsSortMode.None);
+
         foreach (Die die in dice)
         {
-            if (die.priority == 1 && die.isPlaced)
+            if (die.priority == 1 && die.isPlaced && !die.statuses.Contains(Status.Inactive))
             {
                 die.data.DoEffect(die);
                 if (die.didDamage > 0)
@@ -272,7 +273,7 @@ public class BattleSceneManager : MonoBehaviour
 
         foreach (Die die in dice)
         {
-            if (die.priority == 2 && die.isPlaced)
+            if (die.priority == 2 && die.isPlaced && !die.statuses.Contains(Status.Inactive))
             {
                 die.data.DoEffect(die);
                 if (die.didDamage > 0)
@@ -308,7 +309,7 @@ public class BattleSceneManager : MonoBehaviour
                 slot.slottedDie.isDraggable = false;
             }
 
-            if (slot.priority == 1 && slot.slottedDie != null && slot.isFilled)
+            if (slot.priority == 1 && slot.slottedDie != null && slot.isFilled && !slot.slottedDie.statuses.Contains(Status.Inactive))
             {
                 buffSlots.Add(slot);
             }
@@ -396,14 +397,14 @@ public class BattleSceneManager : MonoBehaviour
     {
         foreach (var slot in slots)
         {
-            if (slot == null || slot.Equals(null))
+            if (slot == null || slot.Equals(null) || slot.slottedDie.statuses.Contains(Status.Inactive))
                 continue;
 
             if (slot.priority == priority)
             {
                 if (slot != null && !slot.Equals(null))
                 {
-                    if (slot.slottedDie.data != null && slot.slottedDie.priority == 3)
+                    if (slot.slottedDie != null && slot.slottedDie.data != null && slot.slottedDie.priority == 3)
                     {
                         slot.slottedDie.data.DoEffect(slot.slottedDie);
                         if (slot.slottedDie.didDamage > 0)
@@ -577,6 +578,44 @@ public class BattleSceneManager : MonoBehaviour
                 CheckWinState();
                 yield break;
             }
+
+            yield return new WaitForSeconds(wait);
+            damageAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+    }
+
+    public IEnumerator AnimateOpponentHealthIncrease(int targetHealth, int damage)
+    {
+        RectTransform candle = opponent.candle.GetComponent<RectTransform>();
+
+        float wait = 0.1f;
+        float startY = 16.2f;   // full health
+        float endY = -36.8f;  // zero health
+        float rangeY = startY - endY;
+
+        while (opponent.currentHealth < Mathf.Min(targetHealth, opponent.maxHealth))
+        {
+            if (damage < 11)
+            {
+                wait = 0.1f;
+            }
+            else
+            {
+                wait = 1.5f / damage;
+            }
+
+            FMOD.Studio.EventInstance damageAudio = FMODUnity.RuntimeManager.CreateInstance(DamageEvent);
+            damageAudio.start();
+
+            opponent.currentHealth += 1;
+            opponent.healthText.text = opponent.currentHealth.ToString();
+
+            float healthPercent = (float)opponent.currentHealth / opponent.maxHealth;
+            float newY = Mathf.Lerp(endY, startY, healthPercent);
+
+            Vector3 pos = candle.anchoredPosition;
+            pos.y = newY;
+            candle.anchoredPosition = pos;
 
             yield return new WaitForSeconds(wait);
             damageAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);

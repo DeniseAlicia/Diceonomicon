@@ -1,13 +1,10 @@
-using UnityEngine;
 using System;
 using System.Linq;
 
 public class Hex : Trait
 {
-    private TabletController tablet;
-
     private int initialDamage;
-    
+
     public void Start()
     {
         tablet = GetComponent<TabletController>();
@@ -15,46 +12,11 @@ public class Hex : Trait
         description = "Deal 1 damage whenever you use a Spell die";
         tablet.descText.text = description;
 
-        // sceneStart = true;
-        // roundStart = true;
-        acvitveCombatStart = true;
-        placementDone = true;
-        // acvitveCombatEnd = true;
-
-        if (sceneStart)
-        {
-            BattleSceneManager.OnSceneStart.AddListener(OnSceneStart);
-        }
-        if (roundStart)
-        {
-            BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
-        }
-        if (placementDone)
-        {
-            BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
-        }
-        if (acvitveCombatStart)
-        {
-            BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
-        }
-        if (acvitveCombatEnd)
-        {
-            BattleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
-        }
+        BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
+        BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
     }
 
-
-    public override void OnSceneStart()
-    {
-        Debug.Log("Triggered on SceneStart");
-    }
-
-    public override void OnRoundStart()
-    {
-        Debug.Log("Triggered on RoundStart");
-    }
-
-    public override void OnPlacementDone()
+    public void OnPlacementDone()
     {
         int damage = 0;
 
@@ -73,7 +35,7 @@ public class Hex : Trait
         StartCoroutine(BattleSceneManager.Instance.AnimateOpponentHealthDecrease(newHealth, damage));
     }
 
-    public override void OnAcvitveCombatStart()
+    public void OnAcvitveCombatStart()
     {
         int damage = 0;
 
@@ -90,8 +52,9 @@ public class Hex : Trait
         StartCoroutine(BattleSceneManager.Instance.AnimateOpponentHealthDecrease(newHealth, damage));
     }
 
-    public override void OnAcvitveCombatEnd()
+        public override void UnsubscribeFromEvents()
     {
-        Debug.Log("Triggered on AcvitveCombatEnd");
+        BattleSceneManager.OnPlacementDone.RemoveListener(OnPlacementDone);
+        BattleSceneManager.OnAcvitveCombatStart.RemoveListener(OnAcvitveCombatStart);
     }
 }

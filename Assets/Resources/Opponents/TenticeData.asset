@@ -25,7 +25,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
   - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
   - {fileID: 11400000, guid: fc7e5ba1be96c1c4cb534392a95c6f42, type: 2}
-  - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
+  - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
   - {fileID: 11400000, guid: fc7e5ba1be96c1c4cb534392a95c6f42, type: 2}
   - {fileID: 11400000, guid: 31c25a3886eb7e14d9db255490aa5a5f, type: 2}
   - {fileID: 11400000, guid: 8a4d4f59a450719478f7c549f24faf5a, type: 2}
@@ -39,4 +39,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8a33abe298e513a41894f1c6b0d9a21c, type: 2}
   tabletPrefab: {fileID: 5131653183145106394, guid: 5db0b940a508efc4795299c77058b820, type: 3}
   slotPrefab: {fileID: 1881896027706196343, guid: 7b4fc5a074e11734695476f0948d04d2, type: 3}
-  trait: Rotator
+  trait: Clogger

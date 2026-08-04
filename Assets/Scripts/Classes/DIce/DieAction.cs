@@ -8,7 +8,7 @@ public static class DieAction
 {
     public static void RangeToValue(Die die)
     {
-        if (!die.dieTags.Contains("Buff"))
+        if (!die.dieTags.Contains("Buff") && !die.statuses.Contains(Status.Inactive))
         {
             foreach (Transform childSide in die.GetDiceSides())
             {

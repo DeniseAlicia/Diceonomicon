@@ -1,9 +1,5 @@
-using UnityEngine;
-
 public class Recycle : Trait
 {
-    private TabletController tablet;
-
     public void Start()
     {
         tablet = GetComponent<TabletController>();
@@ -11,46 +7,11 @@ public class Recycle : Trait
         description = "Heal by 1 for every unused die";
         tablet.descText.text = description;
 
-        // sceneStart = true;
-        // roundStart = true;
-        acvitveCombatStart = true;
-        placementDone = true;
-        // acvitveCombatEnd = true;
-
-        if (sceneStart)
-        {
-            BattleSceneManager.OnSceneStart.AddListener(OnSceneStart);
-        }
-        if (roundStart)
-        {
-            BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
-        }
-        if (placementDone)
-        {
-            BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
-        }
-        if (acvitveCombatStart)
-        {
-            BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
-        }
-        if (acvitveCombatEnd)
-        {
-            BattleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
-        }
+        BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
+        BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
     }
 
-
-    public override void OnSceneStart()
-    {
-        Debug.Log("Triggered on SceneStart");
-    }
-
-    public override void OnRoundStart()
-    {
-        Debug.Log("Triggered on RoundStart");
-    }
-
-    public override void OnPlacementDone()
+    public void OnPlacementDone()
     {
         int healing = 0;
 
@@ -66,15 +27,16 @@ public class Recycle : Trait
         StartCoroutine(BattleSceneManager.Instance.AnimatePlayerHealthIncrease(newHealth, healing));
     }
 
-    public override void OnAcvitveCombatStart()
+    public void OnAcvitveCombatStart()
     {
         int healing = BattleSceneManager.Instance.unusedDice.Count;
         int newHealth = Player.Instance.currentHealth + healing;
         StartCoroutine(BattleSceneManager.Instance.AnimatePlayerHealthIncrease(newHealth, healing));
     }
 
-    public override void OnAcvitveCombatEnd()
+    public override void UnsubscribeFromEvents()
     {
-        Debug.Log("Triggered on AcvitveCombatEnd");
+        BattleSceneManager.OnPlacementDone.RemoveListener(OnPlacementDone);
+        BattleSceneManager.OnAcvitveCombatStart.RemoveListener(OnAcvitveCombatStart);
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using System.Linq;
+using System.Collections.Generic;
 
 public class Die : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class Die : MonoBehaviour
     public bool isDraggable;
     public bool isPlaced = false;
     public bool isResting = false;
+
+    public List<Status> statuses = new List<Status>();
+
     public bool isFrozen = false;
     public bool isCopy;
     public int didDamage;

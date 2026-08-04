@@ -1,58 +1,22 @@
 using UnityEngine;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 public class Buddy : Trait
 {
-    private BattleSceneManager battleSceneManager;
-    private TabletController tablet;
     private Die buddyDie;
 
     public void Start()
     {
-        battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
 
         description = "Fill a random slot with a dummy die";
         tablet.descText.text = description;
 
-        // sceneStart = true;
-        roundStart = true;
-        //acvitveCombatStart = true;
-        // placementDone = true;
-        // acvitveCombatEnd = true;
-
-        if (sceneStart)
-        {
-            BattleSceneManager.OnSceneStart.AddListener(OnSceneStart);
-        }
-        if (roundStart)
-        {
-            BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
-        }
-        if (placementDone)
-        {
-            BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
-        }
-        if (acvitveCombatStart)
-        {
-            BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
-        }
-        if (acvitveCombatEnd)
-        {
-            BattleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
-        }
+        BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
     }
 
-
-    public override void OnSceneStart()
-    {
-        Debug.Log("Triggered on SceneStart");
-    }
-
-    public override void OnRoundStart()
+    public void OnRoundStart()
     {
         List<DiceSlotController> randomSlots = new List<DiceSlotController>();
 
@@ -106,7 +70,7 @@ public class Buddy : Trait
 
         die.transform.SetParent(chosenSlot.transform);
         die.transform.localPosition = new Vector3(0, 3, 0);
-        die.transform.localScale = new Vector3(6f, 6f, 6f);
+        die.transform.localScale = die.scale;
 
         chosenSlot.isFilled = true;
         chosenSlot.slottedDie = die;
@@ -114,21 +78,6 @@ public class Buddy : Trait
         die.MoveToLayer("BattleTablets");
 
         StartCoroutine(SetStats(die));
-    }
-
-    public override void OnPlacementDone()
-    {
-        Debug.Log("Triggered on PlacementDone");
-    }
-
-    public override void OnAcvitveCombatStart()
-    {
-
-    }
-
-    public override void OnAcvitveCombatEnd()
-    {
-        Debug.Log("Triggered on AcvitveCombatEnd");
     }
 
     private void Shuffle<T>(List<T> list)
@@ -147,5 +96,10 @@ public class Buddy : Trait
     {
         yield return new WaitForSeconds(1);
         die.isPlaced = true;
+    }
+
+    public override void UnsubscribeFromEvents()
+    {
+        BattleSceneManager.OnRoundStart.RemoveListener(OnRoundStart);
     }
 }

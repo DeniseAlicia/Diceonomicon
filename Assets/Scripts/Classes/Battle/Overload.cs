@@ -34,7 +34,7 @@ public class Overload : MonoBehaviour
     {
         foreach (DiceSlotController slot in tabletSlots)
         {
-            if (slot.isFilled)
+            if (slot.isFilled && slot.slottedDie != null)
             {
                 TabletController tablet = slot.GetComponentInParent<TabletController>();
                 Die die = slot.GetComponentInChildren<Die>();

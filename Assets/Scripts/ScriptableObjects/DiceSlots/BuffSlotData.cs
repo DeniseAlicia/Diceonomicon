@@ -25,8 +25,6 @@ public class BuffSlotData : DiceSlotData
             Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red, 200f);
             if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
             {
-                //Debug.Log($"Ray hit: {hit.collider.name} at {hit.point}");
-
                 Die dieComponent = hit.collider.GetComponent<Die>();
                 if (dieComponent != null)
                 {

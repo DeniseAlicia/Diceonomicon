@@ -39,4 +39,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8a33abe298e513a41894f1c6b0d9a21c, type: 2}
   tabletPrefab: {fileID: 5131653183145106394, guid: 5db0b940a508efc4795299c77058b820, type: 3}
   slotPrefab: {fileID: 1881896027706196343, guid: 7b4fc5a074e11734695476f0948d04d2, type: 3}
-  trait: Traitless
+  trait: Toxic
