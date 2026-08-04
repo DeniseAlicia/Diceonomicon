@@ -1,100 +1,35 @@
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 using System;
-using System.Linq;
 
 public class Thorns : Trait
 {
-    private TabletController tablet;
-
-    private int initialDamage;
-    
     public void Start()
     {
         tablet = GetComponent<TabletController>();
 
-        description = "Deal 1 damage whenever you use a Block die";
+        description = "Adds half of the Block value to the damage";
         tablet.descText.text = description;
 
-        // sceneStart = true;
-        // roundStart = true;
-        acvitveCombatStart = true;
-        placementDone = true;
-        // acvitveCombatEnd = true;
-
-        if (sceneStart)
-        {
-            BattleSceneManager.OnSceneStart.AddListener(OnSceneStart);
-        }
-        if (roundStart)
-        {
-            BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
-        }
-        if (placementDone)
-        {
-            BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
-        }
-        if (acvitveCombatStart)
-        {
-            BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
-        }
-        if (acvitveCombatEnd)
-        {
-            BattleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
-        }
+        BattleSceneManager.OnSlotTriggered += OnSlotTriggered;
     }
 
-
-    public override void OnSceneStart()
+    public void OnSlotTriggered(DiceSlotController slot)
     {
-        Debug.Log("Triggered on SceneStart");
-    }
-
-    public override void OnRoundStart()
-    {
-        Debug.Log("Triggered on RoundStart");
-    }
-
-    public override void OnPlacementDone()
-    {
-        int damage = 0;
-
-        foreach (DiceSlotController slot in tablet.tabletSlots)
+        if (slot.slottedDie != null && tablet.tabletSlots.Contains(slot) && slot.tag == "Block")
         {
-            if (slot.slottedDie != null && slot.slottedDie.dieTags.Contains("Block"))
+            if (slot.owner == Player.Instance)
             {
-                damage++;
+                Player.Instance.damage += (int)Math.Ceiling((double)slot.slottedDie.value / 2);
             }
-        }
-
-        damage -= initialDamage;
-        initialDamage = damage;
-
-        int newHealth = Opponent.Instance.currentHealth - damage;
-        StartCoroutine(BattleSceneManager.Instance.AnimateOpponentHealthDecrease(newHealth, damage));
-    }
-
-    public override void OnAcvitveCombatStart()
-    {
-        int damage = 0;
-
-        foreach (DiceSlotController slot in tablet.tabletSlots)
-        {
-            if (slot.slottedDie != null && slot.slottedDie.dieTags.Contains("Block"))
+            else
             {
-                damage++;
+                Opponent.Instance.damage += (int)Math.Ceiling((double)slot.slottedDie.value / 2);
             }
-        }
 
-        initialDamage = damage;
-        int newHealth = Opponent.Instance.currentHealth - damage;
-        StartCoroutine(BattleSceneManager.Instance.AnimateOpponentHealthDecrease(newHealth, damage));
+        }
     }
 
-    public override void OnAcvitveCombatEnd()
+    public override void UnsubscribeFromEvents()
     {
-        Debug.Log("Triggered on AcvitveCombatEnd");
+        BattleSceneManager.OnSlotTriggered -= OnSlotTriggered;
     }
 }

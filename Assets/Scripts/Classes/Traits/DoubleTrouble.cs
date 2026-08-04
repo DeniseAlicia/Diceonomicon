@@ -2,46 +2,19 @@ using UnityEngine;
 
 public class DoubleTrouble : Trait
 {
-    private BattleSceneManager battleSceneManager;
-    private TabletController tablet;
-
     private bool isFilled;
     private bool isInEffect;
 
     public void Start()
     {
-        battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         tablet = GetComponent<TabletController>();
 
         description = "Whena every slot is filled, double all the dice values";
         tablet.descText.text = description;
 
-        // sceneStart = true;
-        roundStart = true;
-        acvitveCombatStart = true;
-        placementDone = true;
-        //acvitveCombatEnd = true;
-
-        if (sceneStart)
-        {
-            BattleSceneManager.OnSceneStart.AddListener(OnSceneStart);
-        }
-        if (roundStart)
-        {
-            BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
-        }
-        if (placementDone)
-        {
-            BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
-        }
-        if (acvitveCombatStart)
-        {
-            BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
-        }
-        if (acvitveCombatEnd)
-        {
-            BattleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
-        }
+        BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
+        BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
+        BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
     }
 
     public void Update()
@@ -63,12 +36,13 @@ public class DoubleTrouble : Trait
         }
     }
 
-    public override void OnSceneStart()
+    public void OnRoundStart()
     {
-        Debug.Log("Triggered on SceneStart");
+        isFilled = false;
+        isInEffect = false;
     }
 
-    public override void OnRoundStart()
+    public void OnPlacementDone()
     {
         int slotsFilled = 0;
 
@@ -80,9 +54,11 @@ public class DoubleTrouble : Trait
             }
         }
 
-        if (slotsFilled == tablet.tabletSlots.Count)
+        if (!isInEffect && slotsFilled == tablet.tabletSlots.Count)
         {
             isFilled = true;
+            isInEffect = true;
+            DoubleDiceValues();
         }
         else
         {
@@ -90,7 +66,7 @@ public class DoubleTrouble : Trait
         }
     }
 
-    public override void OnPlacementDone()
+    public void OnAcvitveCombatStart()
     {
         int slotsFilled = 0;
 
@@ -102,42 +78,33 @@ public class DoubleTrouble : Trait
             }
         }
 
-        if (slotsFilled == tablet.tabletSlots.Count)
+        if (!isInEffect && slotsFilled == tablet.tabletSlots.Count)
         {
             isFilled = true;
-            Debug.Log("Filled");
+            isInEffect = true;
+            DoubleDiceValues();
         }
         else
         {
             isFilled = false;
-            Debug.Log("Not filled");
         }
     }
 
-    public override void OnAcvitveCombatStart()
-    {
-        int slotsFilled = 0;
 
+    public void DoubleDiceValues()
+    {
         foreach (DiceSlotController slot in tablet.tabletSlots)
         {
-            if (slot.slottedDie != null)
-            {
-                slotsFilled += 1;
-            }
-        }
-
-        if (slotsFilled == tablet.tabletSlots.Count)
-        {
-            isFilled = true;
-        }
-        else
-        {
-            isFilled = false;
+            slot.slottedDie.value = slot.slottedDie.value + slot.slottedDie.value;
+            DieAction.UpdateText(slot.slottedDie);
         }
     }
 
-    public override void OnAcvitveCombatEnd()
-    {
 
+    public override void UnsubscribeFromEvents()
+    {
+        BattleSceneManager.OnRoundStart.RemoveListener(OnRoundStart);
+        BattleSceneManager.OnPlacementDone.RemoveListener(OnPlacementDone);
+        BattleSceneManager.OnAcvitveCombatStart.RemoveListener(OnAcvitveCombatStart);
     }
 }

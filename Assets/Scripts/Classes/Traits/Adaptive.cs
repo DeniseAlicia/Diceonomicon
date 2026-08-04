@@ -1,55 +1,18 @@
-using UnityEngine;
-
 public class Adaptive : Trait
 {
-    private TabletController tablet;
-
     public void Start()
     {
         tablet = GetComponent<TabletController>();
-        
+
         description = "Damage dice gain a +1 bonus and Block dice get a -1 penalty";
         tablet.descText.text = description;
 
-        // sceneStart = true;
-        // roundStart = true;
-        acvitveCombatStart = true;
-        placementDone = true;
-        // acvitveCombatEnd = true;
-
-        if (sceneStart)
-        {
-            BattleSceneManager.OnSceneStart.AddListener(OnSceneStart);
-        }
-        if (roundStart)
-        {
-            BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
-        }
-        if (placementDone)
-        {
-            BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
-        }
-        if (acvitveCombatStart)
-        {
-            BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
-        }
-        if (acvitveCombatEnd)
-        {
-            BattleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
-        }
+        BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
+        BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
     }
 
-    public override void OnSceneStart()
-    {
-        Debug.Log("Triggered on SceneStart");
-    }
 
-    public override void OnRoundStart()
-    {
-        Debug.Log("Triggered on RoundStart");
-    }
-
-    public override void OnPlacementDone()
+    public void OnPlacementDone()
     {
         foreach (DiceSlotController slot in tablet.tabletSlots)
         {
@@ -92,7 +55,7 @@ public class Adaptive : Trait
         }
     }
 
-    public override void OnAcvitveCombatStart()
+    public void OnAcvitveCombatStart()
     {
         foreach (DiceSlotController slot in tablet.tabletSlots)
         {
@@ -135,8 +98,9 @@ public class Adaptive : Trait
         }
     }
 
-    public override void OnAcvitveCombatEnd()
+    public override void UnsubscribeFromEvents()
     {
-        Debug.Log("Triggered on AcvitveCombatEnd");
+        BattleSceneManager.OnPlacementDone.RemoveListener(OnPlacementDone);
+        BattleSceneManager.OnAcvitveCombatStart.RemoveListener(OnAcvitveCombatStart);
     }
 }

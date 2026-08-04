@@ -1,14 +1,9 @@
 using System;
 using UnityEngine;
-using UnityEngine.Analytics;
-using UnityEngine.UIElements;
 
 public class Unpredictable : Trait
 {
     private Unpredictable Instance;
-
-    private BattleSceneManager battleSceneManager;
-    private TabletController tablet;
 
     private DiceSlotData attackSlot;
     private DiceSlotData blockSlot;
@@ -27,50 +22,23 @@ public class Unpredictable : Trait
 
     public void Start()
     {
-        battleSceneManager = FindFirstObjectByType<BattleSceneManager>();
         Instance.tablet = GetComponent<TabletController>();
 
         attackSlot = Resources.Load<DiceSlotData>($"Slots/AttackSlot");
         blockSlot = Resources.Load<DiceSlotData>($"Slots/ShieldSlot");
         poisonSlot = Resources.Load<DiceSlotData>($"Slots/PoisonSlot");
 
-        slots = new DiceSlotData[] { attackSlot, blockSlot , poisonSlot};
+        slots = new DiceSlotData[] { attackSlot, blockSlot, poisonSlot };
 
         description = "Randomizes the slots every round.";
         tablet.descText.text = description;
 
         Instance.OnSceneStart();
-        Instance.roundStart = true;
-        // acvitveCombatStart = true;
-        // placementDone = true;
-        // acvitveCombatEnd = true;
-
-        if (sceneStart)
-        {
-            BattleSceneManager.OnSceneStart.AddListener(OnSceneStart);
-        }
-        if (roundStart)
-        {
-            BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
-        }
-        if (placementDone)
-        {
-            BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
-        }
-        if (acvitveCombatStart)
-        {
-            BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
-        }
-        if (acvitveCombatEnd)
-        {
-            BattleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
-        }
-
-        Debug.Log("Starting...");
+        BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
     }
 
 
-    public override void OnSceneStart()
+    public void OnSceneStart()
     {
         Instance.attacks = 0;
         Instance.blocks = 0;
@@ -83,7 +51,7 @@ public class Unpredictable : Trait
         }
     }
 
-    public override void OnRoundStart()
+    public void OnRoundStart()
     {
         Instance.attacks = 0;
         Instance.blocks = 0;
@@ -95,22 +63,6 @@ public class Unpredictable : Trait
             SlotAction.ChangeSlotData(i, tablet, slots[ValidateRandom(randomNumber)]);
         }
     }
-
-    public override void OnPlacementDone()
-    {
-        Debug.Log("Triggered on PlacementDone");
-    }
-
-    public override void OnAcvitveCombatStart()
-    {
-        Debug.Log("Triggered on AcvitveCombatStart");
-    }
-
-    public override void OnAcvitveCombatEnd()
-    {
-        Debug.Log("Triggered on AcvitveCombatEnd");
-    }
-
 
     public int ValidateRandom(int randomNumber)
     {
@@ -143,5 +95,11 @@ public class Unpredictable : Trait
                 randomNumber = 0;
                 return randomNumber;
         }
+    }
+
+    public override void UnsubscribeFromEvents()
+    {
+        BattleSceneManager.OnSceneStart.RemoveListener(OnSceneStart);
+        BattleSceneManager.OnRoundStart.RemoveListener(OnRoundStart);
     }
 }

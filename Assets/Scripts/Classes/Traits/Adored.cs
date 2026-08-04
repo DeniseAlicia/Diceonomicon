@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Adored : Trait
 {
-    private TabletController tablet;
     private TabletController[] tablets;
     public bool couple;
     private int initialDamage;
@@ -42,48 +41,11 @@ public class Adored : Trait
             }
         }
 
-        //sceneStart = true;
-        // roundStart = true;
-        acvitveCombatStart = true;
-        placementDone = true;
-        // acvitveCombatEnd = true;
-
-        if (sceneStart)
-        {
-            BattleSceneManager.OnSceneStart.AddListener(OnSceneStart);
-        }
-        if (roundStart)
-        {
-            BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
-        }
-        if (placementDone)
-        {
-            BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
-        }
-        if (acvitveCombatStart)
-        {
-            BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
-        }
-        if (acvitveCombatEnd)
-        {
-            BattleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
-        }
-
-        Debug.Log("Starting...");
+        BattleSceneManager.OnPlacementDone.AddListener(OnPlacementDone);
+        BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
     }
 
-
-    public override void OnSceneStart()
-    {
-
-    }
-
-    public override void OnRoundStart()
-    {
-        Debug.Log("Triggered on RoundStart");
-    }
-
-    public override void OnPlacementDone()
+    public void OnPlacementDone()
     {
         int damage = 0;
         if (tablet.nameText.text == "Xiont")
@@ -108,7 +70,7 @@ public class Adored : Trait
         }
     }
 
-    public override void OnAcvitveCombatStart()
+    public void OnAcvitveCombatStart()
     {
         int damage = 0;
         if (tablet.nameText.text == "Xiont")
@@ -133,8 +95,9 @@ public class Adored : Trait
         }
     }
 
-    public override void OnAcvitveCombatEnd()
+    public override void UnsubscribeFromEvents()
     {
-        Debug.Log("Triggered on AcvitveCombatEnd");
+        BattleSceneManager.OnPlacementDone.RemoveListener(OnPlacementDone);
+        BattleSceneManager.OnAcvitveCombatStart.RemoveListener(OnAcvitveCombatStart);
     }
 }
