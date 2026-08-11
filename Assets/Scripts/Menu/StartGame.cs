@@ -2,12 +2,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using TransitionSystem;
+using UnityEngine.Playables;
+using System.Collections;
 
 public class StartGame : MonoBehaviour
 {
     private GameObject gameManagerObject;
     private GameObject impManagerObject;
     [SerializeField] public TransitionSettings transition;
+    [SerializeField] private PlayableDirector director;
+    private float interval = 340f; // 5 minutes
+
+    private Coroutine timelineCoroutine;
 
     private void Awake()
     {
@@ -17,9 +23,22 @@ public class StartGame : MonoBehaviour
         TransitionManager.GetInstance().runningTransition = false;
     }
 
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "StartScreen" && Input.GetKeyDown(KeyCode.Escape))
+        {
+            CancelTimeline();
+        }
+    }
+
+
     private void Start()
     {
         Application.targetFrameRate = 60;
+        if (SceneManager.GetActiveScene().name == "StartScreen")
+        {
+            timelineCoroutine = StartCoroutine(RepeatTimeline());
+        }
     }
 
     public void StartNewGame()
@@ -65,4 +84,43 @@ public class StartGame : MonoBehaviour
         //SceneManager.LoadScene("StartScreen");
     }
 
+    private void CancelTimeline()
+    {
+        Debug.Log("Timeline cancelled!");
+
+        // Stop playback
+        director.Stop();
+
+        // Jump back to beginning
+        director.time = 0;
+        director.Evaluate();
+    }
+
+    private void OnDisable()
+    {
+        if (director != null)
+        {
+            director.Stop();
+            director.time = 0;
+            director.Evaluate();
+        }
+    }
+
+    private IEnumerator RepeatTimeline()
+    {
+        while (true)
+        {
+            Debug.Log("Waiting " + interval + " seconds...");
+
+            yield return new WaitForSecondsRealtime(interval);
+
+            Debug.Log("Playing Timeline!");
+
+            director.time = 0;
+            director.Evaluate();
+            director.Play();
+
+            Debug.Log("Timeline state: " + director.state);
+        }
+    }
 }

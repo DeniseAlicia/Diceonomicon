@@ -176,6 +176,7 @@ public class EnemyAI : MonoBehaviour
         column3Count = 0;
 
         PlaceDice();
+        PlaceNeutralDice();
 
         if (dice.Count() > 0)
         {
@@ -261,6 +262,60 @@ public class EnemyAI : MonoBehaviour
 
                     // Restart recursion after placing a die
                     PlaceDice();
+                    return;
+                }
+            }
+        }
+    }
+
+    public void PlaceNeutralDice()
+    {
+
+        for (int i = 0; i < emptySlots.Count; i++)
+        {
+            DiceSlotController slot = emptySlots[i];
+            int columnIndex;
+
+            if (slot.isFilled)
+            {
+                continue;
+            }
+
+            if (slot.transform.position.x < 7.3f) columnIndex = 1;
+            else if (slot.transform.position.x < 8.1f) columnIndex = 2;
+            else columnIndex = 3;
+
+            if ((columnIndex == 1 && column1Count >= columnLimit) ||
+                (columnIndex == 2 && column2Count >= columnLimit) ||
+                (columnIndex == 3 && column3Count >= columnLimit))
+            {
+                continue;
+            }
+
+            foreach (Die die in dice)
+            {
+                if (die.dieTags.Contains("Neutral") && slot.tag == "Spell" || die.dieTags.Contains("Neutral") && slot.tag == "Block" || die.dieTags.Contains("Neutral") && slot.tag == "Damage")
+                {
+                    die.transform.SetParent(slot.transform);
+                    die.transform.localPosition = new Vector3(0, 3, 0);
+                    die.transform.localScale = die.scale;
+
+                    slot.isFilled = true;
+                    slot.slottedDie = die;
+                    die.isPlaced = true;
+                    die.parentSlot = slot;
+                    die.MoveToLayer("BattleTablets");
+
+                    if (columnIndex == 1) column1Count++;
+                    else if (columnIndex == 2) column2Count++;
+                    else column3Count++;
+
+                    CheckDieUpDown(die);
+
+                    dice.Remove(die);
+
+                    // Restart recursion after placing a die
+                    PlaceNeutralDice();
                     return;
                 }
             }

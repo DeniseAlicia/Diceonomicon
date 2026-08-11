@@ -25,7 +25,7 @@ public class ResetGame : MonoBehaviour
 
     private void Update()
     {
-        if (!TransitionManager.GetInstance().runningTransition && !paused && Input.GetKeyDown(KeyCode.Escape))
+        if (!TransitionManager.GetInstance().runningTransition && !paused && Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "StartScreen")
         {
             paused = true;
             Time.timeScale = 0;

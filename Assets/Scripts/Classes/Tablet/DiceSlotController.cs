@@ -102,8 +102,11 @@ public class DiceSlotController : MonoBehaviour
         }
 
         mult = 1 + tempMult;
-        DetectLinksDown(this.transform.position);
-        DetectLinksUp(this.transform.position);
+        if (!slottedDie.dieTags.Contains("Neutral"))
+        {
+            DetectLinksDown(this.transform.position);
+            DetectLinksUp(this.transform.position);
+        }
         slotData.Effect(slottedDie, mult, owner, this);
         tempMult = 0;
         return;

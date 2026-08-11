@@ -653,11 +653,7 @@ public class Tutorial : MonoBehaviour
             }
             else if (dialogueIndex == 3)
             {
-                GameStateManager gameManagerObject = FindFirstObjectByType<GameStateManager>();
-
-                GameObject.Destroy(gameManagerObject);
-
-                SceneManager.LoadScene("MainMenu");
+                EndTutorial();
             }
 
         }
@@ -820,5 +816,14 @@ public class Tutorial : MonoBehaviour
 
         yield return new WaitForSeconds(0.35f);
         canClick = true;
+    }
+
+    public void EndTutorial()
+    {
+        GameStateManager gameManagerObject = FindFirstObjectByType<GameStateManager>();
+
+        GameObject.Destroy(gameManagerObject);
+
+        SceneManager.LoadScene("MainMenu");
     }
 }
