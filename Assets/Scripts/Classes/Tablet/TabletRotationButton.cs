@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RotationButton : MonoBehaviour
 {
@@ -17,6 +18,13 @@ public class RotationButton : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name != "BattleSetup")
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
+       
+
         meshRenderer = GetComponent<MeshRenderer>();
         if (meshRenderer != null)
         {
