@@ -34,41 +34,53 @@ public static class DiceManager
 
     public static void SortAllDice(List<Die> dice, BattleSceneManager sceneManager, Button button)
     {
-        foreach (Die die in Player.Instance.dice)
-        {
-            die.GetSideFacingUp();
-            die.isResting = true;
-            die.isDraggable = true;
-            die.rigidBody.isKinematic = true;
-            die.rigidBody.useGravity = false;
-        }
+        // foreach (Die die in Player.Instance.dice)
+        // {
+        //     die.GetSideFacingUp();
+        //     die.isResting = true;
+        //     die.isDraggable = true;
+        //     die.rigidBody.isKinematic = true;
+        //     die.rigidBody.useGravity = false;
+        // }
 
-        float overflow = 0;
-        float spacing;
+        // float overflow = 0;
+        // float spacing;
         float distance = 0.5f;
-        Vector3 diePos;
+        // Vector3 diePos;
+
+        Sequence moveSequence = DOTween.Sequence();
 
         for (int i = 0; i < dice.Count; i++)
         {
-            diePos = new Vector3(-0.5f, 0.15f, -1f);
-            //dice[i].transform.position = diePos;
+            float overflow = Mathf.Floor(i / 3);
+            float spacing = (i - overflow * 3) * distance;
 
-            overflow = Mathf.Floor(i / 3);
-            spacing = (i - overflow * 3) * distance;
+            Vector3 diePos = new Vector3(
+                -0.5f + spacing,
+                0.15f,
+                -1f + overflow * distance
+            );
 
-            diePos.x += spacing;
-            diePos.z += overflow * distance;
-            //dice[i].transform.position = diePos;
-
-            dice[i].transform.DOMove(diePos, 0.2f).SetEase(Ease.OutQuad);
+            moveSequence.Join(
+                dice[i].transform.DOMove(diePos, 0.2f)
+                    .SetEase(Ease.OutQuad)
+            );
         }
 
-        foreach (Die die in Player.Instance.dice)
+        moveSequence.OnComplete(() =>
         {
-            die.isResting = false;
-        }
+            foreach (Die die in Player.Instance.dice)
+            {
+                die.GetSideFacingUp();
+                die.isResting = true;
+                die.isDraggable = true;
+                die.rigidBody.isKinematic = true;
+                die.rigidBody.useGravity = false;
+                die.isResting = false;
+            }
 
-        button.gameObject.SetActive(true);
+            button.gameObject.SetActive(true);
+        });
     }
 
     static void RestartOnClick()

@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using DG.Tweening;
 using UnityEngine.UI;
 
@@ -11,25 +8,13 @@ public class ImpSelectManager : MonoBehaviour
 {
     public static ImpSelectManager Instance;
 
-
     [Header("Selection Settings")]
     public int maxSelections = 3;
     public List<TabletData> selectedImplings = new List<TabletData>();
     public bool newGame;
 
-    [Header("Selection Preview")]
-    public ImplingPreview[] preview;
-    [SerializeField] public GameObject diceViewObject;
-    [SerializeField] public List<Image> diceSprites;
-    [SerializeField] public GameObject healthObject;
-    [SerializeField] public TMP_Text healthObjectText;
-
-    [Header("UI References")]
-    [SerializeField] private GameObject warningPanel;
-    public Button startButton;
-
     private Coroutine hideCoroutine;
-    private int combinedHealth;
+    public int combinedHealth;
 
     public void Awake()
     {
@@ -44,15 +29,15 @@ public class ImpSelectManager : MonoBehaviour
             return;
         }
 
-        if (warningPanel != null)
-            warningPanel.SetActive(false);
+        if (MainMenuManager.Instance.warningPanel != null)
+            MainMenuManager.Instance.warningPanel.SetActive(false);
     }
 
     public bool Selection(TabletData data)
     {
         if (selectedImplings.Contains(data))
         {
-            foreach (ImplingPreview imp in preview)
+            foreach (ImplingPreview imp in MainMenuManager.Instance.preview)
             {
                 if (imp.impName.text == data.name)
                 {
@@ -67,7 +52,7 @@ public class ImpSelectManager : MonoBehaviour
             }
 
             selectedImplings.Remove(data);
-            startButton.interactable = false;
+            MainMenuManager.Instance.startButton.interactable = false;
             return false;
         }
 
@@ -79,14 +64,14 @@ public class ImpSelectManager : MonoBehaviour
         selectedImplings.Add(data);
         if (selectedImplings.Count == maxSelections)
         {
-            startButton.interactable = true;
+            MainMenuManager.Instance.startButton.interactable = true;
         }
         else
         {
-            startButton.interactable = false;
+            MainMenuManager.Instance.startButton.interactable = false;
         }
 
-        foreach (ImplingPreview imp in preview)
+        foreach (ImplingPreview imp in MainMenuManager.Instance.preview)
         {
             if (!imp.assigned)
             {
@@ -101,33 +86,10 @@ public class ImpSelectManager : MonoBehaviour
         return true;
     }
 
-    public void ConfirmSelection()
+    public void ResetSelection()
     {
-        if (selectedImplings.Count < maxSelections)
-        {
-            ShowWarning();
-            return;
-        }
-
-        if (GameStateManager.Instance != null)
-        {
-            GameStateManager.Instance.player.activeImplings = selectedImplings;
-        }
-
-        newGame = true;
-
-        foreach (TabletData imp in selectedImplings)
-        {
-            combinedHealth += imp.health;
-        }
-
-        if (GameStateManager.Instance != null)
-        { 
-            GameStateManager.Instance.player.maxHealth = combinedHealth;
-            GameStateManager.Instance.player.currentHealth = combinedHealth;
-        }
-
-        SceneTransition.Load("Map");
+        selectedImplings = new List<TabletData>();
+        combinedHealth = 0; 
     }
 
     public void ConfirmSelectionTutorial()
@@ -147,12 +109,12 @@ public class ImpSelectManager : MonoBehaviour
         SceneTransition.Load("Tutorial");
     }
 
-    private void ShowWarning()
+    public void ShowWarning()
     {
-        if (warningPanel == null)
+        if (MainMenuManager.Instance.warningPanel == null)
             return;
 
-        warningPanel.SetActive(true);
+        MainMenuManager.Instance.warningPanel.SetActive(true);
 
         if (hideCoroutine != null)
             StopCoroutine(hideCoroutine);
@@ -160,12 +122,12 @@ public class ImpSelectManager : MonoBehaviour
         hideCoroutine = StartCoroutine(HideWarningAfterDelay(3f));
     }
 
-    private void HideWarning()
+    public void HideWarning()
     {
-        if (warningPanel == null)
+        if (MainMenuManager.Instance.warningPanel == null)
             return;
 
-        warningPanel.SetActive(false);
+        MainMenuManager.Instance.warningPanel.SetActive(false);
     }
 
     private IEnumerator HideWarningAfterDelay(float delay)

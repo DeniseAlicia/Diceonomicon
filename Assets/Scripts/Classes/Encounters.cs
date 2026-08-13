@@ -137,8 +137,8 @@ public class Encounters
         { (0, "Blue"), new List<List<string>>
             {
                 new List<string>{ "Tentice", "Tentice" },
-                // new List<string>{ "Saddie", "Saddie" },
-                // new List<string>{ "Maddo", "Saddie" },
+                new List<string>{ "Saddie", "Saddie" },
+                new List<string>{ "Maddo", "Saddie" },
                 new List<string>{ "Tentice", "Saddie" },
                 new List<string>{ "Maddo", "Tentice" },
             }
@@ -261,11 +261,11 @@ public class Encounters
         { (0, "Yellow"), new List<List<string>>
             {
                 new List<string>{ "Sludgeo", "Sludgeo"},
-                // new List<string>{ "Toksick", "Toksick"},
-                // new List<string>{ "Diedra", "Toksick"},
-                // new List<string>{ "Toksick", "Acula"},
-                // new List<string>{ "Acula", "Sludgeo"},
-                // new List<string>{ "Acula", "Pierco"},
+                new List<string>{ "Toksick", "Toksick"},
+                new List<string>{ "Diedra", "Toksick"},
+                new List<string>{ "Toksick", "Acula"},
+                new List<string>{ "Acula", "Sludgeo"},
+                new List<string>{ "Acula", "Pierco"},
             }
         },
                 { (1, "Yellow"), new List<List<string>>

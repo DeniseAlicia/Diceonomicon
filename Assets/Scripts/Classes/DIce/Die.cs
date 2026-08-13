@@ -198,6 +198,8 @@ public class Die : MonoBehaviour
                 transform.localScale = scale;
             }
 
+
+
         }
     }
 
@@ -220,6 +222,7 @@ public class Die : MonoBehaviour
     {
         if (isDraggable)
         {
+
             //transform.eulerAngles = lastRotation;
             RaycastHit hit = new RaycastHit();
 

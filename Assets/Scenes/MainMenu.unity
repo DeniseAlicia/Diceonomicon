@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &865373 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6690298743573306218, guid: 19c3446df0d9f6f49ab22224550564a6, type: 3}
-  m_PrefabInstance: {fileID: 6869920682626440080}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &48991085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,11 +1943,64 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &685682421 stripped
+--- !u!1 &669160158
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6441710388270983732, guid: 19c3446df0d9f6f49ab22224550564a6, type: 3}
-  m_PrefabInstance: {fileID: 6869920682626440080}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 669160160}
+  - component: {fileID: 669160159}
+  m_Layer: 0
+  m_Name: MainMenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &669160159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669160158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3181acf164cf1de4caea08fb4da55804, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  diceViewObject: {fileID: 2011358359}
+  healthObject: {fileID: 6869920682626440082}
+  healthObjectText: {fileID: 6869920682626440081}
+  preview:
+  - {fileID: 6551790985243430845}
+  - {fileID: 1165895717}
+  - {fileID: 452572147}
+  diceSprites:
+  - {fileID: 535020296}
+  - {fileID: 2135248430}
+  - {fileID: 1571617481}
+  - {fileID: 239632330}
+  warningPanel: {fileID: 837716625}
+  startButton: {fileID: 1566660771}
+--- !u!4 &669160160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669160158}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -81.11377, y: -33.95311, z: -14.08086}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &685682422 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 543016855888897998, guid: 19c3446df0d9f6f49ab22224550564a6, type: 3}
@@ -2801,11 +2843,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922191830}
   m_CullTransparentMesh: 1
---- !u!1 &1035598914 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6651471507071399040, guid: 5a1a655a151fcf94c8b474c029676da7, type: 3}
-  m_PrefabInstance: {fileID: 2011358358}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1035598915 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1413971320946076173, guid: 5a1a655a151fcf94c8b474c029676da7, type: 3}
@@ -4262,8 +4299,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1570015844}
-        m_TargetAssemblyTypeName: ImpSelectManager, Assembly-CSharp
+      - m_Target: {fileID: 669160159}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
         m_MethodName: ConfirmSelection
         m_Mode: 1
         m_Arguments:
@@ -4419,20 +4456,7 @@ MonoBehaviour:
   maxSelections: 3
   selectedImplings: []
   newGame: 0
-  preview:
-  - {fileID: 6551790985243430845}
-  - {fileID: 1165895717}
-  - {fileID: 452572147}
-  diceViewObject: {fileID: 1035598914}
-  diceSprites:
-  - {fileID: 535020296}
-  - {fileID: 2135248430}
-  - {fileID: 1571617481}
-  - {fileID: 239632330}
-  healthObject: {fileID: 685682421}
-  healthObjectText: {fileID: 865373}
-  warningPanel: {fileID: 837716625}
-  startButton: {fileID: 1566660771}
+  combinedHealth: 0
 --- !u!4 &1570015845
 Transform:
   m_ObjectHideFlags: 0
@@ -5949,6 +5973,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1a655a151fcf94c8b474c029676da7, type: 3}
+--- !u!1 &2011358359 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6651471507071399040, guid: 5a1a655a151fcf94c8b474c029676da7, type: 3}
+  m_PrefabInstance: {fileID: 2011358358}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2037854336
 GameObject:
   m_ObjectHideFlags: 0
@@ -6700,6 +6729,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19c3446df0d9f6f49ab22224550564a6, type: 3}
+--- !u!114 &6869920682626440081 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6690298743573306218, guid: 19c3446df0d9f6f49ab22224550564a6, type: 3}
+  m_PrefabInstance: {fileID: 6869920682626440080}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &6869920682626440082 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6441710388270983732, guid: 19c3446df0d9f6f49ab22224550564a6, type: 3}
+  m_PrefabInstance: {fileID: 6869920682626440080}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8163230361219108384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6821,3 +6866,4 @@ SceneRoots:
   - {fileID: 148044035}
   - {fileID: 1570015845}
   - {fileID: 713447977}
+  - {fileID: 669160160}

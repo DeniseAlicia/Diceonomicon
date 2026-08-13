@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
-using System.Linq;
 
 public class Player : Entity
 {

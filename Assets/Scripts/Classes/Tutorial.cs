@@ -57,7 +57,11 @@ public class Tutorial : MonoBehaviour
         player = Player.Instance;
         opponent = Opponent.Instance;
 
+        player.currentHealth = player.maxHealth;
+        opponent.currentHealth = opponent.maxHealth;
 
+        player.healthText.text = player.currentHealth.ToString();
+        opponent.healthText.text = opponent.currentHealth.ToString();
 
         // Disable UI
         RotationButton[] allButtons = Object.FindObjectsByType<RotationButton>(FindObjectsSortMode.None);
@@ -98,23 +102,9 @@ public class Tutorial : MonoBehaviour
 
     void Update()
     {
-        if (textbox.activeInHierarchy && canClick)
+        if (textbox.activeInHierarchy && canClick && Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (isTyping)
-                {
-                    if (typingCoroutine != null)
-                        StopCoroutine(typingCoroutine);
-
-                    text.text = currentLines[lineIndex];
-                    isTyping = false;
-                }
-                else
-                {
-                    NextLine();
-                }
-            }
+            StartCoroutine(HandleClick());
         }
 
         //////////////////////////////////////////////////////////////////////////
@@ -150,6 +140,7 @@ public class Tutorial : MonoBehaviour
             }
             else if (dialogueIndex == 4)
             {
+                rollButton.interactable = false;
                 string[] lines = {
                     "Press the button to roll your dice!"
                      };
@@ -180,7 +171,7 @@ public class Tutorial : MonoBehaviour
                 }
 
                 string[] lines = {
-                    "That Bouncer is really angry. He is going to hit us if we don't shield us.",
+                    "That Bouncer is really angry. He is going to hurt us if we don't shield us.",
                     "The good news is any damage we take will be absorbed by the wax from our candle, but if we run out we gotta start all over.",
                     //"Now back on topic. Place the dice in the Shield slots.", };
                     "Now, place the dice in the blue Shield slots.",
@@ -324,8 +315,8 @@ public class Tutorial : MonoBehaviour
                     //"But be careful, a combo can only be made with same-colored dice and if they are directly touching each other vertically!",
                     //"Now try to build an attack combo in your second column."
                     "Now let's get on the offense.",
-                    "See how the enemy's blue dice are lined up vertically?",
-                    "That's a combo! The value of the dice will be multiplied by however many dice there are in a combo.",
+                    "See how the enemy's blue dice are lined up vertically? That's a combo!",
+                    "The value of the dice will be multiplied by however many dice there are in a combo.",
                     "Combos can only be created with same-colored dice and if lined up vertically!",
                     };
                 currentLines = lines;
@@ -421,7 +412,7 @@ public class Tutorial : MonoBehaviour
                 text.text = string.Empty;
                 string[] lines = {
                     //"I'm impressed! You are naturally gifted when it comes to dice combat."
-                    "You will need to do more than just attacking and blocking to defeating other hell dwellers.",
+                    "You will need to do more than just attacking and blocking to defeat other hell dwellers.",
                      };
                 currentLines = lines;
                 text.text = string.Empty;
@@ -814,13 +805,14 @@ public class Tutorial : MonoBehaviour
             NextLine();
         }
 
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0.5f);
         canClick = true;
     }
 
     public void EndTutorial()
     {
-        GameStateManager gameManagerObject = FindFirstObjectByType<GameStateManager>();
+        GameStateManager gameManager = FindFirstObjectByType<GameStateManager>();
+        GameObject gameManagerObject = gameManager.gameObject;
 
         GameObject.Destroy(gameManagerObject);
 
