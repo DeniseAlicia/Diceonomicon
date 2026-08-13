@@ -38,7 +38,7 @@ public class Waypoint : MonoBehaviour
     public Renderer innerWaypointRenderer;
 
     [Header("Spawn / Spiral")]
-    public float coreRadius = 3f;               // radius of central cylinder surface
+    private float coreRadius = 6.1f;               // radius of central cylinder surface
     public static float globalSpiralAngle = 25f; // degrees, increments per spawn to form spiral
     public float spiralStepDeg = 0f;           // how much the spiral advances each time this node spawns
 
@@ -56,7 +56,7 @@ public class Waypoint : MonoBehaviour
     public int bezierSamples = 36;
 
     [Header("Angle tweak")]
-    public float smallAnglePairSeparation = 10.0f; // degrees offset to separate upper branches sideways
+    private float smallAnglePairSeparation = 20.0f; // degrees offset to separate upper branches sideways
 
     // Hold-to-spawn variables
     private Coroutine holdCoroutine;
@@ -213,36 +213,45 @@ public class Waypoint : MonoBehaviour
             mapManager = FindFirstObjectByType<MapManager>();
         }
 
-        // base angle: use node's current angle around center (so cluster aligns to node)
+        // Base angle: use node's current angle around center
         Vector3 dir = transform.position - centralCylinder.position;
         dir.y = 0f;
         float baseAngle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
 
-        // Also incorporate global spiral offset so clusters advance
+        // Spiral offset
         float clusterAngle = baseAngle + globalSpiralAngle;
 
-        // upper branches (same Y as clicked)
-        float upperY = transform.position.y + upperYOffset * 2;
-        float upperY2 = transform.position.y - upperYOffset;
-        float lowerY = transform.position.y + lowerYOffset;
-
-        // Convert to radians
         float baseRad = clusterAngle * Mathf.Deg2Rad;
         float angleOffsetRad = smallAnglePairSeparation * Mathf.Deg2Rad;
 
-        // Two upper branches: slightly separated by angle and different radii
-        Vector3 endUpperA = PointOnCore(baseRad + angleOffsetRad, coreRadius + sideRadiusDelta, upperY);
-        Vector3 endUpperB = PointOnCore(baseRad - angleOffsetRad, coreRadius - sideRadiusDelta, upperY2);
+        // Use the LOWEST Y position for ALL THREE branches
+        float lowestY = transform.position.y + lowerYOffset;
 
-        // Lower branch: same angle but lower Y, choose coreRadius base
-        Vector3 endLower = PointOnCore(baseRad, coreRadius, lowerY);
+        // Fork outward horizontally, but keep identical height
+        Vector3 endUpperA = PointOnCore(
+            baseRad + angleOffsetRad,
+            coreRadius + sideRadiusDelta,
+            lowestY
+        );
 
-        // midpoints pulled outward for nicer curvature
+        Vector3 endUpperB = PointOnCore(
+            baseRad - angleOffsetRad,
+            coreRadius - sideRadiusDelta,
+            lowestY
+        );
+
+        Vector3 endLower = PointOnCore(
+            baseRad,
+            coreRadius,
+            lowestY
+        );
+
+        // Midpoints pulled outward for nicer curvature
         Vector3 midA = MidpointPulled(transform.position, endUpperA);
         Vector3 midB = MidpointPulled(transform.position, endUpperB);
         Vector3 midC = MidpointPulled(transform.position, endLower);
 
-        // animate three branches (spawn nodes at tips but deactivated until grown)
+        // Animate three branches
         StartCoroutine(AnimateAndSpawn(transform.position, midA, endUpperA));
         StartCoroutine(AnimateAndSpawn(transform.position, midB, endUpperB));
         StartCoroutine(AnimateAndSpawn(transform.position, midC, endLower));

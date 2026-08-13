@@ -11,15 +11,16 @@ public class StartGame : MonoBehaviour
     private GameObject impManagerObject;
     [SerializeField] public TransitionSettings transition;
     [SerializeField] private PlayableDirector director;
-    private float interval = 340f; // 5 minutes
+    private float interval = 220f; // 3 minutes
 
     private Coroutine timelineCoroutine;
 
     private void Awake()
     {
 
-        gameManagerObject = GameObject.FindGameObjectWithTag("GameManager");
-        impManagerObject = GameObject.FindGameObjectWithTag("ImpManager");
+        gameManagerObject = GameObject.FindFirstObjectByType<GameStateManager>().gameObject;
+        ImpSelectManager impManager = GameObject.FindFirstObjectByType<ImpSelectManager>();
+        impManagerObject = impManager != null ? impManager.gameObject : null;
         TransitionManager.GetInstance().runningTransition = false;
     }
 
@@ -110,17 +111,10 @@ public class StartGame : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("Waiting " + interval + " seconds...");
-
             yield return new WaitForSecondsRealtime(interval);
-
-            Debug.Log("Playing Timeline!");
-
             director.time = 0;
             director.Evaluate();
             director.Play();
-
-            Debug.Log("Timeline state: " + director.state);
         }
     }
 }

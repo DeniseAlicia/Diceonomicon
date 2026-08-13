@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class CameraOrbitController : MonoBehaviour
 {
@@ -39,11 +40,11 @@ public class CameraOrbitController : MonoBehaviour
     {
         if (wpTransform != null)
         {
-            Vector3 offset = Quaternion.Euler(0f, yaw, 0f) * Vector3.right * distance / 1.5f;
-            transform.position = new Vector3(offset.x, currentHeight, offset.z) + wpTransform.position;
-            transform.LookAt(wpTransform.position);
+            centerTransform.position = new Vector3(centerTransform.position.x, wpTransform.position.y, centerTransform.position.z);
         }
-        else if (centerTransform != null)
+        // else 
+        
+        if (centerTransform != null)
         {
             Vector3 offset = Quaternion.Euler(0f, yaw, 0f) * Vector3.right * distance;
             transform.position = new Vector3(offset.x, currentHeight, offset.z) + centerTransform.position;

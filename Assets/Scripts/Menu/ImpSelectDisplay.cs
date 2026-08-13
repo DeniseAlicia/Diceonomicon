@@ -25,7 +25,7 @@ public class ImpSelectDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public GameObject cameras;
 
-    public void SetData(TabletData data)
+       public void SetData(TabletData data)
     {
 
         currentData = data;
@@ -63,17 +63,17 @@ public class ImpSelectDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         //normalView.SetActive(false);
         hoverView.SetActive(true);
-        ImpSelectManager.Instance.diceViewObject.SetActive(true);
-        ImpSelectManager.Instance.healthObject.SetActive(true);
+        MainMenuManager.Instance.diceViewObject.SetActive(true);
+        MainMenuManager.Instance.healthObject.SetActive(true);
 
-        for (int i = 0; i < ImpSelectManager.Instance.diceSprites.Count(); i++)
+        for (int i = 0; i < MainMenuManager.Instance.diceSprites.Count(); i++)
         {
-            ImpSelectManager.Instance.diceSprites[i].sprite = currentData.startingDice[i].image;
+            MainMenuManager.Instance.diceSprites[i].sprite = currentData.startingDice[i].image;
             int emotionColor = Array.IndexOf(Emotions.types, currentData.startingDice[i].tags[0]);
-            ImpSelectManager.Instance.diceSprites[i].color = Emotions.colors[emotionColor];
+            MainMenuManager.Instance.diceSprites[i].color = Emotions.colors[emotionColor];
         }
 
-        ImpSelectManager.Instance.healthObjectText.text = currentData.health.ToString();
+        MainMenuManager.Instance.healthObjectText.text = currentData.health.ToString();
 
         currentTabletInstance = Instantiate(currentData.tabletPrefab);
         currentTabletInstance.transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
@@ -117,8 +117,8 @@ public class ImpSelectDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExi
         //normalView.SetActive(true);
         hoverView.SetActive(false);
         Destroy(currentTabletInstance);
-        ImpSelectManager.Instance.diceViewObject.SetActive(false);
-        ImpSelectManager.Instance.healthObject.SetActive(false);
+        MainMenuManager.Instance.diceViewObject.SetActive(false);
+        MainMenuManager.Instance.healthObject.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
