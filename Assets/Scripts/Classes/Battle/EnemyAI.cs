@@ -1,11 +1,8 @@
 using System;
 using UnityEngine;
 using System.Collections;
-using UnityEngine.InputSystem;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using System.Linq;
-using UnityEngine.Events;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -30,11 +27,6 @@ public class EnemyAI : MonoBehaviour
 
     public enum DiceSortOrder { Ascending, Descending, Random }
     public DiceSortOrder diceSortOrder = DiceSortOrder.Descending;
-
-    // public void OnEventTriggered()
-    // {
-    //     GetEmptySlots();
-    // }
 
     public void GetEmptySlots()
     {
@@ -80,8 +72,8 @@ public class EnemyAI : MonoBehaviour
 
         foreach (DiceSlotController slot in emptySlots)
         {
-            DetectLinksDown(slot);
-            DetectLinksUp(slot);
+            DetectSynergyDown(slot);
+            DetectSynergyUp(slot);
         }
 
         SortSlots();
@@ -140,7 +132,7 @@ public class EnemyAI : MonoBehaviour
 
     private IEnumerator PlaceDieDelay()
     {
-        float delay = 3f;
+        float delay = 1f;
         yield return new WaitForSeconds(delay);
 
         foreach (Die die in dice)
@@ -152,7 +144,6 @@ public class EnemyAI : MonoBehaviour
             die.isDraggable = false;
             die.rigidBody.isKinematic = true;
             die.rigidBody.useGravity = false;
-
         }
 
         switch (diceSortOrder)
@@ -354,7 +345,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public List<Die> FindBuffTargetSlots(Die die, DiceSlotController slot)
+    public void FindBuffTargetSlots(Die die, DiceSlotController slot)
     {
         DieAction.ValueToAngle(die, directions);
         List<int> dirAngles = directions;
@@ -382,17 +373,13 @@ public class EnemyAI : MonoBehaviour
                     {
                         hitSlot.synergy += buffWeight;
                     }
-                }
-                else
-                {
-                    return null;
+
                 }
             }
         }
-        return targets;
     }
 
-    public void DetectLinksDown(DiceSlotController slot)
+    public void DetectSynergyDown(DiceSlotController slot)
     {
         Vector3 rayPosition = new Vector3(slot.transform.position.x, slot.transform.position.y + 0.2f, slot.transform.position.z - 0.8f);
         Ray raydown = new Ray(rayPosition, Vector3.down);
@@ -403,12 +390,12 @@ public class EnemyAI : MonoBehaviour
             if (hitSlot != null && hitSlot.tag == slot.tag)
             {
                 hitSlot.synergy += linkWeight;
-                DetectLinksDown(hitSlot);
+                DetectSynergyDown(hitSlot);
             }
         }
     }
 
-    public void DetectLinksUp(DiceSlotController slot)
+    public void DetectSynergyUp(DiceSlotController slot)
     {
         Vector3 rayPosition = new Vector3(slot.transform.position.x, slot.transform.position.y + 0.2f, slot.transform.position.z + 0.8f);
         Ray rayup = new Ray(rayPosition, Vector3.down);
@@ -419,7 +406,7 @@ public class EnemyAI : MonoBehaviour
             if (hitSlot != null && hitSlot.tag == slot.tag)
             {
                 hitSlot.synergy += linkWeight;
-                DetectLinksUp(hitSlot);
+                DetectSynergyUp(hitSlot);
             }
         }
     }
