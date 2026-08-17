@@ -14,7 +14,7 @@ public class ComboDisplay : MonoBehaviour
 
     public void SetComboColor()
     {
-        if (slot.slottedDie != null)
+        if (slot.slottedDie != null &&  !slot.slottedDie.statuses.Contains(Status.Inactive))
         {
             int emotionColor = Array.IndexOf(Emotions.types, slot.slottedDie.dieTags[0]);
             backgroundSprite.color = Emotions.colors[emotionColor];
@@ -31,7 +31,7 @@ public class ComboDisplay : MonoBehaviour
 
     public void ShowComboDisplay()
     {
-        if (slot.comboSlots.Count() > 0 && slot.slottedDie != null && slot.slotTag != "Buff")
+        if (slot.comboSlots.Count() > 0 && slot.slottedDie != null && slot.slotTag != "Buff" && !slot.slottedDie.statuses.Contains(Status.Inactive))
         {
             comboDisplayObject.SetActive(true);
         }

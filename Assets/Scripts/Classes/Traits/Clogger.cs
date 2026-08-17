@@ -46,7 +46,7 @@ public class Clogger : Trait
             die.usedTexture = rockTexture;
 
             die.range = new int[] { 0, 0, 0, 0, 0, 0 };
-            die.dieTags = new string[] { "" };
+            die.dieTags = new string[] { "Neutral" };
 
             DieAction.RangeToValue(die);
 

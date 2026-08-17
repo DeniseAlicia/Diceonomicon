@@ -19,6 +19,7 @@ public class Die : MonoBehaviour
     public bool isDraggable;
     public bool isPlaced = false;
     public bool isResting = false;
+    public bool isBeingDragged = false;
 
     public List<Status> statuses = new List<Status>();
 
@@ -230,6 +231,7 @@ public class Die : MonoBehaviour
 
     private void OnMouseDown()
     {
+        isBeingDragged = false;
         if (isDraggable)
         {
             RemoveDieFromSlot();
@@ -255,6 +257,7 @@ public class Die : MonoBehaviour
     {
         if (isDraggable)
         {
+            isBeingDragged = true;
             transform.position = camBattleTablets.ScreenToWorldPoint(Input.mousePosition - mouseOffset);
             transform.position = new Vector3(transform.position.x, 2f, transform.position.z);
 
@@ -268,6 +271,7 @@ public class Die : MonoBehaviour
 
     private void OnMouseUp()
     {
+        isBeingDragged = false;
         if (isDraggable)
         {
 
