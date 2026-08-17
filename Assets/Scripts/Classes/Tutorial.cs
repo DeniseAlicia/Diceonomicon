@@ -95,7 +95,7 @@ public class Tutorial : MonoBehaviour
         BattleSceneManager.OnAcvitveCombatEnd.AddListener(OnAcvitveCombatEnd);
 
         roundCount = 0;
-
+        rollButton.interactable = false;
         Debug.Log("Tutorial setting up...");
     }
 
@@ -121,6 +121,7 @@ public class Tutorial : MonoBehaviour
             }
             else if (dialogueIndex == 1)
             {
+                rollButton.interactable = false;
                 dialogueIndex++;
                 blockState = true;
             }
@@ -132,10 +133,12 @@ public class Tutorial : MonoBehaviour
                     player.diceDeck.Add(blockDie);
                     opponent.diceDeck.Add(attackDie);
                 }
-                battleSceneManager.StartNewRound();
+                //battleSceneManager.StartNewRound();
+                opponent.DrawDice();
+                BattleSceneManager.Instance.StartDelay(1f, () => opponent.ai.RollDice());
                 rollButton.interactable = false;
                 confirmButton.interactable = false;
-                buttonContainer.SetActive(true);
+                //buttonContainer.SetActive(true);
                 dialogueIndex++;
             }
             else if (dialogueIndex == 4)
@@ -805,7 +808,7 @@ public class Tutorial : MonoBehaviour
             NextLine();
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.35f);
         canClick = true;
     }
 
