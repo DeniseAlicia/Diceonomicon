@@ -10,7 +10,7 @@ public class ImpSelectManager : MonoBehaviour
 
     [Header("Selection Settings")]
     public int maxSelections = 3;
-    public List<TabletData> selectedImplings = new List<TabletData>();
+    public List<TabletData> selectedImplings = new List<TabletData> { null, null, null };
     public bool newGame;
 
     private Coroutine hideCoroutine;
@@ -51,18 +51,28 @@ public class ImpSelectManager : MonoBehaviour
                 }
             }
 
-            selectedImplings.Remove(data);
+            int i = selectedImplings.IndexOf(data);
+            if (i != -1)
+            {
+                selectedImplings[i] = null;
+            }
+
             MainMenuManager.Instance.startButton.interactable = false;
             return false;
         }
 
-        if (selectedImplings.Count >= maxSelections)
+        if (!selectedImplings.Contains(null))
         {
             return false;
         }
 
-        selectedImplings.Add(data);
-        if (selectedImplings.Count == maxSelections)
+        int index = selectedImplings.IndexOf(null);
+        if (index != -1)
+        {
+            selectedImplings[index] = data;
+        }
+        // selectedImplings.Add(data);
+        if (!selectedImplings.Contains(null))
         {
             MainMenuManager.Instance.startButton.interactable = true;
         }
@@ -88,8 +98,8 @@ public class ImpSelectManager : MonoBehaviour
 
     public void ResetSelection()
     {
-        selectedImplings = new List<TabletData>();
-        combinedHealth = 0; 
+        selectedImplings = new List<TabletData> { null, null, null };
+        combinedHealth = 0;
     }
 
     public void ConfirmSelectionTutorial()

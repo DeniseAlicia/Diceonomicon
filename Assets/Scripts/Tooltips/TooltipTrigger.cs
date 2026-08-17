@@ -39,12 +39,33 @@ public class TooltipTrigger : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        isPointerOver = true;
-        if (tooltipCoroutine != null)
+        if (die != null)
         {
-            StopCoroutine(tooltipCoroutine);
+            if (!die.isBeingDragged)
+            {
+                isPointerOver = true;
+
+                if (tooltipCoroutine != null)
+                {
+                    StopCoroutine(tooltipCoroutine);
+                }
+                tooltipCoroutine = StartCoroutine(ShowTooltipWithDelay());
+
+            }
+            else
+            {
+                return;
+            }
         }
-        tooltipCoroutine = StartCoroutine(ShowTooltipWithDelay());
+        else
+        {
+            isPointerOver = true;
+            if (tooltipCoroutine != null)
+            {
+                StopCoroutine(tooltipCoroutine);
+            }
+            tooltipCoroutine = StartCoroutine(ShowTooltipWithDelay());
+        }
     }
 
     public void OnMouseExit()
