@@ -20,9 +20,9 @@ public class BattleSceneManager : MonoBehaviour
     public GameObject[] opponentColumnBanner;
     public List<DiceSlotController> playerActiveColumn;
     public List<DiceSlotController> enemyActiveColumn;
-    private static List<List<DiceSlotController>> playerSlots;
+    public static List<List<DiceSlotController>> playerSlots;
     private static List<List<DiceSlotController>> enemySlots;
-    private static DiceSlotController[] allSlots;
+    public static DiceSlotController[] allSlots;
     [SerializeField] private DiceData[] startingDiceDeck;
 
     // Combat Stats
@@ -153,17 +153,17 @@ public class BattleSceneManager : MonoBehaviour
 
         foreach (DiceSlotController slot in allSlots)
         {
-            if (slot.tag == "Buff")
+            if (slot.slotTag == "Buff")
             {
                 slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0f, 1f, 0.2f, 0.6f));
                 slot.outlineMaterial.material.SetColor("_OutlineColor", new Color(0.2f, 1f, 0.4f, 1f));
             }
-            else if (slot.tag == "Spell")
+            else if (slot.slotTag == "Spell")
             {
                 slot.outlineMaterial.material.SetColor("_BaseColor", new Color(0.6f, 0.2f, 1f, 0.6f));
                 slot.outlineMaterial.material.SetColor("_OutlineColor", new Color(0.7f, 0.3f, 1f, 1f));
             }
-            else if (slot.tag == "Damage")
+            else if (slot.slotTag == "Damage")
             {
                 slot.outlineMaterial.material.SetColor("_BaseColor", new Color(1f, 0f, 0.15f, 0.6f));
                 slot.outlineMaterial.material.SetColor("_OutlineColor", new Color(1f, 0.2f, 0.4f, 1f));
@@ -844,6 +844,9 @@ public class BattleSceneManager : MonoBehaviour
                 if (slot.slottedDie)
                 {
                     slot.slottedDie.textureRenderer.material.SetTexture("_BaseMap", slot.slottedDie.usedTexture);
+                    slot.slottedDie.used = true;
+                    slot.comboSlots.Clear();
+                    slot.comboDisplay.ShowComboDisplay();
                 }
             }
 
@@ -861,6 +864,9 @@ public class BattleSceneManager : MonoBehaviour
                 if (slot.slottedDie)
                 {
                     slot.slottedDie.textureRenderer.material.SetTexture("_BaseMap", slot.slottedDie.usedTexture);
+                    slot.slottedDie.used = true;
+                    slot.comboSlots.Clear();
+                    slot.comboDisplay.ShowComboDisplay();
                 }
             }
 

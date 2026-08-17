@@ -28,7 +28,7 @@ public class Clogger : Trait
 
         foreach (DiceSlotController slot in allSlots)
         {
-            if (slot.owner != tablet.owner && !slot.isFilled && slot.tag != "Empty")
+            if (slot.owner != tablet.owner && !slot.isFilled && slot.slotTag != "Empty")
             {
                 randomSlots.Add(slot);
             }

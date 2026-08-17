@@ -22,7 +22,7 @@ public class Buddy : Trait
 
         foreach (DiceSlotController slot in tablet.tabletSlots)
         {
-            if (!slot.isFilled && slot.tag != "Buff" && slot.tag != "Empty")
+            if (!slot.isFilled && slot.slotTag != "Buff" && slot.slotTag != "Empty")
             {
                 randomSlots.Add(slot);
             }
@@ -33,34 +33,37 @@ public class Buddy : Trait
         GameObject dieInstance = Instantiate(Player.Instance.diePrefab, randomSlots[0].transform.position, Quaternion.identity);
         Die die = dieInstance.GetComponent<Die>();
 
-
-
         die.nameText = "Buddy Die";
         die.descText = "Value 1";
         //textureRenderer.material.SetTexture("_BaseMap", dieData.texture);
         die.usedTexture = Resources.Load<Texture2D>("Dice/Materials/Used_DiceBlank_Texture");
-        die.range = new int[] { 1, 1, 1, 1, 1, 1 };
-        die.dieTags = new string[] { "Damage", "Spell", "Block" };
-
-        DieAction.RangeToValue(die);
 
         DiceSlotController chosenSlot = randomSlots[0];
 
-        if (chosenSlot.tag == "Spell")
+        if (chosenSlot.slotTag == "Spell")
         {
+            die.data = Resources.Load<DiceData>("Dice/BasicSpellDie");
+            die.dieTags = new string[] { "Spell" };
             Texture texture = Resources.Load<Texture2D>("Dice/Materials/Dummy_DiceSpell_Texture");
             die.textureRenderer.material.SetTexture("_BaseMap", texture);
         }
-        else if (chosenSlot.tag == "Damage")
+        else if (chosenSlot.slotTag == "Damage")
         {
+            die.data = Resources.Load<DiceData>("Dice/BasicDamageDie");
+            die.dieTags = new string[] { "Damage" };
             Texture texture = Resources.Load<Texture2D>("Dice/Materials/Dummy_DiceDamage_Texture");
             die.textureRenderer.material.SetTexture("_BaseMap", texture);
         }
-        else if (chosenSlot.tag == "Block")
+        else if (chosenSlot.slotTag == "Block")
         {
+            die.data = Resources.Load<DiceData>("Dice/BasicBlockDie");
+            die.dieTags = new string[] { "Block" };
             Texture texture = Resources.Load<Texture2D>("Dice/Materials/Dummy_DiceBlock_Texture");
             die.textureRenderer.material.SetTexture("_BaseMap", texture);
         }
+
+        die.range = new int[] { 1, 1, 1, 1, 1, 1 };
+        DieAction.RangeToValue(die);
 
         die.GetSideFacingUp();
         die.isResting = true;
@@ -74,6 +77,7 @@ public class Buddy : Trait
 
         chosenSlot.isFilled = true;
         chosenSlot.slottedDie = die;
+        die.parentSlot = chosenSlot;
         die.isPlaced = true;
         die.MoveToLayer("BattleTablets");
 

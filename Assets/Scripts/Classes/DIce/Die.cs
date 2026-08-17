@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class Die : MonoBehaviour
 {
@@ -49,6 +50,7 @@ public class Die : MonoBehaviour
     public Renderer textureRenderer;
     public DiceData data;
     public Texture usedTexture;
+    public bool used;
     public DiceSlotController parentSlot;
     public Tooltip tooltip;
 
@@ -56,6 +58,8 @@ public class Die : MonoBehaviour
     public Transform sideUp;
     [SerializeField] public ParticleSystem vfx;
     public FMODUnity.EventReference DiePlacementEvent;
+
+    public static UnityEvent OnDieRemoved = new UnityEvent();
 
     public void SetData(DiceData dieData)
     {
@@ -92,7 +96,7 @@ public class Die : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (rigidBody.IsSleeping() & isRolling)
+        if (rigidBody.IsSleeping() && isRolling)
         {
             GetSideFacingUp();
             rigidBody.isKinematic = true;
@@ -179,10 +183,58 @@ public class Die : MonoBehaviour
         return diePos;
     }
 
+    public void PlaceDieInSlot(DiceSlotController slotController)
+    {
+        DiceSlotData slotData = slotController.slotData;
+
+        if (this.dieTags.Contains(slotData.tag) && slotController.isFilled == false && slotController.owner.GetType() == typeof(Player) || dieTags.Contains("Debuff") && slotController.owner.GetType() == typeof(Opponent) && slotController.slotTag != "Buff" && slotController.slotTag != "Spell" || dieTags.Contains("Neutral") && slotController.isFilled == false && slotController.owner.GetType() == typeof(Player) && slotController.slotTag != "Buff")
+        {
+            if (transform.parent != null)
+            {
+                Transform parent = transform.parent;
+                parentSlot = parent.gameObject.GetComponent<DiceSlotController>();
+                parentSlot.isFilled = false;
+                parentSlot.slottedDie = null;
+                transform.SetParent(null);
+            }
+            transform.SetParent(slotController.gameObject.transform);
+            transform.localPosition = new Vector3(0, 3, 0);
+            transform.localScale = scale;
+
+            slotController.isFilled = true;
+            slotController.slottedDie = this;
+            parentSlot = slotController;
+            isPlaced = true;
+
+            //parentSlot.comboDisplay.UpdateCombo();
+
+            FMOD.Studio.EventInstance placeDieAudio = FMODUnity.RuntimeManager.CreateInstance(DiePlacementEvent);
+            placeDieAudio.start();
+        }
+    }
+
+    private void RemoveDieFromSlot()
+    {
+        if (parentSlot == null)
+            return;
+
+        DiceSlotController oldSlot = parentSlot;
+
+        oldSlot.comboSlots.Clear();
+        oldSlot.comboDisplay.UpdateComboText();
+        oldSlot.isFilled = false;
+        oldSlot.slottedDie = null;
+        isPlaced = false;
+        parentSlot = null;
+    }
+
     private void OnMouseDown()
     {
         if (isDraggable)
         {
+            RemoveDieFromSlot();
+            //OnDieRemoved.Invoke();
+
             if (gameObject.layer == LayerMask.NameToLayer("Gameplay"))
             {
                 lastPosition = transform.position;
@@ -190,16 +242,12 @@ public class Die : MonoBehaviour
 
                 mouseOffset = Input.mousePosition - GetDiePosition(camGameplay);
                 transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-                //lastRotation = transform.eulerAngles;
             }
             else
             {
                 mouseOffset = Input.mousePosition - GetDiePosition(camBattleTablets);
-                transform.localScale = scale;
+                transform.localScale = scale * 1.2f;
             }
-
-
-
         }
     }
 
@@ -229,39 +277,14 @@ public class Die : MonoBehaviour
             if (Physics.Raycast(transform.position, Vector3.down, out hit, 100))
             {
                 GameObject hitSlot = hit.transform.gameObject;
-
                 DiceSlotController slotController = hitSlot.GetComponent<DiceSlotController>();
                 if (slotController != null)
                 {
                     DiceSlotData slotData = slotController.slotData;
 
-                    if (this.dieTags.Contains(slotData.tag) && slotController.isFilled == false && slotController.owner.GetType() == typeof(Player) || dieTags.Contains("Debuff") && slotController.owner.GetType() == typeof(Opponent) && slotController.tag != "Buff" && slotController.tag != "Spell" || dieTags.Contains("Neutral") && slotController.isFilled == false && slotController.owner.GetType() == typeof(Player) && slotController.tag != "Buff")
+                    if (this.dieTags.Contains(slotData.tag) && slotController.isFilled == false && slotController.owner.GetType() == typeof(Player) || dieTags.Contains("Debuff") && slotController.owner.GetType() == typeof(Opponent) && slotController.slotTag != "Buff" && slotController.slotTag != "Spell" || dieTags.Contains("Neutral") && slotController.isFilled == false && slotController.owner.GetType() == typeof(Player) && slotController.slotTag != "Buff")
                     {
-                        if (transform.parent != null)
-                        {
-                            Transform parent = transform.parent;
-                            parentSlot = parent.gameObject.GetComponent<DiceSlotController>();
-                            parentSlot.isFilled = false;
-                            parentSlot.slottedDie = null;
-                            transform.SetParent(null);
-                        }
-                        transform.SetParent(hitSlot.transform);
-                        transform.localPosition = new Vector3(0, 3, 0);
-                        transform.localScale = scale;
-
-                        if (dieTags.Contains("Buff"))
-                        {
-                            //transform.Rotate(new Vector3(0, dieRotation, 0), Space.World);
-                            //dieRotation = 0;
-                        }
-
-                        slotController.isFilled = true;
-                        slotController.slottedDie = this;
-                        parentSlot = slotController;
-                        isPlaced = true;
-
-                        FMOD.Studio.EventInstance placeDieAudio = FMODUnity.RuntimeManager.CreateInstance(DiePlacementEvent);
-                        placeDieAudio.start();
+                        PlaceDieInSlot(slotController);
                     }
                     else
                     {
@@ -276,6 +299,7 @@ public class Die : MonoBehaviour
                         {
                             transform.localPosition = new Vector3(0, 3, 0);
                             transform.localScale = scale;
+
                         }
                     }
                 }
@@ -344,13 +368,13 @@ public class Die : MonoBehaviour
         {
             DieAction.ShowBuffArrows(this);
         }
-
         isCopy = true;
         isPlaced = false;
         isResting = true;
         isDraggable = true;
         rigidBody.isKinematic = true;
         rigidBody.useGravity = false;
+        parentSlot = null;
     }
 
     public bool HasDieData()

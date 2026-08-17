@@ -14,8 +14,8 @@ public class Overload : MonoBehaviour
 
     public void Start()
     {
-        BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
-        BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
+        // BattleSceneManager.OnRoundStart.AddListener(OnRoundStart);
+        // BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
     }
 
     public void OnRoundStart()
