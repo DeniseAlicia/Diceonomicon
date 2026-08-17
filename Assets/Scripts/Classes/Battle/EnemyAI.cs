@@ -132,7 +132,7 @@ public class EnemyAI : MonoBehaviour
 
     private IEnumerator PlaceDieDelay()
     {
-        float delay = 1f;
+        float delay = 2f;
         yield return new WaitForSeconds(delay);
 
         foreach (Die die in dice)
