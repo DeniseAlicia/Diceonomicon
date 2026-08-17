@@ -26,7 +26,7 @@ public class ChainDie_Data : DiceData
 
             if (hitSlot != null)
             {
-                if (hitSlot.slottedDie != null && die.parentSlot.tag == hitSlot.tag)
+                if (hitSlot.slottedDie != null && die.parentSlot.slotTag == hitSlot.slotTag)
                 {
                     hitSlot.tempMult += 1;
                     linkCount += 1;
@@ -47,7 +47,7 @@ public class ChainDie_Data : DiceData
 
             if (hitSlot != null)
             {
-                if (hitSlot.slottedDie != null && die.parentSlot.tag == hitSlot.tag)
+                if (hitSlot.slottedDie != null && die.parentSlot.slotTag == hitSlot.slotTag)
                 {
                     hitSlot.tempMult += 1;
                     linkCount += 1;

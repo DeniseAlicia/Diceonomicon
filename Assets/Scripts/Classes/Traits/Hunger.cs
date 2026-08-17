@@ -37,6 +37,9 @@ public class Hunger : Trait
             healing = lowestDie.value;
 
             lowestDie.parentSlot.isFilled = false;
+            lowestDie.used = true;
+            lowestDie.parentSlot.comboSlots.Clear();
+            lowestDie.parentSlot.comboDisplay.ShowComboDisplay();
             lowestDie.parentSlot.slottedDie = null;
 
             Player.Instance.dice.Remove(lowestDie);

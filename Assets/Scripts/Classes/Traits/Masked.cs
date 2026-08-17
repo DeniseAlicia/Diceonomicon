@@ -19,7 +19,7 @@ public class Masked : Trait
     {
         foreach (DiceSlotController slot in slots)
         {
-            if (slot.isFilled && slot.slottedDie != null && slot.tag != "Buff")
+            if (slot.isFilled && slot.slottedDie != null && slot.slotTag != "Buff")
             {
                 foreach (Transform childSide in slot.slottedDie.GetDiceSides())
                 {

@@ -15,7 +15,7 @@ public class Magician : Trait
     {
         foreach (DiceSlotController slot in tablet.tabletSlots)
         {
-            if (slot.tag == "Spell")
+            if (slot.slotTag == "Spell")
             {
                 if (slot.slottedDie != null && slot.slottedDie.isCopy)
                 {
@@ -27,7 +27,7 @@ public class Magician : Trait
 
         foreach (DiceSlotController slot in tablet.tabletSlots)
         {
-            if (slot.tag == "Damage")
+            if (slot.slotTag == "Damage")
             {
                 if (slot.slottedDie != null && slot.slottedDie.isCopy)
                 {
@@ -42,7 +42,7 @@ public class Magician : Trait
     {
         foreach (DiceSlotController slot in tablet.tabletSlots)
         {
-            if (slot.tag == "Spell")
+            if (slot.slotTag == "Spell")
             {
                 if (slot.slottedDie != null)
                 {
@@ -54,7 +54,7 @@ public class Magician : Trait
 
         foreach (DiceSlotController slot in tablet.tabletSlots)
         {
-            if (slot.tag == "Damage")
+            if (slot.slotTag == "Damage")
             {
                 if (slot.slottedDie != null)
                 {

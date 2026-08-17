@@ -10,7 +10,7 @@ public static class SlotAction
         if (Physics.Raycast(rayup, out RaycastHit hit))
         {
             DiceSlotController hitSlot = hit.collider.GetComponent<DiceSlotController>();
-            if (hitSlot != null && hitSlot.tag == slot.tag)
+            if (hitSlot != null && hitSlot.slotTag == slot.slotTag)
             {
                 hitSlot.synergy += linkWeight;
                 DetectLinksUp(hitSlot, linkWeight);

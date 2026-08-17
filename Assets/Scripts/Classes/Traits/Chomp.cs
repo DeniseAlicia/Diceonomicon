@@ -7,7 +7,7 @@ public class Chomp : Trait
     {
         tablet = GetComponent<TabletController>();
 
-        description = "Eat a random die and heal by its value";
+        description = "Eat a random die";
         tablet.descText.text = description;
 
         BattleSceneManager.OnAcvitveCombatStart.AddListener(OnAcvitveCombatStart);
@@ -33,6 +33,9 @@ public class Chomp : Trait
             Die randomDie = placedDice[randomIndex];
 
             randomDie.parentSlot.isFilled = false;
+            randomDie.used = true;
+            randomDie.parentSlot.comboSlots.Clear();
+            randomDie.parentSlot.comboDisplay.ShowComboDisplay();
             randomDie.parentSlot.slottedDie = null;
 
             Player.Instance.dice.Remove(randomDie);

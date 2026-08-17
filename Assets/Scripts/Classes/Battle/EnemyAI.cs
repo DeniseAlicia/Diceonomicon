@@ -55,11 +55,11 @@ public class EnemyAI : MonoBehaviour
                     DiceSlotController slotController = hit2.collider.GetComponent<DiceSlotController>();
                     if (slotController != null)
                     {
-                        if (slotController.tag != "Empty")
+                        if (slotController.slotTag != "Empty")
                         {
                             slotController.synergy += 1;
 
-                            if (slotController.tag == "Buff")
+                            if (slotController.slotTag == "Buff")
                             {
                                 DetectBuffNeighbors(slotController);
                             }
@@ -179,11 +179,11 @@ public class EnemyAI : MonoBehaviour
     {
         foreach (DiceSlotController slot in emptySlots)
         {
-            if (slot.tag == "Buff")
+            if (slot.slotTag == "Buff")
             {
                 foreach (Die die in dice)
                 {
-                    if (die.dieTags.Contains(slot.tag))
+                    if (die.dieTags.Contains(slot.slotTag))
                     {
                         die.transform.SetParent(slot.transform);
                         die.transform.localPosition = new Vector3(0, 3, 0);
@@ -231,7 +231,7 @@ public class EnemyAI : MonoBehaviour
 
             foreach (Die die in dice)
             {
-                if (die.dieTags.Contains(slot.tag))
+                if (die.dieTags.Contains(slot.slotTag))
                 {
                     die.transform.SetParent(slot.transform);
                     die.transform.localPosition = new Vector3(0, 3, 0);
@@ -285,7 +285,7 @@ public class EnemyAI : MonoBehaviour
 
             foreach (Die die in dice)
             {
-                if (die.dieTags.Contains("Neutral") && slot.tag == "Spell" || die.dieTags.Contains("Neutral") && slot.tag == "Block" || die.dieTags.Contains("Neutral") && slot.tag == "Damage")
+                if (die.dieTags.Contains("Neutral") && slot.slotTag == "Spell" || die.dieTags.Contains("Neutral") && slot.slotTag == "Block" || die.dieTags.Contains("Neutral") && slot.slotTag == "Damage")
                 {
                     die.transform.SetParent(slot.transform);
                     die.transform.localPosition = new Vector3(0, 3, 0);
@@ -324,7 +324,7 @@ public class EnemyAI : MonoBehaviour
 
             foreach (Die die in dice)
             {
-                if (die.dieTags.Contains(slot.tag) || die.dieTags.Contains("Neutral") && slot.tag == "Spell" || die.dieTags.Contains("Neutral") && slot.tag == "Block" || die.dieTags.Contains("Neutral") && slot.tag == "Damage")
+                if (die.dieTags.Contains(slot.slotTag) || die.dieTags.Contains("Neutral") && slot.slotTag == "Spell" || die.dieTags.Contains("Neutral") && slot.slotTag == "Block" || die.dieTags.Contains("Neutral") && slot.slotTag == "Damage")
                 {
                     die.transform.SetParent(slot.transform);
                     die.transform.localPosition = new Vector3(0, 3, 0);
@@ -369,7 +369,7 @@ public class EnemyAI : MonoBehaviour
                 DiceSlotController hitSlot = hit.collider.GetComponent<DiceSlotController>();
                 if (hitSlot != null)
                 {
-                    if (hitSlot.tag != "Buff")
+                    if (hitSlot.slotTag != "Buff")
                     {
                         hitSlot.synergy += buffWeight;
                     }
@@ -387,7 +387,7 @@ public class EnemyAI : MonoBehaviour
         if (Physics.Raycast(raydown, out RaycastHit hit, 66))
         {
             DiceSlotController hitSlot = hit.collider.GetComponent<DiceSlotController>();
-            if (hitSlot != null && hitSlot.tag == slot.tag)
+            if (hitSlot != null && hitSlot.slotTag == slot.slotTag)
             {
                 hitSlot.synergy += linkWeight;
                 DetectSynergyDown(hitSlot);
@@ -403,7 +403,7 @@ public class EnemyAI : MonoBehaviour
         if (Physics.Raycast(rayup, out RaycastHit hit, 66))
         {
             DiceSlotController hitSlot = hit.collider.GetComponent<DiceSlotController>();
-            if (hitSlot != null && hitSlot.tag == slot.tag)
+            if (hitSlot != null && hitSlot.slotTag == slot.slotTag)
             {
                 hitSlot.synergy += linkWeight;
                 DetectSynergyUp(hitSlot);
@@ -419,7 +419,7 @@ public class EnemyAI : MonoBehaviour
         if (Physics.Raycast(rayup, out RaycastHit hit, 66))
         {
             DiceSlotController hitSlot = hit.collider.GetComponent<DiceSlotController>();
-            if (hitSlot != null && die.dieTags.Contains(hitSlot.tag))
+            if (hitSlot != null && die.dieTags.Contains(hitSlot.slotTag))
             {
                 hitSlot.synergy += 1;
             }
@@ -431,7 +431,7 @@ public class EnemyAI : MonoBehaviour
         if (Physics.Raycast(raydown, out RaycastHit hit2, 66))
         {
             DiceSlotController hitSlot = hit2.collider.GetComponent<DiceSlotController>();
-            if (hitSlot != null && die.dieTags.Contains(hitSlot.tag))
+            if (hitSlot != null && die.dieTags.Contains(hitSlot.slotTag))
             {
                 hitSlot.synergy += 1;
             }
@@ -458,7 +458,7 @@ public class EnemyAI : MonoBehaviour
                     DiceSlotController slotController = hit2.collider.GetComponent<DiceSlotController>();
                     if (slotController != null)
                     {
-                        if (slotController.tag != "Empty")
+                        if (slotController.slotTag != "Empty")
                         {
                             slot.synergy += 1;
                         }

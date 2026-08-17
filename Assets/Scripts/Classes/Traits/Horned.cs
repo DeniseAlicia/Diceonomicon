@@ -21,7 +21,7 @@ public class Horned : Trait
 
         foreach (DiceSlotController slot in tablet.tabletSlots)
         {
-            if (!slot.isFilled && slot.tag != "Buff" && slot.tag != "Empty")
+            if (!slot.isFilled && slot.slotTag != "Buff" && slot.slotTag != "Empty")
             {
                 randomSlots.Add(slot);
             }
@@ -33,6 +33,8 @@ public class Horned : Trait
         {
             GameObject dieInstance = Instantiate(Player.Instance.diePrefab, randomSlots[i].transform.position, Quaternion.identity);
             Die die = dieInstance.GetComponent<Die>();
+
+            die.data = Resources.Load<DiceData>("Dice/BasicNeutralDie");
 
             die.nameText = "Horn";
             die.descText = "Value 3";
@@ -60,6 +62,7 @@ public class Horned : Trait
 
             chosenSlot.isFilled = true;
             chosenSlot.slottedDie = die;
+            die.parentSlot = chosenSlot;
             die.isPlaced = true;
             die.MoveToLayer("BattleTablets");
 

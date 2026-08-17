@@ -12,7 +12,7 @@ public class Toxic : Trait
 
     public void OnSlotTriggered(DiceSlotController slot)
     {
-        if (slot.slottedDie != null && tablet.tabletSlots.Contains(slot) && slot.tag == "Spell")
+        if (slot.slottedDie != null && tablet.tabletSlots.Contains(slot) && slot.slotTag == "Spell")
         {
             int damage = slot.slotData.affectedDice;
 

@@ -14,7 +14,7 @@ public class Thorns : Trait
 
     public void OnSlotTriggered(DiceSlotController slot)
     {
-        if (slot.slottedDie != null && tablet.tabletSlots.Contains(slot) && slot.tag == "Block")
+        if (slot.slottedDie != null && tablet.tabletSlots.Contains(slot) && slot.slotTag == "Block")
         {
             if (slot.owner == Player.Instance)
             {

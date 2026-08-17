@@ -13,7 +13,7 @@ public class SpawnDie_Data : DiceData
 
         foreach (DiceSlotController slot in allSlots)
         {
-            if (!slot.isFilled && currentDie.dieTags.Contains(slot.tag))
+            if (!slot.isFilled && currentDie.dieTags.Contains(slot.slotTag))
             {
                 emptySlots.Add(slot);
             }
@@ -39,17 +39,17 @@ public class SpawnDie_Data : DiceData
 
 
 
-            if (chosenSlot.tag == "Spell")
+            if (chosenSlot.slotTag == "Spell")
             {
                 Texture texture = Resources.Load<Texture2D>("Dice/Materials/Dummy_DiceSpell_Texture");
                 die.textureRenderer.material.SetTexture("_BaseMap", texture);
             }
-            else if (chosenSlot.tag == "Damage")
+            else if (chosenSlot.slotTag == "Damage")
             {
                 Texture texture = Resources.Load<Texture2D>("Dice/Materials/Dummy_DiceDamage_Texture");
                 die.textureRenderer.material.SetTexture("_BaseMap", texture);
             }
-            else if (chosenSlot.tag == "Block")
+            else if (chosenSlot.slotTag == "Block")
             {
                 Texture texture = Resources.Load<Texture2D>("Dice/Materials/Dummy_DiceBlock_Texture");
                 die.textureRenderer.material.SetTexture("_BaseMap", texture);

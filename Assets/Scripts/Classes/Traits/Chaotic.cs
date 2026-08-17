@@ -29,12 +29,27 @@ public class Chaotic : Trait
 
     public void OnRoundStart()
     {
-        SlotAction.ChangeSlotData(1, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 3.999f))]);
-        SlotAction.ChangeSlotData(2, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
-        SlotAction.ChangeSlotData(3, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
-        SlotAction.ChangeSlotData(4, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 3.999f))]);
-        SlotAction.ChangeSlotData(5, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
-        SlotAction.ChangeSlotData(6, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
+        for (int i = 1; i < 7; i++)
+        {
+            if (tablet.tabletSlots[i - 1].slottedDie == null)
+            {
+                if (i == 4 || i == 1)
+                {
+                    SlotAction.ChangeSlotData(i, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 3.999f))]);
+                }
+
+                else
+                {
+                    SlotAction.ChangeSlotData(i, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
+                }
+            }
+        }
+        // SlotAction.ChangeSlotData(1, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 3.999f))]);
+        // SlotAction.ChangeSlotData(2, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
+        // SlotAction.ChangeSlotData(3, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
+        // SlotAction.ChangeSlotData(4, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 3.999f))]);
+        // SlotAction.ChangeSlotData(5, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
+        // SlotAction.ChangeSlotData(6, tablet, slots[(int)Math.Floor(UnityEngine.Random.Range(0f, 2.999f))]);
     }
 
     public override void UnsubscribeFromEvents()

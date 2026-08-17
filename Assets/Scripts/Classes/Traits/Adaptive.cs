@@ -16,7 +16,7 @@ public class Adaptive : Trait
     {
         foreach (DiceSlotController slot in tablet.tabletSlots)
         {
-            if (slot.tag == "Block")
+            if (slot.slotTag == "Block")
             {
                 if (slot.slottedDie != null && slot.slottedDie.isCopy)
                 {
@@ -36,7 +36,7 @@ public class Adaptive : Trait
 
         foreach (DiceSlotController slot in tablet.tabletSlots)
         {
-            if (slot.tag == "Damage")
+            if (slot.slotTag == "Damage")
             {
                 if (slot.slottedDie != null && slot.slottedDie.isCopy)
                 {
@@ -59,7 +59,7 @@ public class Adaptive : Trait
     {
         foreach (DiceSlotController slot in tablet.tabletSlots)
         {
-            if (slot.tag == "Block")
+            if (slot.slotTag == "Block")
             {
                 if (slot.slottedDie != null)
                 {
@@ -79,7 +79,7 @@ public class Adaptive : Trait
 
         foreach (DiceSlotController slot in tablet.tabletSlots)
         {
-            if (slot.tag == "Damage")
+            if (slot.slotTag == "Damage")
             {
                 if (slot.slottedDie != null)
                 {
