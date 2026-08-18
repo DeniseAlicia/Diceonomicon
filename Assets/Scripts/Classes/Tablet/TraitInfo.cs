@@ -3,6 +3,7 @@ using DG.Tweening;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using System;
+using System.Collections;
 
 public class TraitInfo : MonoBehaviour
 {
@@ -26,6 +27,22 @@ public class TraitInfo : MonoBehaviour
         moveDuration = 0.01f;
         MoveObjects(initialLocalPos - hoverOffset, false);
         moveDuration = 0.3f;
+    }
+
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "BattleSetup")
+        {
+            StartCoroutine(ShowTraitsOnStart());
+        }
+    }
+
+    private IEnumerator ShowTraitsOnStart()
+    {
+        MoveObjects(initialLocalPos, true);
+        yield return new WaitForSeconds(5f);
+        traitObject.SetActive(false);
+        MoveObjects(initialLocalPos - hoverOffset, false);
     }
 
     private void OnMouseEnter()

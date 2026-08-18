@@ -95,6 +95,17 @@ public class Die : MonoBehaviour
         }
     }
 
+    private void OnMouseOver()
+    {
+        if (isDraggable &&
+            dieTags.Contains("Buff") &&
+            Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            transform.Rotate(Vector3.up, 90f, Space.World);
+            dieRotation += 90;
+        }
+    }
+
     void FixedUpdate()
     {
         if (rigidBody.IsSleeping() && isRolling)
@@ -260,18 +271,13 @@ public class Die : MonoBehaviour
             isBeingDragged = true;
             transform.position = camBattleTablets.ScreenToWorldPoint(Input.mousePosition - mouseOffset);
             transform.position = new Vector3(transform.position.x, 2f, transform.position.z);
-
-            if (Mouse.current.rightButton.wasPressedThisFrame && this.dieTags.Contains("Buff"))
-            {
-                transform.Rotate(new Vector3(0, 90, 0), Space.World);
-                dieRotation += 90;
-            }
         }
     }
 
     private void OnMouseUp()
     {
         isBeingDragged = false;
+
         if (isDraggable)
         {
 
